@@ -2,5 +2,16 @@
 #ifndef __STATE__H
 #define __STATE__H
 
-#include "state/Exemple.h"
+#include "state/TypeId.h"
+#include "state/Element.h"
+#include "state/Direction.h"
+#include "state/MobileElement.h"
+#include "state/StaticElement.h"
+#include "state/Floor.h"
+#include "state/SpaceTypeId.h"
+#include "state/Space.h"
+#include "state/Status.h"
+#include "state/Personnage.h"
+#include "state/ElementTab.h"
+#include "state/State.h"
 #endif
