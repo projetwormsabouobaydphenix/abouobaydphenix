@@ -7,7 +7,6 @@ namespace state {
   class Element;
 }
 
-#include "Direction.h"
 #include "Element.h"
 
 namespace state {
@@ -16,8 +15,7 @@ namespace state {
   class MobileElement : public state::Element {
     // Operations
   public:
-    MobileElement (Direction id);
-    bool equals (const Element& other) const;
+    MobileElement ();
     bool isStatic () const;
     // Setters and Getters
   };

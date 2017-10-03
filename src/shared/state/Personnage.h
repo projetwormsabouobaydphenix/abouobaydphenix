@@ -18,8 +18,8 @@ namespace state {
     // Attributes
   protected:
     int color;
-    int Step     = 0;
-    int Shoot     = 0;
+    int step     = 0;
+    int shoot     = 0;
     // Operations
   public:
     Personnage  (Status id);
@@ -29,9 +29,9 @@ namespace state {
     int getColor() const;
     void setColor(int color);
     int getStep() const;
-    void setStep(int Step);
+    void setStep(int step);
     int getShoot() const;
-    void setShoot(int Shoot);
+    void setShoot(int shoot);
   };
 
 };

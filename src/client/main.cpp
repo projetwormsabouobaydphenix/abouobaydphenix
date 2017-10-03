@@ -10,15 +10,30 @@ void testSFML() {
 // Fin test SFML
 
 #include "state.h"
+#include <stdio.h>
+#include <string.h>
+
 
 using namespace std;
 using namespace state;
 
 int main(int argc,char* argv[]) 
 {
- 
-
-    cout << "It works !" << endl;
+    const char *str1 = "hello";
+    const char *str2="state";
+    if (argc==2){
+        if (strcmp(argv[1], str1)==0){
+            cout << "Hello World !" << endl;
+        }
+        
+        else if (strcmp(argv[1], str2)==0){
+            
+        }
+    }
+    
+    
+    
+    
 
     return 0;
 }

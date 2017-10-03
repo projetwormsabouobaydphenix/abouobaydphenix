@@ -16,7 +16,7 @@ namespace state {
     // Attributes
   private:
     ElementTab grid;
-    ElementTab Chars;
+    ElementTab chars;
   protected:
     int epoch     = 0;
     int epochrate     = 12;

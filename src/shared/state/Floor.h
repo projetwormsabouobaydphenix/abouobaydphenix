@@ -4,7 +4,6 @@
 
 
 namespace state {
-  class Element;
   class StaticElement;
 }
 
@@ -20,7 +19,6 @@ namespace state {
     Floor ( );
     bool isSpace () const;
     TypeId getTypeId () const;
-    bool equals (const Element& other) const;
     // Setters and Getters
   };
 
