@@ -18,12 +18,13 @@
 #include <iostream>
 
 TestState::TestState() {
-    cout<<"Tests des états"<<endl;
+    cout<< "Tests des états" <<endl;
     cout<<"Création d'une grille"<<endl;
     ElementTab grille = new ElementTab(3, 5);
     
     
 }
+
 TestState::~TestState() {
 }
 

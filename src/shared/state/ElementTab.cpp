@@ -1,24 +1,27 @@
 
 #include "ElementTab.h"
 #include "Element.h"
+#include <vector>
+#include <memory>
+
 
 namespace state{
 
     ElementTab::ElementTab(size_t width, size_t height) {
         this->width=width;
         this->height=height;
-        list.resize(width*height);
+        l.resize(width*height);
     }
     
     size_t ElementTab::add(Element* e) {
-        
-        return width;
-        
+        l.push_back(std::unique_ptr<Element>(e));  
+        cout << "Ajout d'un élement à la grille" << endl;
+        return l.size();
     }
 
     Element* ElementTab::get(int i, int j) const {
-        Element* e = list[i][j];
-        
+        Element* e ;
+        cout << "Obtenir l'élement se trouvant à la position (i, j)" << endl;
         return e;
     }
 
@@ -33,13 +36,12 @@ namespace state{
     
     void ElementTab::resize(size_t width, size_t height) {
         this->height=height;
-        this->width= width;
-        
+        this->width= width;       
 
     }
 
     void ElementTab::set(int i, int j, Element* e) {
-
+        //l[i][j].push_back(e);
     }
 
 
