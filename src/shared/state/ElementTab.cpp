@@ -11,15 +11,12 @@ namespace state{
     }
     
     size_t ElementTab::add(Element* e) {
-        int i = e->getX();
-        int j = e->getY();
+        list.push_back(e);
         
     }
 
     Element* ElementTab::get(int i, int j) const {
-        Element* e;
-        e->x=i;
-        e->y=j;
+        Element* e = list[i,j];
         return e;
     }
 
@@ -34,13 +31,12 @@ namespace state{
     
     void ElementTab::resize(size_t width, size_t height) {
         this->height=height;
-        this->width= width;
-        
+        this->width= width;       
 
     }
 
     void ElementTab::set(int i, int j, Element* e) {
-
+        list[i,j].push_back(e);
     }
 
 
