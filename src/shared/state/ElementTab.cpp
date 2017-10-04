@@ -11,15 +11,14 @@ namespace state{
     }
     
     size_t ElementTab::add(Element* e) {
-        int i = e->getX();
-        int j = e->getY();
+        
+        return width;
         
     }
 
     Element* ElementTab::get(int i, int j) const {
-        Element* e;
-        e->x=i;
-        e->y=j;
+        Element* e = list[i][j];
+        
         return e;
     }
 

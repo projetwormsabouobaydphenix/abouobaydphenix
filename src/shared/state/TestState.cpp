@@ -12,7 +12,10 @@
  */
 
 #include "TestState.h"
-
+#include "state.h"
+#include <stdio.h>
+#include <string.h>
+#include <iostream>
 
 TestState::TestState() {
     cout<<"Tests des états"<<endl;

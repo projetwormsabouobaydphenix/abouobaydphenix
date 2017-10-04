@@ -9,10 +9,6 @@ namespace state {
 
   /// class Element - 
   class Element {
-    // Attributes
-  protected:
-    int x     = 0;
-    int y     = 0;
     // Operations
   public:
     Element ();
@@ -20,10 +16,6 @@ namespace state {
     virtual TypeId getTypeId () const = 0;
     virtual bool isStatic () const = 0;
     // Setters and Getters
-    int getX() const;
-    void setX(int x);
-    int getY() const;
-    void setY(int y);
   };
 
 };
