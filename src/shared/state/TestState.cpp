@@ -18,7 +18,7 @@ using namespace std;
 
 namespace state {
     
-    void TestState::testsUnitaires(){
+    TestState::TestState(){
         cout<< "Tests des états" <<endl;
         cout<<"Création d'une grille"<<endl;
         ElementTab grille(0,1);
@@ -31,20 +31,6 @@ namespace state {
         else {
             cout << "La largeur n'est pas nulle" << endl;
         }
-     
-        //cout << "Crée un sol" << endl;
-    
-    
-    
-        //cout << "Ajoute le sol " << endl;
-        //grille.add(f);
-    
-    
-        //cout << "Crée un personnage vert" << endl;
-        //Personnage personnage_vert(1);
-    
-        //cout << "Ajoute le personnage " << endl;
-        //grille.add(personnage_vert);
     
         cout << "Vérifie que la largeur est 1" << endl;
         size_t l2 = grille.getWidth();
@@ -61,8 +47,17 @@ namespace state {
         //Personnage p(1); 
         //Floor f;
         //Space s;
+        cout << "Ajout d'un élement dans la grille" << endl;
 
         size_t add = grille.add(floor);
+        
+        cout << "On vérifie que la largeur a changé :" ;
+        if (add == 1){
+            cout << "OK" << endl;
+        }
+        else{
+            cout << "not ok" << endl;
+        }
         cout << "Tests sur la grille" << endl;
         cout << "Redimmensionne en 5 par 7" << endl;
            grille.resize(5,7);
@@ -74,15 +69,15 @@ namespace state {
             cout << "Not OK" << endl;
         }
     
-    cout << "Vérifie que la hauteur est correcte : ";
-    if (grille.getHeight()== 7){
-        cout << "OK" << endl;
-    }
-    else{
-        cout << "Not OK" << endl;
-    }
+        cout << "Vérifie que la hauteur est correcte : ";
+        if (grille.getHeight()== 7){
+            cout << "OK" << endl;
+        }
+        else{
+            cout << "Not OK" << endl;
+        }
     
-    cout << "Vérifie que toutes les cases sont nulles ";
+        //cout << "Vérifie que toutes les cases sont nulles ";
     
     
     

@@ -25,7 +25,7 @@ namespace state {
     //class Floor;
     class TestState {
         public:
-            void testsUnitaires();
+           TestState();
           
              
     };
