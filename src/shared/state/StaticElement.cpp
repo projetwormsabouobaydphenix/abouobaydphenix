@@ -7,14 +7,6 @@ namespace state{
 
     }
 
-
-    bool StaticElement::isStatic() const {
-        return true;
-    }
-    
-    Element::~Element(){
-        
-    }
-   
+  
 }
 

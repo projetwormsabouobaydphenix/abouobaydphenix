@@ -3,35 +3,35 @@
 
 namespace state{
         
-    ElementTab& State::getChars() {
+    ElementTab& state::State::getChars() {
         return this->chars;
     }
     
-    int State::getEpoch() const {
+    int state::State::getEpoch() const {
         return this->epoch;
     }
 
-    int State::getEpochrate() const {
+    int state::State::getEpochrate() const {
         return this->epochrate;
     }
     
-    ElementTab& State::getGrid() {
+    ElementTab& state::State::getGrid() {
         return this->grid;
     }
 
-    int State::getStepcount() const {
+    int state::State::getStepcount() const {
         return this->stepcount;
     }
 
-    void State::setEpoch(int epoch) {
+    void state::State::setEpoch(int epoch) {
         this->epoch=epoch;
     }
 
-    void State::setEpochrate(int epochrate) {
+    void state::State::setEpochrate(int epochrate) {
         this->epochrate=epochrate;
     }
 
-    void State::setStepcount(int stepcount) {
+    void state::State::setStepcount(int stepcount) {
         this->stepcount=stepcount;
     }
     

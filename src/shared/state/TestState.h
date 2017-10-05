@@ -14,20 +14,19 @@
 #ifndef TESTSTATE_H
 #define TESTSTATE_H
 
-#include "state.h"
-//#include "Floor.h"
+
+#include "../state.h"
+#include <iostream>
+using namespace std;
+
 
 
 namespace state {
     //class Floor;
     class TestState {
         public:
-            TestState();
-            virtual ~TestState();
-           
-            
-        private:   
-           // Element* floor = new Floor();
+            void testsUnitaires();
+          
              
     };
 

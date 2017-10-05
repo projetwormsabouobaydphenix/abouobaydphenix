@@ -24,6 +24,7 @@ namespace state {
     Personnage (int color);
     ~Personnage ();
     TypeId  getTypeId () const;
+    bool isStatic () const;
     // Setters and Getters
     int getColor() const;
     void setColor(int color);

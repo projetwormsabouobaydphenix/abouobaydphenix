@@ -2,22 +2,33 @@
 #include "Space.h"
 
 namespace state{
+        
+    Space::Space() {
+
+    }
+
     
-    bool Space::isSpace () const{
+    bool state::Space::isSpace () const{
         return true;
     }
     
-    TypeId Space::getTypeId () const{
+    TypeId state::Space::getTypeId () const{
         return TypeId::Space;
     }
     
-    SpaceTypeId Space::getSpaceTypeId () const{
+    SpaceTypeId state::Space::getSpaceTypeId () const{
         return SpaceTypeId::Empty;  //Le vrai code sera inséré après
     }
     
-    void Space::setSpaceTypeId(SpaceTypeId id) const {
+    void state::Space::setSpaceTypeId(SpaceTypeId id) const {
 
     }
+    
+    bool state::Space::isStatic() const {
+        return true;
+
+    }
+
 
     
     

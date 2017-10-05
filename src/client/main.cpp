@@ -9,7 +9,7 @@ void testSFML() {
 
 // Fin test SFML
 
-#include "state.h"
+#include "../shared/state.h"
 #include <stdio.h>
 #include <string.h>
 #include "state/TestState.h"
@@ -29,6 +29,7 @@ int main(int argc,char* argv[])
         
         else if (strcmp(argv[1], str2)==0){
             using namespace state;
+            //Element* floor ;
             TestState();
         }
     }

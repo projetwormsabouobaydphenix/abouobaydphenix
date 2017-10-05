@@ -19,6 +19,7 @@ namespace state {
     Floor ( );
     bool isSpace () const;
     TypeId getTypeId () const;
+    bool isStatic () const;
     // Setters and Getters
   };
 

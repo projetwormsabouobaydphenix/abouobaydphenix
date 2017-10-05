@@ -4,18 +4,21 @@
 
 namespace state{ 
     
-    
-
-    Floor::Floor() : state::StaticElement(){
+    Floor::Floor(){
     
     }
 
-    bool Floor :: isSpace() const{
+    bool state::Floor::isSpace() const{
         return false;
     }
 
     TypeId state::Floor::getTypeId() const{
        return TypeId::Floor;
     }
+        bool Floor::isStatic() const {
+            return true;
+
+    }
+
 
 }

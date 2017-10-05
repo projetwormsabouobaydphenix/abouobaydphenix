@@ -22,6 +22,7 @@ namespace state {
     TypeId getTypeId () const;
     SpaceTypeId getSpaceTypeId () const;
     void setSpaceTypeId (SpaceTypeId id ) const;
+    bool isStatic () const;
     // Setters and Getters
   };
 
