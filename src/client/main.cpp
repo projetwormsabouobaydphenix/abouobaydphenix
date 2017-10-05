@@ -12,10 +12,11 @@ void testSFML() {
 #include "state.h"
 #include <stdio.h>
 #include <string.h>
+#include "state/TestState.h"
 
 
 using namespace std;
-using namespace state;
+
 
 int main(int argc,char* argv[]) 
 {
@@ -27,9 +28,11 @@ int main(int argc,char* argv[])
         }
         
         else if (strcmp(argv[1], str2)==0){
-            
+            using namespace state;
+            TestState();
         }
     }
+    
     
     
     

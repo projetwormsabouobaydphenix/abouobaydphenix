@@ -14,19 +14,23 @@
 #ifndef TESTSTATE_H
 #define TESTSTATE_H
 
-#include "Element.h"
-#include "ElementTab.h"
-#include "Personnage.h"
-#include "Floor.h"
-#include "Space.h"
+#include "state.h"
+//#include "Floor.h"
 
-class TestState {
-public:
-    TestState();
-    virtual ~TestState();
-private:
+
+namespace state {
+    //class Floor;
+    class TestState {
+        public:
+            TestState();
+            virtual ~TestState();
+           
+            
+        private:   
+           // Element* floor = new Floor();
+             
+    };
 
 };
-
 #endif /* TESTSTATE_H */
 

@@ -1,7 +1,23 @@
 #include "Personnage.h"
 
-namespace state{
+namespace state {
 
+    
+    Personnage::Personnage(int color) {
+        if (color == 1 or color == 2){
+            this->color = color;
+        }
+        else{
+            this->color=0;
+        }
+
+    }
+    
+    Personnage::~Personnage() {
+
+    }
+
+    
 TypeId state::Personnage::getTypeId() const{
     return TypeId::Personnage;
 }

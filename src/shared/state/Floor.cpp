@@ -1,10 +1,12 @@
 
 #include "Floor.h"
+
+
 namespace state{ 
     
     
 
-    Floor::Floor(){
+    Floor::Floor() : state::StaticElement(){
     
     }
 
@@ -12,7 +14,7 @@ namespace state{
         return false;
     }
 
-    TypeId Floor::getTypeId() const{
+    TypeId state::Floor::getTypeId() const{
        return TypeId::Floor;
     }
 

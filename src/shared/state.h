@@ -9,9 +9,9 @@
 #include "state/Floor.h"
 #include "state/SpaceTypeId.h"
 #include "state/Space.h"
-#include "state/Status.h"
 #include "state/Personnage.h"
 #include "state/ElementTab.h"
 #include "state/State.h"
+#include "state/Status.h"
 #include "state/Direction.h"
 #endif
