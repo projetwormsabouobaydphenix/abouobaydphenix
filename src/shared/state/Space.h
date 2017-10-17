@@ -8,7 +8,6 @@ namespace state {
 }
 
 #include "TypeId.h"
-#include "SpaceTypeId.h"
 #include "StaticElement.h"
 
 namespace state {
@@ -20,8 +19,6 @@ namespace state {
     Space ();
     bool isSpace () const;
     TypeId getTypeId () const;
-    SpaceTypeId getSpaceTypeId () const;
-    void setSpaceTypeId (SpaceTypeId id ) const;
     bool isStatic () const;
     // Setters and Getters
   };

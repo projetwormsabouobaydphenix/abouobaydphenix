@@ -15,7 +15,7 @@
 #define TESTSTATE_H
 
 
-#include "../state.h"
+#include "state.h"
 #include <iostream>
 using namespace std;
 
