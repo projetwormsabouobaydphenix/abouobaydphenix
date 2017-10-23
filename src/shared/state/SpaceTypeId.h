@@ -6,8 +6,8 @@
 namespace state {
 
   enum SpaceTypeId {
-    Life     = 1,
-    Empty     = 2
+    LIFE     = 1,
+    EMPTY     = 2
   };
 
 };

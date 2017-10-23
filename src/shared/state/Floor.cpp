@@ -4,7 +4,7 @@
 
 namespace state{ 
     
-    Floor::Floor(){
+    Floor::Floor(FloorTypeId id){
     
     }
 
@@ -13,7 +13,7 @@ namespace state{
     }
 
     TypeId state::Floor::getTypeId() const{
-       return TypeId::Floor;
+       return TypeId::FLOOR;
     }
         bool Floor::isStatic() const {
             return true;

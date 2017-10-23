@@ -3,6 +3,10 @@
 #define STATE__ELEMENT__H
 
 
+namespace state {
+  class Element;
+}
+
 #include "TypeId.h"
 
 namespace state {
@@ -12,9 +16,10 @@ namespace state {
     // Operations
   public:
     Element ();
-    virtual ~Element ();
-    virtual TypeId getTypeId () const = 0;
-    virtual bool isStatic () const = 0;
+    ~Element ();
+    TypeId getTypeId () const;
+    bool isStatic () const;
+    bool equals (const Element& other) const;
     // Setters and Getters
   };
 

@@ -6,9 +6,9 @@
 namespace state {
 
   enum Direction {
-    Left     = 1,
-    Right     = 2,
-    Up     = 3
+    LEFT     = 1,
+    RIGHT     = 2,
+    UP     = 3
   };
 
 };

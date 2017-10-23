@@ -3,7 +3,7 @@
 
 namespace state{
         
-    Space::Space() {
+    Space::Space(SpaceTypeId id) {
 
     }
 
@@ -13,17 +13,13 @@ namespace state{
     }
     
     TypeId state::Space::getTypeId () const{
-        return TypeId::Space;
+        return TypeId::SPACE;
     }
     
     SpaceTypeId state::Space::getSpaceTypeId () const{
-        return SpaceTypeId::Empty;  //Le vrai code sera inséré après
+        return SpaceTypeId::EMPTY;  //Le vrai code sera inséré après
     }
-    
-    void state::Space::setSpaceTypeId(SpaceTypeId id) const {
-
-    }
-    
+       
     bool state::Space::isStatic() const {
         return true;
 

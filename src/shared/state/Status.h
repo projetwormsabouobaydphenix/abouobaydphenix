@@ -6,8 +6,8 @@
 namespace state {
 
   enum Status {
-    Alive     = 1,
-    Dead     = 2
+    ALIVE     = 1,
+    DEAD     = 2
   };
 
 };

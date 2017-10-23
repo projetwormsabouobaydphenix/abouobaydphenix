@@ -7,8 +7,8 @@ namespace state {
   class StaticElement;
 }
 
-#include "TypeId.h"
 #include "SpaceTypeId.h"
+#include "TypeId.h"
 #include "StaticElement.h"
 
 namespace state {
@@ -17,11 +17,11 @@ namespace state {
   class Space : public state::StaticElement {
     // Operations
   public:
-    Space ();
+    Space (SpaceTypeId id);
     bool isSpace () const;
     TypeId getTypeId () const;
     SpaceTypeId getSpaceTypeId () const;
-    void setSpaceTypeId (SpaceTypeId id ) const;
+    void setSpaceTypeId (SpaceTypeId id);
     bool isStatic () const;
     // Setters and Getters
   };

@@ -6,9 +6,9 @@
 namespace state {
 
   enum TypeId {
-    Personnage     = 1,
-    Floor     = 2,
-    Space     = 3
+    PERSONNAGE     = 1,
+    FLOOR     = 2,
+    SPACE     = 3
   };
 
 };
