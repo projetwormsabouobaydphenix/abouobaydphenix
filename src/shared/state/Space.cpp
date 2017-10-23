@@ -13,7 +13,7 @@ namespace state{
     }
     
     TypeId state::Space::getTypeId () const{
-        return TypeId::Space;
+        return TypeId::SPACE;
     }
     
     

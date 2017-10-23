@@ -19,7 +19,7 @@ namespace state {
 
     
 TypeId state::Personnage::getTypeId() const{
-    return TypeId::Personnage;
+    return TypeId::PERSONNAGE;
 }
 
 int state::Personnage::getColor() const{
