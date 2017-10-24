@@ -4,19 +4,5 @@
  * and open the template in the editor.
  */
 
-#include "AElementAlloc.h"
+#include "LoadCSV.h"
 
-using namespace std;
-
-namespace state{
-    
-
-    AElementAlloc::~AElementAlloc() {
-
-   }
- 
-    Element* newInstance (){
-            
-    }
-
-}

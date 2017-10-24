@@ -7,9 +7,7 @@ namespace state {
 
   enum FloorTypeId {
     FULL     = 1,
-    SLOPELEFT     = 2,
-    SLOPERIGHT     = 3,
-    LADDER     = 4
+    WATER     = 2
   };
 
 };
