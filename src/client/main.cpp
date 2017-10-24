@@ -20,17 +20,23 @@ using namespace std;
 
 int main(int argc,char* argv[]) 
 {
-    const char *str1 = "hello";
-    const char *str2="state";
+    /*const char *str1 = "hello";
+    const char *str2 = "state";
+    const char *str3 = "render";*/
+    string mode(argv[1]); 
     if (argc==2){
-        if (strcmp(argv[1], str1)==0){
+        if (mode == "hello"){
             cout << "Hello World !" << endl;
         }
         
-        else if (strcmp(argv[1], str2)==0){
+        else if (mode == "state"){
             using namespace state;
-            //Element* floor ;
             TestState();
+        }
+        
+        else if (mode == "render"){
+            cout << "Test render" << endl;
+            
         }
     }
     

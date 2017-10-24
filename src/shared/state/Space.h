@@ -7,7 +7,10 @@ namespace state {
   class StaticElement;
 }
 
+<<<<<<< HEAD
 #include "SpaceTypeId.h"
+=======
+>>>>>>> 354a9cd21019c6cacb51d82aa3781ccb62ff8e6b
 #include "TypeId.h"
 #include "StaticElement.h"
 
@@ -20,8 +23,11 @@ namespace state {
     Space (SpaceTypeId id);
     bool isSpace () const;
     TypeId getTypeId () const;
+<<<<<<< HEAD
     SpaceTypeId getSpaceTypeId () const;
     void setSpaceTypeId (SpaceTypeId id);
+=======
+>>>>>>> 354a9cd21019c6cacb51d82aa3781ccb62ff8e6b
     bool isStatic () const;
     // Setters and Getters
   };
