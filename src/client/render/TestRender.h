@@ -15,6 +15,7 @@
 #define TESTRENDER_H
 
 #include <iostream>
+#include "../render.h"
 using namespace std;
 
 namespace render{

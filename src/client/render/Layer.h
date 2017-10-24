@@ -5,11 +5,11 @@
 #include <memory>
 
 namespace render {
-  class Surface;
+  class TileMap;
   class TileSet;
 }
 
-#include "Surface.h"
+#include "TileMap.h"
 #include "TileSet.h"
 
 namespace render {
@@ -18,16 +18,17 @@ namespace render {
   class Layer {
     // Attributes
   protected:
-    std::unique_ptr<Surface> surface;
+    std::unique_ptr<TileMap> tilemap;
     std::shared_ptr<TileSet> tileset;
     // Operations
   public:
     Layer ();
-    virtual ~Layer ();
-    const Surface*  getSurface () const;
-    void setSurface (Surface* surface);
-    void initSurface ();
+    ~Layer ();
+    void setTileMap (TileMap* tilemap);
+    void initTileMap ();
     // Setters and Getters
+    const std::unique_ptr<TileMap>& getTilemap() const;
+    void setTilemap(const std::unique_ptr<TileMap>& tilemap);
     const std::shared_ptr<TileSet>& getTileset() const;
     void setTileset(const std::shared_ptr<TileSet>& tileset);
   };
