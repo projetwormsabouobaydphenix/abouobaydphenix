@@ -13,15 +13,14 @@
 
 #include "TestState.h"
 
-
-using namespace std;
-
 namespace state {
     
     TestState::TestState(){
         cout<< "Tests des états" <<endl;
         cout<<"Création d'une grille"<<endl;
         ElementTab grille(0,1);
+        //Personnage* perso;
+        //perso = new Personnage; 
         cout << "Vérifie que la largeur est nulle" << endl;
         // vérification de la largeur
         size_t largeur = grille.getWidth();
@@ -40,16 +39,22 @@ namespace state {
         else {
           cout << "Largeur différente de 1" << endl;
         } 
+<<<<<<< HEAD
+        //StaticElement * floor = new Floor();
+        Element* fl;
+        fl = new Floor(FULL);
+=======
         Element* floor = new Floor();
         //Element* floor;
         //floor = new Floor();
+>>>>>>> 354a9cd21019c6cacb51d82aa3781ccb62ff8e6b
         //Element* personnage;
         Personnage* ptt; 
         //Floor floor;
         //Space s;
         cout << "Ajout d'un élement dans la grille" << endl;
 
-        size_t add = grille.add(floor);
+        size_t add = grille.add(fl);
         
         cout << "On vérifie que la largeur a changé :" ;
         if (add == 1){

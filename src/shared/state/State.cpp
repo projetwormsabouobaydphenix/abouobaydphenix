@@ -4,7 +4,7 @@
 namespace state{
         
     ElementTab& state::State::getChars() {
-        return this->chars;
+        return this->Chars;
     }
     
     int state::State::getEpoch() const {

@@ -31,24 +31,19 @@ void state::Personnage:: setColor(int color){
 }
 
 int state::Personnage::getStep() const{
-    return this->step;
+    return this->Step;
 }
 
 void state::Personnage::setStep(int step){
-    this->step = step;
+    this->Step = step;
 }
 
 int state::Personnage::getShoot() const{
-    return this->shoot;
+    return this->Shoot;
 }
 
 void state::Personnage::setShoot(int shoot){
-    this->shoot=shoot;
+    this->Shoot=shoot;
     }
-
-    bool state::Personnage::isStatic() const {
-        return false;
-    }
-
-
 }
+

@@ -711,6 +711,12 @@ void print_include_stdlib(struct stdlib_includes* si,char* name) {
            print ("#include <stdint.h>\n");
            si->stdint = 1;
        }
+
+       
+        if (!si->fstream && strstr(name,"std::ifstream")) {
+           print ("#include <fstream>\n");
+           si->fstream = 1;
+       }
        if (!si->stdlib && strstr(name,"size_t")) {
            print ("#include <stdlib.h>\n");
            si->stdlib = 1;

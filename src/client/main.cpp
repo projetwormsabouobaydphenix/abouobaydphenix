@@ -11,6 +11,7 @@ void testSFML() {
 
 #include "../shared/state.h"
 #include "render.h"
+#include "state.h"
 #include <stdio.h>
 #include <string.h>
 #include "state/TestState.h"

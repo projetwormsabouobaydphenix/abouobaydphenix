@@ -7,6 +7,7 @@ namespace state {
   class StaticElement;
 }
 
+#include "FloorTypeId.h"
 #include "TypeId.h"
 #include "StaticElement.h"
 
@@ -16,7 +17,7 @@ namespace state {
   class Floor : public state::StaticElement {
     // Operations
   public:
-    Floor ( );
+    Floor (FloorTypeId id);
     bool isSpace () const;
     TypeId getTypeId () const;
     bool isStatic () const;

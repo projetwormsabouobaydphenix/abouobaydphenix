@@ -17,17 +17,17 @@ namespace state{
     ElementTab::ElementTab(size_t width, size_t height) {
         this->width=width;
         this->height=height;
-        l.resize(width*height);
+        list.resize(width*height);
     }
     
     size_t ElementTab::add(Element* e) {
-        l.push_back(std::unique_ptr<Element>(e));  
+        list.push_back(std::unique_ptr<Element>(e));  
         cout << "Ajout d'un élement à la grille" << endl;
-        return l.size();
+        return list.size();
     }
 
-    void ElementTab::get(int i, int j) const {
-        //return l[j*width + i];
+    Element* ElementTab::get(int i, int j) const {
+        //return list[j*width + i];
     }
 
     size_t ElementTab::getHeight() const {
@@ -43,7 +43,7 @@ namespace state{
         this->height=height;
         this->width= width; 
         cout << "Redimensionnement en " << width << " par " << height << endl;
-        l.resize(width*height);
+        list.resize(width*height);
 
     }
 

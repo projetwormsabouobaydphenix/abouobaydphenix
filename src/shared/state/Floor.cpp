@@ -4,7 +4,7 @@
 
 namespace state{ 
     
-    Floor::Floor(){
+    Floor::Floor(FloorTypeId id){
     
     }
 

@@ -22,7 +22,7 @@ namespace state {
     /// 	
     size_t width ;
     size_t height;
-    std::vector<std::unique_ptr<Element>> l;
+    std::vector<std::unique_ptr<Element>> list;
     // Operations
   public:
     ElementTab (size_t width = 0, size_t height = 1);
@@ -30,7 +30,7 @@ namespace state {
     size_t getHeight () const;
     size_t add (Element* e);
     void resize (size_t width, size_t height);
-    void get (int i, int j) const;
+    Element* get (int i, int j) const;
     void set (int i, int j, Element* e);
     // Setters and Getters
   };

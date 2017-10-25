@@ -17,21 +17,20 @@ namespace state {
     // Attributes
   protected:
     int color;
-    int step     = 0;
-    int shoot     = 0;
+    int Step     = 0;
+    int Shoot     = 0;
     // Operations
   public:
-    Personnage (int color);
+    Personnage  (int color);
     ~Personnage ();
     TypeId  getTypeId () const;
-    bool isStatic () const;
     // Setters and Getters
     int getColor() const;
     void setColor(int color);
     int getStep() const;
-    void setStep(int step);
+    void setStep(int Step);
     int getShoot() const;
-    void setShoot(int shoot);
+    void setShoot(int Shoot);
   };
 
 };
