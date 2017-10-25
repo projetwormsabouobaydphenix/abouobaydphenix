@@ -10,13 +10,10 @@ namespace state {
   class Element;
 }
 
-#include "Element.h"
-
 namespace state {
 
   /// class ElementTab - 
   class ElementTab {
-    // Associations
     // Attributes
   private:
     /// 	

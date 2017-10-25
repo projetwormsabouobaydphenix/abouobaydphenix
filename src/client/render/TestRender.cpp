@@ -20,16 +20,23 @@ TestRender::TestRender() {
     sf::RenderWindow window(sf::VideoMode(4960, 1280), "Worms");
     
       const int level[] =
-    {
-        280, 280,280,280,280,280,280,280,280,280,280,280,
-        280,280,280,280,280,280,280, 190,  190, 190, 190, 190, 190,
-        190, 190, 190, 190, 190, 190, 190, 190, 190, 190
+    { 
     };
     
-    TileMap map;
-    if (!map.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), map.loadLayer(), 16, 32))
-        cout << "Erreur chargement texture" << endl;
+    TileMap t;
+    TileMap m;
     
+    std::vector<int> terre = t.loadLayer("/home/sanaa/Documents/abouobaydphenix/res/terre.txt");
+    std::vector<int> mer = m.loadLayer("/home/sanaa/Documents/abouobaydphenix/res/mer.txt");
+    /*for (int i = 0; i<l.size(); i++){
+        cout << l[i] << endl;
+    }*/
+    if (!t.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), terre, 155, 40))
+        cout << "Erreur chargement texture terre" << endl;
+    
+    if (!m.load("/home/sanaa/Documents/abouobaydphenix/res/water.png", sf::Vector2u(32, 32), mer, 155, 40))
+        cout << "Erreur chargement texture mer" << endl;
+
     while (window.isOpen())
     {
         // on gère les évènements
@@ -42,7 +49,8 @@ TestRender::TestRender() {
 
         // on dessine le niveau
         window.clear();
-        window.draw(map);
+        window.draw(m);
+        window.draw(t);
         window.display();
     }
 

@@ -39,30 +39,26 @@ namespace state {
         else {
           cout << "Largeur différente de 1" << endl;
         } 
-<<<<<<< HEAD
+
         //StaticElement * floor = new Floor();
-        Element* fl;
-        fl = new Floor(FULL);
-=======
-        Element* floor = new Floor();
+        //Element* floor = new Floor();
         //Element* floor;
         //floor = new Floor();
->>>>>>> 354a9cd21019c6cacb51d82aa3781ccb62ff8e6b
         //Element* personnage;
         Personnage* ptt; 
         //Floor floor;
         //Space s;
         cout << "Ajout d'un élement dans la grille" << endl;
 
-        size_t add = grille.add(fl);
+       // size_t add = grille.add(fl);
         
         cout << "On vérifie que la largeur a changé :" ;
-        if (add == 1){
+        /*if (add == 1){
             cout << "OK" << endl;
         }
         else{
             cout << "not ok" << endl;
-        }
+        }*/
         cout << "Tests sur la grille" << endl;
         cout << "Redimmensionne en 5 par 7" << endl;
            grille.resize(5,7);

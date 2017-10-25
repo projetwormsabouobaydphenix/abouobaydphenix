@@ -66,7 +66,7 @@ namespace render{
 
     }*/
     
-    bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width, unsigned int height)
+    bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize,  std::vector<int> tiles, unsigned int width, unsigned int height)
     {
         // on charge la texture du tileset
         if (!texture.loadFromFile(tileset))
@@ -106,28 +106,32 @@ namespace render{
         return true;
     }
     
-    std::vector<int> TileMap::loadLayer() {
-        
-        std::vector<int> vcarte;
-	std::ifstream fichier;
-        fichier.open("/home/sanaa/Documents/abouobaydphenix/res/terre.csv",std::ios::in);
-        std::string ligne,valeur;
-       
-        int i = 0;
-		
-        while(!fichier.eof()){
-            std::getline(fichier,ligne);
-            std::stringstream stream(ligne);
-            std::cout << ligne << std::endl;
-
-		
-            while(getline(stream, valeur,',')){
-			
-                vcarte.push_back(atoi(valeur.c_str()));
-			
-            }
+    std::vector<int> TileMap::loadLayer(const std::string& path) {
+ 
+       std::vector<int> vcarte;
+       int* carte;
+        string n;
+	std::ifstream fichier(path);
+        //fichier.open("terre.csv", std::ios::in);
+        if (!fichier.is_open()) std::cout << "Erreur open file" << endl;
+        while(fichier.good()){
+            getline(fichier, n, ',');
+            //cout << n << endl;
+            //if (n == "-1-1"){
+              //  n = "-1, -1";
+            //}
+            vcarte.push_back(std::stoi(n));
+            
+            
         }
-        std::cout << "OK" << std::endl;
+        
+       for (int i = 0; i<vcarte.size(); i++){
+            if (vcarte[i] == -1){
+               vcarte[i] = 0;
+            }
+          //      cout << vcarte[i] << endl;
+       }
+        
         
         return vcarte;
         

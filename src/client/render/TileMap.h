@@ -26,7 +26,7 @@ namespace render {
   public:
     void draw (sf::RenderTarget& target, sf::RenderStates states) const;
     bool load (const std::string&  tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int height, unsigned int width);
-    std::vector<int> loadLayer ();
+    std::vector<int> loadLayer (const std::string& path);
     // Setters and Getters
   };
 
