@@ -40,12 +40,8 @@ namespace state {
           cout << "Largeur différente de 1" << endl;
         } 
 
-        //StaticElement * floor = new Floor();
-        //Element* floor = new Floor();
-        //Element* floor;
-        //floor = new Floor();
-        //Element* personnage;
-        Personnage* ptt; 
+       
+        //Personnage* ptt; 
         //Floor floor;
         //Space s;
         cout << "Ajout d'un élement dans la grille" << endl;
