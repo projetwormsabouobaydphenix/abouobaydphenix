@@ -9,24 +9,10 @@ namespace state {
 
   /// class LoadCSV - 
   class LoadCSV {
-    // Attributes
-  protected:
-    std::vector<int> layer;
-    std::ifstream layerCSV;
-    std::string ligne;
-    std::string valeur;
     // Operations
   public:
-    std::vector<int> loadCSV ();
+    std::vector<int> loadCSV (std::string nom_fichier);
     // Setters and Getters
-    const std::vector<int>& getLayer() const;
-    void setLayer(const std::vector<int>& layer);
-    const std::ifstream& getLayerCSV() const;
-    void setLayerCSV(const std::ifstream& layerCSV);
-    const std::string& getLigne() const;
-    void setLigne(const std::string& ligne);
-    const std::string& getValeur() const;
-    void setValeur(const std::string& valeur);
   };
 
 };
