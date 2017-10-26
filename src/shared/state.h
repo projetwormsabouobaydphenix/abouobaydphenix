@@ -15,5 +15,8 @@
 #include "state/State.h"
 #include "state/Status.h"
 #include "state/Direction.h"
+<<<<<<< HEAD
 #include "state/ElementAlloc.h"
+=======
+>>>>>>> e544559d0c95c33751e12a9c1149f2a9c648493e
 #endif

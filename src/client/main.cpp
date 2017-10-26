@@ -9,10 +9,13 @@ void testSFML() {
 
 // Fin test SFML
 
+#include "../shared/state.h"
+#include "render.h"
 #include "state.h"
 #include <stdio.h>
 #include <string.h>
 #include "state/TestState.h"
+#include "render/TestRender.h"
 
 
 using namespace std;
@@ -36,6 +39,7 @@ int main(int argc,char* argv[])
         
         else if (mode == "render"){
             cout << "Test render" << endl;
+            render::TestRender();
             
         }
     }

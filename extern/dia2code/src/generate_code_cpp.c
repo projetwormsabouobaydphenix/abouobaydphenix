@@ -712,7 +712,13 @@ void print_include_stdlib(struct stdlib_includes* si,char* name) {
            si->stdint = 1;
        }
 
+<<<<<<< HEAD
         if (!si->stdlib && strstr(name,"size_t")) {
+=======
+       
+        
+       if (!si->stdlib && strstr(name,"size_t")) {
+>>>>>>> e544559d0c95c33751e12a9c1149f2a9c648493e
            print ("#include <stdlib.h>\n");
            si->stdlib = 1;
        }
