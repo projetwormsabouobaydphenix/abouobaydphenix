@@ -6,27 +6,32 @@
 
 #include "ElementAlloc.h"
 #include "Floor.h"
+#include "Space.h"
 #include <vector>
 
 namespace state {
     
+    
     ElementAlloc:: ElementAlloc() {
-        for (int i =0; i<(Layer_int.size()); i++){
+       for (int i =0; i<(Layer_int.size()); i++){
             if (Layer_int[i]==-1){
-                Layer.add(Space(2));
+                Element* pEmpty = new Space(SpaceTypeId::EMPTY);
+                Layer.add(pEmpty);
             }
             else if (Layer_int[i]==(280 or 119)){
-                Layer.add(Floor(1));
+                Element* pFull = new Floor(FloorTypeId::FULL);
+                Layer.add(pFull);
             }
             
             else if (Layer_int[i]==32){
-                Layer.add(Floor(2));
+                Element* pWater = new Floor(FloorTypeId::WATER);
+                Layer.add(pWater);
             }
         
         }
     }
     
-    ElementAlloc:: getLayer() {
+    ElementTab ElementAlloc:: getLayer() {
         return Layer;
     }
     

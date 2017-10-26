@@ -19,16 +19,16 @@ namespace state {
     /// 	
     size_t width ;
     size_t height;
-    std::vector<std::unique_ptr<Element>> list;
+    std::vector<std::shared_ptr<Element>> list;
     // Operations
   public:
-    ElementTab (size_t width = 0, size_t height = 1);
+    explicit ElementTab (size_t width = 0, size_t height = 1);
     size_t getWidth () const;
     size_t getHeight () const;
     size_t add (Element* e);
     void resize (size_t width, size_t height);
     Element* get (int i, int j) const;
-    void set (int i, int j, Element* e);
+    void set (int i, Element* e);
     // Setters and Getters
   };
 

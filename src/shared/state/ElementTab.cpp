@@ -15,6 +15,7 @@ namespace state{
 
 
     ElementTab::ElementTab(size_t width, size_t height) {
+        
         this->width=width;
         this->height=height;
         list.resize(width*height);
@@ -28,6 +29,7 @@ namespace state{
 
     Element* ElementTab::get(int i, int j) const {
         //return list[j*width + i];
+        
     }
 
     size_t ElementTab::getHeight() const {
@@ -47,8 +49,8 @@ namespace state{
 
     }
 
-    void ElementTab::set(int i, int j, Element* e) {
-       // l.insert(i,e);
+    void ElementTab::set(int i, Element* e) {
+       //l.insert(i,e);
         //l[j*width + i] = e;
     }
 
