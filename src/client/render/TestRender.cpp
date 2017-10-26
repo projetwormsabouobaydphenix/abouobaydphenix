@@ -22,13 +22,13 @@ TestRender::TestRender() {
     TileMap t;
     TileMap m;
     
-    std::vector<int> terre = t.loadLayer("/home/sanaa/Documents/abouobaydphenix/res/terre.txt");
-    std::vector<int> mer = m.loadLayer("/home/sanaa/Documents/abouobaydphenix/res/mer.txt");
+    std::vector<int> terre = t.loadLayer("res/terre.txt");
+    std::vector<int> mer = m.loadLayer("res/mer.txt");
     
-    if (!t.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), terre, 155, 40))
+    if (!t.load("res/tilemap.png", sf::Vector2u(32, 32), terre, 155, 40))
         cout << "Erreur chargement texture terre" << endl;
     
-    if (!m.load("/home/sanaa/Documents/abouobaydphenix/res/water.png", sf::Vector2u(32, 32), mer, 155, 40))
+    if (!m.load("res/water.png", sf::Vector2u(32, 32), mer, 155, 40))
         cout << "Erreur chargement texture mer" << endl;
 
     while (window.isOpen())
