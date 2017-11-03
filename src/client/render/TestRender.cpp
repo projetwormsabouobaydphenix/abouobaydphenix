@@ -21,15 +21,30 @@ TestRender::TestRender() {
     
     TileMap t;
     TileMap m;
+    TileMap p;
+    TileMap l;
+    TileMap b;
     
-    std::vector<int> terre = t.loadLayer("res/terre.txt");
-    std::vector<int> mer = m.loadLayer("res/mer.txt");
+    std::vector<int> terre = t.loadLayer("res/cterre.txt");
+    std::vector<int> mer = m.loadLayer("res/cmer.txt");
+    std::vector<int> perso = p.loadLayer("res/cpersonnages.txt");
+    std::vector<int> life = l.loadLayer("res/clife.txt");
+    std::vector<int> back = b.loadLayer("res/back.txt");
     
     if (!t.load("res/tilemap.png", sf::Vector2u(32, 32), terre, 155, 40))
         cout << "Erreur chargement texture terre" << endl;
     
     if (!m.load("res/water.png", sf::Vector2u(32, 32), mer, 155, 40))
         cout << "Erreur chargement texture mer" << endl;
+    
+    if (!p.load("res/Worms/wormsteam.png", sf::Vector2u(32, 32), perso, 155, 40))
+        cout << "Erreur chargement texture personnages" << endl;
+    
+    if (!l.load("res/life.png", sf::Vector2u(32, 32), life, 155, 40))
+        cout << "Erreur chargement texture life" << endl;
+    
+    if (!l.load("res/back.png", sf::Vector2u(32, 32), back, 155, 40))
+        cout << "Erreur chargement texture back" << endl;
 
     while (window.isOpen())
     {
@@ -43,7 +58,10 @@ TestRender::TestRender() {
 
         // on dessine le niveau
         window.clear();
+        window.draw(b);
+        window.draw(l);
         window.draw(m);
+        window.draw(p);
         window.draw(t);
         window.display();
     }
