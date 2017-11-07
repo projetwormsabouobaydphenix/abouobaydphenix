@@ -9,9 +9,9 @@ namespace engine {
   class Command {
     // Operations
   public:
-    ~Command ();
-    commandTypeId getTypeId () const;
-    void execute (state:: State& state);
+    virtual ~Command ();
+    virtual commandTypeId getTypeId () const = 0;
+    virtual void execute (state:: State& state) = 0;
     // Setters and Getters
   };
 

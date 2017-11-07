@@ -121,11 +121,11 @@ namespace render{
             
         }
         
-       for (int i = 0; i<vcarte.size(); i++){
+       /*for (int i = 0; i<vcarte.size(); i++){
             if (vcarte[i] == -1){
                vcarte[i] = 9;
             }
-       }
+       }*/
         
         
         return vcarte;

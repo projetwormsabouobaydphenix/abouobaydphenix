@@ -26,15 +26,21 @@ TestRender::TestRender() {
     TileMap b;
     
     std::vector<int> terre = t.loadLayer("res/cterre.txt");
-    std::vector<int> mer = m.loadLayer("res/cmer.txt");
+    std::vector<int> mer = m.loadLayer("/home/sanaa/Documents/abouobaydphenix/res/cmer.txt");
     std::vector<int> perso = p.loadLayer("res/cpersonnages.txt");
     std::vector<int> life = l.loadLayer("res/clife.txt");
     std::vector<int> back = b.loadLayer("res/back.txt");
     
-    if (!t.load("res/tilemap.png", sf::Vector2u(32, 32), terre, 155, 40))
+    for (int i = 0; i<terre.size(); i++){
+            if (terre[i] == -1){
+               terre[i] = 0;
+            }
+    }
+    
+    if (!t.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), terre, 155, 40))
         cout << "Erreur chargement texture terre" << endl;
     
-    if (!m.load("res/water.png", sf::Vector2u(32, 32), mer, 155, 40))
+    if (!m.load("/home/sanaa/Documents/abouobaydphenix/res/water.png", sf::Vector2u(32, 32), mer, 155, 40))
         cout << "Erreur chargement texture mer" << endl;
     
     if (!p.load("res/Worms/wormsteam.png", sf::Vector2u(32, 32), perso, 155, 40))
@@ -58,10 +64,10 @@ TestRender::TestRender() {
 
         // on dessine le niveau
         window.clear();
-        window.draw(b);
-        window.draw(l);
+        //window.draw(b);
+        //window.draw(l);
         window.draw(m);
-        window.draw(p);
+        //window.draw(p);
         window.draw(t);
         window.display();
     }
