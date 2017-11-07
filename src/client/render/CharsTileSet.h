@@ -15,6 +15,7 @@ namespace render {
   class TileSet;
 }
 
+#include "Tile.h"
 #include "TileSet.h"
 
 namespace render {
@@ -23,7 +24,7 @@ namespace render {
   class CharsTileSet : public render::TileSet {
     // Attributes
   private:
-    std::vector<std::vector<Tile>> personnage;
+    std::vector<Tile> personnage;
     // Operations
   public:
     CharsTileSet ();
