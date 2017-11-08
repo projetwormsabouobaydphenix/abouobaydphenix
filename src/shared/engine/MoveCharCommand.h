@@ -5,25 +5,29 @@
 
 namespace state {
   class State;
+};
+namespace engine {
+  class Command;
 }
 
 #include "CommandTypeId.h"
+#include "Command.h"
 
 namespace engine {
 
   /// class MoveCharCommand - 
-  class MoveCharCommand {
+  class MoveCharCommand : public engine::Command {
     // Attributes
   protected:
-    int char;
+    int character;
     // Operations
   public:
     MoveCharCommand (int c);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters
-    int getChar() const;
-    void setChar(int char);
+    int getCharacter() const;
+    void setCharacter(int character);
   };
 
 };

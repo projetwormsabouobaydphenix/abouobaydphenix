@@ -24,6 +24,7 @@ namespace state{
     size_t ElementTab::add(Element* e) {
         list.push_back(std::unique_ptr<Element>(e));  
         cout << "Ajout d'un élement à la grille" << endl;
+        notifierObserver();
         return list.size();
     }
 

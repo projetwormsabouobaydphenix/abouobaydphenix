@@ -12,10 +12,12 @@ void testSFML() {
 #include "../shared/state.h"
 #include "render.h"
 #include "state.h"
+#include "engine.h"
 #include <stdio.h>
 #include <string.h>
 #include "state/TestState.h"
 #include "render/TestRender.h"
+#include "engine/TestEngine.h"
 
 
 using namespace std;
@@ -41,6 +43,11 @@ int main(int argc,char* argv[])
             cout << "Test render" << endl;
             render::TestRender();
             
+        }
+        
+        else if (mode == "engine"){
+            cout << "Test engine" << endl;
+            engine::TestEngine();
         }
     }
     

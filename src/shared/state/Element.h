@@ -13,6 +13,7 @@ namespace state {
 
   /// class Element - 
   class Element {
+    // Associations
     // Operations
   public:
     Element ();

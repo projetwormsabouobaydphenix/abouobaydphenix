@@ -8,11 +8,13 @@ namespace state {
 }
 
 #include "Element.h"
+#include "Direction.h"
 
 namespace state {
 
   /// class MobileElement - 
   class MobileElement : public state::Element {
+    // Associations
     // Operations
   public:
     MobileElement ();

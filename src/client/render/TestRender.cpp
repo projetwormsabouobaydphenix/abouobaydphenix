@@ -37,6 +37,7 @@ TestRender::TestRender() {
             }
     }
     
+    
     if (!t.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), terre, 155, 40))
         cout << "Erreur chargement texture terre" << endl;
     

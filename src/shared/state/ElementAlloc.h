@@ -14,6 +14,7 @@ namespace state {
 
   /// class ElementAlloc - 
   class ElementAlloc {
+    // Associations
     // Attributes
   protected:
     ElementTab Layer;

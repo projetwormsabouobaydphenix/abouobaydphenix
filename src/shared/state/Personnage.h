@@ -9,11 +9,13 @@ namespace state {
 
 #include "TypeId.h"
 #include "MobileElement.h"
+#include "Status.h"
 
 namespace state {
 
   /// class Personnage - 
   class Personnage : public state::MobileElement {
+    // Associations
     // Attributes
   protected:
     int color;

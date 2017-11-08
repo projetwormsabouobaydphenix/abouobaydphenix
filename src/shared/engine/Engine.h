@@ -13,11 +13,13 @@ namespace engine {
 }
 
 #include "state/State.h"
+#include "Command.h"
 
 namespace engine {
 
   /// class Engine - 
   class Engine {
+    // Associations
     // Attributes
   private:
     state::State currentState;

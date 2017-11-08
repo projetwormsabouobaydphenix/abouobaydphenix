@@ -15,6 +15,7 @@ namespace state {
 
   /// class Floor - 
   class Floor : public state::StaticElement {
+    // Associations
     // Operations
   public:
     Floor (FloorTypeId id);

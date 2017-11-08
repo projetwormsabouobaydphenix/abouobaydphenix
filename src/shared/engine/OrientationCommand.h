@@ -5,15 +5,20 @@
 
 namespace state {
   class State;
+};
+namespace engine {
+  class Command;
 }
 
 #include "state/Direction.h"
 #include "CommandTypeId.h"
+#include "Command.h"
 
 namespace engine {
 
   /// class OrientationCommand - 
-  class OrientationCommand {
+  class OrientationCommand : public engine::Command {
+    // Associations
     // Attributes
   protected:
     int character;

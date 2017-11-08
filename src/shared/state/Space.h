@@ -15,6 +15,7 @@ namespace state {
 
   /// class Space - 
   class Space : public state::StaticElement {
+    // Associations
     // Operations
   public:
     Space (SpaceTypeId id);
