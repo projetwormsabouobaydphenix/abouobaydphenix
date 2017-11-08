@@ -13,7 +13,7 @@ namespace state {
     
     
     ElementAlloc:: ElementAlloc() {
-       for (int i =0; i<(Layer_int.size()); i++){
+       for (size_t i =0; i<(Layer_int.size()); i++){
             if (Layer_int[i]==-1){
                 Element* pEmpty = new Space(SpaceTypeId::EMPTY);
                 Layer.add(pEmpty);

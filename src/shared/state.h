@@ -13,6 +13,8 @@
 #include "state/Space.h"
 #include "state/Status.h"
 #include "state/Personnage.h"
+#include "state/EventTypeId.h"
+#include "state/Event.h"
 #include "state/Observer.h"
 #include "state/Observable.h"
 #include "state/ElementTab.h"

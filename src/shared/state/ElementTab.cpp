@@ -10,11 +10,11 @@
 #include <sstream>
 
 
-using namespace std;
+
 
 namespace state{
     
-
+using namespace std;
 
     ElementTab::ElementTab(size_t width, size_t height) {
         
@@ -55,8 +55,8 @@ namespace state{
     }
 
     void ElementTab::set(int i, Element* e) {
-       //l.insert(i,e);
-        //l[j*width + i] = e;
+        //list.erase(*);
+       // list.at(i)=shared_ptr e;
     }
     
      std::vector<int> ElementTab::load(const std::string& file) {

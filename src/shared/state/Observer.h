@@ -4,13 +4,18 @@
 
 
 namespace state {
+  class Event;
+}
 
-  // interface
+#include "Event.h"
+
+namespace state {
+
   /// class Observer - 
   class Observer {
     // Operations
   public:
-    void notifier ();
+    void update ();
     // Setters and Getters
   };
 
