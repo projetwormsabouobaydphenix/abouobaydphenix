@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <vector>
 #include <memory>
+#include <string>
 
 namespace state {
   class Element;
@@ -34,6 +35,7 @@ namespace state {
     void resize (size_t width, size_t height);
     Element* get (int i, int j) const;
     void set (int i, Element* e);
+    std::vector<int> load (const std::string& file);
     // Setters and Getters
   };
 

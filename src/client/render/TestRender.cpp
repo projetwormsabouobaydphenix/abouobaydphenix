@@ -12,6 +12,7 @@
  */
 
 #include "TestRender.h"
+#include "state/ElementTab.h"
 #include <SFML/Graphics.hpp>
 
 
@@ -19,38 +20,45 @@ namespace render{
 TestRender::TestRender() {
     sf::RenderWindow window(sf::VideoMode(4960, 1280), "Worms");
     
+    state::ElementTab terre(32,32);
+    state::ElementTab mer(32,32);
+    state::ElementTab perso(32,32);
+    state::ElementTab life(32,32);
+    state::ElementTab back(32,32);
+    
+    
     TileMap t;
     TileMap m;
     TileMap p;
     TileMap l;
     TileMap b;
     
-    std::vector<int> terre = t.loadLayer("res/cterre.txt");
-    std::vector<int> mer = m.loadLayer("/home/sanaa/Documents/abouobaydphenix/res/cmer.txt");
-    std::vector<int> perso = p.loadLayer("res/cpersonnages.txt");
-    std::vector<int> life = l.loadLayer("res/clife.txt");
-    std::vector<int> back = b.loadLayer("res/back.txt");
+    std::vector<int> t_terre = terre.load("res/cterre.txt");
+    std::vector<int> t_mer = mer.load("/home/sanaa/Documents/abouobaydphenix/res/cmer.txt");
+    std::vector<int> t_perso = perso.load("res/cpersonnages.txt");
+    std::vector<int> t_life = life.load("res/clife.txt");
+    std::vector<int> t_back = back.load("res/back.txt");
     
-    for (int i = 0; i<terre.size(); i++){
-            if (terre[i] == -1){
-               terre[i] = 0;
+    for (int i = 0; i<t_terre.size(); i++){
+            if (t_terre[i] == -1){
+               t_terre[i] = 0;
             }
     }
     
     
-    if (!t.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), terre, 155, 40))
+    if (!t.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), t_terre, 155, 40))
         cout << "Erreur chargement texture terre" << endl;
     
-    if (!m.load("/home/sanaa/Documents/abouobaydphenix/res/water.png", sf::Vector2u(32, 32), mer, 155, 40))
+    if (!m.load("/home/sanaa/Documents/abouobaydphenix/res/water.png", sf::Vector2u(32, 32), t_mer, 155, 40))
         cout << "Erreur chargement texture mer" << endl;
     
-    if (!p.load("res/Worms/wormsteam.png", sf::Vector2u(32, 32), perso, 155, 40))
+    if (!p.load("res/Worms/wormsteam.png", sf::Vector2u(32, 32), t_perso, 155, 40))
         cout << "Erreur chargement texture personnages" << endl;
     
-    if (!l.load("res/life.png", sf::Vector2u(32, 32), life, 155, 40))
+    if (!l.load("res/life.png", sf::Vector2u(32, 32), t_life, 155, 40))
         cout << "Erreur chargement texture life" << endl;
     
-    if (!l.load("res/back.png", sf::Vector2u(32, 32), back, 155, 40))
+    if (!l.load("res/back.png", sf::Vector2u(32, 32), t_back, 155, 40))
         cout << "Erreur chargement texture back" << endl;
 
     while (window.isOpen())

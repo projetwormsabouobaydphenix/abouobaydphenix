@@ -5,6 +5,7 @@
 
 namespace state {
 
+  // interface
   /// class Observer - 
   class Observer {
     // Operations

@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 
 using namespace std;
@@ -55,6 +57,31 @@ namespace state{
     void ElementTab::set(int i, Element* e) {
        //l.insert(i,e);
         //l[j*width + i] = e;
+    }
+    
+     std::vector<int> ElementTab::load(const std::string& file) {
+ 
+       std::vector<int> vcarte;
+       
+        string n;
+	std::ifstream fichier(file);
+        //fichier.open("terre.csv", std::ios::in);
+        if (!fichier.is_open()) std::cout << "Erreur open file" << endl;
+        while(fichier.good()){
+            getline(fichier, n, ',');
+            vcarte.push_back(std::stoi(n));
+            
+            
+        }
+        
+       /*for (int i = 0; i<vcarte.size(); i++){
+            if (vcarte[i] == -1){
+               vcarte[i] = 9;
+            }
+       }*/
+        
+        return vcarte;
+        
     }
 
 

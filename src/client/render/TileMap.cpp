@@ -106,31 +106,7 @@ namespace render{
         return true;
     }
     
-    std::vector<int> TileMap::loadLayer(const std::string& path) {
- 
-       std::vector<int> vcarte;
-       
-        string n;
-	std::ifstream fichier(path);
-        //fichier.open("terre.csv", std::ios::in);
-        if (!fichier.is_open()) std::cout << "Erreur open file" << endl;
-        while(fichier.good()){
-            getline(fichier, n, ',');
-            vcarte.push_back(std::stoi(n));
-            
-            
-        }
-        
-       /*for (int i = 0; i<vcarte.size(); i++){
-            if (vcarte[i] == -1){
-               vcarte[i] = 9;
-            }
-       }*/
-        
-        
-        return vcarte;
-        
-    }
+   
     
     
 }
