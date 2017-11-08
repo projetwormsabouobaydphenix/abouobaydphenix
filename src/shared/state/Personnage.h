@@ -7,6 +7,7 @@ namespace state {
   class MobileElement;
 }
 
+#include "Status.h"
 #include "TypeId.h"
 #include "MobileElement.h"
 
@@ -21,7 +22,7 @@ namespace state {
     int Shoot     = 0;
     // Operations
   public:
-    Personnage  (int color);
+    Personnage  (int color, Status status);
     ~Personnage ();
     TypeId  getTypeId () const;
     // Setters and Getters

@@ -3,7 +3,7 @@
 namespace state {
 
     
-    Personnage::Personnage(int color) {
+    Personnage::Personnage(int color, Status status) {
         if (color == 1 or color == 2){
             this->color = color;
         }

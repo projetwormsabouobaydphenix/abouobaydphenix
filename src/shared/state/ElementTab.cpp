@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include <fstream>
 
 
 using namespace std;
@@ -52,8 +53,8 @@ namespace state{
     }
 
     void ElementTab::set(int i, Element* e) {
-       //l.insert(i,e);
-        //l[j*width + i] = e;
+        //list.erase(*);
+       // list.at(i)=shared_ptr e;
     }
 
 

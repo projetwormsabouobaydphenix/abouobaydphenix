@@ -3,14 +3,26 @@
 #define ENGINE__COMMAND__H
 
 
+namespace state {
+  class State;
+};
+namespace engine {
+  class Engine;
+}
+
+#include "CommandTypeId.h"
+#include "state/State.h"
+#include "Engine.h"
+
 namespace engine {
 
   /// class Command - 
   class Command {
+    // Associations
     // Operations
   public:
     virtual ~Command ();
-    virtual commandTypeId getTypeId () const = 0;
+    virtual CommandTypeId getTypeId () const = 0;
     virtual void execute (state:: State& state) = 0;
     // Setters and Getters
   };
