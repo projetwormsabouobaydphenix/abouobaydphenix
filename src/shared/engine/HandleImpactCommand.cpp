@@ -34,4 +34,13 @@ namespace engine {
         cout<<"La case a été détruite par le tir"<<endl;
         
         }
+    
+    void engine::HandleImpactCommand::execute(state::State& state){
+        
+    }
+     
+     
+     CommandTypeId engine::HandleImpactCommand::getTypeId () const{
+         return CommandTypeId::HANDLE_IMPACT;
+     }
 }

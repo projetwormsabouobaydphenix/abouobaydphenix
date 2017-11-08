@@ -5,6 +5,8 @@
  */
 
 #include "HandleLifesCommand.h"
+#include "state.h"
+#include "state/SpaceTypeId.h"
 #include <iostream>
 
 using namespace std;
@@ -20,4 +22,14 @@ namespace engine {
         tyletype = EMPTY;
         cout<<"Le personnage a récupéré une vie."<<endl;
     }
+    
+    void engine::HandleLifesCommand::execute(state::State& state){
+        
+    }
+
+    CommandTypeId engine::HandleLifesCommand::getTypeId () const{
+        return CommandTypeId::HANDLE_LIFE;
+    }
+    
+ 
 }
