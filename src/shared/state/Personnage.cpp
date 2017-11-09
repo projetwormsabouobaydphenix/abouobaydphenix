@@ -45,5 +45,16 @@ int state::Personnage::getShoot() const{
 void state::Personnage::setShoot(int shoot){
     this->Shoot=shoot;
     }
+
+    bool Personnage::equals(const Element& other) const {
+        if (other.getTypeId() == TypeId::PERSONNAGE){
+            return true;
+        }
+        
+        else{
+            return false;
+        }
+    }
+
 }
 

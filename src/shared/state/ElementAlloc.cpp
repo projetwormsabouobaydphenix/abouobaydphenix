@@ -13,27 +13,25 @@ namespace state {
     
     
     ElementAlloc:: ElementAlloc() {
-       for (size_t i =0; i<(Layer_int.size()); i++){
-            if (Layer_int[i]==-1){
+       /*for (size_t i =0; i<(layer_int.size()); i++){
+            if (layer_int[i]==-1){
                 Element* pEmpty = new Space(SpaceTypeId::EMPTY);
-                Layer.add(pEmpty);
+                layer.add(pEmpty);
             }
-            else if (Layer_int[i]==(280 or 119)){
+            else if (layer_int[i]==(280 or 119)){
                 Element* pFull = new Floor(FloorTypeId::FULL);
-                Layer.add(pFull);
+                layer.add(pFull);
             }
             
-            else if (Layer_int[i]==32){
+            else if (layer_int[i]==32){
                 Element* pWater = new Floor(FloorTypeId::WATER);
-                Layer.add(pWater);
+                layer.add(pWater);
             }
         
-        }
+        }*/
     }
     
-    ElementTab ElementAlloc:: getLayer() {
-        return Layer;
-    }
+   
     
     
 }

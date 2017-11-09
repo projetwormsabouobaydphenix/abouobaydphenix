@@ -4,6 +4,7 @@
 
 
 namespace state {
+  class Element;
   class StaticElement;
 }
 
@@ -24,6 +25,7 @@ namespace state {
     SpaceTypeId getSpaceTypeId () const;
     void setSpaceTypeId (SpaceTypeId id);
     bool isStatic () const;
+    bool equals (const Element& other) const;
     // Setters and Getters
   };
 

@@ -23,7 +23,11 @@ namespace engine {
     void lostLife (state::State& state, state::Status statusPerso);
     void destruct (state::State& state, int pos);
     CommandTypeId getTypeId () const;
+<<<<<<< HEAD
     void execute (state::State& state, int position);
+=======
+    void execute (state::State& state);
+>>>>>>> ab55e7e6e5508ef1b0b7c9db889fafe4f8ed66ab
     // Setters and Getters
   };
 

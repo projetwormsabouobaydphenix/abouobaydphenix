@@ -17,16 +17,16 @@ namespace state {
     // Associations
     // Attributes
   protected:
-    ElementTab Layer;
-    std::vector<int> Layer_int;
+    ElementTab layer;
+    std::vector<int> layerInt;
     // Operations
   public:
     ElementTab getLayer ();
     ElementAlloc ();
     // Setters and Getters
-    void setLayer(const ElementTab& Layer);
-    const std::vector<int>& getLayer_int() const;
-    void setLayer_int(const std::vector<int>& Layer_int);
+    void setLayer(const ElementTab& layer);
+    const std::vector<int>& getLayerInt() const;
+    void setLayerInt(const std::vector<int>& layerInt);
   };
 
 };

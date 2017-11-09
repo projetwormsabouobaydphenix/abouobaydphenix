@@ -11,7 +11,7 @@ namespace state{
 
     void Observable::notifierObserver()  {
         for (auto observer:observers){
-            observer->notifier() ;
+            observer->update() ;
         }
     }
 

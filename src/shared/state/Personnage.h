@@ -4,6 +4,7 @@
 
 
 namespace state {
+  class Element;
   class MobileElement;
 }
 
@@ -26,6 +27,7 @@ namespace state {
     Personnage  (int color);
     ~Personnage ();
     TypeId  getTypeId () const;
+    bool equals (const Element& other) const;
     // Setters and Getters
     int getColor() const;
     void setColor(int color);
