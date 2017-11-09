@@ -24,6 +24,7 @@ namespace engine {
     }
     
     void engine::OrientationCommand::execute(state::State& state){
+         cout<<"Le personnage est orienté "<<endl;
         
     }
 }

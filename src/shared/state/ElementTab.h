@@ -33,7 +33,7 @@ namespace state {
     size_t getHeight () const;
     size_t add (Element* e);
     void resize (size_t width, size_t height);
-    Element* get (int i, int j) const;
+    Element* get (int i) const;
     void set (int i, Element* e);
     std::vector<int> load (const std::string& file);
     // Setters and Getters

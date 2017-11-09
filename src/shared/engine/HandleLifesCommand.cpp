@@ -23,8 +23,13 @@ namespace engine {
         cout<<"Le personnage a récupéré une vie."<<endl;
     }
     
-    void engine::HandleLifesCommand::execute(state::State& state){
-        
+    void engine::HandleLifesCommand::execute(state::State& state, int position){
+        ElementTab tabgrid= state.getGrid();
+        Element* type = tabgrid.get(position);
+        Element heart = *type;
+        if (heart.equals(Space(SpaceTypeId::LIFE))){
+            HandleLifesCommand::takeLife(state, position, state::SpaceTypeId::LIFE);
+        }
     }
 
     CommandTypeId engine::HandleLifesCommand::getTypeId () const{

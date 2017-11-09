@@ -39,7 +39,7 @@ TestRender::TestRender() {
     std::vector<int> t_life = life.load("res/clife.txt");
     std::vector<int> t_back = back.load("res/back.txt");
     
-    for (int i = 0; i<t_terre.size(); i++){
+    for (size_t i = 0; i<t_terre.size(); i++){
             if (t_terre[i] == -1){
                t_terre[i] = 0;
             }

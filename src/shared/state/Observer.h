@@ -16,6 +16,7 @@ namespace state {
     // Operations
   public:
     void update ();
+    void notifier ();
     // Setters and Getters
   };
 

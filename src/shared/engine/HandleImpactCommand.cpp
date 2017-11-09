@@ -5,11 +5,10 @@
  */
 
 #include "HandleImpactCommand.h"
-#include "state/TypeId.h"
-#include "state/Floor.h"
-#include "state/Space.h"
+#include "state.h"
 #include <iostream>
 #include <vector>
+
 
 using namespace std;
 using namespace state;
@@ -17,7 +16,7 @@ using namespace state;
 
 namespace engine {
     
-    void lostLife(state::State& state, state::Status statusPerso){
+    void HandleImpactCommand::lostLife(state::State& state, state::Status statusPerso){
         int Lifecount = state.getLifecount();
         state.setLifecount(Lifecount-1);
         cout << "Le personnage a perdu une vie" << endl;
@@ -28,15 +27,23 @@ namespace engine {
         }
     }
     
-    void destruct(state::State& state, int pos){
+    void HandleImpactCommand::destruct(state::State& state, int pos){
         ElementTab grid = state.getGrid();
         //grid.set(pos, state::Space.setSpaceTypeId(EMPTY) );
         cout<<"La case a été détruite par le tir"<<endl;
         
         }
     
-    void engine::HandleImpactCommand::execute(state::State& state){
-        
+    void engine::HandleImpactCommand::execute(state::State& state, int position){
+        ElementTab tabchars= state.getChars();
+        Element* type = tabchars.get(position);
+        Element impact = *type;
+        if (impact.equals(Space(SpaceTypeId::EMPTY)) or impact.equals(Space(SpaceTypeId::LIFE))){
+            HandleImpactCommand::lostLife(state, state::Status::ALIVE);
+        }
+        else {
+           engine::HandleImpactCommand::destruct(state, position);
+        }
     }
      
      

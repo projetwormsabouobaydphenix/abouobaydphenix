@@ -18,7 +18,6 @@ namespace engine {
 
   /// class OrientationCommand - 
   class OrientationCommand : public engine::Command {
-    // Associations
     // Attributes
   protected:
     int character;

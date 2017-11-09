@@ -25,7 +25,7 @@ namespace engine {
         //Voir comment on peut sélectionner un personnage en particulier et le décaler d'une case dans la grille
         }
         else {
-            cout<<"Le personnage a épuisé le nombre de pas autorisé pour un tour."<<endl;
+            cout<<"Le personnage a épuisé le nombre de pas autorisés pour un tour."<<endl;
         } 
     }
     
@@ -34,7 +34,17 @@ namespace engine {
     }
     
     void engine::MoveCharCommand::execute (state::State& state){
-        
+        int stepcount=state.getStepcount();
+        if(stepcount<3){
+            cout<<"Le personnage s'est déplacé d'une case."<<endl;
+        stepcount=stepcount+1;
+        state.setStepcount(stepcount);
+        ElementTab chars= state.getChars();
+        //Voir comment on peut sélectionner un personnage en particulier et le décaler d'une case dans la grille
+        }
+        else {
+            cout<<"Le personnage a épuisé le nombre de pas autorisés pour un tour."<<endl;
+        } 
     }
     
     int engine::MoveCharCommand::getCharacter() const{

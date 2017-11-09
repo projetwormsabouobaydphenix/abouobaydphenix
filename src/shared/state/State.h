@@ -24,6 +24,7 @@ namespace state {
     int epoch     = 0;
     int epochrate     = 12;
     int stepcount     = 0;
+    int lifecount     = 3;
     // Operations
   public:
     ElementTab& getGrid ();
@@ -35,6 +36,8 @@ namespace state {
     void setEpochrate(int epochrate);
     int getStepcount() const;
     void setStepcount(int stepcount);
+    int getLifecount() const;
+    void setLifecount(int lifecount);
   };
 
 };

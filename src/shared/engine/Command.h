@@ -5,15 +5,20 @@
 
 namespace state {
   class State;
+};
+namespace engine {
+  class Engine;
 }
 
 #include "CommandTypeId.h"
 #include "state/State.h"
+#include "Engine.h"
 
 namespace engine {
 
   /// class Command - 
   class Command {
+    // Associations
     // Operations
   public:
     virtual ~Command ();

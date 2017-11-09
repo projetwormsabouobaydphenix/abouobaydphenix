@@ -15,10 +15,15 @@ namespace state{
     TypeId state::Floor::getTypeId() const{
        return TypeId::FLOOR;
     }
-        bool Floor::isStatic() const {
-            return true;
+    
+    bool Floor::isStatic() const {
+        return true;
 
     }
+    
+ 
+    }
+
 
 
 }
