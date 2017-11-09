@@ -31,9 +31,7 @@ using namespace std;
     }
 
     Element* ElementTab::get(int i, int j) const {
-        Element* e;
-        return e;
-        //return list[j*width + i];
+        return list[i].get();
         
     }
 

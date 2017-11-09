@@ -8,7 +8,8 @@ namespace engine {
   enum CommandTypeId {
     MOVE_CHAR     = 1,
     ORIENTATION     = 2,
-    HANDLE_LIFE     = 3
+    HANDLE_LIFE     = 3,
+    HANDLE_IMPACT     = 4
   };
 
 };

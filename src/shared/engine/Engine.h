@@ -13,17 +13,15 @@ namespace engine {
 }
 
 #include "state/State.h"
-#include "Command.h"
 
 namespace engine {
 
   /// class Engine - 
   class Engine {
-    // Associations
     // Attributes
   private:
     state::State currentState;
-    std::map<int, std::unique_ptr<Command>> currentCommands;
+    std::map<int,std::unique_ptr<Command>> currentCommands;
     // Operations
   public:
     Engine ();

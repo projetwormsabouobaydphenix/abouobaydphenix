@@ -6,7 +6,7 @@ using namespace std;
 
 namespace state{
 
-    void Observer::notifier() {
+    void Observer::update() {
         cout << "notification reçue" << endl;
     }
     

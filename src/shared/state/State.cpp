@@ -35,12 +35,6 @@ namespace state{
         this->stepcount=stepcount;
     }
     
-    int state::State::getLifecount() const {
-        return this->lifecount;
-    }
-    
-    void state::State::setLifecount(int lifecount){
-        this->lifecount=lifecount;
-    }
+   
     
 }

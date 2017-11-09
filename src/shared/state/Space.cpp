@@ -25,6 +25,21 @@ namespace state{
         return true;
 
     }
+    
+    void Space::setSpaceTypeId(SpaceTypeId id) {
+        
+    }
+
+    bool Space::equals(const Element& other) const {
+        if (other.getTypeId() == TypeId::SPACE){
+            return true;
+        }
+        
+        else{
+            return false;
+        }
+    }
+
 
 
     

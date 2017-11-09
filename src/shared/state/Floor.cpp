@@ -19,6 +19,17 @@ namespace state{
             return true;
 
     }
+    
+    bool Floor::equals(const Element& other) const {
+        if (other.getTypeId() == TypeId::FLOOR){
+            return true;
+        }
+        
+        else{
+            return false;
+        }
+    }
+
 
 
 }

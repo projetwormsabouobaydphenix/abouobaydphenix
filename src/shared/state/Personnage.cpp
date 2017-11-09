@@ -3,7 +3,7 @@
 namespace state {
 
     
-    Personnage::Personnage(int color, Status status) {
+    Personnage::Personnage(int color) {
         if (color == 1 or color == 2){
             this->color = color;
         }
@@ -45,5 +45,16 @@ int state::Personnage::getShoot() const{
 void state::Personnage::setShoot(int shoot){
     this->Shoot=shoot;
     }
+
+    bool Personnage::equals(const Element& other) const {
+        if (other.getTypeId() == TypeId::PERSONNAGE){
+            return true;
+        }
+        
+        else{
+            return false;
+        }
+    }
+
 }
 
