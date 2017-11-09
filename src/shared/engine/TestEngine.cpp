@@ -9,7 +9,7 @@
 
 namespace engine{
     TestEngine::TestEngine() {
-        Command comm;
+        Command comm = new OrientationCommand(1, state::Direction::LEFT);
         
         cout << "Appuyez sur espace pour passer à l'époque suivante\n" << endl;
        
@@ -24,7 +24,7 @@ namespace engine{
             //state::Element p = new state::Personnage(1);
             //elementTab.add(*p);
             cout<<"** Epoque 1**\n"<<endl;
-            comm = new OrientationCommand();
+            //comm = new OrientationCommand();
             enginetest.addCommand(1,comm);
             
             enginetest.moteur();

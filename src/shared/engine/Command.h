@@ -21,6 +21,7 @@ namespace engine {
     // Associations
     // Operations
   public:
+    Command ();
     virtual ~Command ();
     virtual CommandTypeId getTypeId () const = 0;
     virtual void execute (state:: State& state) = 0;
