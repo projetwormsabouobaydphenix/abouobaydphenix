@@ -17,14 +17,14 @@ using namespace state;
 namespace engine {
     
     void HandleImpactCommand::lostLife(state::State& state, state::Status statusPerso){
-        int Lifecount = state.getLifecount();
+        /*int Lifecount = state.getLifecount();
         state.setLifecount(Lifecount-1);
         cout << "Le personnage a perdu une vie" << endl;
         
         if (Lifecount==0){
             statusPerso=DEAD;
             cout<<"Le personnage est mort"<<endl;
-        }
+        }*/
     }
     
     void HandleImpactCommand::destruct(state::State& state, int pos){

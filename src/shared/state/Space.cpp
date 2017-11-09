@@ -31,13 +31,14 @@ namespace state{
     }
 
     bool Space::equals(const Element& other) const {
-        if (other.getTypeId() == TypeId::SPACE){
+        /*if (other.getTypeId() == TypeId::SPACE){
             return true;
         }
         
         else{
             return false;
-        }
+        }*/
+        return true;
     }
 
 

@@ -6,13 +6,25 @@
 #include "state.h"
 #include "engine.h"
 
+#include <iostream>
+using namespace std;
+
 
 namespace engine{
     TestEngine::TestEngine() {
-        Command comm = new OrientationCommand(1, state::Direction::LEFT);
+        Command *comm ;
+        Engine enginetest;
         
-        cout << "Appuyez sur espace pour passer à l'époque suivante\n" << endl;
-       
+        
+        comm = new OrientationCommand(1, state::Direction::LEFT);
+        
+        enginetest.addCommand(1,comm);
+        enginetest.moteur();
+        
+        comm = new MoveCharCommand(1, enginetest.getState());
+        enginetest.addCommand(2,comm);
+        enginetest.moteur();
+        
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
             Engine enginetest;

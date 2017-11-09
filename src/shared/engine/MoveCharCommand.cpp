@@ -54,4 +54,6 @@ namespace engine {
     void setCharacter(int character){
        //this->character=character;
     }
+    
+    Command::~Command(){}
 }

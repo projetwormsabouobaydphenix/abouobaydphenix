@@ -22,13 +22,14 @@ namespace state{
     }
     
     bool Floor::equals(const Element& other) const {
-        if (other.getTypeId() == TypeId::FLOOR){
+        /*if (other.getTypeId() == TypeId::FLOOR){
             return true;
         }
         
         else{
             return false;
-        }
+        }*/
+        return true;
 
     }
 

@@ -47,13 +47,14 @@ void state::Personnage::setShoot(int shoot){
     }
 
     bool Personnage::equals(const Element& other) const {
-        if (other.getTypeId() == TypeId::PERSONNAGE){
+        /*if (other.getTypeId() == TypeId::PERSONNAGE){
             return true;
         }
         
         else{
             return false;
-        }
+        }*/
+        return true;
     }
 
 }

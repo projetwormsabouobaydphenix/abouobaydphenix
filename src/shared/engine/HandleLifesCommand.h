@@ -5,15 +5,19 @@
 
 namespace state {
   class State;
+};
+namespace engine {
+  class Command;
 }
 
 #include "state/SpaceTypeId.h"
 #include "CommandTypeId.h"
+#include "Command.h"
 
 namespace engine {
 
   /// class HandleLifesCommand - 
-  class HandleLifesCommand {
+  class HandleLifesCommand : public engine::Command {
     // Operations
   public:
     void takeLife (state::State& state, int pos, state::SpaceTypeId tyletype);

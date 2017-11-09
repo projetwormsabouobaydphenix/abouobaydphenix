@@ -7,6 +7,7 @@
 #include "Engine.h"
 #include "Command.h"
 #include <algorithm>
+#include <iostream>
 
 using namespace std;
 using namespace state;
@@ -37,7 +38,7 @@ namespace engine {
     void Engine::addCommand(int priority, Command* cmd){
         //currentCommands.insert(std::pair<int, Command>(priority,cmd));
         currentCommands[priority]=std::unique_ptr<Command>(cmd);
-        cout<<"Ajout de la commande : %s\n", cmd->getTypeId()<<endl;
+        cout<<"Ajout de la commande : " << cmd->getTypeId()<<endl;
     }
     
     void Engine::addPassiveCommand(){
@@ -46,7 +47,7 @@ namespace engine {
         addCommand(priority,cmd);
     }
     
-   const state::State& Engine::getState() const{
+   state::State& Engine::getState(){
         return this ->currentState;
     }
     

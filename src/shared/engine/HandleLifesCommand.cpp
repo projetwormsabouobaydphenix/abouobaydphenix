@@ -15,21 +15,21 @@ using namespace state;
 namespace engine {
     
     void takeLife(state::State& state, int pos, state::SpaceTypeId tyletype){
-        int Lifecount = state.getLifecount();
+        /*int Lifecount = state.getLifecount();
         if (Lifecount<3){
         state.setLifecount(Lifecount+1);
         }
-        tyletype = EMPTY;
+        tyletype = EMPTY;*/
         cout<<"Le personnage a récupéré une vie."<<endl;
     }
     
     void engine::HandleLifesCommand::execute(state::State& state, int position){
-        ElementTab tabgrid= state.getGrid();
+       /* ElementTab tabgrid= state.getGrid();
         Element* type = tabgrid.get(position);
         Element heart = *type;
         if (heart.equals(Space(SpaceTypeId::LIFE))){
             HandleLifesCommand::takeLife(state, position, state::SpaceTypeId::LIFE);
-        }
+        }*/
     }
 
     CommandTypeId engine::HandleLifesCommand::getTypeId () const{
