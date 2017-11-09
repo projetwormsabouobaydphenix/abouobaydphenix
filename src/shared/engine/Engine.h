@@ -26,10 +26,11 @@ namespace engine {
   public:
     Engine ();
     ~Engine ();
-    const state::State& getState () const;
+     state::State& getState ();
     void addPassiveCommand ();
     void addCommand (int priority, Command* cmd);
     void update ();
+    void moteur ();
     // Setters and Getters
   };
 

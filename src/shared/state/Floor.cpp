@@ -21,9 +21,6 @@ namespace state{
 
     }
     
-<<<<<<< HEAD
- 
-=======
     bool Floor::equals(const Element& other) const {
         if (other.getTypeId() == TypeId::FLOOR){
             return true;
@@ -32,7 +29,7 @@ namespace state{
         else{
             return false;
         }
->>>>>>> ab55e7e6e5508ef1b0b7c9db889fafe4f8ed66ab
+
     }
 
 

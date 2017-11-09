@@ -8,23 +8,28 @@ namespace state {
 };
 namespace engine {
   class Command;
+};
+namespace state {
+  class Personnage;
 }
 
 #include "state/Direction.h"
 #include "CommandTypeId.h"
 #include "Command.h"
+#include "state/Personnage.h"
 
 namespace engine {
 
   /// class OrientationCommand - 
   class OrientationCommand : public engine::Command {
+    // Associations
     // Attributes
   protected:
     int character;
     state:: Direction orientation;
     // Operations
   public:
-    OrientationCommand (int c, state::Direction d);
+    OrientationCommand (int perso, state::Direction d);
     CommandTypeId getTypeId () const;
     void execute  (state::State& state);
     // Setters and Getters

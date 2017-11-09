@@ -25,7 +25,7 @@ namespace state {
     /// 	
     size_t width ;
     size_t height;
-    std::vector<std::unique_ptr<Element>> list;
+    std::vector<std::shared_ptr<Element>> list;
     // Operations
   public:
     explicit ElementTab (size_t width = 0, size_t height = 1);

@@ -22,7 +22,7 @@ namespace engine {
         stepcount=stepcount+1;
         state.setStepcount(stepcount);
         ElementTab chars= state.getChars();
-        //Voir comment on peut sélectionner un personnage en particulier et le décaler d'une case dans la grille
+        
         }
         else {
             cout<<"Le personnage a épuisé le nombre de pas autorisés pour un tour."<<endl;

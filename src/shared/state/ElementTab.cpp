@@ -30,14 +30,11 @@ using namespace std;
         return list.size();
     }
 
-<<<<<<< HEAD
+
     Element* ElementTab::get(int i) const {
         return list.at(i).get();
         //return list[j*width + i];
-=======
-    Element* ElementTab::get(int i, int j) const {
-        return list[i].get();
->>>>>>> ab55e7e6e5508ef1b0b7c9db889fafe4f8ed66ab
+
         
     }
 
