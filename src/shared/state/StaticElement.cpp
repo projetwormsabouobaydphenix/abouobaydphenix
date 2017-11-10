@@ -7,8 +7,6 @@ namespace state{
 
     }
 
-    Element::~Element(){
-        
-    }
+
 }
 

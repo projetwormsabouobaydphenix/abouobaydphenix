@@ -14,7 +14,7 @@ using namespace state;
 
 namespace engine {
     
-    void takeLife(state::State& state, int pos, state::SpaceTypeId tyletype){
+    void HandleLifesCommand::takeLife(state::State& state, int pos, state::SpaceTypeId tyletype){
         int Lifecount = state.getLifecount();
         if (Lifecount<3){
         state.setLifecount(Lifecount+1);
