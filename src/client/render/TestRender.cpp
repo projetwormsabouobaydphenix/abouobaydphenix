@@ -60,6 +60,9 @@ TestRender::TestRender() {
     
     if (!l.load("res/back.png", sf::Vector2u(32, 32), t_back, 155, 40))
         cout << "Erreur chargement texture back" << endl;
+    
+    
+    
 
     while (window.isOpen())
     {

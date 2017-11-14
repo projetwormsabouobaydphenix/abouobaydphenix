@@ -14,7 +14,7 @@ using namespace state;
 
 namespace engine {
     
-   
+
     MoveCharCommand::MoveCharCommand(int i, int j) {
         this->i=i;
         this->j=j;
@@ -26,6 +26,7 @@ namespace engine {
     }
     
     void engine::MoveCharCommand::execute (state::State& state){
+        
         ElementTab tabgrid= state.getGrid();
         Element* casenext;
         ElementTab tabchars= state.getChars();
@@ -93,4 +94,6 @@ namespace engine {
     void setCharacter(int character){
      //  (this->character)=character;
     }
+    
+    Command::~Command(){}
 }

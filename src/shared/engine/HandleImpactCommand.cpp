@@ -16,6 +16,7 @@ using namespace state;
 
 namespace engine {
     
+
     void HandleImpactCommand::lostLife (state::State& state, int i, int j){
         ElementTab tabchars= state.getChars();
         Element* top;
@@ -47,7 +48,7 @@ namespace engine {
             cout<<"La case a été détruite par le tir"<<endl;
         }
     }
-    
+
     void engine::HandleImpactCommand::execute(state::State& state, int i, int j){
         ElementTab tabgrid= state.getGrid();
         Element* top;

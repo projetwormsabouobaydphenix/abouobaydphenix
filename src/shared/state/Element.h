@@ -20,7 +20,7 @@ namespace state {
     ~Element ();
     virtual TypeId getTypeId () const = 0;
     virtual bool isStatic () const = 0;
-    virtual bool equals (const Element& other) const = 0;
+    virtual bool equals (const Element& other) const;
     // Setters and Getters
   };
 

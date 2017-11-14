@@ -15,10 +15,10 @@ using namespace state;
 namespace engine {
     
     
-    Engine::Engine(){
-        //for_each(currentCommands.begin(), currentCommands.end(), Command.execute(currentState));
-      
+    Engine::Engine() {
+
     }
+
     
     Engine::~Engine(){
         
@@ -38,16 +38,17 @@ namespace engine {
     void Engine::addCommand(int priority, Command* cmd){
         //currentCommands.insert(std::pair<int, Command>(priority,cmd));
         currentCommands[priority]=std::unique_ptr<Command>(cmd);
-        cout<<"Ajout de la commande :\n"<< cmd->getTypeId()<<endl;
+        cout<<"Ajout de la commande : " << cmd->getTypeId()<<endl;
+
     }
     
     void Engine::addPassiveCommand(){
         Command* cmd;
         int priority;
-        addCommand(priority,cmd);
+        //addCommand(priority,cmd);
     }
     
-    state::State& Engine::getState() {
+   state::State& Engine::getState(){
         return this ->currentState;
     }
     

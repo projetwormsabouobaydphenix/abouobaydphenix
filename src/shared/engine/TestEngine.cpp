@@ -6,19 +6,22 @@
 #include "state.h"
 #include "engine.h"
 
+#include <iostream>
+using namespace std;
+
+
+
 using namespace state;
 
 namespace engine{
     TestEngine::TestEngine() {
         Command* comm;
         
-        cout << "Appuyez sur espace pour passer à l'époque suivante\n" << endl;
-       
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
             Engine enginetest;
-            state::State state;
-            enginetest.getState()=state;
+            state::State state = enginetest.getState();
+            //enginetest.getState()=state;
             state::ElementTab elementTab(2,2);
             state.getChars()=elementTab;
             

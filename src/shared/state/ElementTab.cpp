@@ -32,11 +32,7 @@ using namespace std;
 
 
     Element* ElementTab::get(int i, int j) const {
-        int position = j*width +i;
-        return list.at(position).get();
-        
-
-        
+        return list[j*width + i].get();
     }
 
     size_t ElementTab::getHeight() const {
@@ -61,7 +57,7 @@ using namespace std;
         list[position]= std::shared_ptr<Element>(e);
     }
     
-     std::vector<int> ElementTab::load(const std::string& file) {
+    std::vector<int> ElementTab::load(const std::string& file) {
  
        std::vector<int> vcarte;
        
@@ -72,18 +68,8 @@ using namespace std;
         while(fichier.good()){
             getline(fichier, n, ',');
             vcarte.push_back(std::stoi(n));
-            
-            
         }
-        
-       /*for (int i = 0; i<vcarte.size(); i++){
-            if (vcarte[i] == -1){
-               vcarte[i] = 9;
-            }
-       }*/
-        
         return vcarte;
-        
     }
 
 

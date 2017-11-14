@@ -14,6 +14,16 @@ using namespace state;
 
 namespace engine {
     
+    void takeLife(state::State& state, int pos, state::SpaceTypeId tyletype){
+        /*int Lifecount = state.getLifecount();
+        if (Lifecount<3){
+        state.setLifecount(Lifecount+1);
+        }
+        tyletype = EMPTY;*/
+        cout<<"Le personnage a récupéré une vie."<<endl;
+    }
+    
+
     void HandleLifesCommand::addLife(int i, int j, state::State& state){
         ElementTab tabgrid= state.getGrid();
         Element* pos;

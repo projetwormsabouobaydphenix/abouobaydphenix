@@ -19,7 +19,6 @@
 #include "state/Observable.h"
 #include "state/ElementTab.h"
 #include "state/State.h"
-#include "state/ElementAlloc.h"
 #include "state/TabEvent.h"
 #include "state/StateEventId.h"
 #include "state/StateEvent.h"

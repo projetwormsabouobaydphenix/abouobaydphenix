@@ -7,15 +7,14 @@ namespace render{
 
     }
 
-    
-  
-
     void Layer::initTileMap() {
 
     }
-        void Layer::setTileMap(TileMap* tilemap) {
+    
+    void Layer::setTileMap(TileMap* tilemap) {
 
     }
+    
     void Layer::setTilemap(const std::unique_ptr<TileMap>& tilemap) {
 
     }

@@ -10,9 +10,9 @@ namespace engine {
   class Command;
 }
 
+#include "state/Status.h"
 #include "CommandTypeId.h"
 #include "Command.h"
-#include "state/Status.h"
 
 namespace engine {
 
@@ -20,10 +20,10 @@ namespace engine {
   class HandleImpactCommand : public engine::Command {
     // Operations
   public:
-    void lostLife (state::State& state, int i, int j);
-    void destruct (state::State& state, int i, int j);
+    void lostLife (state::State& state, state::Status statusPerso);
+    void destruct (state::State& state, int pos);
     CommandTypeId getTypeId () const;
-    void execute (state::State& state, int i, int j);
+    void execute (state::State& state, int position);
     // Setters and Getters
   };
 

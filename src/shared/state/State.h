@@ -19,7 +19,7 @@ namespace state {
     // Attributes
   private:
     ElementTab grid;
-    ElementTab Chars;
+    ElementTab chars;
   protected:
     int epoch     = 0;
     int epochrate     = 12;
@@ -27,6 +27,8 @@ namespace state {
   public:
     ElementTab& getGrid ();
     ElementTab& getChars ();
+    void setGrid (ElementTab& grid);
+    void setChars (ElementTab& chars);
     // Setters and Getters
     int getEpoch() const;
     void setEpoch(int epoch);

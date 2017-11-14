@@ -2,17 +2,15 @@
 #include "State.h"
 
 namespace state {
-
+     
+    Personnage::Personnage() {
+        
+    }
     
-        Personnage::Personnage() {
-
-        }
-
-        Personnage::~Personnage() {
-
-        }
-
-
+    Personnage::~Personnage() {
+        
+    }
+    
     TypeId state::Personnage::getTypeId() const{
         return TypeId::PERSONNAGE;
     }
@@ -25,22 +23,30 @@ namespace state {
         this->color=color;
     }
 
-    int state::Personnage::getStepcount() const{
-        return this->stepcount;
+    int Personnage::getLifecount() const {
+        return this->lifecount;
     }
 
-    void state::Personnage::setStepcount(int step){
-        this->stepcount = step;
-    }
-
-    int state::Personnage::getShootcount() const{
+    int Personnage::getShootcount() const {
         return this->shootcount;
     }
 
-    void state::Personnage::setShootcount(int shoot){
-        this->shootcount=shoot;
-        }
+    int Personnage::getStepcount() const {
+        return this->stepcount;
+    }
 
+    void Personnage::setLifecount(int lifecount) {
+        this->lifecount = lifecount;
+    }
+
+    void Personnage::setShootcount(int shootcount) {
+        this->shootcount = shootcount;
+    }
+    
+    void Personnage::setStepcount(int stepcount) {
+        this->stepcount = stepcount;
+    }
+    
     bool Personnage::equals(const Element& other) const {
         if (other.getTypeId() == TypeId::PERSONNAGE){
             return true;
@@ -49,40 +55,12 @@ namespace state {
         else{
             return false;
         }
+        return true;
     }
 
 
-    int Personnage::getLifecount() const{
-        return lifecount;
-    }    
-
-    void Personnage::setLifecount(int lifecount){
-        this->lifecount=lifecount;
+   
     }
 
-    Status Personnage::getStatus() const{
-        return this->status;
-    }
 
-    void Personnage::setStatus(Status status){
-        this->status=status;
-    }
-
-    int Personnage::getI() const{
-        return this->i;
-    }
-
-    int Personnage::getJ() const{
-        return this->j;
-    }
-
-    void Personnage::setI(int i){
-        this->i=i;
-    }
-
-    void Personnage::setJ(int j){
-        this->j=j;
-    }
-
-}
 
