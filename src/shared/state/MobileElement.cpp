@@ -7,8 +7,10 @@ namespace state{
        
     }
     
-   
-    
+    bool MobileElement::isStatic() const {
+        return false;
+    }
+
     
     
     

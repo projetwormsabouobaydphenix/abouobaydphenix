@@ -7,7 +7,6 @@ namespace state{
 
     }
 
-    
     bool state::Space::isSpace () const{
         return true;
     }
@@ -19,25 +18,19 @@ namespace state{
     SpaceTypeId state::Space::getSpaceTypeId () const{
         return SpaceTypeId::EMPTY;  //Le vrai code sera inséré après
     }
-       
-
-    bool state::Space::isStatic() const {
-        return true;
-
-    }
     
     void Space::setSpaceTypeId(SpaceTypeId id) {
         
     }
 
     bool Space::equals(const Element& other) const {
-        /*if (other.getTypeId() == TypeId::SPACE){
+        if (other.getTypeId() == TypeId::SPACE){
             return true;
         }
         
         else{
             return false;
-        }*/
+        }
         return true;
     }
 

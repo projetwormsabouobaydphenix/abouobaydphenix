@@ -18,6 +18,7 @@ void testSFML() {
 #include "state/TestState.h"
 #include "render/TestRender.h"
 #include "engine/TestEngine.h"
+#include "ai/TestAI.h"
 
 
 using namespace std;
@@ -48,6 +49,11 @@ int main(int argc,char* argv[])
         else if (mode == "engine"){
             cout << "Test engine" << endl;
             engine::TestEngine();
+        }
+        
+        else if (mode == "random_ai"){
+            cout << "Test AI" << endl;
+            ai::TestAI();
         }
     }
     

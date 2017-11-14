@@ -22,7 +22,6 @@ namespace state {
     Floor (FloorTypeId id);
     bool isSpace () const;
     TypeId getTypeId () const;
-    bool isStatic () const;
     bool equals (const Element& other) const;
     // Setters and Getters
   };

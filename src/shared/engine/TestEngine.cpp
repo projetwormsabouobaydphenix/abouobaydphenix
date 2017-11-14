@@ -28,8 +28,8 @@ namespace engine{
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
             Engine enginetest;
-            state::State state;
-            enginetest.getState()=state;
+            state::State state = enginetest.getState();
+            //enginetest.getState()=state;
             state::ElementTab elementTab(2,2);
             state.getChars()=elementTab;
             

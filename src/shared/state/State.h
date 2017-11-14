@@ -19,25 +19,21 @@ namespace state {
     // Attributes
   private:
     ElementTab grid;
-    ElementTab Chars;
+    ElementTab chars;
   protected:
     int epoch     = 0;
     int epochrate     = 12;
-    int stepcount     = 0;
-    int lifecount     = 3;
     // Operations
   public:
     ElementTab& getGrid ();
     ElementTab& getChars ();
+    void setGrid (ElementTab& grid);
+    void setChars (ElementTab& chars);
     // Setters and Getters
     int getEpoch() const;
     void setEpoch(int epoch);
     int getEpochrate() const;
     void setEpochrate(int epochrate);
-    int getStepcount() const;
-    void setStepcount(int stepcount);
-    int getLifecount() const;
-    void setLifecount(int lifecount);
   };
 
 };

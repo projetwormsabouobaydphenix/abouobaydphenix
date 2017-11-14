@@ -18,6 +18,7 @@ namespace state {
     // Operations
   public:
     MobileElement ();
+    bool isStatic () const;
     // Setters and Getters
   };
 

@@ -15,10 +15,10 @@ using namespace state;
 namespace engine {
     
     
-    Engine::Engine(){
-        //for_each(currentCommands.begin(), currentCommands.end(), Command.execute(currentState));
-      
+    Engine::Engine() {
+
     }
+
     
     Engine::~Engine(){
         
@@ -44,7 +44,7 @@ namespace engine {
     void Engine::addPassiveCommand(){
         Command* cmd;
         int priority;
-        addCommand(priority,cmd);
+        //addCommand(priority,cmd);
     }
     
    state::State& Engine::getState(){

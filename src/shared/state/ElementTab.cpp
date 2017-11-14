@@ -31,11 +31,8 @@ using namespace std;
     }
 
 
-    Element* ElementTab::get(int i) const {
-        return list.at(i).get();
-        //return list[j*width + i];
-
-        
+    Element* ElementTab::get(int i, int j) const {
+        return list[j*width + i].get();
     }
 
     size_t ElementTab::getHeight() const {
@@ -55,12 +52,12 @@ using namespace std;
 
     }
 
-    void ElementTab::set(int i, Element* e) {
+    void ElementTab::set(int i, int j, Element* e) {
         //list.erase(*);
        // list.at(i)=shared_ptr e;
     }
     
-     std::vector<int> ElementTab::load(const std::string& file) {
+    std::vector<int> ElementTab::load(const std::string& file) {
  
        std::vector<int> vcarte;
        
@@ -71,18 +68,8 @@ using namespace std;
         while(fichier.good()){
             getline(fichier, n, ',');
             vcarte.push_back(std::stoi(n));
-            
-            
         }
-        
-       /*for (int i = 0; i<vcarte.size(); i++){
-            if (vcarte[i] == -1){
-               vcarte[i] = 9;
-            }
-       }*/
-        
         return vcarte;
-        
     }
 
 

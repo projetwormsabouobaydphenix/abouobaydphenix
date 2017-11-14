@@ -35,15 +35,7 @@ namespace engine {
         }
     
     void engine::HandleImpactCommand::execute(state::State& state, int position){
-        ElementTab tabchars= state.getChars();
-        Element* type = tabchars.get(position);
-        Element impact = *type;
-        if (impact.equals(Space(SpaceTypeId::EMPTY)) or impact.equals(Space(SpaceTypeId::LIFE))){
-            HandleImpactCommand::lostLife(state, state::Status::ALIVE);
-        }
-        else {
-           engine::HandleImpactCommand::destruct(state, position);
-        }
+       
     }
      
      

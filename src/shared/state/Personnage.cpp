@@ -1,59 +1,59 @@
 #include "Personnage.h"
 
 namespace state {
-
-    
-    Personnage::Personnage(int color) {
-        if (color == 1 or color == 2){
-            this->color = color;
-        }
-        else{
-            this->color=0;
-        }
-
+     
+    Personnage::Personnage() {
+        
     }
     
     Personnage::~Personnage() {
-
+        
+    }
+    
+    TypeId state::Personnage::getTypeId() const{
+        return TypeId::PERSONNAGE;
     }
 
+    int state::Personnage::getColor() const{
+        return this->color;
+    }
+
+    void state::Personnage:: setColor(int color){
+        this->color=color;
+    }
+
+    int Personnage::getLifecount() const {
+        return this->lifecount;
+    }
+
+    int Personnage::getShootcount() const {
+        return this->shootcount;
+    }
+
+    int Personnage::getStepcount() const {
+        return this->stepcount;
+    }
+
+    void Personnage::setLifecount(int lifecount) {
+        this->lifecount = lifecount;
+    }
+
+    void Personnage::setShootcount(int shootcount) {
+        this->shootcount = shootcount;
+    }
     
-TypeId state::Personnage::getTypeId() const{
-    return TypeId::PERSONNAGE;
-}
-
-int state::Personnage::getColor() const{
-    return this->color;
-}
-
-void state::Personnage:: setColor(int color){
-    this->color=color;
-}
-
-int state::Personnage::getStep() const{
-    return this->Step;
-}
-
-void state::Personnage::setStep(int step){
-    this->Step = step;
-}
-
-int state::Personnage::getShoot() const{
-    return this->Shoot;
-}
-
-void state::Personnage::setShoot(int shoot){
-    this->Shoot=shoot;
+    void Personnage::setStepcount(int stepcount) {
+        this->stepcount = stepcount;
     }
 
     bool Personnage::equals(const Element& other) const {
-        /*if (other.getTypeId() == TypeId::PERSONNAGE){
+        if (other.getTypeId() == TypeId::PERSONNAGE){
             return true;
         }
         
         else{
             return false;
-        }*/
+        }
         return true;
     }
 
