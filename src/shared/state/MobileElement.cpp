@@ -7,10 +7,14 @@ namespace state{
        
     }
     
-    bool MobileElement::isStatic() const {
+
+
+    bool MobileElement::isStatic() const{
         return false;
     }
-
+   
+   
+    
     
     
     

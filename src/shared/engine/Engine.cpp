@@ -39,6 +39,7 @@ namespace engine {
         //currentCommands.insert(std::pair<int, Command>(priority,cmd));
         currentCommands[priority]=std::unique_ptr<Command>(cmd);
         cout<<"Ajout de la commande : " << cmd->getTypeId()<<endl;
+
     }
     
     void Engine::addPassiveCommand(){

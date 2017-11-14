@@ -20,6 +20,7 @@ namespace state{
         return this->grid;
     }
 
+
     void state::State::setEpoch(int epoch) {
         this->epoch=epoch;
     }
@@ -27,11 +28,12 @@ namespace state{
     void state::State::setEpochrate(int epochrate) {
         this->epochrate=epochrate;
     }
+
     
     void state::State::setGrid(ElementTab& grid) {
         this->grid = grid;
     }
-    
+
     void state::State::setChars(ElementTab& chars) {
         this->chars=chars;
     }

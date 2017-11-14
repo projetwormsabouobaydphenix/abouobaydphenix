@@ -14,17 +14,27 @@ using namespace state;
 
 namespace engine {
     
-    OrientationCommand::OrientationCommand(int c, state::Direction d){
-        //Pourquoi représenter le character par un int ? Cette commande fonctionne-t-elle aussi pour les fantômes ?
-        cout<<"Le personnage est orienté "<<endl;
+    OrientationCommand::OrientationCommand(int i, int j , state::Direction d){
+        this->i=i;
+        this->j=j;
+        this->orientation= d;
+        
     }
     
     CommandTypeId engine::OrientationCommand::getTypeId () const{
         return CommandTypeId::ORIENTATION;
     }
     
-    void engine::OrientationCommand::execute(state::State& state){
+    void OrientationCommand::execute(state::State& state){
+        ElementTab tabchars= state.getChars();
+        Element* top;
+        top= tabchars.get( i, j);
+        
+        if(top->getTypeId()== PERSONNAGE){
+            Personnage* perso = (Personnage*)top;
+            perso->setD(this->orientation);
          cout<<"Le personnage est orienté "<<endl;
         
+        }
     }
 }

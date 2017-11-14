@@ -10,20 +10,12 @@
 using namespace std;
 
 
+
+using namespace state;
+
 namespace engine{
     TestEngine::TestEngine() {
-        Command *comm ;
-        Engine enginetest;
-        
-        
-        comm = new OrientationCommand(1, state::Direction::LEFT);
-        
-        enginetest.addCommand(1,comm);
-        enginetest.moteur();
-        
-        comm = new MoveCharCommand(1, enginetest.getState());
-        enginetest.addCommand(2,comm);
-        enginetest.moteur();
+        Command* comm;
         
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
@@ -33,10 +25,14 @@ namespace engine{
             state::ElementTab elementTab(2,2);
             state.getChars()=elementTab;
             
-            //state::Element p = new state::Personnage(1);
-            //elementTab.add(*p);
+            Element* p;
+            Personnage* perso = new Personnage();
+            p = perso;
+            //Floor* f = new Floor();
+            //elementTab.add(f);
+            elementTab.add(p);
             cout<<"** Epoque 1**\n"<<endl;
-            //comm = new OrientationCommand();
+            comm = new OrientationCommand(1, 2, state::Direction::LEFT);
             enginetest.addCommand(1,comm);
             
             enginetest.moteur();

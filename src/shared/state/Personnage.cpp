@@ -1,4 +1,5 @@
 #include "Personnage.h"
+#include "State.h"
 
 namespace state {
      
@@ -45,17 +46,21 @@ namespace state {
     void Personnage::setStepcount(int stepcount) {
         this->stepcount = stepcount;
     }
-
+    
     bool Personnage::equals(const Element& other) const {
         if (other.getTypeId() == TypeId::PERSONNAGE){
             return true;
         }
-        
+
         else{
             return false;
         }
         return true;
     }
 
-}
+
+   
+    }
+
+
 

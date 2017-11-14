@@ -28,6 +28,12 @@ namespace state{
 
     }
 
-
+    FloorTypeId Floor::getNature() const{
+        return this->nature;
+    }
+    
+    void Floor::setNature(FloorTypeId nature){
+        this->nature =nature;
+    }
 
 }
