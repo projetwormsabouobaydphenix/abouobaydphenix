@@ -7,18 +7,29 @@ namespace state {
   class Element;
 }
 
-#include "Element.h"
 #include "Direction.h"
+#include "TypeId.h"
+#include "Element.h"
 
 namespace state {
 
   /// class MobileElement - 
   class MobileElement : public state::Element {
     // Associations
+    // Attributes
+  protected:
+    Direction d;
     // Operations
   public:
     MobileElement ();
+    virtual TypeId getTypeId () const = 0;
+    bool isStatic () const;
+    virtual bool equals (const Element& other) const = 0;
+    Direction getDirection ();
+    void setDirection (Direction direction);
     // Setters and Getters
+    Direction getD() const;
+    void setD(Direction d);
   };
 
 };

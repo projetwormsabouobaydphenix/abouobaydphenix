@@ -18,9 +18,9 @@ namespace state {
   public:
     Element ();
     ~Element ();
-    TypeId getTypeId () const;
-    bool isStatic () const;
-    virtual bool equals (const Element& other) const;
+    virtual TypeId getTypeId () const = 0;
+    virtual bool isStatic () const = 0;
+    virtual bool equals (const Element& other) const = 0;
     // Setters and Getters
   };
 

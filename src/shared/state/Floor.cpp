@@ -16,11 +16,6 @@ namespace state{
        return TypeId::FLOOR;
     }
     
-    bool Floor::isStatic() const {
-        return true;
-
-    }
-    
     bool Floor::equals(const Element& other) const {
         if (other.getTypeId() == TypeId::FLOOR){
             return true;
@@ -32,6 +27,12 @@ namespace state{
 
     }
 
-
+    FloorTypeId Floor::getNature() const{
+        return this->nature;
+    }
+    
+    void Floor::setNature(FloorTypeId nature){
+        this->nature =nature;
+    }
 
 }

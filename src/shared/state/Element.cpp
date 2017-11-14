@@ -8,7 +8,7 @@ namespace state{
     
     }   
     
-   bool Element::equals(const Element& other) const{
+    Element::~Element(){
         
     }
 

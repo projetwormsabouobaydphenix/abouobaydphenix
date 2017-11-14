@@ -6,6 +6,7 @@
 #include "state.h"
 #include "engine.h"
 
+using namespace state;
 
 namespace engine{
     TestEngine::TestEngine() {
@@ -21,10 +22,14 @@ namespace engine{
             state::ElementTab elementTab(2,2);
             state.getChars()=elementTab;
             
-            //state::Element p = new state::Personnage(1);
-            //elementTab.add(*p);
+            Element* p;
+            Personnage* perso = new Personnage();
+            p = perso;
+            //Floor* f = new Floor();
+            //elementTab.add(f);
+            elementTab.add(p);
             cout<<"** Epoque 1**\n"<<endl;
-            comm = new OrientationCommand(1, state::Direction::LEFT);
+            comm = new OrientationCommand(1, 2, state::Direction::LEFT);
             enginetest.addCommand(1,comm);
             
             enginetest.moteur();

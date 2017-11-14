@@ -14,21 +14,39 @@ using namespace state;
 
 namespace engine {
     
-    void HandleLifesCommand::takeLife(state::State& state, int pos, state::SpaceTypeId tyletype){
-        int Lifecount = state.getLifecount();
-        if (Lifecount<3){
-        state.setLifecount(Lifecount+1);
+    void HandleLifesCommand::addLife(int i, int j, state::State& state){
+        ElementTab tabgrid= state.getGrid();
+        Element* pos;
+        pos= tabgrid.get(i,j);
+        ElementTab tabchars= state.getChars();
+        Element* top;
+        top= tabchars.get( i, j);
+        
+        if ((pos->getTypeId())==SPACE){
+            Space* lieu = (Space*)pos;
+        
+            if(top->getTypeId()== PERSONNAGE){
+                Personnage* perso = (Personnage*)top;
+                int lifecount = perso->getLifecount();
+                if (lifecount<3){
+                    perso->setLifecount(lifecount+1);
+                    cout<<"Le personnage a récupéré une vie."<<endl;
+                }
+                lieu->setNature(EMPTY);
+            }
         }
-        tyletype = EMPTY;
-        cout<<"Le personnage a récupéré une vie."<<endl;
     }
     
-    void engine::HandleLifesCommand::execute(state::State& state, int position){
+    void engine::HandleLifesCommand::execute(state::State& state){
         ElementTab tabgrid= state.getGrid();
-        Element* type = tabgrid.get(position);
-        Element heart = *type;
-        if (heart.equals(Space(SpaceTypeId::LIFE))){
-            HandleLifesCommand::takeLife(state, position, state::SpaceTypeId::LIFE);
+        Element* heart;
+        heart = tabgrid.get(i,j);
+        
+        if ((heart->getTypeId())== SPACE){
+            Space* vie = (Space*)heart;
+            if ((vie->getNature())==LIFE){
+            HandleLifesCommand::addLife(i,j , state);
+            }
         }
     }
 

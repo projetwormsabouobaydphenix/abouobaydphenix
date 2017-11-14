@@ -16,18 +16,12 @@ namespace state{
         return TypeId::SPACE;
     }
     
-    SpaceTypeId state::Space::getSpaceTypeId () const{
-        return SpaceTypeId::EMPTY;  //Le vrai code sera inséré après
-    }
-       
-
-    bool state::Space::isStatic() const {
-        return true;
-
+    SpaceTypeId state::Space::getNature () const{
+        return this->nature;  
     }
     
-    void Space::setSpaceTypeId(SpaceTypeId id) {
-        
+    void Space::setNature(SpaceTypeId id) {
+        this->nature = id;
     }
 
     bool Space::equals(const Element& other) const {

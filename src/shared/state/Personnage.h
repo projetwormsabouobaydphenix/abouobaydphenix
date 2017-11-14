@@ -8,9 +8,9 @@ namespace state {
   class MobileElement;
 }
 
+#include "Status.h"
 #include "TypeId.h"
 #include "MobileElement.h"
-#include "Status.h"
 
 namespace state {
 
@@ -20,21 +20,33 @@ namespace state {
     // Attributes
   protected:
     int color;
-    int Step     = 0;
-    int Shoot     = 0;
+    int stepcount     = 0;
+    int shootcount     = 0;
+    int lifecount     = 3;
+    Status status;
+    int i;
+    int j;
     // Operations
   public:
-    Personnage  (int color);
+    Personnage  ();
     ~Personnage ();
     TypeId  getTypeId () const;
     bool equals (const Element& other) const;
     // Setters and Getters
     int getColor() const;
     void setColor(int color);
-    int getStep() const;
-    void setStep(int Step);
-    int getShoot() const;
-    void setShoot(int Shoot);
+    int getStepcount() const;
+    void setStepcount(int stepcount);
+    int getShootcount() const;
+    void setShootcount(int shootcount);
+    int getLifecount() const;
+    void setLifecount(int lifecount);
+    Status getStatus() const;
+    void setStatus(Status status);
+    int getI() const;
+    void setI(int i);
+    int getJ() const;
+    void setJ(int j);
   };
 
 };

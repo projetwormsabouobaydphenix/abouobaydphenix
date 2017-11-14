@@ -7,6 +7,8 @@ namespace state{
 
     }
 
-
+    bool StaticElement::isSpace() const {
+        return true;
+    }
 }
 

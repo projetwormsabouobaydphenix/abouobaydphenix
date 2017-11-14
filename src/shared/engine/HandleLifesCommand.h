@@ -5,21 +5,33 @@
 
 namespace state {
   class State;
+};
+namespace engine {
+  class Command;
 }
 
-#include "state/SpaceTypeId.h"
 #include "CommandTypeId.h"
+#include "Command.h"
+#include "state/SpaceTypeId.h"
 
 namespace engine {
 
   /// class HandleLifesCommand - 
-  class HandleLifesCommand {
+  class HandleLifesCommand : public engine::Command {
+    // Attributes
+  protected:
+    int i;
+    int j;
     // Operations
   public:
-    void takeLife (state::State& state, int pos, state::SpaceTypeId tyletype);
+    void addLife (int i, int j, state::State& state);
     CommandTypeId getTypeId () const;
-    void execute (state::State& state, int position);
+    void execute (state::State& state);
     // Setters and Getters
+    int getI() const;
+    void setI(int i);
+    int getJ() const;
+    void setJ(int j);
   };
 
 };

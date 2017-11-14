@@ -24,16 +24,17 @@ using namespace std;
     }
     
     size_t ElementTab::add(Element* e) {
-        list.push_back(std::unique_ptr<Element>(e));  
+        list.push_back(std::shared_ptr<Element>(e));  
         cout << "Ajout d'un élement à la grille" << endl;
         notifierObserver();
         return list.size();
     }
 
 
-    Element* ElementTab::get(int i) const {
-        return list.at(i).get();
-        //return list[j*width + i];
+    Element* ElementTab::get(int i, int j) const {
+        int position = j*width +i;
+        return list.at(position).get();
+        
 
         
     }
@@ -55,9 +56,9 @@ using namespace std;
 
     }
 
-    void ElementTab::set(int i, Element* e) {
-        //list.erase(*);
-       // list.at(i)=shared_ptr e;
+    void ElementTab::set(int i, int j, Element* e) {
+        int position = j*width +i;
+        list[position]= std::shared_ptr<Element>(e);
     }
     
      std::vector<int> ElementTab::load(const std::string& file) {

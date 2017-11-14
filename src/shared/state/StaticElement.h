@@ -16,7 +16,7 @@ namespace state {
     // Operations
   public:
     StaticElement ();
-    virtual bool isSpace () const = 0;
+    bool isSpace () const;
     // Setters and Getters
   };
 

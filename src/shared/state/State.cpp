@@ -19,9 +19,8 @@ namespace state{
         return this->grid;
     }
 
-    int state::State::getStepcount() const {
-        return this->stepcount;
-    }
+  
+    
 
     void state::State::setEpoch(int epoch) {
         this->epoch=epoch;
@@ -31,10 +30,6 @@ namespace state{
         this->epochrate=epochrate;
     }
 
-    void state::State::setStepcount(int stepcount) {
-        this->stepcount=stepcount;
-    }
-    
    
     
 }
