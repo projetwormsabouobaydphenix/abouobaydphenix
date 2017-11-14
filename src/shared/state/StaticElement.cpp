@@ -11,8 +11,6 @@ namespace state{
         return true;
     }
 
-    bool StaticElement::isSpace() const {
-        return true;
-    }
+   
 }
 

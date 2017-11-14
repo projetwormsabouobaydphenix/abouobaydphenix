@@ -17,6 +17,9 @@ namespace state {
   /// class Floor - 
   class Floor : public state::StaticElement {
     // Associations
+    // Attributes
+  protected:
+    FloorTypeId nature;
     // Operations
   public:
     Floor (FloorTypeId id);
@@ -24,6 +27,8 @@ namespace state {
     TypeId getTypeId () const;
     bool equals (const Element& other) const;
     // Setters and Getters
+    FloorTypeId getNature() const;
+    void setNature(FloorTypeId nature);
   };
 
 };

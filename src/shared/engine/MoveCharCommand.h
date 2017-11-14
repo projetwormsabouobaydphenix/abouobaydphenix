@@ -20,14 +20,20 @@ namespace engine {
     // Attributes
   protected:
     int character;
+    int i;
+    int j;
     // Operations
   public:
-    MoveCharCommand (int c, state::State& state);
+    MoveCharCommand (int i, int j);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters
     int getCharacter() const;
     void setCharacter(int character);
+    int getI() const;
+    void setI(int i);
+    int getJ() const;
+    void setJ(int j);
   };
 
 };

@@ -14,6 +14,10 @@ namespace state {
   /// class Element - 
   class Element {
     // Associations
+    // Attributes
+  protected:
+    int i;
+    int j;
     // Operations
   public:
     Element ();
@@ -22,6 +26,10 @@ namespace state {
     virtual bool isStatic () const = 0;
     virtual bool equals (const Element& other) const;
     // Setters and Getters
+    int getI() const;
+    void setI(int i);
+    int getJ() const;
+    void setJ(int j);
   };
 
 };

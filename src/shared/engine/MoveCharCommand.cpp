@@ -95,5 +95,5 @@ namespace engine {
      //  (this->character)=character;
     }
     
-    Command::~Command(){}
+  
 }

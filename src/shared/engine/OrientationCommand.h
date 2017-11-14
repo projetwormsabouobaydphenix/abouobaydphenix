@@ -27,9 +27,11 @@ namespace engine {
   protected:
     int character;
     state:: Direction orientation;
+    int i;
+    int j;
     // Operations
   public:
-    OrientationCommand (int perso, state::Direction d);
+    OrientationCommand (int i, int j, state::Direction d);
     CommandTypeId getTypeId () const;
     void execute  (state::State& state);
     // Setters and Getters
@@ -37,6 +39,10 @@ namespace engine {
     void setCharacter(int character);
     const state:: Direction& getOrientation() const;
     void setOrientation(const state:: Direction& orientation);
+    int getI() const;
+    void setI(int i);
+    int getJ() const;
+    void setJ(int j);
   };
 
 };
