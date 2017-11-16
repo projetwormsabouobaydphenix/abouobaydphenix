@@ -2,8 +2,11 @@
 #include "RandomAI.h"
 #include "engine/Engine.h"
 #include "ai.h"
-#include "state.h"
+#include "../state.h"
+#include "../engine.h"
 #include <random>
+#include <iostream>
+#include <stdlib.h>
 
 
 using namespace state;
@@ -17,19 +20,36 @@ namespace ai{
     }
 
     void RandomAI::run(engine::Engine& engine, int i, int j) {
+        //cout<<"test random ai 1"<<endl;
         std::vector<engine::Command*> list;
-        State currentState = engine.getState();
-        AI::listCommands(list, currentState, i, j );
-        //int pos = rand();
-        std::random_device rd;  //Will be used to obtain a seed for the random number engine
-        std::mt19937 randgen(rd()); //Standard mersenne_twister_engine seeded with rd()
-        std::uniform_int_distribution<> dis(0, 1);
-        int pos = dis(randgen);
-       // randgen =mt_rand([0,1]);
-        for (int k =0; k<4; k++){
-           engine.addCommand(k, list[pos]);
-        }
+        //State currentState;
+        //currentState = engine.getState();
+        //AI::listCommands(list, engine.getState(), i, j );
+        srand(time(NULL));
         
+        //cout<<"test random ai 4"<<endl;
+        Command* commande;
+        commande = new MoveCharCommand(i,j);
+        list.push_back(commande);
+        commande = new OrientationCommand(i,j, Direction::LEFT);
+        list.push_back(commande);
+        commande = new OrientationCommand(i,j, Direction::RIGHT);
+        list.push_back(commande);
+        //std::random_device rd;  //Will be used to obtain a seed for the random number engine
+        //std::mt19937 randgen(rd()); //Standard mersenne_twister_engine seeded with rd()
+        //std::uniform_int_distribution<> dis(0, 1);
+        //int pos = dis(randgen);
+       // randgen =mt_rand([0,1]);
+        for (int k =0; k<10; k++){
+            int pos = rand()%2;
+            engine.addCommand(k, list[pos]);
+           
+        }
+       
         engine.update();
+    }
+    
+    RandomAI::~RandomAI(){
+        
     }
 }
