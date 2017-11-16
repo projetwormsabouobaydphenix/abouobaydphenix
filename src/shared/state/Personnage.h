@@ -8,9 +8,9 @@ namespace state {
   class MobileElement;
 }
 
+#include "Status.h"
 #include "TypeId.h"
 #include "MobileElement.h"
-#include "Status.h"
 
 namespace state {
 
@@ -23,6 +23,7 @@ namespace state {
     int stepcount     = 0;
     int shootcount     = 0;
     int lifecount     = 3;
+    Status status;
     // Operations
   public:
     Personnage  ();
@@ -38,6 +39,8 @@ namespace state {
     void setShootcount(int shootcount);
     int getLifecount() const;
     void setLifecount(int lifecount);
+    Status getStatus() const;
+    void setStatus(Status status);
   };
 
 };

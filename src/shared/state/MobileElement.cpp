@@ -13,6 +13,13 @@ namespace state{
         return false;
     }
    
+    Direction MobileElement::getD() const{
+        return d;
+    }
+    
+    void MobileElement::setD(Direction d){
+        this->d= d;
+    }
    
     
     

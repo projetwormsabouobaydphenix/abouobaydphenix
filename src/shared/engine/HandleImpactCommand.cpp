@@ -71,7 +71,7 @@ namespace engine {
          return CommandTypeId::HANDLE_IMPACT;
      }
      
-     Command::~Command(){
+     Command::~Command(){ }
          
-     }
+     
 }

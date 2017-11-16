@@ -15,9 +15,6 @@ namespace state{
         return TypeId::SPACE;
     }
     
-    SpaceTypeId state::Space::getSpaceTypeId () const{
-        return SpaceTypeId::EMPTY;  //Le vrai code sera inséré après
-    }
     SpaceTypeId state::Space::getNature () const{
         return this->nature;  
     }

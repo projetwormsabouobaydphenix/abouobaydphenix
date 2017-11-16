@@ -27,8 +27,6 @@ namespace state {
   public:
     ElementTab& getGrid ();
     ElementTab& getChars ();
-    void setGrid (ElementTab& grid);
-    void setChars (ElementTab& chars);
     // Setters and Getters
     int getEpoch() const;
     void setEpoch(int epoch);

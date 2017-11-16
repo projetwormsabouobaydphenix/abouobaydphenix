@@ -8,13 +8,24 @@ namespace state{
     
     }
     
-<<<<<<< HEAD
-    bool Element::equals(const Element& other) const {
-
-=======
     Element::~Element(){
         
->>>>>>> aa1b2b520ea6c6842c44a4363626590a0cce3d66
+    }
+    
+    int Element::getI() const{
+        return i;
+    }
+    
+    int Element::getJ() const{
+        return j;
+    }
+    
+    void Element::setI(int i){
+        this->i=i;
+    } 
+    
+    void Element::setJ(int j){
+        this->j=j;
     }
 
 }

@@ -5,7 +5,7 @@ namespace state{
         
   
     ElementTab& state::State::getChars() {
-        return this->chars;
+        return chars;
     }
     
     int state::State::getEpoch() const {
@@ -27,14 +27,5 @@ namespace state{
 
     void state::State::setEpochrate(int epochrate) {
         this->epochrate=epochrate;
-    }
-
-    
-    void state::State::setGrid(ElementTab& grid) {
-        this->grid = grid;
-    }
-
-    void state::State::setChars(ElementTab& chars) {
-        this->chars=chars;
     }
 }

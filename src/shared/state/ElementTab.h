@@ -28,7 +28,7 @@ namespace state {
     std::vector<std::shared_ptr<Element>> list;
     // Operations
   public:
-    ElementTab (size_t width, size_t height);
+    ElementTab (size_t width = 0, size_t height = 1);
     size_t getWidth () const;
     size_t getHeight () const;
     size_t add (Element* e);
@@ -36,7 +36,7 @@ namespace state {
     Element* get (int i, int j) const;
     void set (int i, int j, Element* e);
     std::vector<int> load (const std::string& file);
-    void alloc ();
+    void alloc (std::vector<int> layer_int);
     // Setters and Getters
   };
 

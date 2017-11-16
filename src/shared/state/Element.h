@@ -14,14 +14,22 @@ namespace state {
   /// class Element - 
   class Element {
     // Associations
+    // Attributes
+  protected:
+    int i;
+    int j;
     // Operations
   public:
     Element ();
     ~Element ();
     virtual TypeId getTypeId () const = 0;
     virtual bool isStatic () const = 0;
-    virtual bool equals (const Element& other) const;
+    virtual bool equals (const Element& other) const = 0;
     // Setters and Getters
+    int getI() const;
+    void setI(int i);
+    int getJ() const;
+    void setJ(int j);
   };
 
 };

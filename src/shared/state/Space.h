@@ -17,15 +17,18 @@ namespace state {
   /// class Space - 
   class Space : public state::StaticElement {
     // Associations
+    // Attributes
+  protected:
+    SpaceTypeId nature;
     // Operations
   public:
     Space (SpaceTypeId id);
     bool isSpace () const;
     TypeId getTypeId () const;
-    SpaceTypeId getSpaceTypeId () const;
-    void setSpaceTypeId (SpaceTypeId id);
     bool equals (const Element& other) const;
     // Setters and Getters
+    SpaceTypeId getNature() const;
+    void setNature(SpaceTypeId nature);
   };
 
 };
