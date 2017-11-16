@@ -26,15 +26,17 @@ namespace engine {
     }
     
     void engine::MoveCharCommand::execute (state::State& state){
-        
-        ElementTab tabgrid;
+        cout<<"Le personnage s'est déplacé"<<endl;
+        /*ElementTab tabgrid;
         tabgrid = state.getGrid();
         Element* casenext;
         ElementTab tabchars;
         tabchars = state.getChars();
         Element* top;
+        cout<<"test 2"<<endl;
         top= tabchars.get(i, j);
-        if(top->getTypeId()== PERSONNAGE){
+        cout<<"fin test 2"<<endl;*/
+        /*if(top->getTypeId()== PERSONNAGE){
             Personnage* perso = (Personnage*)top;   
             int stepcount = perso->getStepcount();
             
@@ -86,7 +88,7 @@ namespace engine {
         }
         else {
             cout<<"Le personnage a épuisé le nombre de pas autorisés pour un tour."<<endl;
-        } 
+        } */
     }
     
     int engine::MoveCharCommand::getCharacter() const{

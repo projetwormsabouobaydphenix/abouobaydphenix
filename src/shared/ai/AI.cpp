@@ -1,7 +1,7 @@
 
 #include "AI.h"
-#include "state.h"
-#include "engine.h"
+#include "../state.h"
+#include "../engine.h"
 #include <iostream>
 #include <vector>
 
@@ -12,14 +12,22 @@ using namespace std;
 namespace ai{
         
     void AI::listCommands (std::vector<engine::Command*> list, state::State& state, int i, int j){
-        ElementTab tabchars= state.getChars();
+        /*ElementTab tabchars= state.getChars();
         Element* top;
         top= tabchars.get( i, j);
         ElementTab grid = state.getGrid();
         Element* nextl = grid.get(i-1,j);
-        Element* nextr = grid.get(i+1,j);
-        MoveCharCommand* move = new MoveCharCommand(i,j);
-        if(top->getTypeId()== PERSONNAGE){
+        Element* nextr = grid.get(i+1,j);*/
+        cout<<"test random ai 2"<<endl;
+        Command* commande;
+        commande = new MoveCharCommand(i,j);
+        list.push_back(commande);
+        commande = new OrientationCommand(i,j, Direction::LEFT);
+        list.push_back(commande);
+        commande = new OrientationCommand(i,j, Direction::RIGHT);
+        list.push_back(commande);
+        cout<<"test random ai 3"<<endl;
+        /*if(top->getTypeId()== PERSONNAGE){
             Personnage* perso = (Personnage*)top;
             if(nextl->getTypeId()==FLOOR){
                 OrientationCommand* orientright = new OrientationCommand(i,j,RIGHT);
@@ -48,10 +56,8 @@ namespace ai{
             } 
             
             
-        }   
+        }   */
     }
     
-    void AI::run (engine::Engine& engine, int i, int j){
-        
-    }
+   
 }    

@@ -3,7 +3,6 @@
 #define ENGINE__ENGINE__H
 
 #include <map>
-#include <memory>
 
 namespace state {
   class State;
@@ -21,7 +20,7 @@ namespace engine {
     // Attributes
   private:
     state::State currentState;
-    std::map<int,std::unique_ptr<Command>> currentCommands;
+    std::map<int,Command*> currentCommands;
     // Operations
   public:
     Engine ();

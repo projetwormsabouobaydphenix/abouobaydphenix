@@ -26,7 +26,7 @@ using namespace std;
     
     size_t ElementTab::add(Element* e) {
         list.push_back(std::shared_ptr<Element>(e));  
-        cout << "Ajout d'un élement à la grille" << endl;
+        //cout << "Ajout d'un élement à la grille" << endl;
         notifierObserver();
         return list.size();
     }

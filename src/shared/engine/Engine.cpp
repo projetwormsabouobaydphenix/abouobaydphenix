@@ -30,7 +30,7 @@ namespace engine {
     
     void Engine::addCommand(int priority, Command* cmd){
         //currentCommands.insert(std::pair<int, Command>(priority,cmd));
-        currentCommands[priority]=std::unique_ptr<Command>(cmd);
+        currentCommands[priority]=cmd;
         cout<<"Ajout de la commande : " << cmd->getTypeId()<<endl;
 
     }
@@ -46,8 +46,9 @@ namespace engine {
     }
     
     void Engine::update(){
-        for (std::map<int,std::unique_ptr<Command>>::iterator it = currentCommands.begin(); it != currentCommands.end(); ++it){
-            it->second.get()->execute(currentState);
+        for (std::map<int,Command*>::iterator it = currentCommands.begin(); it != currentCommands.end(); ++it){
+            it->second->execute(currentState);
+            //get()execute(currentState);
         }
         
         int epoch = currentState.getEpoch();
