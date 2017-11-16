@@ -72,6 +72,7 @@ using namespace std;
         }
         return vcarte;
     }
+
     
     void ElementTab::alloc(std::vector<int> layer_int){
        /* for(size_t i =0; i<(layer_int.size()); i++){
@@ -89,6 +90,7 @@ using namespace std;
                 list.(ElementTab::add(pWater));
             }*/
     }
+
 
 
 }

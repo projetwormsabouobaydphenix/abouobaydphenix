@@ -19,7 +19,14 @@ namespace state{
     ElementTab& state::State::getGrid() {
         return this->grid;
     }
-
+    
+    void State::setGrid(ElementTab& grid){
+        this->grid = grid;
+    }
+    
+    void State::setChars(ElementTab& chars){
+        this->chars = chars;
+    }
 
     void state::State::setEpoch(int epoch) {
         this->epoch=epoch;

@@ -27,9 +27,11 @@ namespace engine {
     
     void engine::MoveCharCommand::execute (state::State& state){
         
-        ElementTab tabgrid= state.getGrid();
+        ElementTab tabgrid;
+        tabgrid = state.getGrid();
         Element* casenext;
-        ElementTab tabchars= state.getChars();
+        ElementTab tabchars;
+        tabchars = state.getChars();
         Element* top;
         top= tabchars.get( i, j);
         if(top->getTypeId()== PERSONNAGE){
@@ -95,5 +97,5 @@ namespace engine {
      //  (this->character)=character;
     }
     
-    
+
 }

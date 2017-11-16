@@ -25,13 +25,33 @@ namespace ai{
                 OrientationCommand* orientright = new OrientationCommand(i,j,RIGHT);
                 list.push_back(orientright);
                 list.push_back(move);
+                if(nextr->getTypeId()==SPACE){
+                    Space* nextri = (Space*)nextr;
+                    if (nextri->getNature()==LIFE){
+                        HandleLifesCommand* add = new HandleLifesCommand;
+                        list.push_back(add);
+                    }
+                }
             }
             
             if(nextr->getTypeId()==FLOOR){
                 OrientationCommand* orientleft = new OrientationCommand(i,j,LEFT);
                 list.push_back(orientleft);
                 list.push_back(move);
-            }            
+                if(nextl->getTypeId()==SPACE){
+                    Space* nextle = (Space*)nextl;
+                    if (nextle->getNature()==LIFE){
+                        HandleLifesCommand* add = new HandleLifesCommand;
+                        list.push_back(add);
+                    }
+                }
+            } 
+            
+            
         }   
+    }
+    
+    void AI::run (engine::Engine& engine, int i, int j){
+        
     }
 }    

@@ -14,7 +14,7 @@ namespace state{
     TypeId state::Space::getTypeId () const{
         return TypeId::SPACE;
     }
-    
+
     SpaceTypeId state::Space::getNature () const{
         return this->nature;  
     }
@@ -31,12 +31,8 @@ namespace state{
         else{
             return false;
         }
-        return true;
+        
     }
-
-
-
-    
     
     
 }

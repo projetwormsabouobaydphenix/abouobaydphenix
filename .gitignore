@@ -2,3 +2,7 @@
 build
 bin
 nbproject
+/src/state.dia.autosave
+/src/engine.dia.autosave
+/src/render.dia.autosave
+/src/ai.dia.autosave
