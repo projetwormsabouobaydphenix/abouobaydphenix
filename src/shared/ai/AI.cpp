@@ -21,7 +21,7 @@ namespace ai{
         MoveCharCommand* move = new MoveCharCommand(i,j);
         OrientationCommand* orientright = new OrientationCommand(i,j,RIGHT);
         OrientationCommand* orientleft = new OrientationCommand(i,j,LEFT);
-        Handle
+       
        /* if(top->getTypeId()== PERSONNAGE){
            // Personnage* perso = (Personnage*)top;
             if(nextl->getTypeId()==FLOOR){
