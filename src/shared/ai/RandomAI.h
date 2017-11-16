@@ -24,6 +24,7 @@ namespace ai {
   public:
     RandomAI ();
     void run (engine::Engine& engine, int i, int j);
+    ~RandomAI ();
     // Setters and Getters
   };
 

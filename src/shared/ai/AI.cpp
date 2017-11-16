@@ -18,7 +18,7 @@ namespace ai{
         ElementTab grid = state.getGrid();
         Element* nextl = grid.get(i-1,j);
         Element* nextr = grid.get(i+1,j);*/
-        cout<<"test random ai 2"<<endl;
+        //cout<<"test random ai 2"<<endl;
         Command* commande;
         commande = new MoveCharCommand(i,j);
         list.push_back(commande);
@@ -26,7 +26,7 @@ namespace ai{
         list.push_back(commande);
         commande = new OrientationCommand(i,j, Direction::RIGHT);
         list.push_back(commande);
-        cout<<"test random ai 3"<<endl;
+        //cout<<"test random ai 3"<<endl;
         /*if(top->getTypeId()== PERSONNAGE){
             Personnage* perso = (Personnage*)top;
             if(nextl->getTypeId()==FLOOR){
