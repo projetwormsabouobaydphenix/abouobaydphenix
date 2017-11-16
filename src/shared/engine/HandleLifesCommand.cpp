@@ -48,7 +48,7 @@ namespace engine {
     }
     
     void engine::HandleLifesCommand::execute(state::State& state){
-        ElementTab tabgrid= state.getGrid();
+        /*ElementTab tabgrid= state.getGrid();
         Element* heart;
         heart = tabgrid.get(i,j);
         
@@ -57,7 +57,8 @@ namespace engine {
             if ((vie->getNature())==LIFE){
             HandleLifesCommand::addLife(i,j , state);
             }
-        }
+        }*/
+        cout<<"le personnage a récupéré une vie"<<endl;
     }
 
     CommandTypeId engine::HandleLifesCommand::getTypeId () const{

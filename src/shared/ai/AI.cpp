@@ -19,8 +19,11 @@ namespace ai{
         Element* nextl = grid.get(i-1,j);
         Element* nextr = grid.get(i+1,j);
         MoveCharCommand* move = new MoveCharCommand(i,j);
-        if(top->getTypeId()== PERSONNAGE){
-            Personnage* perso = (Personnage*)top;
+        OrientationCommand* orientright = new OrientationCommand(i,j,RIGHT);
+        OrientationCommand* orientleft = new OrientationCommand(i,j,LEFT);
+        Handle
+       /* if(top->getTypeId()== PERSONNAGE){
+           // Personnage* perso = (Personnage*)top;
             if(nextl->getTypeId()==FLOOR){
                 OrientationCommand* orientright = new OrientationCommand(i,j,RIGHT);
                 list.push_back(orientright);
@@ -48,7 +51,7 @@ namespace ai{
             } 
             
             
-        }   
+        }*/   
     }
     
     void AI::run (engine::Engine& engine, int i, int j){

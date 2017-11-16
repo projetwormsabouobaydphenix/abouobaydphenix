@@ -26,13 +26,13 @@ namespace ai{
         
         //cout << t_terre.size() << endl; /test
         
-        /*for (size_t i = 0; i<t_terre.size(); i++){
+        for (size_t i = 0; i<t_terre.size(); i++){
             if (t_terre[i] == -1){
                t_terre[i] = 0;
             }
         }
         
-        if (!mapt.load("../../../res/tilemap.png", sf::Vector2u(32, 32), t_terre, 10, 10))
+       /* if (!mapt.load("../../../res/tilemap.png", sf::Vector2u(32, 32), t_terre, 10, 10))
         cout << "Erreur chargement texture terre" << endl;
         // ---------------------------------------------------------------------------------------------------
         

@@ -26,7 +26,7 @@ namespace engine {
     }
     
     void OrientationCommand::execute(state::State& state){
-        ElementTab tabchars= state.getChars();
+        /*ElementTab tabchars= state.getChars();
         Element* top;
         top= tabchars.get( i, j);
         
@@ -35,6 +35,7 @@ namespace engine {
             perso->setD(this->orientation);
          cout<<"Le personnage est orienté "<<endl;
         
-        }
+        }*/
+        cout<<"le personnage a changé d'orientation"<<endl;
     }
 }
