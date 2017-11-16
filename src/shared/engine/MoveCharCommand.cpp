@@ -33,10 +33,10 @@ namespace engine {
         ElementTab tabchars;
         tabchars = state.getChars();
         Element* top;
-        top= tabchars.get( i, j);
+        top= tabchars.get(i, j);
         if(top->getTypeId()== PERSONNAGE){
             Personnage* perso = (Personnage*)top;   
-            int stepcount =perso->getStepcount();
+            int stepcount = perso->getStepcount();
             
             if(stepcount<3){
                 cout<<"Le personnage s'est déplacé d'une case."<<endl; 

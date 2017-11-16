@@ -28,7 +28,7 @@ namespace engine {
     void OrientationCommand::execute(state::State& state){
         /*ElementTab tabchars= state.getChars();
         Element* top;
-        top= tabchars.get( i, j);
+        top= tabchars.get(i, j);
         
         if(top->getTypeId()== PERSONNAGE){
             Personnage* perso = (Personnage*)top;

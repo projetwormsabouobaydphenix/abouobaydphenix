@@ -74,6 +74,7 @@ using namespace std;
     }
 
     
+
     void ElementTab::alloc(std::vector<int> layer_int){
        /* for(size_t i =0; i<(layer_int.size()); i++){
             if (layer_int[i]==-1){

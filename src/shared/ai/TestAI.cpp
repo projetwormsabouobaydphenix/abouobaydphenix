@@ -14,7 +14,7 @@ namespace ai{
     
     TestAI::TestAI() {
         
-       /* sf::RenderWindow window(sf::VideoMode(320, 320), "Test Worms");
+        sf::RenderWindow window(sf::VideoMode(320, 320), "Test Worms");
          
         // ----------------------------------------------------------------------------------
         render::TileMap mapt; //création d'une mini map*/
@@ -39,16 +39,18 @@ namespace ai{
         
         
         //------------------------------------------------------------------------------------
-        render::TileMap tileperso;
+        /*render::TileMap tileperso;
         std::vector<int> t_perso = {2}; //a modifier en fonction du personnage + chemin vers personnage
+        if (!tileperso.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), t_perso, 1, 1))
+        cout << "Erreur chargement texture personnage" << endl;
         if (!tileperso.load("../../../res/tilemap.png", sf::Vector2u(32, 32), t_perso, 1, 1))
         cout << "Erreur chargement texture personnage" << endl;*/
         //-------------------------------------------------------------------------------------
         
         
         // ----------------------------------------------------------
-        engine::Engine engine;
-        state::State currentState = engine.getState();
+        engine::Engine enginet;
+        state::State currentState = enginet.getState();
         state::ElementTab grid(10,10);
         state::ElementTab chars(1,1);
         currentState.setGrid(grid);
@@ -56,6 +58,7 @@ namespace ai{
         state::Element* floor = new state::Floor(state::FloorTypeId::FULL);
         state::Element* space = new state::Space(state::SpaceTypeId::EMPTY);
         state::Element* personnage = new state::Personnage();
+        chars.add(personnage);
         for (size_t it = 0; it<t_terre.size(); it++){
             if (t_terre[it] != 0){
                 grid.add(floor);
@@ -64,9 +67,28 @@ namespace ai{
                 grid.add(space);
             }
         }
-        chars.add(personnage);
+        cout << "tous les élements sont chargés dans la grille" << endl;
+        engine::Command* commande;
+        //commande = new engine::OrientationCommand(1, 2, state::Direction::LEFT);
+        //enginet.addCommand(1,commande);
+        //cout << "test" << endl;
+        //commande->execute(currentState);
+        cout << " test" << endl;
+        commande = new engine::MoveCharCommand(1,2);
+        enginet.addCommand(2,commande);
+        cout << "test2" << endl;
+        commande->execute(currentState);
+        cout << " fin test" << endl;
+        commande = new engine::MoveCharCommand(1,2);
+        enginet.addCommand(3,commande);
+        commande->execute(currentState);
+        commande = new engine::MoveCharCommand(1,2);
+        enginet.addCommand(4,commande);
+        commande->execute(currentState);
+        
+        
         AI* testrand = new RandomAI();
-        testrand->run(engine, personnage->getI(), personnage->getJ());
+        testrand->run(enginet, personnage->getI(), personnage->getJ());
         
         
         
@@ -90,7 +112,8 @@ namespace ai{
     TestAI::~TestAI(){
         
     }
-}       
+}      
+
         
         
         

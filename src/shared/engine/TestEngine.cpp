@@ -35,7 +35,7 @@ namespace engine{
             comm = new OrientationCommand(0,0, state::Direction::LEFT);
             enginetest.addCommand(1,comm);
             
-            enginetest.moteur();
+            //enginetest.moteur();
           
             
         }
