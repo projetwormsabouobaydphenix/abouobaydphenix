@@ -11,7 +11,9 @@ using namespace std;
 namespace render{
 
     CharsTileSet::CharsTileSet() {
-
+        for(int i = 0; i < 6; i++){
+           this->personnage.push_back(Tile(i*32,0,32,64)); 
+        }
     }
     
 
@@ -28,7 +30,7 @@ namespace render{
     }
 
     const Tile& CharsTileSet::getTile(const state::Element& e) const {
-        Tile tuile;
+        /*Tile tuile;
         tuile.setHeight(64);
         tuile.setWidth(32);
         if (e.getTypeId() == state::TypeId::PERSONNAGE){
@@ -43,9 +45,12 @@ namespace render{
         }
         else{
             std::cout << "Erreur, ce n'est pas un personnage" << std::endl;
+        }*/
+        
+        if (e.getTypeId() == state::TypeId::PERSONNAGE){
+            return this->personnage[0]; // a modifier en fonction des couleurs des personnages
         }
         
-        return tuile;
     }
    
     
