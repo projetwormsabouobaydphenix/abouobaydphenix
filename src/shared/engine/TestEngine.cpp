@@ -32,7 +32,7 @@ namespace engine{
             //elementTab.add(f);
             elementTab.add(p);
             cout<<"** Epoque 1**\n"<<endl;
-            comm = new OrientationCommand(1, 2, state::Direction::LEFT);
+            comm = new OrientationCommand(0,0, state::Direction::LEFT);
             enginetest.addCommand(1,comm);
             
             //enginetest.moteur();

@@ -8,6 +8,11 @@ namespace state{
     
     }
     
+
+    Element::~Element(){
+        
+    }
+    
     bool Element::equals(const Element& other) const {
 
     }
@@ -28,8 +33,5 @@ namespace state{
         this->j = j;
     }
 
-    Element::~Element() {
-
-    }
     
 }

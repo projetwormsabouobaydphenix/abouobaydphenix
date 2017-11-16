@@ -24,6 +24,7 @@ namespace state {
     MobileElement ();
     virtual TypeId getTypeId () const = 0;
     bool isStatic () const;
+    virtual bool equals (const Element& other) const = 0;
     // Setters and Getters
     Direction getD() const;
     void setD(Direction d);

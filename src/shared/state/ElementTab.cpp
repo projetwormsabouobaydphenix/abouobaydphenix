@@ -1,5 +1,6 @@
 
 #include "ElementTab.h"
+#include "state.h"
 #include "Element.h"
 #include <vector>
 #include <memory>
@@ -73,7 +74,24 @@ using namespace std;
     }
 
     
-    
+
+    void ElementTab::alloc(std::vector<int> layer_int){
+       /* for(size_t i =0; i<(layer_int.size()); i++){
+            if (layer_int[i]==-1){
+                Element* pEmpty = new Space(SpaceTypeId::EMPTY);
+                list.ElementTab::add(std::shared_ptr<Element>(pEmpty));
+            }
+            else if (layer_int[i]==(280 or 119)){
+                Element* pFull = new Floor(FloorTypeId::FULL);
+                list.(ElementTab::add(pFull));
+            }
+            
+            else if (layer_int[i]==32){
+                Element* pWater = new Floor(FloorTypeId::WATER);
+                list.(ElementTab::add(pWater));
+            }*/
+    }
+
 
 
 }

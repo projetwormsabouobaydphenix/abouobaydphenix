@@ -55,16 +55,18 @@ namespace state {
         else{
             return false;
         }
-        return true;
     }
 
-    Status Personnage::getStatus() const {
-        return this->status;
+
+    Status Personnage::getStatus() const{
+        return status;
+    }
+    
+    void Personnage::setStatus(Status status){
+        this->status=status;
     }
 
-    void Personnage::setStatus(Status status) {
-        this->status = status;
-    }
+
    
 }
 

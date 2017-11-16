@@ -25,14 +25,7 @@ namespace engine {
     }
     
     void Engine::moteur(){
-         for (std::map<int,std::unique_ptr<Command>>::iterator it = currentCommands.begin(); it != currentCommands.end(); ++it){
-             it->second.get()->execute(currentState);
-       }
-        
-        int epoch = currentState.getEpoch();
-        epoch=epoch+1;
-        currentState.setEpoch(epoch);
-        currentCommands.clear();
+
     }
     
     void Engine::addCommand(int priority, Command* cmd){
@@ -53,7 +46,13 @@ namespace engine {
     }
     
     void Engine::update(){
-        currentState.setEpoch(0);
+        for (std::map<int,std::unique_ptr<Command>>::iterator it = currentCommands.begin(); it != currentCommands.end(); ++it){
+            it->second.get()->execute(currentState);
+        }
+        
+        int epoch = currentState.getEpoch();
+        epoch=epoch+1;
+        currentState.setEpoch(epoch);
+        currentCommands.clear();
     }
-    
 }

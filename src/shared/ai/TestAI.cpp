@@ -17,7 +17,7 @@ namespace ai{
         sf::RenderWindow window(sf::VideoMode(320, 320), "Test Worms");
          
         // ----------------------------------------------------------------------------------
-        render::TileMap mapt; //création d'une mini map
+        render::TileMap mapt; //création d'une mini map*/
         std::vector<int> t_terre = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
             -1,-1,-1,-1,-1,-1,-1,-1,132,132, -1,-1,-1,-1,-1,-1,-1,132,164,164,
             132,132,-1,-1,-1,-1,132,164,164,164, 164,164,132,132,132,132,164,164,164,164,
@@ -32,17 +32,19 @@ namespace ai{
             }
         }
         
-        if (!mapt.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), t_terre, 10, 10))
+        if (!mapt.load("../../../res/tilemap.png", sf::Vector2u(32, 32), t_terre, 10, 10))
         cout << "Erreur chargement texture terre" << endl;
         // ---------------------------------------------------------------------------------------------------
         
         
         
         //------------------------------------------------------------------------------------
-        render::TileMap tileperso;
+        /*render::TileMap tileperso;
         std::vector<int> t_perso = {2}; //a modifier en fonction du personnage + chemin vers personnage
         if (!tileperso.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), t_perso, 1, 1))
         cout << "Erreur chargement texture personnage" << endl;
+        if (!tileperso.load("../../../res/tilemap.png", sf::Vector2u(32, 32), t_perso, 1, 1))
+        cout << "Erreur chargement texture personnage" << endl;*/
         //-------------------------------------------------------------------------------------
         
         
@@ -85,12 +87,14 @@ namespace ai{
         commande->execute(currentState);
         
         
+        AI* testrand = new RandomAI();
+        testrand->run(enginet, personnage->getI(), personnage->getJ());
         
         
         
         
         
-        while (window.isOpen()){
+       /* while (window.isOpen()){
         // on gère les évènements
         sf::Event event;
         while (window.pollEvent(event))
@@ -102,20 +106,21 @@ namespace ai{
         // on dessine le niveau
         window.clear();
         window.draw(mapt);
-        window.display();
+        window.display();*/
     }
-        
-        
-        
-        
-        
-        
-        
+    
+    TestAI::~TestAI(){
         
     }
+}      
+
+        
+        
+        
+        
+        
+        
+        
 
 
 
-TestAI::~TestAI() {
-}
-}
