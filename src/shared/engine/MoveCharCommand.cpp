@@ -26,8 +26,13 @@ namespace engine {
     }
     
     void engine::MoveCharCommand::execute (state::State& state){
+
+        
+
         cout<<"Le personnage s'est déplacé"<<endl;
         ElementTab tabgrid;
+
+        /*ElementTab tabgrid;
         tabgrid = state.getGrid();
         Element* casenext;
         ElementTab tabchars;
@@ -89,6 +94,10 @@ namespace engine {
         else {
             cout<<"Le personnage a épuisé le nombre de pas autorisés pour un tour."<<endl;
         } 
+        } */
+
+       
+
     }
     
     int engine::MoveCharCommand::getCharacter() const{

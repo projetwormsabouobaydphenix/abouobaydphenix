@@ -32,8 +32,13 @@ namespace ai{
             }
         }
         
+
+       /* if (!mapt.load("../../../res/tilemap.png", sf::Vector2u(32, 32), t_terre, 10, 10))
+        cout << "Erreur chargement texture terre" << endl;
+
        // if (!mapt.load("../../../res/tilemap.png", sf::Vector2u(32, 32), t_terre, 10, 10))
         //cout << "Erreur chargement texture terre" << endl;
+
         // ---------------------------------------------------------------------------------------------------
         
         

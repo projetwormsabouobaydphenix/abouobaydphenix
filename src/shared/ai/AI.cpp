@@ -17,6 +17,15 @@ namespace ai{
         top= tabchars.get( i, j);
         ElementTab grid = state.getGrid();
         Element* nextl = grid.get(i-1,j);
+
+        Element* nextr = grid.get(i+1,j);
+        MoveCharCommand* move = new MoveCharCommand(i,j);
+        OrientationCommand* orientright = new OrientationCommand(i,j,RIGHT);
+        OrientationCommand* orientleft = new OrientationCommand(i,j,LEFT);
+       
+       /* if(top->getTypeId()== PERSONNAGE){
+           // Personnage* perso = (Personnage*)top;
+
         Element* nextr = grid.get(i+1,j);*/
         //cout<<"test random ai 2"<<endl;
         Command* commande;
@@ -29,6 +38,7 @@ namespace ai{
         //cout<<"test random ai 3"<<endl;
         /*if(top->getTypeId()== PERSONNAGE){
             Personnage* perso = (Personnage*)top;
+
             if(nextl->getTypeId()==FLOOR){
                 OrientationCommand* orientright = new OrientationCommand(i,j,RIGHT);
                 list.push_back(orientright);
@@ -56,8 +66,11 @@ namespace ai{
             } 
             
             
-        }   */
+
+        }*/   
+
+        }   
+
     }
     
-   
-}    
+    

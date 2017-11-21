@@ -6,6 +6,7 @@
 #include "../engine.h"
 #include <random>
 #include <iostream>
+#include <stdlib.h>
 
 
 using namespace state;
@@ -24,7 +25,8 @@ namespace ai{
         //State currentState;
         //currentState = engine.getState();
         //AI::listCommands(list, engine.getState(), i, j );
-        int pos = rand()%2;
+        srand(time(NULL));
+        
         //cout<<"test random ai 4"<<endl;
         Command* commande;
         commande = new MoveCharCommand(i,j);
@@ -39,7 +41,8 @@ namespace ai{
         //int pos = dis(randgen);
        // randgen =mt_rand([0,1]);
         for (int k =0; k<10; k++){
-           engine.addCommand(k, list[pos]);
+            int pos = rand()%2;
+            engine.addCommand(k, list[pos]);
            
         }
        
