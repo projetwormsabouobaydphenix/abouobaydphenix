@@ -4,28 +4,41 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
-#include <vector>
 
 namespace sf {
-  class Texture;
   class VertexArray;
+  class Texture;
+};
+namespace render {
+  class Tile;
+};
+namespace sf {
   class Drawable;
   class Transformable;
+};
+namespace render {
+  class Layer;
 }
 
+#include "Layer.h"
 
 namespace render {
 
   /// class TileMap - 
   class TileMap : public sf::Drawable, public sf::Transformable {
+    // Associations
     // Attributes
   private:
-    sf::Texture texture;
     sf::VertexArray quads;
+    sf::Texture texture;
     // Operations
   public:
+    TileMap ();
+    void initQuads (int count);
+    void setSpriteLocation (int i, int x, int y);
+    void loadTexture (const std::string& image_file);
+    void setSpriteTexture (int i, const Tile& tex);
     void draw (sf::RenderTarget& target, sf::RenderStates states) const;
-    bool load (const std::string&  tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int height, unsigned int width);
     // Setters and Getters
   };
 

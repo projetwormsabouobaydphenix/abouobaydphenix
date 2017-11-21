@@ -34,7 +34,7 @@ TestRender::TestRender() {
     TileMap b;
     
     std::vector<int> t_terre = terre.load("res/cterre.txt");
-    std::vector<int> t_mer = mer.load("/home/sanaa/Documents/abouobaydphenix/res/cmer.txt");
+    std::vector<int> t_mer = mer.load("res/cmer.txt");
     std::vector<int> t_perso = perso.load("res/cpersonnages.txt");
     std::vector<int> t_life = life.load("res/clife.txt");
     std::vector<int> t_back = back.load("res/back.txt");
@@ -46,10 +46,10 @@ TestRender::TestRender() {
     }
     
     
-    if (!t.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), t_terre, 155, 40))
+    if (!t.load("res/tilemap.png", sf::Vector2u(32, 32), t_terre, 155, 40))
         cout << "Erreur chargement texture terre" << endl;
     
-    if (!m.load("/home/sanaa/Documents/abouobaydphenix/res/water.png", sf::Vector2u(32, 32), t_mer, 155, 40))
+    if (!m.load("res/water.png", sf::Vector2u(32, 32), t_mer, 155, 40))
         cout << "Erreur chargement texture mer" << endl;
     
     if (!p.load("res/Worms/wormsteam.png", sf::Vector2u(32, 32), t_perso, 155, 40))

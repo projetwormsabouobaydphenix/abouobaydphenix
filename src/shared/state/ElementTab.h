@@ -36,7 +36,13 @@ namespace state {
     Element* get (int i, int j) const;
     void set (int i, int j, Element* e);
     std::vector<int> load (const std::string& file);
-    void alloc (std::vector<int> layer_int);
+    Element* alloc (int type);
+    /// 	
+    /// @param x1		(???) 
+    /// @param y1		(???) 
+    /// @param x2		(???) 
+    /// @param y2		(???) 
+    void changePosition (int x1, int y1, int x2, int y2);
     // Setters and Getters
   };
 

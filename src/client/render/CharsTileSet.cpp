@@ -8,12 +8,19 @@
 
 using namespace std;
 
+
 namespace render{
 
     CharsTileSet::CharsTileSet() {
-        for(int i = 0; i < 6; i++){
-           this->personnage.push_back(Tile(i*32,0,32,64)); 
-        }
+        Tile vd(32,0,32,36); //vert droite
+        Tile vg(0,0,32,36); //vert gauche
+        Tile nd(32,36,32,36); //noir droite
+        Tile ng(0,36,32,36); //noir gauche
+        personnage.push_back(vd); //0
+        personnage.push_back(vg); //1
+        personnage.push_back(nd); //2
+        personnage.push_back(ng); //3
+        
     }
     
 
@@ -26,33 +33,47 @@ namespace render{
     }
 
     const std::string CharsTileSet::getImageFile() const {
-        return "/home/sanaa/Documents/abouobaydphenix/res/Worms/worms.png";
+        return "res/personnage.png";
     }
 
     const Tile& CharsTileSet::getTile(const state::Element& e) const {
-        /*Tile tuile;
-        tuile.setHeight(64);
-        tuile.setWidth(32);
-        if (e.getTypeId() == state::TypeId::PERSONNAGE){
-            if (state::Direction::LEFT){ //gauche
-                tuile.setX(1); //à revérifier
-                tuile.setY(0);
-            } 
-            else if (state::Direction::RIGHT){ //droite
-                tuile.setX(0); //à revérifier
-                tuile.setY(0);
-            } 
+        std::cout << "getTile de CharsTileSet" << std::endl;
+        if (!e.isStatic()){
+            //MobileElement* mobile = (MobileElement*) e;
+            state::TypeId typeId = e.getTypeId();
+            if (typeId == state::TypeId::PERSONNAGE){
+                state::Personnage& p = (state::Personnage&) e;
+                state::Status statut = p.getStatus();
+                if(statut == state::Status::DEAD){
+                    return this->personnage[0];
+                }
+                else if (statut == state::Status::ALIVE){
+                    if (p.getD() == state::Direction::LEFT){ 
+                        if (p.getColor() == 0){ //noir
+                            return this->personnage[3];
+                        }
+                        else if (p.getColor() == 1){ //vert
+                            return this->personnage[1];
+                        }
+                    } 
+                    else if (p.getD() == state::Direction::RIGHT){ //droite
+                        if (p.getColor() == 0){ //noir
+                            return this->personnage[2];
+                        }
+                        else if (p.getColor() == 1){ //vert
+                            return this->personnage[0];
+                        }
+                    } 
+                }
+            }
+            else{
+                std::cout << "Erreur, ce n'est pas un personnage" << std::endl;
+                return personnage[0];
+            }
         }
-        else{
-            std::cout << "Erreur, ce n'est pas un personnage" << std::endl;
-        }*/
-        
-        if (e.getTypeId() == state::TypeId::PERSONNAGE){
-            return this->personnage[0]; // a modifier en fonction des couleurs des personnages
+        else {
+            return personnage[0];
         }
-        
     }
-   
-    
 }
 

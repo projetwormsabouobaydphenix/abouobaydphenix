@@ -55,7 +55,7 @@ namespace ai{
         state::ElementTab chars(1,1);
         currentState.setGrid(grid);
         currentState.setChars(chars);
-        state::Element* floor = new state::Floor(state::FloorTypeId::FULL);
+        state::Element* floor = new state::Floor(state::FloorTypeId::GROUND);
         state::Element* space = new state::Space(state::SpaceTypeId::EMPTY);
         state::Element* personnage = new state::Personnage();
         chars.add(personnage);
@@ -96,14 +96,3 @@ namespace ai{
         
     }
 }      
-
-        
-        
-        
-        
-        
-        
-        
-
-
-
