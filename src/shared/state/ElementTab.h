@@ -4,7 +4,6 @@
 
 #include <stdlib.h>
 #include <vector>
-#include <memory>
 #include <string>
 
 namespace state {
@@ -25,7 +24,7 @@ namespace state {
     /// 	
     size_t width ;
     size_t height;
-    std::vector<std::shared_ptr<Element>> list;
+    std::vector<Element*> list;
     // Operations
   public:
     ElementTab (size_t width = 0, size_t height = 1);
@@ -36,13 +35,7 @@ namespace state {
     Element* get (int i, int j) const;
     void set (int i, int j, Element* e);
     std::vector<int> load (const std::string& file);
-    Element* alloc (int type);
-    /// 	
-    /// @param x1		(???) 
-    /// @param y1		(???) 
-    /// @param x2		(???) 
-    /// @param y2		(???) 
-    void changePosition (int x1, int y1, int x2, int y2);
+    void alloc (std::vector<int> layer_int);
     // Setters and Getters
   };
 

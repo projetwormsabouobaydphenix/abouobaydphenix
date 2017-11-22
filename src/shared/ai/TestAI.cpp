@@ -44,7 +44,7 @@ namespace ai{
         
         
         //------------------------------------------------------------------------------------
-        /*render::TileMap tileperso;
+        render::TileMap tileperso;
         std::vector<int> t_perso = {2}; //a modifier en fonction du personnage + chemin vers personnage
         if (!tileperso.load("/home/sanaa/Documents/abouobaydphenix/res/tilemap.png", sf::Vector2u(32, 32), t_perso, 1, 1))
         cout << "Erreur chargement texture personnage" << endl;
@@ -55,28 +55,39 @@ namespace ai{
         
         // ----------------------------------------------------------
         engine::Engine engine;
-        state::State currentState = engine.getState();
+        state::State& currentState = engine.getState(); 
         state::ElementTab grid(10,10);
-        state::ElementTab chars(1,1);
-        currentState.setGrid(grid);
-        currentState.setChars(chars);
-        state::Element* floor = new state::Floor(state::FloorTypeId::GROUND);
-        state::Element* space = new state::Space(state::SpaceTypeId::EMPTY);
-        state::Element* personnage = new state::Personnage();
-        chars.add(personnage);
-        for (size_t it = 0; it<t_terre.size(); it++){
-            if (t_terre[it] != 0){
-                grid.add(floor);
-            }
-            else if (t_terre[it] == 0){
-                grid.add(space);
+        state::ElementTab chars(10,10);
+        state::Element* personnage = new state::Personnage(); 
+        chars.set(30%10,30/10, personnage);
+        
+        for (size_t jt = 0; jt<(t_terre.size()-1); jt++){
+            for (size_t it = 0; it<(t_terre.size()-1); it++){
+                if (t_terre[it] != 0){
+                state::Element* full = new state::Floor(state::FloorTypeId::FULL);
+                grid.set(it%10, jt/10, full);
+                full->setI(it%10);
+                full->setJ(it/10);
+                }
+
+                else if (t_terre[it] == 0){
+                
+                state::Element* empty = new state::Space(state::SpaceTypeId::EMPTY);
+                grid.set(it%10, it/10, empty);
+                empty->setI(it%10);
+                empty->setJ(it/10);
+                }
             }
         }
+ 
+        currentState.setGrid(grid);
+        currentState.setChars(chars);
+        
         cout << "tous les élements sont chargés dans la grille" << endl;
         
         
         AI* testrand = new RandomAI();
-        testrand->run(engine, 1, 1);
+        testrand->run(engine, 30%10, 30/10);
         
         
         
@@ -101,3 +112,14 @@ namespace ai{
         
     }
 }      
+
+        
+        
+        
+        
+        
+        
+        
+
+
+

@@ -79,7 +79,7 @@ TestRender::TestRender() {
         //window.draw(b);
         //window.draw(l);
         window.draw(m);
-        //window.draw(p);
+        window.draw(p);
         window.draw(t);
         window.display();
     }

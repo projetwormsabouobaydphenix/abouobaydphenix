@@ -1,21 +1,12 @@
 
-
 #include "GridTileSet.h"
 #include "state/FloorTypeId.h"
 #include "state/SpaceTypeId.h"
-#include "state/Floor.h"
-#include "state/Space.h"
-#include <iostream>
-
-using namespace state;
 
 namespace render{
 
     GridTileSet::GridTileSet() {
-        Tile tuile;
-        tuile.setHeight(32);
-        tuile.setWidth(32);
-        
+
     }
 
     int GridTileSet::getCellHeight() const {
@@ -31,35 +22,32 @@ namespace render{
     }
 
     const Tile& GridTileSet::getTile(const state::Element& e) const {
-        
+        Tile tuile;
+        tuile.setHeight(32);
+        tuile.setWidth(32);
         if (e.getTypeId() == state::TypeId::FLOOR){
-            Floor& f = (Floor&) e;
-            state::FloorTypeId floorId = f.getNature();
-            if (floorId == state::FloorTypeId::GROUND){ //gauche
-                return this->floors[0]; //à modifier
+            if (state::FloorTypeId::FULL){ //gauche
+                tuile.setX(0); //à revérifier
+                tuile.setY(0);
             } 
-            else if (floorId == state::FloorTypeId::WATER){ //droite
-                return this->floors[0]; //à modifier
-            } 
-            else if (floorId == state::FloorTypeId::GRASS){ //droite
-                return this->floors[0]; //à modifier
+            else if (state::FloorTypeId::WATER){ //droite
+                tuile.setX(0); //à revérifier
+                tuile.setY(0);
             } 
         }
-        
         else if (e.getTypeId() == state::TypeId::SPACE){
-            state::Space& s = (state::Space&) e;
-            state::SpaceTypeId spaceId = s.getNature();
-            if (spaceId == state::SpaceTypeId::EMPTY){
-                 return this->spaces[0]; //à modifier
-            }
-            else if (spaceId == state::SpaceTypeId::EMPTY){
-                return this->spaces[0];
+            if (state::SpaceTypeId::EMPTY){
+                if (state::SpaceTypeId::EMPTY){
+                    tuile.setX(0); //à revérifier
+                    tuile.setY(0);
+                }
+                else if (state::SpaceTypeId::LIFE){
+                    tuile.setX(0); //à revérifier
+                    tuile.setY(0);
+                }
             }
         }
-        
-        else{
-            std::cout << "Erreur, ceci n'est pas un élement du décor" << std::endl;
-        }
+        return tuile;
     }
  
 }

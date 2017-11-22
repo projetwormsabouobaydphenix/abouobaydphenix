@@ -18,26 +18,22 @@ namespace state{
 using namespace std;
 
     ElementTab::ElementTab(size_t width, size_t height) {
+        
         this->width=width;
         this->height=height;
         list.resize(width*height);
     }
     
     size_t ElementTab::add(Element* e) {
-        list.push_back(std::shared_ptr<Element>(e));  
+        list.push_back(e);  
         //cout << "Ajout d'un élement à la grille" << endl;
-        //notifierObserver();
+        notifierObserver();
         return list.size();
     }
 
 
     Element* ElementTab::get(int i, int j) const {
-        if (0<=i and i<width and 0<=j and j<height){
-            return list[j*width + i].get();
-        }
-        else {
-            return nullptr;
-        }
+        return list[j*width + i];
     }
 
     size_t ElementTab::getHeight() const {
@@ -59,13 +55,13 @@ using namespace std;
 
     void ElementTab::set(int i, int j, Element* e) {
         int position = j*width +i;
-        if (list[position] == NULL){
-                list[position]= std::shared_ptr<Element>(e);
-        }
+        list[position]= e;
     }
     
     std::vector<int> ElementTab::load(const std::string& file) {
-        std::vector<int> vcarte;
+ 
+       std::vector<int> vcarte;
+       
         string n;
 	std::ifstream fichier(file);
         //fichier.open("terre.csv", std::ios::in);
@@ -76,40 +72,27 @@ using namespace std;
         }
         return vcarte;
     }
+
     
-    void ElementTab::changePosition(int x1, int y1, int x2, int y2) {
-        if (get(x1, y1) != NULL){
-            if (get(x2, y2) == NULL){
-                list[x2 + y2 * width].swap(list[x1 + y1 * width]);
-                //list[x2 + y2 * width].get();
+
+    void ElementTab::alloc(std::vector<int> layer_int){
+       /* for(size_t i =0; i<(layer_int.size()); i++){
+            if (layer_int[i]==-1){
+                Element* pEmpty = new Space(SpaceTypeId::EMPTY);
+                list.ElementTab::add(std::shared_ptr<Element>(pEmpty));
             }
-        }
-        else{
-            cout << "Erreur : on ne peut pas déplacer l'élement" << endl;
-        }
+            else if (layer_int[i]==(280 or 119)){
+                Element* pFull = new Floor(FloorTypeId::FULL);
+                list.(ElementTab::add(pFull));
+            }
+            
+            else if (layer_int[i]==32){
+                Element* pWater = new Floor(FloorTypeId::WATER);
+                list.(ElementTab::add(pWater));
+            }*/
     }
-    
-    Element* ElementTab::alloc(int type){
-        Element* e;
-        if (type == -1){
-            e = new Space(SpaceTypeId::EMPTY);
-            return e;
-        }
-        else if (type == 280){
-            e = new Floor(FloorTypeId::GROUND);
-            return e;
-        }
-        else if (type == 119){
-            e = new Floor(FloorTypeId::GRASS);
-            return e;
-        }
-        else if (type == 32){
-            e = new Floor(FloorTypeId::WATER);
-            return e;
-        }
-        
-        
-    }
+
+
 
 }
 

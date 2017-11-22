@@ -20,7 +20,7 @@ namespace ai {
   public:
     virtual void run (engine::Engine& engine, int i, int j) = 0;
   protected:
-    void listCommands (std::vector<engine::Command*> list, state::State& state, int i, int j);
+    void listCommands (std::vector<engine::Command*>& list, state::State& state, int i, int j);
     // Setters and Getters
   };
 
