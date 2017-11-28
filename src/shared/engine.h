@@ -9,4 +9,5 @@
 #include "engine/OrientationCommand.h"
 #include "engine/HandleLifesCommand.h"
 #include "engine/HandleImpactCommand.h"
+#include "engine/LoadCommand.h"
 #endif

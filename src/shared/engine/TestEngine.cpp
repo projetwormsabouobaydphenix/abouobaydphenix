@@ -23,23 +23,28 @@ namespace engine{
         sf::RenderWindow window(sf::VideoMode(320, 320), "Test Worms");
          
         // ----------------------------------------------------------------------------------
-        render::TileMap mapt; //création d'une mini map
-        std::vector<int> t_terre = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
-            -1,-1,-1,-1,-1,-1,-1,-1,132,132, -1,-1,-1,-1,-1,-1,-1,132,164,164,
-            132,132,-1,-1,-1,-1,132,164,164,164, 164,164,132,132,132,132,164,164,164,164,
-            164,164,164,164,164,164,164,164,164,164, 164,164,164,164,164,164,164,164,164,164,
-            -1,-1,-1,-1,-1,-1,-1,-1,-1,-1, -1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+        /*render::TileMap mapt; //création d'une mini map
+        state::ElementTab elementTab;
+        std::vector<int> vcarte = elementTab.load("res/heuristic_ai.txt");*/
         
-        //cout << t_terre.size() << endl; /test
         
-        for (size_t i = 0; i<t_terre.size(); i++){
-            if (t_terre[i] == -1){
-               t_terre[i] = 0;
-            }
-        }
         
-        if (!mapt.load("res/tilemap.png", sf::Vector2u(32, 32), t_terre, 10, 10))
-        cout << "Erreur chargement texture terre" << endl;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //if (!mapt.load("res/tilemap.png", sf::Vector2u(32, 32), t_terre, 10, 10))
+        //cout << "Erreur chargement texture terre" << endl;
         
         cout << "Map terre créée" << endl;
         // ------------------------------------------------------------------------------------------
@@ -47,7 +52,7 @@ namespace engine{
         
         
         //-------------------------------------------------------------------------------------------
-        render::TileMap mapp;
+        /*render::TileMap mapp;
         CharsTileSet tileset;
         Personnage p;
         p.setColor(0);
@@ -60,7 +65,7 @@ namespace engine{
         cout << t_perso.size() << endl;
         cout << "Création personnage" << endl;
         if (!mapt.load("res/soldat13.png", sf::Vector2u(32, 36), t_perso, 1, 1))
-        cout << "Erreur chargement texture personnage" << endl;
+        cout << "Erreur chargement texture personnage" << endl;*/
         
         
         
@@ -72,7 +77,7 @@ namespace engine{
         
         
         //------------------------------------------------------------------------------------------
-        engine::Engine engine;
+        /*engine::Engine engine;
         state::State& currentState = engine.getState();
         state::ElementTab grid(10,10);
         state::ElementTab chars(1,1);
@@ -91,12 +96,12 @@ namespace engine{
         }
         cout << "tous les élements sont chargés dans la grille" << endl;
         currentState.setGrid(grid);
-        currentState.setChars(chars);
+        currentState.setChars(chars);*/
         
         
         
         // ------------------------------------------------------------------------------------------
-        Command* commande;
+        //Command* commande;
         //commande = new MoveCharCommand();
         
         
@@ -117,8 +122,8 @@ namespace engine{
 
         // on dessine le niveau
         window.clear();
-        window.draw(mapt);
-        window.draw(mapp);
+        //window.draw(mapt);
+        //window.draw(mapp);
         window.display();
     
     

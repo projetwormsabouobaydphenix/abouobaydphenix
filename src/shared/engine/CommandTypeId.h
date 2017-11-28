@@ -9,7 +9,8 @@ namespace engine {
     MOVE_CHAR     = 1,
     ORIENTATION     = 2,
     HANDLE_LIFE     = 3,
-    HANDLE_IMPACT     = 4
+    HANDLE_IMPACT     = 4,
+    LOAD     = 5
   };
 
 };

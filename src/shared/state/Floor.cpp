@@ -4,7 +4,7 @@
 
 namespace state{ 
     
-    Floor::Floor(FloorTypeId id){
+    Floor::Floor(FloorTypeId id) : nature(id){
     
     }
 

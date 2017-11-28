@@ -1,9 +1,10 @@
 
 #include "State.h"
+#include "ElementTab.h"
 
 namespace state{
-        
-  
+    
+    
     ElementTab& state::State::getChars() {
         return chars;
     }
@@ -35,4 +36,5 @@ namespace state{
     void state::State::setEpochrate(int epochrate) {
         this->epochrate=epochrate;
     }
+   
 }

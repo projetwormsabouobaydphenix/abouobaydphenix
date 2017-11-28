@@ -21,6 +21,9 @@ using namespace std;
         this->width=width;
         this->height=height;
         list.resize(width*height);
+        for (int i=0;i<(int)(height*width);i++){
+          list.push_back(NULL);
+        }
     }
     
     size_t ElementTab::add(Element* e) {

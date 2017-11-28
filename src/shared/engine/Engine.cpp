@@ -6,6 +6,11 @@
 
 #include "Engine.h"
 #include "Command.h"
+#include "LoadCommand.h"
+#include "HandleImpactCommand.h"
+#include "HandleLifesCommand.h"
+#include "OrientationCommand.h"
+#include "MoveCharCommand.h"
 #include <algorithm>
 #include <iostream>
 
@@ -14,10 +19,10 @@ using namespace state;
 
 namespace engine {
     
-    
     Engine::Engine() {
 
     }
+
 
     
     Engine::~Engine(){
@@ -48,14 +53,36 @@ namespace engine {
     
     void Engine::update(){
         //cout<<"test update"<<endl;
-        for (std::map<int,Command*>::iterator it = currentCommands.begin(); it != currentCommands.end(); ++it){
+        for (int i=0; i<((int)(currentCommands.size()));i++){
+            if ((currentCommands[i])->getTypeId() == LOAD){
+                cout << "load command" << endl;
+                ((LoadCommand*)(currentCommands[i]))->execute(currentState);
+            }
+            else if((currentCommands[i])->getTypeId() == MOVE_CHAR){
+                ((MoveCharCommand*)(currentCommands[i]))->execute(currentState);
+            }
+            else if((currentCommands[i])->getTypeId() == ORIENTATION){
+                ((OrientationCommand*)(currentCommands[i]))->execute(currentState);
+            }
+            else if((currentCommands[i])->getTypeId() == HANDLE_LIFE){
+                ((HandleLifesCommand*)(currentCommands[i]))->execute(currentState);
+            }
+            /*else if((currentCommands[i])->getTypeId() == HANDLE_IMPACT){
+                ((HandleImpactCommand*)(currentCommands[i]))->execute(currentState);
+            }*/
+            
+           currentCommands.clear();
+            }
+
+        /*for (std::map<int,Command*>::iterator it = currentCommands.begin(); it != currentCommands.end(); ++it){
             it->second->execute(currentState);
             //get()execute(currentState);
-        }
+        }*/
         
-        int epoch = currentState.getEpoch();
+        /*int epoch = currentState.getEpoch();
         epoch=epoch+1;
-        currentState.setEpoch(epoch);
-        currentCommands.clear();
+        currentState.setEpoch(epoch);*/
+        
+        
     }
 }

@@ -23,7 +23,7 @@ namespace ai{
         OrientationCommand* orientright = new OrientationCommand(i,j,RIGHT);
         OrientationCommand* orientleft = new OrientationCommand(i,j,LEFT);
        
-       /* if(top->getTypeId()== PERSONNAGE){
+        if(top->getTypeId()== PERSONNAGE){
            // Personnage* perso = (Personnage*)top;
 
         Element* nextr = grid.get(i+1,j);*/

@@ -1,5 +1,5 @@
 
-#include "TileMap.h"
+#include "Surface.h"
 
 #include <iostream>
 #include <stdio.h>
@@ -7,52 +7,51 @@
 #include <sstream>
 
 using namespace std;
+using namespace sf;
 
 namespace render{
-    
-    TileMap::TileMap() {
+
+    Surface::Surface() {
 
     }
 
-    void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-        // on applique la transformation
+    void Surface::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         states.transform *= getTransform();
-    
-        // on applique la texture du tileset
-        states.texture = &m_tileset;
-    
-        // et on dessine enfin le tableau de vertex
-        target.draw(m_vertices, states);
-        
+        states.texture = &m_texture;
+        target.draw(m_quads, states);
     }
 
-    void TileMap::initQuads(int count) {
-        quads.setPrimitiveType(sf::Quads);
-        quads.resize(count * 4);
+    void Surface::initQuads(int count) {
+        m_quads.setPrimitiveType(Quads);
+        m_quads.resize(count*4);
     }
 
-    void TileMap::setSpriteLocation(int i, int x, int y) {
-         sf::Vertex* quad = &m_vertices[i * 4];
-        quad[0].position = sf::Vector2f(x * 32, y * 32);
-        quad[1].position = sf::Vector2f((x + 1) * 32, y * 32);
-        quad[2].position = sf::Vector2f((x + 1) * 32, (y + 1) * 32);
-        quad[3].position = sf::Vector2f(x * 32, (y + 1) * 32);
-    }
- 
-
-    void TileMap::loadTexture(const std::string& image_file) {
-        if (!texture.loadFromFile(image_file)){
-            cout << "Erreur chargement de la texture" << endl;
+    void Surface::loadTexture(const std::string& image_file) {
+    if (!m_texture.loadFromFile(image_file)){
+                throw std::runtime_error("Impossible de charger la texture");
         }
     }
-    
-    void TileMap::setSpriteTexture(int i, const Tile& tex) {
-        sf::Vertex* quad = &m_vertices[i * 4];
-        quad[0].texCoords = sf::Vector2f(tex.getX(), tex.getY());
-        quad[1].texCoords = sf::Vector2f(tex.getX()+tile.getWidth(), tex.getY());
-        quad[2].texCoords = sf::Vector2f(tex.getX()+tex.getWidth(), tex.getY()+tex.getHeight());
-        quad[3].texCoords = sf::Vector2f(tex.getX(), tex.getY()+tex.getHeight());
+
+    void Surface::setSpriteLocation(int i, int x, int y) {
+        //cout << "setSpriteLocation" << endl;
+        sf::Vertex* quad = &m_quads[i*4];
+        quad[0].position = Vector2f(x*32, y*32);
+        quad[1].position = Vector2f((x+1)*32, y*32);
+        quad[2].position = Vector2f((x+1)*32,(y+1)*32);
+        quad[3].position = Vector2f(x*32,(y+1)*32);
+        //cout << "fin set sprite location" << endl;
     }
+
+    void Surface::setSpriteTexture(int i, const Tile& tex) {
+        //cout << "setSpriteTexture" << endl;
+        sf::Vertex* quad = &m_quads[i*4];
+        quad[0].texCoords = Vector2f(tex.getX(), tex.getY());
+        quad[1].texCoords = Vector2f(tex.getX()+tex.getWidth(), tex.getY());
+        quad[2].texCoords = Vector2f(tex.getX()+tex.getWidth(), tex.getY()+tex.getHeight());
+        quad[3].texCoords = Vector2f(tex.getX(), tex.getY()+tex.getHeight());
+    }
+    
+    
     
     /*bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize,  std::vector<int> tiles, unsigned int width, unsigned int height)
     {

@@ -18,7 +18,7 @@
 
 namespace render{
 TestRender::TestRender() {
-    sf::RenderWindow window(sf::VideoMode(4960, 1280), "Worms");
+    /*sf::RenderWindow window(sf::VideoMode(4960, 1280), "Worms");
     
     state::ElementTab terre(32,32);
     state::ElementTab mer(32,32);
@@ -82,7 +82,7 @@ TestRender::TestRender() {
         //window.draw(p);
         window.draw(t);
         window.display();
-    }
+    }*/
 
 
     

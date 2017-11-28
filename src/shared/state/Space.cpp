@@ -3,7 +3,7 @@
 
 namespace state{
         
-    Space::Space(SpaceTypeId id) {
+    Space::Space(SpaceTypeId id) : nature(id) {
 
     }
 

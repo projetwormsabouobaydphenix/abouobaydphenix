@@ -27,10 +27,8 @@ namespace engine {
     
     void engine::MoveCharCommand::execute (state::State& state){
 
-        
-
         cout<<"Le personnage s'est déplacé"<<endl;
-        ElementTab tabgrid;
+        //ElementTab tabgrid;
 
         /*ElementTab tabgrid;
         tabgrid = state.getGrid();

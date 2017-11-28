@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="2017.07.26" orientation="orthogonal" renderorder="right-down" width="5" height="1" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="tilemap" tilewidth="32" tileheight="32" tilecount="512" columns="32">
+  <image source="tilemap.png" width="1024" height="512"/>
+ </tileset>
+ <tileset firstgid="513" name="water" tilewidth="32" tileheight="32" tilecount="33" columns="11">
+  <image source="water.png" width="366" height="110"/>
+ </tileset>
+ <tileset firstgid="546" name="life" tilewidth="32" tileheight="32" tilecount="14" columns="7">
+  <image source="life.png" width="225" height="67"/>
+ </tileset>
+ <tileset firstgid="560" name="coeur_HEARTS_2" tilewidth="32" tileheight="29" tilecount="1" columns="1">
+  <image source="coeur_HEARTS_2.png" width="32" height="29"/>
+ </tileset>
+ <layer name="Calque de Tile 1" width="5" height="1">
+  <data encoding="csv">
+0,68,133,538,560
+</data>
+ </layer>
+</map>

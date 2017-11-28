@@ -9,14 +9,10 @@ namespace render {
 };
 namespace state {
   class Element;
-};
-namespace render {
-  class Layer;
 }
 
 #include "state/Element.h"
 #include "Tile.h"
-#include "Layer.h"
 
 namespace render {
 
