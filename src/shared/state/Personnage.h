@@ -9,6 +9,7 @@ namespace state {
 }
 
 #include "Status.h"
+#include "Direction.h"
 #include "TypeId.h"
 #include "MobileElement.h"
 
@@ -24,9 +25,10 @@ namespace state {
     int shootcount     = 0;
     int lifecount     = 3;
     Status status;
+    Direction direction;
     // Operations
   public:
-    Personnage  ();
+    Personnage (int color, Direction direction);
     ~Personnage ();
     TypeId  getTypeId () const;
     bool equals (const Element& other) const;
@@ -41,6 +43,8 @@ namespace state {
     void setLifecount(int lifecount);
     Status getStatus() const;
     void setStatus(Status status);
+    Direction getDirection() const;
+    void setDirection(Direction direction);
   };
 
 };

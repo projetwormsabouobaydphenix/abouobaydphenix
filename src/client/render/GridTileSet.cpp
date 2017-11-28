@@ -38,7 +38,7 @@ namespace render{
     }
 
     const Tile& GridTileSet::getTile(const state::Element& e) const {
-        //std::cout << "getTile GridTileSet" << std::endl;
+        //std::cout << "getTile de GridTileSet" << std::endl;
         if (e.getTypeId() == state::TypeId::FLOOR){
             //cout << "FLOOR" << endl;
             const Floor& f = (const Floor&) e;

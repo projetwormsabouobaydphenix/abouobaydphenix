@@ -22,7 +22,7 @@ namespace render {
   class ElementTabLayer : public render::Layer {
     // Attributes
   private:
-    state::ElementTab& tab;
+     state::ElementTab& tab;
     sf::Texture m_texture;
     // Operations
   public:

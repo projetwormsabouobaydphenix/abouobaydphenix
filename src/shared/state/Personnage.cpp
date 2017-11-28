@@ -2,10 +2,11 @@
 #include "State.h"
 
 namespace state {
-     
-    Personnage::Personnage() {
-        
+    
+    Personnage::Personnage(int color, Direction direction) : color(color), direction(direction) {
+
     }
+
     
     Personnage::~Personnage() {
         
@@ -65,6 +66,15 @@ namespace state {
     void Personnage::setStatus(Status status){
         this->status=status;
     }
+    
+    Direction Personnage::getDirection() const {
+        return this->direction;
+    }
+    
+    void Personnage::setDirection(Direction direction) {
+        this->direction = direction;
+    }
+
 
 
    

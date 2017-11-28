@@ -56,8 +56,10 @@ namespace ai{
             //window.clear(Color::Black);
             window.clear();
             layer1->initSurface();
+            layer2->initSurface();
             //cout << "sortie initSurface" << endl;
             window.draw(*(layer1->getSurface()));
+            window.draw(*(layer2->getSurface()));
 
             // on dessine la surface des équipes
             window.display();
