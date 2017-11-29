@@ -87,7 +87,7 @@ namespace engine{
                 Element* empty = new Personnage(3, Direction::LEFT);
                 empty->setI(i%25);
                 empty->setJ(i/25);
-                chars.set(i%25, i/25, empty);
+                chars.set(i%25, i/25, NULL);
             }
             else if (pcarte[i] == 1){ //vert gauche
                 //cout << "vcarte[i] = 1" << endl;

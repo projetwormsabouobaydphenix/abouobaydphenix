@@ -7,6 +7,8 @@
 #include <random>
 #include <iostream>
 #include <stdlib.h>
+#include <vector>
+#include <chrono>
 
 
 using namespace state;
@@ -21,7 +23,23 @@ namespace ai{
         randgen = rng;
     }
 
-    void RandomAI::run(engine::Engine& engine, int i, int j) {
+    void RandomAI::run(engine::Engine& engine) {
+        vector<Command*> listCommands;
+        State& state = engine.getState();
+        auto seed = chrono::high_resolution_clock::now().time_since_epoch().count();
+        std::mt19937 rng(seed);
+        int color = engine.getState().getJoueur();
+        if (color == 1){
+            cout << "Joueur vert" << endl;
+        }
+        else if (color == 2){
+            cout << "Joueur noir" << endl;
+        }
+        
+        //Command* = 
+        
+        
+        
         
         
     }

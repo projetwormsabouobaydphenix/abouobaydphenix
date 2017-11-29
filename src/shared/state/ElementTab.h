@@ -28,7 +28,7 @@ namespace state {
     std::vector<std::shared_ptr<Element>> list;
     // Operations
   public:
-    ElementTab (size_t width = 0, size_t height = 0);
+    ElementTab (size_t width = 25, size_t height = 12);
     size_t getWidth () const;
     size_t getHeight () const;
     size_t add (Element* e);

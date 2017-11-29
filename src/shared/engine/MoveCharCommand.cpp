@@ -14,12 +14,41 @@ using namespace state;
 
 namespace engine {
     
+    MoveCharCommand::MoveCharCommand(int xFrom, int yFrom, int xTo, int yTo) :
+    xFrom(xFrom), yFrom(yFrom), xTo(xTo), yTo(yTo) {}
 
-    MoveCharCommand::MoveCharCommand(int i, int j) {
-        this->i=i;
-        this->j=j;
-  
+    int MoveCharCommand::getXFrom() const {
+        return this->xFrom;
     }
+
+    int MoveCharCommand::getXTo() const {
+        return this->xTo;
+    }
+
+    int MoveCharCommand::getYFrom() const {
+        return this->yFrom;
+    }
+
+    int MoveCharCommand::getYTo() const {
+        return this->yTo;
+    }
+
+    void MoveCharCommand::setXFrom(int xFrom) {
+        this->xFrom = xFrom;
+    }
+
+    void MoveCharCommand::setXTo(int xTo) {
+        this->xTo = xTo;
+    }
+
+    void MoveCharCommand::setYFrom(int yFrom) {
+        this->yFrom = yFrom;
+    }
+
+    void MoveCharCommand::setYTo(int yTo) {
+        this->yTo = yTo;
+    }
+
     
     CommandTypeId engine::MoveCharCommand::getTypeId () const{
         return CommandTypeId::MOVE_CHAR;
@@ -27,84 +56,30 @@ namespace engine {
     
     void engine::MoveCharCommand::execute (state::State& state){
 
-        cout<<"Le personnage s'est déplacé"<<endl;
-        //ElementTab tabgrid;
-
-        /*ElementTab tabgrid;
-        tabgrid = state.getGrid();
-        Element* casenext;
-        ElementTab tabchars;
-        tabchars = state.getChars();
-        Element* top;
-        cout<<"test 2"<<endl;
-        top= tabchars.get(i, j);
-        cout<<"fin test 2"<<endl;
-        if(top->getTypeId()== PERSONNAGE){
-            Personnage* perso = (Personnage*)top;   
-            int stepcount = perso->getStepcount();
-            
-            if(stepcount<3){
-                cout<<"Le personnage s'est déplacé d'une case."<<endl; 
-                stepcount=stepcount+1;
-                perso->setStepcount(stepcount);
-                if((perso->getD())==LEFT){
-                    casenext = tabgrid.get(i-1,j);
-                    if((casenext->getTypeId())!=FLOOR){
-                        perso->setI(i-1);
-                        while(((tabgrid.get(i-1,j-1))->getTypeId())==SPACE){
-                            this->j=j-1;
-                        }
-                        
-                        if (((tabgrid.get(i-1,j))->getTypeId())==FLOOR){
-                            Element* next = (tabgrid.get(i-1,j));
-                            Floor* eau = (Floor*)next;
-                            if (eau->getNature()==WATER){
-                            perso->setLifecount(0);
-                            perso->setStatus(DEAD);
-                            }
-                        }
-                        
-                        else {
-                            perso->setJ(j);
-                        }                        
-                    }
-                }
-                else if((perso->getD())==RIGHT){
-                    if(((tabgrid.get(i+1,j))->getTypeId())!=FLOOR){
-                        perso->setI(i+1);
-                        while(((tabgrid.get(i+1,j-1))->getTypeId())==SPACE){
-                            this->j=j-1;
-                        }
-                        Element* next = tabgrid.get(i+1,j);
-                        Floor* eau = (Floor*)next;
-                        if (eau->getNature()==WATER){
-                            perso->setLifecount(0);
-                            perso->setStatus(DEAD);
-                        }
-
-                        else {
-                            perso->setJ(j);
-                        }                    
-                    }  
-                } 
-            }                     
+        //cout<<"Le personnage s'est déplacé"<<endl;
+        ElementTab& grid = state.getGrid();
+        ElementTab& chars = state.getChars();
+        
+        Element* e = chars.get(xFrom, yFrom);
+        
+        if (e == NULL){
+            cout << "Erreur : Il n'y a rien à déplacer " << endl;
         }
-        else {
-            cout<<"Le personnage a épuisé le nombre de pas autorisés pour un tour."<<endl;
-        } 
-        } */
-
-       
+        else{
+            if (e->getTypeId() == PERSONNAGE){
+                if (chars.get(xTo, yTo) == NULL){
+                    Personnage* p = (Personnage*) e;
+                    chars.set(xTo, yTo, p);
+                    //cout<<"set to ok"<<endl;
+                    chars.set(xFrom, yFrom, NULL);
+                    //cout<<"set from ok"<<endl;
+                }
+            }
+        }
 
     }
     
-    int engine::MoveCharCommand::getCharacter() const{
-        return this->character;
-    }
     
-    void setCharacter(int character){
-     //  (this->character)=character;
-    }
     
 
 }

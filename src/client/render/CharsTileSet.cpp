@@ -42,7 +42,10 @@ namespace render{
     const Tile& CharsTileSet::getTile(const state::Element& e) const {
         //std::cout << "getTile de CharsTileSet" << std::endl;
         //state::TypeId typeId = e.getTypeId();
+        if (&e != NULL){
+            //cout << "test 1" << endl;
         if (e.getTypeId() == state::TypeId::PERSONNAGE){
+            //cout << "test 2" << endl;
             //cout << "personnage" << endl;
             const Personnage& p = (const Personnage&) e;
             /*state::Status statut = p.getStatus();
@@ -59,10 +62,10 @@ namespace render{
                             //cout << "noir" << endl;
                             return this->personnage[3];
                         }
-                        else{
+                        //else{
                             //std::cout << "Ce n'est pas un personnage" << std::endl;
-                            return personnage[0];
-                        }
+                         //   return personnage[0];
+                        //}
                     } 
                     else if (p.getDirection() == state::Direction::RIGHT){ //droite
                         //cout << "right" << endl;
@@ -74,13 +77,18 @@ namespace render{
                             //cout << "noir" << endl;
                             return this->personnage[4];
                         }
-                        else{
+                        //else{
                             //std::cout << "Ce n'est pas un personnage" << std::endl;
-                            return personnage[0];
-                        }
+                        //    return personnage[0];
+                        //}
                     } 
             
             }
+        }
+        else{
+            //cout << "test 3" << endl;
+            return personnage[0];
+        }
             
             
         

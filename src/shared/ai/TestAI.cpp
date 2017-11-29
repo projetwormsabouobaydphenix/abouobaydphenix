@@ -27,44 +27,94 @@ namespace ai{
         Command* init = new LoadCommand("res/heuristic_ai.txt");    
         moteur.addCommand(0,init);
         moteur.update();
+        //init->execute(state);
 
         Layer* layer1 = new ElementTabLayer(state.getGrid());
         Layer* layer2 = new ElementTabLayer(state.getChars());
        // ElementTabLayer layer2(state.getChars());
 
-        sf::RenderWindow window(sf::VideoMode(800, 384), "Test Worms");      
+        sf::RenderWindow window; 
+        window.create(sf::VideoMode(800, 384), "Test Worms");      
         
-        cout << "Appuyez sur Espace pour continuer" << endl;
+        cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
         
         while (window.isOpen()){
+            
             sf::Event event;
             while (window.pollEvent(event)){
                 // fermeture de la fenêtre lorsque l'utilisateur le souhaite
                 if (event.type == sf::Event::Closed){
                     window.close();
                 }
+                /*if (event.type == sf::Event::EventType::KeyPressed){
+                    if (event.key.code == sf::Keyboard::Space){
+                        Command* move = new MoveCharCommand(2, 3, 2, 3);
+                        moteur.addCommand(0, move);
+                    }
+                    else if (event.key.code == sf::Keyboard::Return){
+                        Command* move = new MoveCharCommand(16, 3, 15, 3);
+                        moteur.addCommand(0, move);
+                    }
+                        
+                    }*/
             }
             
             
-            if(Keyboard::isKeyPressed(Keyboard::Space)){
-                    
-                cout << "ok" << endl;
+            
+            if(Keyboard::isKeyPressed(Keyboard::V)){
+                cout << "C'est le personnage vert qui va jouer" << endl;
+                //for (int i = 0; i < (int)state.getChars().getHeight(); i++){
+                  //  for (int j = 0; j < (int)state.getChars().getWidth(); j++){
+                        //cout << state.getChars().getWidth() << state.getChars().getHeight() << endl;
+                    //    Element* e = state.getChars().get(j, i);
+                      //  if (e != NULL){
+                        //if (e->getTypeId() == PERSONNAGE){
+                          //  Personnage* p = (Personnage*) e;
+                            //if (p->getColor() == 1){
+                              //  cout << "test" << endl;
+                                //int x = p->getI();
+                                //int y = p->getI();
+                                //cout << "x = " << x << ", y = " << y << endl;
+                                Command* move = new MoveCharCommand(2, 3, 3, 3);
+                                
+                                moteur.addCommand(0, move);
+                                
+                                //cout << "add ok" << endl;
+                                //move->execute(state);
+                            //}
+                            
+                        //}
+                    //}
+                    //}
+                }
+            
+            if (Keyboard::isKeyPressed(Keyboard::N)){
+                cout << "C'est le personnage noir qui va jouer" << endl;
+                Command* move = new MoveCharCommand(16, 3, 15, 3);
+                moteur.addCommand(0, move);
+            }
+                
+                
+                //cout << "update ok" << endl;
                     //rai->run(moteur);
-                    //sleep(milliseconds(1000));
-            }
+                //sleep(milliseconds(1000));
             
-            //window.clear(Color::Black);
-            window.clear();
+            moteur.update();
+            
             layer1->initSurface();
-            layer2->initSurface();
-            //cout << "sortie initSurface" << endl;
             window.draw(*(layer1->getSurface()));
+            
+            layer2->initSurface();
             window.draw(*(layer2->getSurface()));
 
-            // on dessine la surface des équipes
             window.display();
+            window.clear();
+
+            
+            
         }
     }
+    
    
     
     

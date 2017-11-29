@@ -21,6 +21,7 @@ namespace state {
     ElementTab grid;
     ElementTab chars;
   protected:
+    int joueur;
     int epoch     = 0;
     int epochrate     = 12;
     // Operations
@@ -30,6 +31,8 @@ namespace state {
     void setGrid (ElementTab& grid);
     void setChars (ElementTab& chars);
     // Setters and Getters
+    int getJoueur() const;
+    void setJoueur(int joueur);
     int getEpoch() const;
     void setEpoch(int epoch);
     int getEpochrate() const;

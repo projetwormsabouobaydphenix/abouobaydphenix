@@ -36,8 +36,8 @@ namespace engine {
     void Engine::addCommand(int priority, Command* cmd){
         //out<<"22" << endl;
         //currentCommands.insert(std::pair<int, Command>(priority,cmd));
-        currentCommands[priority]=cmd;
-        cout<<"Ajout de la commande : " << cmd->getTypeId()<<endl;
+        currentCommands[priority] = cmd;
+        cout<<"Ajout de la commande : " << cmd->getTypeId() << endl;
 
     }
     
@@ -70,19 +70,10 @@ namespace engine {
             /*else if((currentCommands[i])->getTypeId() == HANDLE_IMPACT){
                 ((HandleImpactCommand*)(currentCommands[i]))->execute(currentState);
             }*/
-            
-           currentCommands.clear();
+            delete currentCommands[i];
+            currentCommands.clear();
             }
 
-        /*for (std::map<int,Command*>::iterator it = currentCommands.begin(); it != currentCommands.end(); ++it){
-            it->second->execute(currentState);
-            //get()execute(currentState);
-        }*/
-        
-        /*int epoch = currentState.getEpoch();
-        epoch=epoch+1;
-        currentState.setEpoch(epoch);*/
-        
         
     }
 }

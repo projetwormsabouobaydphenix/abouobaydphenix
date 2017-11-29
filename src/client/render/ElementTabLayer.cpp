@@ -19,7 +19,7 @@ namespace render {
 
     void ElementTabLayer::initSurface() {
         //cout << "Foction InitSurface d'ElementTabLayer" << endl;
-        if (tab.get(0,0)->isStatic() == true){
+        if (tab.get(0,0)!= NULL){
             TileSet* m_tileset = new GridTileSet();
             size_t width = tab.getWidth();
             size_t height = tab.getHeight();
@@ -59,7 +59,7 @@ namespace render {
             surface = std::unique_ptr<Surface> (surface_grid);
         }
         
-        else{
+        else {
             TileSet* m_tileset = new CharsTileSet();
             size_t width = tab.getWidth();
             size_t height = tab.getHeight();

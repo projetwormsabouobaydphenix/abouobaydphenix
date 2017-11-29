@@ -36,5 +36,15 @@ namespace state{
     void state::State::setEpochrate(int epochrate) {
         this->epochrate=epochrate;
     }
+    
+    int State::getJoueur() const {
+        return this->joueur;
+    }
+
+    void State::setJoueur(int joueur) {
+        this->joueur = joueur;
+    }
+    
+    
    
 }

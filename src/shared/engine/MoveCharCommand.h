@@ -19,21 +19,24 @@ namespace engine {
   class MoveCharCommand : public engine::Command {
     // Attributes
   protected:
-    int character;
-    int i;
-    int j;
+    int xFrom;
+    int yFrom;
+    int xTo;
+    int yTo;
     // Operations
   public:
-    MoveCharCommand (int i, int j);
+    MoveCharCommand (int xFrom, int yFrom, int xTo, int yTo);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters
-    int getCharacter() const;
-    void setCharacter(int character);
-    int getI() const;
-    void setI(int i);
-    int getJ() const;
-    void setJ(int j);
+    int getXFrom() const;
+    void setXFrom(int xFrom);
+    int getYFrom() const;
+    void setYFrom(int yFrom);
+    int getXTo() const;
+    void setXTo(int xTo);
+    int getYTo() const;
+    void setYTo(int yTo);
   };
 
 };

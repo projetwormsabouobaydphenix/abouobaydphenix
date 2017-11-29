@@ -12,6 +12,44 @@ using namespace std;
 namespace ai{
         
     void AI::listCommands (std::vector<engine::Command*> list, state::State& state, int i, int j){
+        
+        ElementTab& chars = state.getChars();
+        int playerStatus = state.getJoueur();
+        Personnage* p = (Personnage*)chars.get(i,j);
+        
+        if (p->getColor() == playerStatus)
+        {
+            // on déclare les cases autour de la case de coordonnées (i,j)
+            Personnage* pNordEst;
+            Personnage* pEst;
+            Personnage* pSudEst;
+            Personnage* pSudOuest;
+            Personnage* pOuest;
+            Personnage* pNordOuest;
+            
+            // on récupère les tuiles correspondantes à toutes les directions
+            // en distinguant si on se situe sur une ligne paire
+            
+            pNordEst = ((Personnage*)chars.get(i-1,j));
+            pEst = ((Personnage*)chars.get(i,j+1));
+            pSudEst = ((Personnage*)chars.get(i+1,j));
+            pSudOuest = ((Personnage*)chars.get(i+1,j-1));
+            pOuest = ((Personnage*)chars.get(i,j-1));
+            pNordOuest = ((Personnage*)chars.get(i-1,j-1));
+            
+            // ou une ligne impaire
+            /*else
+            {
+                teamNordEst = ((Team*)teamBoard.getElement(i-1,j+1));
+                teamEst = ((Team*)teamBoard.getElement(i,j+1));
+                teamSudEst = ((Team*)teamBoard.getElement(i+1,j+1));
+                teamSudOuest = ((Team*)teamBoard.getElement(i+1,j));
+                teamOuest = ((Team*)teamBoard.getElement(i,j-1));
+                teamNordOuest = ((Team*)teamBoard.getElement(i-1,j));
+            }*/
+            
+            
+}
         /*ElementTab tabchars= state.getChars();
         Element* top;
         top= tabchars.get( i, j);
@@ -28,13 +66,13 @@ namespace ai{
 
         Element* nextr = grid.get(i+1,j);*/
         //cout<<"test random ai 2"<<endl;
-        Command* commande;
+       /* Command* commande;
         commande = new MoveCharCommand(i,j);
         list.push_back(commande);
         commande = new OrientationCommand(i,j, Direction::LEFT);
         list.push_back(commande);
         commande = new OrientationCommand(i,j, Direction::RIGHT);
-        list.push_back(commande);
+        list.push_back(commande);*/
         //cout<<"test random ai 3"<<endl;
         /*if(top->getTypeId()== PERSONNAGE){
             Personnage* perso = (Personnage*)top;

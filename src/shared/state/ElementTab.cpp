@@ -35,7 +35,7 @@ using namespace std;
 
 
     Element* ElementTab::get(int i, int j) const {
-        if (0<=i and i<width and 0<=j and j<height){
+        if (0<=i and i<(int)width and 0<=j and j<(int)height){
             return list[j*width + i].get();
         }
         else {
@@ -64,6 +64,11 @@ using namespace std;
         int position = j*width +i;
         if (list[position] == NULL){
                 list[position]= std::shared_ptr<Element>(e);
+                cout << "set elementTab ok" << endl;
+        }
+        else{
+           list[position] = NULL;
+           list[position] = std::shared_ptr<Element>(e);
         }
     }
     
