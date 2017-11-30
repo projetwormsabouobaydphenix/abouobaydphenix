@@ -2,9 +2,9 @@
 #ifndef STATE__ELEMENTTAB__H
 #define STATE__ELEMENTTAB__H
 
-#include <stdlib.h>
 #include <vector>
 #include <memory>
+#include <stdlib.h>
 #include <string>
 
 namespace state {
@@ -21,11 +21,12 @@ namespace state {
   class ElementTab : public state::Observable {
     // Associations
     // Attributes
+  public:
+    std::vector<std::shared_ptr<Element>> list;
   private:
     /// 	
     size_t width ;
     size_t height;
-    std::vector<std::shared_ptr<Element>> list;
     // Operations
   public:
     ElementTab (size_t width = 25, size_t height = 12);
@@ -43,6 +44,7 @@ namespace state {
     /// @param x2		(???) 
     /// @param y2		(???) 
     void changePosition (int x1, int y1, int x2, int y2);
+    void swap (Element* e1, Element* e2);
     // Setters and Getters
   };
 

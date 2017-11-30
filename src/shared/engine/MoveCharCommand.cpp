@@ -14,40 +14,45 @@ using namespace state;
 
 namespace engine {
     
-    MoveCharCommand::MoveCharCommand(int xFrom, int yFrom, int xTo, int yTo) :
-    xFrom(xFrom), yFrom(yFrom), xTo(xTo), yTo(yTo) {}
+    
+    MoveCharCommand::MoveCharCommand(int xFrom, int yFrom, state::Direction direction) : xFrom(xFrom),
+    yFrom(yFrom), direction(direction){
+
+    }
+
+
 
     int MoveCharCommand::getXFrom() const {
         return this->xFrom;
     }
 
-    int MoveCharCommand::getXTo() const {
-        return this->xTo;
-    }
+    
 
     int MoveCharCommand::getYFrom() const {
         return this->yFrom;
     }
 
-    int MoveCharCommand::getYTo() const {
-        return this->yTo;
-    }
+    
 
     void MoveCharCommand::setXFrom(int xFrom) {
         this->xFrom = xFrom;
     }
 
-    void MoveCharCommand::setXTo(int xTo) {
-        this->xTo = xTo;
-    }
 
     void MoveCharCommand::setYFrom(int yFrom) {
         this->yFrom = yFrom;
     }
-
-    void MoveCharCommand::setYTo(int yTo) {
-        this->yTo = yTo;
+    
+    state::Direction MoveCharCommand::getDirection() const {
+        return this->direction;
     }
+    
+    void MoveCharCommand::setDirection(state::Direction direction) {
+        this->direction = direction;
+    }
+
+
+
 
     
     CommandTypeId engine::MoveCharCommand::getTypeId () const{
@@ -67,13 +72,40 @@ namespace engine {
         }
         else{
             if (e->getTypeId() == PERSONNAGE){
-                if (chars.get(xTo, yTo) == NULL){
                     Personnage* p = (Personnage*) e;
-                    chars.set(xTo, yTo, p);
-                    //cout<<"set to ok"<<endl;
-                    chars.set(xFrom, yFrom, NULL);
-                    //cout<<"set from ok"<<endl;
-                }
+                    //Personnage* p2 = new Personnage(1, Direction::LEFT);
+                    if (direction == Direction::LEFT){
+                        p->setDirection(Direction::LEFT);
+                        chars.list[(xFrom-1) + (yFrom) * chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
+                        //chars.set(xFrom-1, yFrom, p);
+                        //chars.set(xFrom, yFrom, NULL);
+                    }
+                    else if (direction == Direction::RIGHT){
+                        p->setDirection(Direction::RIGHT);
+                        if (grid.get(xFrom+1, yFrom)->getTypeId() == TypeId::SPACE){
+                            cout << "space" << endl;
+                            if (grid.get(xFrom+1, yFrom+1)->getTypeId() == TypeId::FLOOR){
+                                cout << "floor " << endl;
+                                //chars.set(xFrom+1, yFrom, p);
+                                chars.list[(xFrom+1) + (yFrom) * chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
+                                
+                                //chars.set(xFrom, yFrom, NULL);
+                            }
+                            else {
+                                cout << "else" << endl;
+                                chars.list[(xFrom+1) + (yFrom+1) * chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
+                                //chars.set(xFrom+1, yFrom+1, p);
+                                //chars.set(xFrom, yFrom, NULL);
+                            }
+                        
+                        }
+                        else if (grid.get(xFrom+1, yFrom)->getTypeId() == TypeId::FLOOR){
+                            cout << "dloor 2" << endl;
+                            chars.list[(xFrom+1) + (yFrom-1) * chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
+                            //chars.set(xFrom+1, yFrom-1, p);
+                            //chars.set(xFrom, yFrom, NULL);
+                        }
+                    }   
             }
         }
 

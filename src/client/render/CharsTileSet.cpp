@@ -43,7 +43,8 @@ namespace render{
         //std::cout << "getTile de CharsTileSet" << std::endl;
         //state::TypeId typeId = e.getTypeId();
         if (&e != NULL){
-            //cout << "test 1" << endl;
+            
+            //cout << "non nul" << endl;
         if (e.getTypeId() == state::TypeId::PERSONNAGE){
             //cout << "test 2" << endl;
             //cout << "personnage" << endl;
@@ -86,7 +87,7 @@ namespace render{
             }
         }
         else{
-            //cout << "test 3" << endl;
+            //cout << "null" << endl;
             return personnage[0];
         }
             

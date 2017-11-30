@@ -35,12 +35,12 @@ using namespace std;
 
 
     Element* ElementTab::get(int i, int j) const {
-        if (0<=i and i<(int)width and 0<=j and j<(int)height){
+        //if (0<=i and i<(int)width and 0<=j and j<(int)height){
             return list[j*width + i].get();
-        }
+        /*}
         else {
             return nullptr;
-        }
+        }*/
     }
 
     size_t ElementTab::getHeight() const {
@@ -62,14 +62,11 @@ using namespace std;
 
     void ElementTab::set(int i, int j, Element* e) {
         int position = j*width +i;
-        if (list[position] == NULL){
+        //if (list[position] == NULL){
                 list[position]= std::shared_ptr<Element>(e);
-                cout << "set elementTab ok" << endl;
-        }
-        else{
-           list[position] = NULL;
-           list[position] = std::shared_ptr<Element>(e);
-        }
+                //cout << "set elementTab ok" << endl;
+                
+        //}
     }
     
     std::vector<int> ElementTab::load(const std::string& file) {
@@ -96,6 +93,16 @@ using namespace std;
             cout << "Erreur : on ne peut pas déplacer l'élement" << endl;
         }
     }
+
+    void ElementTab::swap(Element* e1, Element* e2) {
+        Element* tmp = e1;
+        e1 = NULL;
+        e2 = tmp;
+        cout << "Swap OK" << endl;
+        return;
+
+    }
+
     
     Element* ElementTab::alloc(int type){
         Element* e;

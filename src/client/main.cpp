@@ -19,6 +19,7 @@ void testSFML() {
 #include "render/TestRender.h"
 #include "engine/TestEngine.h"
 #include "ai/TestAI.h"
+#include "ai/TestHeuristicAi.h"
 
 
 using namespace std;
@@ -52,6 +53,11 @@ int main(int argc,char* argv[])
         else if (mode == "random_ai"){
             cout << "Test AI" << endl;
             ai::TestAI();
+        }
+        
+        else if (mode == "heuristic_ai"){
+            cout << "Test Heuristic  AI" << endl;
+            ai::TestHeuristicAi();
         }
     }
     

@@ -26,33 +26,20 @@ namespace render {
 
             Surface* surface_grid = new Surface();
 
-            // charge la texture : loadTexture
-            //string texture_grid = m_tileset->getImageFile();
             surface_grid->loadTexture("res/decor.png");
-            //cout << "load texture ok" << endl;
 
-            // initialise la liste des sprites : initHexas
+            // initialise la liste des sprites
             surface_grid->initQuads(width*height);
-            //cout << "width = " << width << endl;
-            //cout << "height = " << height << endl;
-            //cout << "x = " << tab.get(5,1)->getI() << "et" << tab.get(5,1)->getJ() << endl;
             
-
             // pour chaque cellule de la grille
-            for (size_t i = 0; i < width; i++){
-                //cout << i << endl;
-                for (size_t j = 0; j < height; j++){
-                    //cout << j << endl;
-                    //cout << "i" << endl;
-                    //size_t i = x*width+y;
+            for (size_t i = 0; i < height; i++){
+                for (size_t j = 0; j < width; j++){
                     // - la positionne dans la fenêtre
-                    surface_grid->setSpriteLocation(j*width+i, i, j);
+                    surface_grid->setSpriteLocation(i*width+j, j, i);
                     // - prend la partie de texture correspondante
-                    Element* element = tab.get(i, j);
-                    //cout << "x=" << element->getI() << ", y= " << element->getJ() <<endl;
-                    //cout << "typeid = " << element->getTypeId() << endl;
+                    Element* element = tab.get(j, i);
                     Tile tile = m_tileset->getTile(*element);
-                    surface_grid->setSpriteTexture(j*width+i, tile);
+                    surface_grid->setSpriteTexture(i*width+j, tile);
                     
                 }
             }
@@ -61,38 +48,34 @@ namespace render {
         
         else {
             TileSet* m_tileset = new CharsTileSet();
+            //cout << "Test 1" << endl;
             size_t width = tab.getWidth();
             size_t height = tab.getHeight();
 
             Surface* surface_perso = new Surface();
 
-            // charge la texture : loadTexture
-            //string texture_grid = m_tileset->getImageFile();
             surface_perso->loadTexture("res/personnage.png");
-            //cout << "load texture ok" << endl;
-
-            // initialise la liste des sprites : initHexas
             surface_perso->initQuads(width*height);
-            //cout << "width = " << width << endl;
-            //cout << "height = " << height << endl;
-            //cout << "x = " << tab.get(5,1)->getI() << "et" << tab.get(5,1)->getJ() << endl;
-            
 
             // pour chaque cellule de la grille
-            for (size_t i = 0; i < width; i++){
-                //cout << i << endl;
-                for (size_t j = 0; j < height; j++){
-                    //cout << j << endl;
-                    //cout << "i" << endl;
-                    //size_t i = x*width+y;
-                    // - la positionne dans la fenêtre
-                    surface_perso->setSpriteLocation(j*width+i, i, j);
-                    // - prend la partie de texture correspondante
-                    Element* element = tab.get(i, j);
-                    //cout << "x=" << element->getI() << ", y= " << element->getJ() <<endl;
-                    //cout << "typeid = " << element->getTypeId() << endl;
+            for (size_t i = 0; i < height; i++){
+                //cout << "i =" << i << endl;
+                for (size_t j = 0; j < width; j++){
+                    //cout << "j=" <<j << endl;
+                    //cout << "Test 1" << endl;
+                    surface_perso->setSpriteLocation(i*width+j, j, i);
+                    //cout << "Test t" << endl;
+                    Element* element = tab.get(j, i);
+                    if (element == NULL){
+                        //cout << "Test 3"  << endl;
+                    }
+                    else {
+                        //cout << "test 4" << element->getTypeId() << endl;
+                    }
                     Tile tile = m_tileset->getTile(*element);
-                    surface_perso->setSpriteTexture(j*width+i, tile);
+                    //cout << "Test 2" << endl;
+                    surface_perso->setSpriteTexture(i*width+j, tile);
+                    //cout << "ok" << endl;
                     
                 }
             }

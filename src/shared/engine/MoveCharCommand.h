@@ -10,6 +10,7 @@ namespace engine {
   class Command;
 }
 
+#include "state/Direction.h"
 #include "CommandTypeId.h"
 #include "Command.h"
 
@@ -17,15 +18,15 @@ namespace engine {
 
   /// class MoveCharCommand - 
   class MoveCharCommand : public engine::Command {
+    // Associations
     // Attributes
   protected:
     int xFrom;
     int yFrom;
-    int xTo;
-    int yTo;
+    state::Direction direction;
     // Operations
   public:
-    MoveCharCommand (int xFrom, int yFrom, int xTo, int yTo);
+    MoveCharCommand (int xFrom, int yFrom, state::Direction direction);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters
@@ -33,10 +34,8 @@ namespace engine {
     void setXFrom(int xFrom);
     int getYFrom() const;
     void setYFrom(int yFrom);
-    int getXTo() const;
-    void setXTo(int xTo);
-    int getYTo() const;
-    void setYTo(int yTo);
+    state::Direction getDirection() const;
+    void setDirection(state::Direction direction);
   };
 
 };
