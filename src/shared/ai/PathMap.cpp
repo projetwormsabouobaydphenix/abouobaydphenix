@@ -14,26 +14,30 @@ namespace ai {
     }
     
     void PathMap::init(const state::ElementTab& grid){
+        weights.resize(grid.getWidth()*grid.getHeight());
         Point* p = new Point();
         for (size_t i =0; i< grid.getWidth(); i++){
             for (size_t j =0; j < grid.getHeight(); j++){
                 if((grid.get(i,j)->getTypeId())== state::TypeId::FLOOR){
+                    //cout << "test 9" << endl;
                     weights[j*grid.getWidth()+i]= -1;
                     p->setX(i);
                     p->setY(j);
                     int& w = weights[j*grid.getWidth()+i];
                     p->setWeight(w);
-                    cout<<"le poids est"<<p->getWeight()<<"."<<endl;
+                    //cout<<"le poids est"<<p->getWeight()<<"."<<endl;
                     queue.push(*p);                    
                     }
                 
                 else {
+                    //cout << "test 8" << endl;
                     weights[j*grid.getWidth()+i]= std::numeric_limits<int>::max();
-                    p->setX(i);
-                    p->setY(j);
-                    int& w = weights[j*grid.getWidth()+i];
-                    p->setWeight(w);
-                    queue.push(*p);                    
+                    //p->setX(i);
+                    //p->setY(j);
+                    //int& w = weights[j*grid.getWidth()+i];
+                    //p->setWeight(w);
+                    //queue.push(*p);     
+                    //cout << "test 10" << endl;
                 }
             }
         }
@@ -54,6 +58,7 @@ namespace ai {
     }
     
     void PathMap::setWeights(int indice, int valeur){
+       // cout << "test 14" << endl;
         weights[indice] = valeur;
         
     }
@@ -76,6 +81,9 @@ namespace ai {
         }
     }
     
+    bool PathMap::compare(int a, int b){
+        return (a<b);
+    }
     
 }
 

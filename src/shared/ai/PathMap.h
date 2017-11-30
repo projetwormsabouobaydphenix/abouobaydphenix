@@ -38,6 +38,7 @@ namespace ai {
     void addSink (Point p, int weight);
     void update (const state::ElementTab& grid);
     void setWeights (int indice, int valeur);
+    bool compare (int a, int b);
     // Setters and Getters
   };
 

@@ -37,7 +37,7 @@ namespace engine {
         //out<<"22" << endl;
         //currentCommands.insert(std::pair<int, Command>(priority,cmd));
         currentCommands[priority] = cmd;
-        cout<<"Ajout de la commande : " << cmd->getTypeId() << endl;
+        //cout<<"Ajout de la commande : " << cmd->getTypeId() << endl;
 
     }
     
@@ -55,7 +55,7 @@ namespace engine {
         //cout<<"test update"<<endl;
         for (int i=0; i<((int)(currentCommands.size()));i++){
             if ((currentCommands[i])->getTypeId() == LOAD){
-                cout << "load command" << endl;
+                //cout << "load command" << endl;
                 ((LoadCommand*)(currentCommands[i]))->execute(currentState);
             }
             else if((currentCommands[i])->getTypeId() == MOVE_CHAR){

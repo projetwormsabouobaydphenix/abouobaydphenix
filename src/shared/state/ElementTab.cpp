@@ -52,7 +52,7 @@ using namespace std;
     void ElementTab::resize(size_t width, size_t height) {
         this->height=height;
         this->width= width; 
-        cout << "Redimensionnement en " << width << " par " << height << endl;
+        //cout << "Redimensionnement en " << width << " par " << height << endl;
         list.resize(width*height);
 
     }

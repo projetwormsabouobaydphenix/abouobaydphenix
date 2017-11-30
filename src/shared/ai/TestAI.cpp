@@ -75,7 +75,7 @@ namespace ai{
                                 //int x = p->getI();
                                 //int y = p->getI();
                                 //cout << "x = " << x << ", y = " << y << endl;
-                                Command* move = new MoveCharCommand(6, 3, Direction::RIGHT);
+                                Command* move = new MoveCharCommand(16, 3, Direction::LEFT);
                                 moteur.addCommand(0, move);
                                 
                                 
@@ -90,7 +90,12 @@ namespace ai{
             
             if (Keyboard::isKeyPressed(Keyboard::N)){
                 cout << "C'est le personnage noir qui va jouer" << endl;
-                Command* move = new MoveCharCommand(14, 4, Direction::RIGHT);
+                Command* move = new MoveCharCommand(9, 4, Direction::LEFT);
+                moteur.addCommand(0, move);
+            }
+            if (Keyboard::isKeyPressed(Keyboard::O)){
+                cout << "C'est le personnage noir qui va jouer" << endl;
+                Command* move = new MoveCharCommand(15, 3, Direction::LEFT);
                 moteur.addCommand(0, move);
             }
                 

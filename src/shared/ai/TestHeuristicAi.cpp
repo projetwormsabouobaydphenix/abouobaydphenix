@@ -33,11 +33,15 @@ namespace ai{
 
         sf::RenderWindow window; 
         window.create(sf::VideoMode(800, 384), "Test Worms");      
-        
+        Element* e = state.getChars().get(9,4);
+        Personnage* p = (Personnage*) e;
+        p->setLifecount(1);
+        cout << "Bienvenue sur le jeu worms" << endl;
+        cout << "Le personnage vert n'a qu'une seule vie. Normalement, il doit en récupérer s'il ne veut pas mourir" << endl;
         cout << "Appuyez sur Espace pour faire défiler" << endl;
         //cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
-        //HeuristicAI heuristic(state);
-        
+        HeuristicAI heuristic(state, 9, 4);
+        int i = 0;
         while (window.isOpen()){
             
             sf::Event event;
@@ -62,11 +66,17 @@ namespace ai{
             
             
             if(Keyboard::isKeyPressed(Keyboard::Space)){
-                //heuristic.run(e);
-                
-                }
+                //cout << "test A" << i << endl;
+                heuristic.run(moteur, 9-i,4);
+                i = i+1;
+            }
             
-            moteur.update();
+            //if(Keyboard::isKeyPressed(Keyboard::A)){
+              //  heuristic.run(moteur, 8,4);
+                
+            //}
+            
+            //moteur.update();
             
             layer1->initSurface();
             window.draw(*(layer1->getSurface()));

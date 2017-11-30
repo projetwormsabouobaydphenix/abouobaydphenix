@@ -72,27 +72,48 @@ namespace engine {
         }
         else{
             if (e->getTypeId() == PERSONNAGE){
+                    
                     Personnage* p = (Personnage*) e;
+                    cout << "Le personnage a " << p->getLifecount() << " vies" << endl; 
                     //Personnage* p2 = new Personnage(1, Direction::LEFT);
                     if (direction == Direction::LEFT){
                         p->setDirection(Direction::LEFT);
-                        chars.list[(xFrom-1) + (yFrom) * chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
-                        //chars.set(xFrom-1, yFrom, p);
-                        //chars.set(xFrom, yFrom, NULL);
+                        if (grid.get(xFrom-1, yFrom)->getTypeId() == TypeId::SPACE){
+                            if (grid.get(xFrom-1, yFrom+1)->getTypeId() == TypeId::FLOOR){
+                                chars.list[(xFrom-1) + (yFrom) * chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
+                                if (grid.get(xFrom-1, yFrom)->getTypeId() == TypeId::SPACE){
+                                    Space* s = (Space*)grid.get(xFrom-1, yFrom);
+                                    if (s->getNature() == SpaceTypeId::LIFE){
+                                        p->setLifecount(p->getLifecount()+1);
+                                        cout << "Super, le personnage a récupéré une vie" << endl;
+                                        cout << "Il en a maintenant " << p->getLifecount() << endl;
+                                    }
+                                }
+                            }
+                            else{
+                                chars.list[(xFrom-1) + (yFrom+1) * chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
+                            }
+                        }
+                        else if (grid.get(xFrom-1, yFrom)->getTypeId()== TypeId::FLOOR){
+                            chars.list[(xFrom-1)+(yFrom-1)*chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
+                        }
+                        
+                        
+                        
                     }
                     else if (direction == Direction::RIGHT){
                         p->setDirection(Direction::RIGHT);
                         if (grid.get(xFrom+1, yFrom)->getTypeId() == TypeId::SPACE){
-                            cout << "space" << endl;
+                            //cout << "space" << endl;
                             if (grid.get(xFrom+1, yFrom+1)->getTypeId() == TypeId::FLOOR){
-                                cout << "floor " << endl;
+                                //cout << "floor " << endl;
                                 //chars.set(xFrom+1, yFrom, p);
                                 chars.list[(xFrom+1) + (yFrom) * chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
                                 
                                 //chars.set(xFrom, yFrom, NULL);
                             }
                             else {
-                                cout << "else" << endl;
+                               // cout << "else" << endl;
                                 chars.list[(xFrom+1) + (yFrom+1) * chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
                                 //chars.set(xFrom+1, yFrom+1, p);
                                 //chars.set(xFrom, yFrom, NULL);
@@ -105,6 +126,8 @@ namespace engine {
                     }
             }
         }
+        
+        //if (chars.get(xFrom, yFrom))
     }
 }
     
