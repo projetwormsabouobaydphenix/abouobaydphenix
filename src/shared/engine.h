@@ -9,4 +9,6 @@
 #include "engine/OrientationCommand.h"
 #include "engine/HandleLifesCommand.h"
 #include "engine/HandleImpactCommand.h"
+#include "engine/JumpCommand.h"
+#include "engine/ShootCommand.h"
 #endif

@@ -18,7 +18,7 @@ namespace engine {
     
 
     void HandleImpactCommand::lostLife (state::State& state, int i, int j){
-        ElementTab tabchars= state.getChars();
+       /* ElementTab tabchars= state.getChars();
         Element* top;
         top= tabchars.get( i, j);
         if(top->getTypeId()== PERSONNAGE){
@@ -34,10 +34,10 @@ namespace engine {
                 perso->~Personnage();
                 cout<<"Le personnage est mort"<<endl;
             }
-        }
+        }*/
     }
     
-    void HandleImpactCommand::destruct(state::State& state, int i, int j){
+  /*  void HandleImpactCommand::destruct(state::State& state, int i, int j){
         ElementTab grid = state.getGrid();
         Element* top = grid.get(i,j);
         Space* space;
@@ -47,10 +47,10 @@ namespace engine {
             grid.set(i, j+1, space);
             cout<<"La case a été détruite par le tir"<<endl;
         }
-    }
+    }*/
 
     void engine::HandleImpactCommand::execute(state::State& state, int i, int j){
-        ElementTab tabgrid= state.getGrid();
+        /*ElementTab tabgrid= state.getGrid();
         Element* top;
         top= tabgrid.get(i,j);
         
@@ -62,7 +62,7 @@ namespace engine {
         
             else if ((top->getTypeId())==SPACE) {
                HandleImpactCommand::destruct(state, i,j);
-            }
+            }*/
         }
    
      

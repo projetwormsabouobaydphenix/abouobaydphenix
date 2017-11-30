@@ -7,8 +7,7 @@ namespace state {
 
   enum Direction {
     LEFT     = 1,
-    RIGHT     = 2,
-    UP     = 3
+    RIGHT     = 2
   };
 
 };

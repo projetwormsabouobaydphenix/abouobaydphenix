@@ -53,7 +53,7 @@ namespace ai{
                 if((nextr->getTypeId())==SPACE){
                     Space* nextri = (Space*)nextr;
                     if (nextri->getNature()==LIFE){
-                        HandleLifesCommand* add = new HandleLifesCommand;
+                        HandleLifesCommand* add = new HandleLifesCommand(i,j);
                         list.push_back(add);
                     }
                 }
@@ -67,7 +67,7 @@ namespace ai{
                 if(nextl->getTypeId()==SPACE){
                     Space* nextle = (Space*)nextl;
                     if (nextle->getNature()==LIFE){
-                        HandleLifesCommand* add = new HandleLifesCommand;
+                        HandleLifesCommand* add = new HandleLifesCommand(i,j);
                         list.push_back(add);
                     }
                 }
@@ -82,7 +82,7 @@ namespace ai{
                 if(nextl->getTypeId()==SPACE){
                     Space* nextle = (Space*)nextl;
                     if (nextle->getNature()==LIFE){
-                        HandleLifesCommand* add = new HandleLifesCommand;
+                        HandleLifesCommand* add = new HandleLifesCommand(i,j);
                         list.push_back(add);
                     }
                 }

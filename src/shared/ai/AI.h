@@ -10,12 +10,15 @@ namespace engine {
 };
 namespace state {
   class State;
+  class Observer;
 }
+
+#include "state/Observer.h"
 
 namespace ai {
 
   /// class AI - 
-  class AI {
+  class AI : public state::Observer {
     // Operations
   public:
     virtual void run (engine::Engine& engine, int i, int j) = 0;
