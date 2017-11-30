@@ -20,7 +20,7 @@ namespace ai {
     int weight;
     // Operations
   public:
-    Point (int x = 0, int y = 0, int weight = 0);
+    Point (int x = 0, int y = 0, int w = 0);
     Point transform (state::Direction d);
     // Setters and Getters
     int getX() const;

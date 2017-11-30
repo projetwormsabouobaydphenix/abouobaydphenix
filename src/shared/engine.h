@@ -10,4 +10,6 @@
 #include "engine/HandleLifesCommand.h"
 #include "engine/HandleImpactCommand.h"
 #include "engine/LoadCommand.h"
+#include "engine/ShootCommand.h"
+#include "engine/JumpCommand.h"
 #endif

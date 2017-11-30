@@ -30,7 +30,7 @@ namespace ai {
     PathMap ennemyMap;
     // Operations
   public:
-    HeuristicAI (const state::State& state);
+    HeuristicAI (const state::State& state, int i, int j);
     const PathMap& getLifeMap () const;
     const PathMap& getEnnemyMap () const;
     void stateChanged (const state::Event& event);

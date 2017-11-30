@@ -20,6 +20,7 @@ namespace render {
     void ElementTabLayer::initSurface() {
         //cout << "Foction InitSurface d'ElementTabLayer" << endl;
         if (tab.get(0,0)!= NULL){
+            //cout << "grid" << endl;
             TileSet* m_tileset = new GridTileSet();
             size_t width = tab.getWidth();
             size_t height = tab.getHeight();
@@ -33,7 +34,9 @@ namespace render {
             
             // pour chaque cellule de la grille
             for (size_t i = 0; i < height; i++){
+                //cout << "i" << i << endl;
                 for (size_t j = 0; j < width; j++){
+                   // cout << "j" << j << endl;
                     // - la positionne dans la fenêtre
                     surface_grid->setSpriteLocation(i*width+j, j, i);
                     // - prend la partie de texture correspondante
@@ -47,6 +50,7 @@ namespace render {
         }
         
         else {
+            //cout << "chars" << endl;
             TileSet* m_tileset = new CharsTileSet();
             //cout << "Test 1" << endl;
             size_t width = tab.getWidth();
@@ -81,6 +85,7 @@ namespace render {
             }
             surface = std::unique_ptr<Surface> (surface_perso);
         }
+        //cout << "Foction InitSurface d'ElementTabLayer fin" << endl;
             
         }
         

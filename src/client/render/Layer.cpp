@@ -15,6 +15,8 @@ namespace render{
         
     }
 
+    
+
     const std::unique_ptr<Surface>& Layer::getSurface() const {
         //cout << "Foction getSurface " << endl;
         return this->surface;
@@ -36,8 +38,11 @@ namespace render{
    
     
     Layer::~Layer() {
+    
 
     }
+    
+
 
 
 

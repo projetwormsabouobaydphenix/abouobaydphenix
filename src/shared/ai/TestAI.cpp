@@ -109,16 +109,23 @@ namespace ai{
 
             window.display();
             window.clear();
-
-            
-            
         }
     }
-    
-   
     
     
     TestAI::~TestAI(){
         
     }
-}      
+}  
+    
+
+        
+        
+        
+        
+        
+        
+        
+
+
+

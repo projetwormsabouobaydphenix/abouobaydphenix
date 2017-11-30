@@ -29,7 +29,7 @@ namespace engine {
 
          cout<<"La direction a changé"<<endl;
 
-        /*ElementTab tabchars= state.getChars();
+        ElementTab tabchars= state.getChars();
         Element* top;
         top= tabchars.get(i, j);
         
@@ -38,7 +38,7 @@ namespace engine {
             perso->setD(this->orientation);
          cout<<"Le personnage est orienté "<<endl;
         
-        }*/
+        }
 
 
     }

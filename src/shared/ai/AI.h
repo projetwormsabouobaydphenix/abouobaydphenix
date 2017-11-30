@@ -10,17 +10,20 @@ namespace engine {
 };
 namespace state {
   class State;
+  class Observer;
 }
+
+#include "state/Observer.h"
 
 namespace ai {
 
   /// class AI - 
-  class AI {
+  class AI : public state::Observer {
     // Operations
   public:
-    virtual void run (engine::Engine& engine) = 0;
+    virtual void run (engine::Engine& engine, int i, int j) = 0;
   protected:
-    void listCommands (std::vector<engine::Command*> list, state::State& state, int i, int j);
+    void listCommands (std::vector<engine::Command*>& list, state::State& state, int i, int j);
     // Setters and Getters
   };
 

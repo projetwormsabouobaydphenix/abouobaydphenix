@@ -7,18 +7,18 @@
 using namespace state;
 using namespace std;
 
-namespace ai{
-
+namespace ai {
+    
     int PathMap::getWeight(const Point& p) const{
         return p.getWeight();
     }
     
     void PathMap::init(const state::ElementTab& grid){
         Point* p = new Point();
-        for (size_t i = 0; i< grid.getWidth(); i++){
-            for (size_t j = 0; j < grid.getHeight(); j++){
-                if((grid.get(i,j)->getTypeId()) == state::TypeId::FLOOR){
-                    weights[j*grid.getWidth()+i] = -1;
+        for (size_t i =0; i< grid.getWidth(); i++){
+            for (size_t j =0; j < grid.getHeight(); j++){
+                if((grid.get(i,j)->getTypeId())== state::TypeId::FLOOR){
+                    weights[j*grid.getWidth()+i]= -1;
                     p->setX(i);
                     p->setY(j);
                     int& w = weights[j*grid.getWidth()+i];

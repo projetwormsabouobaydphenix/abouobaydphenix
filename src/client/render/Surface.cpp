@@ -31,6 +31,10 @@ namespace render{
                 throw std::runtime_error("Impossible de charger la texture");
         }
     }
+ 
+
+    
+
 
     void Surface::setSpriteLocation(int i, int x, int y) {
         //cout << "setSpriteLocation" << endl;
@@ -49,11 +53,18 @@ namespace render{
         quad[1].texCoords = Vector2f(tex.getX()+tex.getWidth(), tex.getY());
         quad[2].texCoords = Vector2f(tex.getX()+tex.getWidth(), tex.getY()+tex.getHeight());
         quad[3].texCoords = Vector2f(tex.getX(), tex.getY()+tex.getHeight());
+        //cout << "fin setTexture" << endl;
     }
+    
+    
+
     
     
     
     /*bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize,  std::vector<int> tiles, unsigned int width, unsigned int height)
+=======
+    bool TileMap::load(const std::string& tileset, sf::Vector2u tileSize,  std::vector<int> tiles, unsigned int width, unsigned int height)
+>>>>>>> cbdd80bb8ed9edf3f68dad7d0a082dd027109711:src/client/render/TileMap.cpp
     {
         // on charge la texture du tileset
         if (!texture.loadFromFile(tileset))
@@ -91,10 +102,12 @@ namespace render{
             }
 
         return true;
-    }*/
+    }
     
    
     
     
-}
+}*/
+    
 
+}

@@ -97,21 +97,17 @@ namespace engine {
                                 //chars.set(xFrom+1, yFrom+1, p);
                                 //chars.set(xFrom, yFrom, NULL);
                             }
-                        
+
                         }
-                        else if (grid.get(xFrom+1, yFrom)->getTypeId() == TypeId::FLOOR){
-                            cout << "dloor 2" << endl;
-                            chars.list[(xFrom+1) + (yFrom-1) * chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
-                            //chars.set(xFrom+1, yFrom-1, p);
-                            //chars.set(xFrom, yFrom, NULL);
+                        else if (grid.get(xFrom+1, yFrom)->getTypeId()== TypeId::FLOOR){
+                            chars.list[(xFrom+1)+(yFrom-1)*chars.getWidth()].swap(chars.list[xFrom + yFrom * chars.getWidth()]);
                         }
-                    }   
+                    }
             }
         }
-
     }
+}
     
     
     
 
-}

@@ -36,8 +36,8 @@ namespace engine{
         chars.resize(25, 12);
         std::vector<int> vcarte = state.getGrid().load("res/heuristic_ai.txt");
         std::vector<int> pcarte = state.getChars().load("res/heuristic_perso.txt");
-        cout << vcarte.size() << endl;
-        cout << pcarte.size() << endl;
+        //cout << vcarte.size() << endl;
+       // cout << pcarte.size() << endl;
         
         
         for (int i = 0; i<(int)vcarte.size(); i++){
@@ -82,14 +82,8 @@ namespace engine{
     
         for (int i = 0; i<(int)pcarte.size(); i++){
             //cout << vcarte[i] << endl;
-            if (pcarte[i] == 0){ //vide
-                //cout << "vcarte[i] = 0" << endl;
-                Element* empty = new Personnage(3, Direction::LEFT);
-                empty->setI(i%25);
-                empty->setJ(i/25);
-                chars.set(i%25, i/25, NULL);
-            }
-            else if (pcarte[i] == 1){ //vert gauche
+            
+            if (pcarte[i] == 1){ //vert gauche
                 //cout << "vcarte[i] = 1" << endl;
                 Element* vg = new Personnage(1, Direction::LEFT);
                 vg->setI(i%25);
@@ -110,18 +104,23 @@ namespace engine{
                 ng->setJ(i/25);
                 chars.set(i%25, i/25, ng);
             }
-            else if (vcarte[i] == 4){ //noir droite
+            else if (pcarte[i] == 4){ //noir droite
                 Element* nd = new Personnage(2, Direction::RIGHT);
                 nd->setI(i%25);
                 nd->setJ(i/25);
                 chars.set(i%25, i/25, nd);
             }
+            else{
+                chars.set(i%25, i/25, NULL);
+            }
+            }
+            
             
             }
         }
 
         
-    }
+    
     
     
  

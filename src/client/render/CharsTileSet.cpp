@@ -9,7 +9,6 @@
 using namespace std;
 using namespace state;
 
-
 namespace render{
 
     CharsTileSet::CharsTileSet() {
@@ -17,13 +16,14 @@ namespace render{
         Tile vg(32, 0, 32, 32); //vert gauche
         Tile vd(64, 0, 32, 32); //vert droite
         Tile ng(96, 0, 32, 32); //noir gauche
-        Tile nd(128, 0, 32, 32); //noir gauche
+        Tile nd(128, 0, 32, 32); //noir droite
         personnage.push_back(vide); //0
         personnage.push_back(vg); //1
         personnage.push_back(vd); //2
         personnage.push_back(ng); //3
         personnage.push_back(nd); //4
         
+
     }
     
 
@@ -63,10 +63,7 @@ namespace render{
                             //cout << "noir" << endl;
                             return this->personnage[3];
                         }
-                        //else{
-                            //std::cout << "Ce n'est pas un personnage" << std::endl;
-                         //   return personnage[0];
-                        //}
+                        
                     } 
                     else if (p.getDirection() == state::Direction::RIGHT){ //droite
                         //cout << "right" << endl;
@@ -78,10 +75,7 @@ namespace render{
                             //cout << "noir" << endl;
                             return this->personnage[4];
                         }
-                        //else{
-                            //std::cout << "Ce n'est pas un personnage" << std::endl;
-                        //    return personnage[0];
-                        //}
+                        
                     } 
             
             }
@@ -95,5 +89,9 @@ namespace render{
         
         }
     }
+
+
+   
+    
 
 

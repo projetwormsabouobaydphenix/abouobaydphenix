@@ -10,7 +10,9 @@ namespace engine {
     ORIENTATION     = 2,
     HANDLE_LIFE     = 3,
     HANDLE_IMPACT     = 4,
-    LOAD     = 5
+    LOAD     = 5,
+    SHOOT     = 6,
+    JUMP     = 7
   };
 
 };
