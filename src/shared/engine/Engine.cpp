@@ -9,6 +9,7 @@
 #include "LoadCommand.h"
 #include "HandleImpactCommand.h"
 #include "HandleLifesCommand.h"
+#include "ShootCommand.h"
 #include "MoveCharCommand.h"
 #include <algorithm>
 #include <iostream>
@@ -64,6 +65,10 @@ namespace engine {
             else if((currentCommands[i])->getTypeId() == HANDLE_LIFE){
                 //cout << "HandleLife" << endl;
                 ((HandleLifesCommand*)(currentCommands[i]))->execute(currentState);
+            }
+            else if((currentCommands[i])->getTypeId() == SHOOT){
+                //cout << "HandleLife" << endl;
+                ((ShootCommand*)(currentCommands[i]))->execute(currentState);
             }
             /*else if((currentCommands[i])->getTypeId() == HANDLE_IMPACT){
                 ((HandleImpactCommand*)(currentCommands[i]))->execute(currentState);

@@ -19,18 +19,15 @@ namespace engine {
   class ShootCommand : public engine::Command {
     // Attributes
   protected:
-    int i;
-    int j;
+    int color;
     // Operations
   public:
-    ShootCommand (int i, int j);
+    ShootCommand (int color);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters
-    int getI() const;
-    void setI(int i);
-    int getJ() const;
-    void setJ(int j);
+    int getColor() const;
+    void setColor(int color);
   };
 
 };

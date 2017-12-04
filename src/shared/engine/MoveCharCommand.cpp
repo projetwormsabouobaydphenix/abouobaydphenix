@@ -47,8 +47,8 @@ namespace engine {
         
         size_t width = chars.getWidth();
         size_t height = chars.getHeight();
-        cout << width << endl;
-        cout << height << endl;
+        //cout << width << endl;
+        //cout << height << endl;
         
         for (int i = 0; i < (int)height; i++) {
                 for (int j = 0; j < (int)width; j++) {
@@ -58,13 +58,11 @@ namespace engine {
                         if (p->getColor() == color) {
                             int xFrom = p->getI();
                             int yFrom = p->getJ();
-                            cout << "x = " << xFrom << ", y = " << yFrom << endl;
+                            //cout << "x = " << xFrom << ", y = " << yFrom << endl;
                             //cout << "Le personnage a " << p->getLifecount() << " vies" << endl;
                             if (direction == Direction::RIGHT){
                                 if (grid.get(xFrom+1, yFrom)->getTypeId() == TypeId::SPACE){
-                                    cout << "test 1" << endl;
                                     if (grid.get(xFrom+1, yFrom+1)->getTypeId() == TypeId::FLOOR){
-                                        cout << "test 2" << endl;
                                         Personnage* p1 = new Personnage(color, RIGHT);
                                         p1->setI(xFrom+1);
                                         p1->setJ(yFrom);
@@ -72,17 +70,22 @@ namespace engine {
                                         return;
                                     }
                                     
-                                    else { //if(grid.get(xFrom+1, yFrom+1)->getTypeId() == TypeId::SPACE){
-                                        cout << "test 3" << endl;
+                                    else if(grid.get(xFrom+1, yFrom+1)->getTypeId() == TypeId::SPACE){
+                                        if (grid.get(xFrom+1, yFrom+2)->getTypeId() == TypeId::SPACE){
+                                            chars.list[xFrom+yFrom*width].reset();
+                                            cout << "Le personnage est tombé dans l'eau. Il est mort." << endl;
+                                            return;
+                                        }
+                                        else{
                                         Personnage* p1 = new Personnage(color, RIGHT);
                                         p1->setI(xFrom+1);
                                         p1->setJ(yFrom+1);
                                         chars.changePosition(xFrom, yFrom, xFrom+1, yFrom+1, p1);
                                         return;
+                                        }
                                     }
                                 }
                                 else { //if(grid.get(xFrom+1, yFrom)->getTypeId() == TypeId::FLOOR){
-                                    cout << "test 4" << endl;
                                     Personnage* p1 = new Personnage(color, RIGHT);
                                         p1->setI(xFrom+1);
                                         p1->setJ(yFrom-1);
@@ -93,11 +96,8 @@ namespace engine {
                             }  //fin if direction = right
                             
                             else if (direction == Direction::LEFT){
-                                cout << "test 4" << endl;
                                 if (grid.get(xFrom-1, yFrom)->getTypeId() == TypeId::SPACE){
-                                    cout << "test 5" << endl;
                                     if (grid.get(xFrom-1, yFrom+1)->getTypeId() == TypeId::FLOOR){
-                                        cout << "test 6" << endl;
                                         Personnage* p1 = new Personnage(color, LEFT);
                                         p1->setI(xFrom-1);
                                         p1->setJ(yFrom);
@@ -106,16 +106,21 @@ namespace engine {
                                     }
                                     
                                     else if(grid.get(xFrom-1, yFrom+1)->getTypeId() == TypeId::SPACE){
-                                        cout << "test 7" << endl;
+                                        if (grid.get(xFrom-1, yFrom+2)->getTypeId() == TypeId::SPACE){
+                                            chars.list[xFrom+yFrom*width].reset();
+                                            cout << "Le personnage est tombé dans l'eau. Il est mort." << endl;
+                                            return;
+                                        }
+                                        else{
                                         Personnage* p1 = new Personnage(color, LEFT);
                                         p1->setI(xFrom-1);
                                         p1->setJ(yFrom+1);
                                         chars.changePosition(xFrom, yFrom, xFrom-1, yFrom+1, p1);
                                         return;
+                                        }
                                     }
                                 }
                                 else if(grid.get(xFrom-1, yFrom)->getTypeId() == TypeId::FLOOR){
-                                    cout << "test 8" << endl;
                                     Personnage* p1 = new Personnage(color, LEFT);
                                         p1->setI(xFrom-1);
                                         p1->setJ(yFrom-1);

@@ -37,7 +37,7 @@ namespace ai {
         window.create(sf::VideoMode(800, 384), "Test Worms");
 
         cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
-
+        cout << "Appuyez sur la touche T pour tirer" << endl;
         while (window.isOpen()) {
 
             sf::Event event;
@@ -59,6 +59,11 @@ namespace ai {
                         cout << "C'est le personnage noir qui va jouer" << endl;
                         Command* move = new MoveCharCommand(2, Direction::LEFT);
                         moteur.addCommand(0, move);
+                    }
+                    else if(event.key.code == Keyboard::L){
+                        cout << "le noir va tirer" << endl;
+                        Command* shoot = new ShootCommand(2);
+                        moteur.addCommand(0, shoot);
                     }
                 }
             }

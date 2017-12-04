@@ -65,7 +65,7 @@ namespace engine{
             }
             else if (vcarte[i] == 3){
                 //cout << "vcarte[i] = 3" << endl;
-                Element* water = new Floor(state::FloorTypeId::WATER);
+                Element* water = new Space(state::SpaceTypeId::WATER);
                 water->setI(i%25);
                 water->setJ(i/25);
                 grid.set(i%25, i/25, water);
