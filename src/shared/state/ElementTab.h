@@ -43,7 +43,8 @@ namespace state {
     /// @param y1		(???) 
     /// @param x2		(???) 
     /// @param y2		(???) 
-    void changePosition (int x1, int y1, int x2, int y2);
+    /// @param e		(???) 
+    void changePosition (int x1, int y1, int x2, int y2, Element* e);
     void swap (Element* e1, Element* e2);
     // Setters and Getters
   };

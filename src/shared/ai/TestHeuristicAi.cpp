@@ -21,11 +21,10 @@ using namespace render;
 
 
 namespace ai{
-    TestHeuristicAi::TestHeuristicAi() {
-         
+    TestHeuristicAi::TestHeuristicAi() {        
         
-        
-        Engine moteur;
+        /*Engine moteur;
+>>>>>>> 787112591aca6cac39a47138e7ffde323498f1d1
         State& state = moteur.getState();
         
         // initialisation de l'état
@@ -74,7 +73,7 @@ namespace ai{
                         moteur.addCommand(0, move);
                     }
                         
-                    }*/
+                    }
             }
            
             
@@ -94,7 +93,7 @@ namespace ai{
             window.display();
             window.clear(); 
        
-    }
+    }*/
     }
 
 

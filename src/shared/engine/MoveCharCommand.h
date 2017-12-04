@@ -21,19 +21,16 @@ namespace engine {
     // Associations
     // Attributes
   protected:
-    int xFrom;
-    int yFrom;
+    int color;
     state::Direction direction;
     // Operations
   public:
-    MoveCharCommand (int xFrom, int yFrom, state::Direction direction);
+    MoveCharCommand (int color, state::Direction direction);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters
-    int getXFrom() const;
-    void setXFrom(int xFrom);
-    int getYFrom() const;
-    void setYFrom(int yFrom);
+    int getColor() const;
+    void setColor(int color);
     state::Direction getDirection() const;
     void setDirection(state::Direction direction);
   };

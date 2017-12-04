@@ -5,7 +5,6 @@
 #include "engine/CommandTypeId.h"
 #include "engine/Engine.h"
 #include "engine/Command.h"
-#include "engine/OrientationCommand.h"
 #include "engine/MoveCharCommand.h"
 #include "engine/HandleLifesCommand.h"
 #include "engine/HandleImpactCommand.h"
