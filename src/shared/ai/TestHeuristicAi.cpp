@@ -16,9 +16,15 @@ using namespace state;
 using namespace sf;
 using namespace render;
 
+
+#define LIMITE_FRAME 60
+
+
 namespace ai{
     TestHeuristicAi::TestHeuristicAi() {
          
+        
+        
         Engine moteur;
         State& state = moteur.getState();
         
@@ -32,6 +38,7 @@ namespace ai{
         Layer* layer2 = new ElementTabLayer(state.getChars());
 
         sf::RenderWindow window; 
+        window.setFramerateLimit(LIMITE_FRAME);
         window.create(sf::VideoMode(800, 384), "Test Worms");      
         Element* e = state.getChars().get(9,4);
         Personnage* p = (Personnage*) e;
@@ -50,6 +57,13 @@ namespace ai{
                 if (event.type == sf::Event::Closed){
                     window.close();
                 }
+                
+                if (Keyboard::isKeyPressed(Keyboard::Space)) {
+                    
+                    //cout << "test A" << i << endl;
+                    heuristic.run(moteur, 9-i,4);
+                    i = i+1;
+                }
                 /*if (event.type == sf::Event::EventType::KeyPressed){
                     if (event.key.code == sf::Keyboard::Space){
                         Command* move = new MoveCharCommand(2, 3, 2, 3);
@@ -62,14 +76,7 @@ namespace ai{
                         
                     }*/
             }
-            
-            
-            
-            if(Keyboard::isKeyPressed(Keyboard::Space)){
-                //cout << "test A" << i << endl;
-                heuristic.run(moteur, 9-i,4);
-                i = i+1;
-            }
+           
             
             //if(Keyboard::isKeyPressed(Keyboard::A)){
               //  heuristic.run(moteur, 8,4);
