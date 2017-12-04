@@ -18,11 +18,12 @@ namespace engine{
     
    
     CommandTypeId ShootCommand::getTypeId() const{
+        //cout << "ShootCommand";
         return CommandTypeId::SHOOT;
     }
     
     void ShootCommand::execute(state::State& state){
-        cout << "debut shoot" << endl;
+        //cout << "debut shoot" << endl;
         ElementTab& tabchars = state.getChars();
         
         size_t width = tabchars.getWidth();
@@ -40,12 +41,12 @@ namespace engine{
                         if (p->getColor() == color) {
                             xp = p->getI();
                             yp = p->getJ();
-                            cout << "xp = " << xp << ", yp = " << yp << endl;
+                            //cout << "xp = " << xp << ", yp = " << yp << endl;
                         }
                         else{
                             xe = p->getI();
                             ye = p->getJ();
-                            cout << "xe = " << xe << ", ye = " << ye << endl;
+                           // cout << "xe = " << xe << ", ye = " << ye << endl;
                         }
                     }
                 }
@@ -53,7 +54,7 @@ namespace engine{
         }
         
         int distance = sqrt((xp-xe)*(xp-xe)+(yp-ye)*(yp-ye));
-        cout << "distance = " << distance << endl;
+        //cout << "distance = " << distance << endl;
         if (distance < 10){
             cout << "L'ennemi a été touché." << endl;
             Personnage* ennemy = (Personnage*) tabchars.get(xe, ye);

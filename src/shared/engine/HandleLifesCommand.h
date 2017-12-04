@@ -20,18 +20,16 @@ namespace engine {
   class HandleLifesCommand : public engine::Command {
     // Attributes
   protected:
-    int i;
-    int j;
+    int color;
     // Operations
   public:
-    void addLife (int i, int j, state::State& state);
+    HandleLifesCommand (int color);
+    void addLife (int color, state::State& state);
     CommandTypeId getTypeId () const;
     void execute (state::State& state);
     // Setters and Getters
-    int getI() const;
-    void setI(int i);
-    int getJ() const;
-    void setJ(int j);
+    int getColor() const;
+    void setColor(int color);
   };
 
 };

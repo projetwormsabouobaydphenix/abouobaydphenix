@@ -14,44 +14,48 @@ using namespace state;
 
 namespace engine {
     
+    HandleLifesCommand::HandleLifesCommand(int color) : color(color) {
+
+    }
    
     
-
-    void HandleLifesCommand::addLife(int i, int j, state::State& state){
-        //ElementTab tabgrid= state.getGrid();
-        //Element* pos;
-        //pos= tabgrid.get(i,j);
-        ElementTab tabchars= state.getChars();
-        Element* top;
-        top= tabchars.get( i, j);
+    void HandleLifesCommand::execute(state::State& state) {
+        ElementTab& chars = state.getChars();
+        ElementTab& grid = state.getGrid();
         
-        /*if ((pos->getTypeId())==SPACE){
-            Space* lieu = (Space*)pos;*/
+        size_t width = chars.getWidth();
+        size_t height = chars.getHeight();
         
-            if(top->getTypeId()== PERSONNAGE){
-                Personnage* perso = (Personnage*)top;
-                int lifecount = perso->getLifecount();
-                if (lifecount<3){
-                    perso->setLifecount(lifecount+1);
-                    cout<<"Le personnage a récupéré une vie."<<endl;
+        for (int i = 0; i < (int)height; i++) {
+            for (int j = 0; j < (int)width; j++) {
+                if (chars.list[i * width + j].get() != NULL){
+                    if (chars.list[i * width + j].get()->getTypeId() == TypeId::PERSONNAGE) {
+                        Personnage* p = (Personnage*) chars.list[i * width + j].get();
+                        if (p->getColor() == color) {
+                            int x = p->getI();
+                            int y = p->getJ();
+                            if (grid.get(x, y)->getTypeId() == state::TypeId::SPACE){
+                                Space* s = (Space*) grid.get(x, y);
+                                    if (s->getNature() == SpaceTypeId::LIFE) {
+                                        if (p->getLifecount() < 3){
+                                            p->setLifecount(p->getLifecount() + 1);
+                                            cout << "Super, le personnage a récupéré une vie" << endl;
+                                            cout << "Il en a maintenant " << p->getLifecount() << endl;
+                                        }
+                                        else{
+                                            cout << "Le personnage a déjà 3 vies. Il ne peut pas en avoir plus." << endl;
+                                        }
+                                    }
+                            }
+                        }
+                    }
                 }
-                //lieu->setNature(EMPTY);
             }
-        //}
+        }
     }
+
     
-    void engine::HandleLifesCommand::execute(state::State& state){
-        /*ElementTab tabgrid= state.getGrid();
-        Element* heart;
-        heart = tabgrid.get(i,j);
-        
-        if ((heart->getTypeId())== SPACE){
-            Space* vie = (Space*)heart;
-            if ((vie->getNature())==LIFE){*/
-            HandleLifesCommand::addLife(i,j , state);
-        
-        cout<<"le personnage a récupéré une vie"<<endl;
-    }
+
 
     CommandTypeId engine::HandleLifesCommand::getTypeId () const{
         return CommandTypeId::HANDLE_LIFE;
