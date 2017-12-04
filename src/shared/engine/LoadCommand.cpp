@@ -110,9 +110,9 @@ namespace engine{
                 nd->setJ(i/25);
                 chars.set(i%25, i/25, nd);
             }
-            else{
-                chars.set(i%25, i/25, NULL);
-            }
+            //else{
+              //  chars.set(i%25, i/25, NULL);
+            //}
             }
             
             

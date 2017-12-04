@@ -81,9 +81,18 @@ using namespace std;
         }
         return vcarte;
     }
-
     
-
+    
+    void ElementTab::changePosition(int x1, int y1, int x2, int y2, Element* e) {
+        if (list[x2+y2*width].get() == NULL){
+            list[x2 + y2 *width] = std::shared_ptr<Element>(e);
+            list[x1 + y1 * width].reset();
+        }
+        
+        else{
+            cout << "Le personnage ne peut pas se déplacer, il y a quelqu'un devant lui." << endl;
+        }
+    }
     
     
 

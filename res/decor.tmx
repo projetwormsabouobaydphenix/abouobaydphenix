@@ -12,9 +12,12 @@
  <tileset firstgid="560" name="coeur_HEARTS_2" tilewidth="32" tileheight="29" tilecount="1" columns="1">
   <image source="coeur_HEARTS_2.png" width="32" height="29"/>
  </tileset>
+ <tileset firstgid="561" name="coeur" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="coeur.png" width="32" height="32"/>
+ </tileset>
  <layer name="Calque de Tile 1" width="5" height="1">
   <data encoding="csv">
-0,68,133,538,560
+0,68,133,538,561
 </data>
  </layer>
 </map>

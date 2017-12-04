@@ -9,7 +9,6 @@
 #include "LoadCommand.h"
 #include "HandleImpactCommand.h"
 #include "HandleLifesCommand.h"
-#include "OrientationCommand.h"
 #include "MoveCharCommand.h"
 #include <algorithm>
 #include <iostream>
@@ -59,12 +58,11 @@ namespace engine {
                 ((LoadCommand*)(currentCommands[i]))->execute(currentState);
             }
             else if((currentCommands[i])->getTypeId() == MOVE_CHAR){
+                //cout << "MoveCharcommand" << endl;
                 ((MoveCharCommand*)(currentCommands[i]))->execute(currentState);
             }
-            else if((currentCommands[i])->getTypeId() == ORIENTATION){
-                ((OrientationCommand*)(currentCommands[i]))->execute(currentState);
-            }
             else if((currentCommands[i])->getTypeId() == HANDLE_LIFE){
+                //cout << "HandleLife" << endl;
                 ((HandleLifesCommand*)(currentCommands[i]))->execute(currentState);
             }
             /*else if((currentCommands[i])->getTypeId() == HANDLE_IMPACT){

@@ -5,7 +5,6 @@
  */
 
 #include "JumpCommand.h"
-#include "OrientationCommand.h"
 #include <iostream>
 
 using namespace std;
@@ -31,7 +30,7 @@ namespace engine {
     }
     
     void JumpCommand::setI(int i){
-        this->i;
+        this->i = i;
     }
     
     void JumpCommand::setJ(int j){

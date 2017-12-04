@@ -3,7 +3,6 @@
 #include "HeuristicAI.h"
 #include "engine/Engine.h"
 #include "state/Personnage.h"
-#include "engine/OrientationCommand.h"
 #include "engine/MoveCharCommand.h"
 #include "engine/ShootCommand.h"
 #include "state/Space.h"
@@ -37,7 +36,7 @@ namespace ai {
     }
     
     void HeuristicAI::run(engine::Engine& engine, int i, int j){
-        //cout << "debut heuristic" << endl;
+       /* //cout << "debut heuristic" << endl;
         State& state = engine.getState();
         ElementTab& grid = state.getGrid();
         ElementTab& chars = state.getChars();
@@ -77,7 +76,7 @@ namespace ai {
                             ennemy->setY(y);
                             ennemyMap.setWeights(y*grid.getWidth()+x, 0);
                         }
-                    }  */        
+                    }       
                 }
             }
             for(size_t x = 0; x<grid.getWidth(); x++){
@@ -132,6 +131,6 @@ namespace ai {
 }
         else{
             cout << "test 12" << endl;
-        }
+        }*/
     }
 }
