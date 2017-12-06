@@ -26,10 +26,12 @@ namespace render {
   private:
     state::State& state;
     sf::Texture m_texture;
+    int lifeCount;
     // Operations
   public:
     StateLayer (state::State& state);
     void initSurface ();
+    void printLifeCount ();
     // Setters and Getters
   };
 

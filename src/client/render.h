@@ -10,4 +10,5 @@
 #include "render/CharsTileSet.h"
 #include "render/StateLayer.h"
 #include "render/ElementTabLayer.h"
+#include "render/StateTileSet.h"
 #endif

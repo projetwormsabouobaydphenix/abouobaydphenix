@@ -66,7 +66,7 @@ namespace engine{
                 return;
             }
             else{
-                ennemy->setLifecount(life-1);
+                tabchars.list[ennemy->getI()+ennemy->getJ()*width].reset();
                 cout << "Il n'avait qu'une vie restante. Il est mort" << endl;
                 return;
             }

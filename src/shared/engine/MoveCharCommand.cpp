@@ -136,6 +136,7 @@ namespace engine {
                             }//fin if direction = right
 
                             else if (direction == Direction::LEFT) {
+                                cout << "direction = left" << endl;
                                 if (grid.get(xFrom - 1, yFrom)->getTypeId() == TypeId::SPACE) {
                                     if (grid.get(xFrom - 1, yFrom + 1)->getTypeId() == TypeId::FLOOR) {
                                         Personnage* p1 = new Personnage(color, LEFT);
@@ -211,6 +212,7 @@ namespace engine {
                         }
                     }
                 }
+                
             }
         }
     }

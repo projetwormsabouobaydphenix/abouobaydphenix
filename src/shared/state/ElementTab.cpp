@@ -12,10 +12,11 @@
 
 
 
+using namespace std;
 
 namespace state{
     
-using namespace std;
+
 
     ElementTab::ElementTab(size_t width, size_t height) {
         
