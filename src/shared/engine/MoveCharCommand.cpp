@@ -39,6 +39,7 @@ namespace engine {
     }
 
     CommandTypeId engine::MoveCharCommand::getTypeId() const {
+        //cout << "MoveCharCommand";
         return CommandTypeId::MOVE_CHAR;
     }
 
@@ -47,21 +48,22 @@ namespace engine {
         //cout<<"Le personnage s'est déplacé"<<endl;
         ElementTab& grid = state.getGrid();
         ElementTab& chars = state.getChars();
-        
+
         size_t width = chars.getWidth();
         size_t height = chars.getHeight();
         //cout << width << endl;
         //cout << height << endl;
+
         
         for (int i = 0; i < (int)height; i++) {
             for (int j = 0; j < (int)width; j++) {
                 if (chars.get(i,j) != NULL){
                     if (chars.get(i,j)->getTypeId() == TypeId::PERSONNAGE) {
                         Personnage* persoAction = (Personnage*) chars.get(i,j);
-                        state::Direction precDir = persoAction->getDirection();
                         if (persoAction->getColor() == color) {
                             int xFrom = persoAction->getI();
                             int yFrom = persoAction->getJ();
+                            state::Direction precDir = persoAction->getDirection();
                             //cout << "x = " << xFrom << ", y = " << yFrom << endl;
                             //cout << "Le personnage a " << p->getLifecount() << " vies" << endl;
                             if (direction == Direction::RIGHT){
@@ -81,7 +83,7 @@ namespace engine {
                                             actions.push(shared_ptr<Action>(die));
                                             die->apply(state);
                                             return;
-                                        }
+                                        } 
                                         else{
                                         Personnage* persoApAction = new Personnage(color, RIGHT);
                                         state::Direction nextDir = persoApAction->getDirection();
@@ -90,9 +92,11 @@ namespace engine {
                                         move->apply(state);
                                         return;
                                         }
+
                                     }
                                 }
-                                else { //if(grid.get(xFrom+1, yFrom)->getTypeId() == TypeId::FLOOR){
+
+                                else { 
                                     Personnage* persoApAction = new Personnage(color, RIGHT);
                                     state::Direction nextDir = persoApAction->getDirection();
                                     engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom+1, yFrom-1, persoApAction, precDir, nextDir);
@@ -147,4 +151,3 @@ namespace engine {
         }
     }
 }
-

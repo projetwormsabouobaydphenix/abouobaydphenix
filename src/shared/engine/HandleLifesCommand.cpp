@@ -16,8 +16,12 @@ using namespace state;
 
 namespace engine {
     
+    HandleLifesCommand::HandleLifesCommand(int color) : color(color) {
+
+    }
    
     
+
 
     void HandleLifesCommand::addLife(int color, state::State& state){
         //ElementTab tabgrid= state.getGrid();
@@ -37,6 +41,7 @@ namespace engine {
                         if (lifecount<3){
                             persoAction->setLifecount(lifecount+1);
                             cout<<"Le personnage a récupéré une vie."<<endl;
+
                         }
                     }
                 }
@@ -75,6 +80,7 @@ namespace engine {
         
         cout<<"le personnage a récupéré une vie"<<endl;
     }
+
 
     CommandTypeId engine::HandleLifesCommand::getTypeId () const{
         return CommandTypeId::HANDLE_LIFE;

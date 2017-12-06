@@ -5,148 +5,122 @@
 #include "TestEngine.h"
 #include "state.h"
 #include "engine.h"
+#include "render.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 using namespace std;
-
-
-
+using namespace std;
+using namespace engine;
 using namespace state;
+using namespace sf;
+using namespace render;
+
+
 
 namespace engine{
     TestEngine::TestEngine() {
         
-        sf::RenderWindow window(sf::VideoMode(320, 320), "Test Worms");
-         
-        // ----------------------------------------------------------------------------------
-        /*render::TileMap mapt; //création d'une mini map
-        state::ElementTab elementTab;
-        std::vector<int> vcarte = elementTab.load("res/heuristic_ai.txt");*/
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        //if (!mapt.load("res/tilemap.png", sf::Vector2u(32, 32), t_terre, 10, 10))
-        //cout << "Erreur chargement texture terre" << endl;
-        
-        cout << "Map terre créée" << endl;
-        // ------------------------------------------------------------------------------------------
-        
-        
-        
-        //-------------------------------------------------------------------------------------------
-        /*render::TileMap mapp;
-        CharsTileSet tileset;
-        Personnage p;
-        p.setColor(0);
-        p.setD(Direction::LEFT);
-        p.setStatus(Status::ALIVE);
-        Tile tilep = tileset.getTile(p);
-        std::vector<int> t_perso;
-        int n = tilep.getX();
-        t_perso.push_back(n);
-        cout << t_perso.size() << endl;
-        cout << "Création personnage" << endl;
-        if (!mapt.load("res/soldat13.png", sf::Vector2u(32, 36), t_perso, 1, 1))
-        cout << "Erreur chargement texture personnage" << endl;*/
-        
-        
-        
-        
-        
-        
-        
-        //------------------------------------------------------------------------------------------
-        
-        
-        //------------------------------------------------------------------------------------------
-        /*engine::Engine engine;
-        state::State& currentState = engine.getState();
-        state::ElementTab grid(10,10);
-        state::ElementTab chars(1,1);
-        state::Element* personnage = new state::Personnage();
-        chars.add(personnage);
-        for (size_t it = 0; it<t_terre.size(); it++){
-            if (t_terre[it] == 164){
-                grid.add( new state::Floor(state::FloorTypeId::GROUND) );
-            }
-            else if (t_terre[it] == 132){
-                grid.add(new state::Floor(state::FloorTypeId::GRASS));
-            }
-            else if (t_terre[it] == 0){
-                grid.add(new state::Space(state::SpaceTypeId::EMPTY));
-            }
-        }
-        cout << "tous les élements sont chargés dans la grille" << endl;
-        currentState.setGrid(grid);
-        currentState.setChars(chars);*/
-        
-        
-        
-        // ------------------------------------------------------------------------------------------
-        //Command* commande;
-        //commande = new MoveCharCommand();
-        
-        
-        
-        /*Command* comm;
-        
-        
-        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-            Engine enginetest;
-            state::State& state = enginetest.getState();
-            //enginetest.getState()=state;
-            state::ElementTab elementTab(2,2);
-            
-            
-            Element* p;
-            Personnage* perso = new Personnage();
-            p = perso;
-            //Floor* f = new Floor();
-            //elementTab.add(f);
-            elementTab.set(0, 0, p);
-            state.getChars()=elementTab;
-            cout<<"** Epoque 1**\n"<<endl;
-            comm = new OrientationCommand(0,0, state::Direction::LEFT);
-            enginetest.addCommand(1,comm);
-            Command* comm2 = new MoveCharCommand(0,0);
-            enginetest.addCommand(2, comm2);
-            enginetest.update();
-          
-            
-        //}
-        
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-            Engine enginetest = new Engine;
-            cout<<"** Epoque 2**\n"<<endl;
-            enginetest.addCommand(1,OrientationCommand);
-            enginetest.addCommand(2,MoveCharCommand);
-            
-<<<<<<< HEAD
-        }
+        Engine moteur;
+        State& state = moteur.getState();
 
-        // on dessine le niveau
-        window.clear();
-        //window.draw(mapt);
-        //window.draw(mapp);
-        window.display();
-=======
-        }*/
-    
-    
+        Command* init = new LoadCommand("res/heuristic_ai.txt");
+        moteur.addCommand(0, init);
+        moteur.update();
+
+        Layer* layer1 = new ElementTabLayer(state.getGrid());
+        Layer* layer2 = new ElementTabLayer(state.getChars());
+
+        sf::RenderWindow window;
+        window.create(sf::VideoMode(800, 384), "Test Worms");
+
+        cout << "Appuyez sur Espace pour faire défiler les époques" << endl;
+        int epoche = 0;
+        
+        while (window.isOpen()) {
+
+            sf::Event event;
+            while (window.pollEvent(event)) {
+                // fermeture de la fenêtre lorsque l'utilisateur le souhaite
+                if (event.type == sf::Event::Closed) {
+                    window.close();
+                }
+                else if (event.type == sf::Event::KeyReleased){
+                    
+                    if (event.key.code == Keyboard::Space){
+                        epoche = epoche+1;
+                        
+                        if (epoche == 1){
+                            cout << "Epoque "  << epoche << endl;
+                            Command* move = new MoveCharCommand(2, Direction::LEFT);
+                            moteur.addCommand(0, move);
+                            cout << "Le personnage noir s'est déplacé : OK" << endl;
+                        }
+                        if (epoche == 2){
+                            cout << "Epoque "  << epoche << endl;
+                            Command* move = new MoveCharCommand(2, Direction::LEFT);
+                            moteur.addCommand(0, move);
+                            cout << "Le personnage noir s'est déplacé : OK" << endl;
+                        }
+                        if (epoche == 3){
+                            cout << "Epoque " << epoche << endl;
+                            cout << "Le personnage noir va tirer" << endl;
+                            Command* shoot = new ShootCommand(2);
+                            moteur.addCommand(0, shoot);
+                        }
+                        if (epoche == 4){
+                            cout << "Epoque " << epoche << endl;
+                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                            moteur.addCommand(0, move);
+                            cout << "Le personnage vert s'est déplacé : OK" << endl;
+                            
+                        }
+                        if (epoche == 5){
+                            cout << "Epoque " << epoche << endl;
+                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                            moteur.addCommand(0, move);
+                            cout << "Le personnage vert s'est déplacé : OK" << endl;
+                        }
+                        if (epoche == 6){
+                            cout << "Epoque " << epoche << endl;
+                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                            moteur.addCommand(0, move);
+                            cout << "Le personnage vert s'est déplacé : OK" << endl;
+                        }
+                        if (epoche == 7){
+                            cout << "Epoque " << epoche << endl;
+                            cout << "Le personnage vert va tirer" << endl;
+                            Command* shoot = new ShootCommand(1);
+                            moteur.addCommand(0, shoot);
+                        }
+                        if (epoche == 8){
+                            cout << "Epoque " << epoche << endl;
+                            return;
+                            
+                        }
+                        if (epoche == 9){
+                            cout << "Epoque " << epoche << endl;
+                            return;
+                        }
+                        if (epoche == 10){
+                            cout << "Epoque " << epoche << endl;
+                        }
+                        
+                    }
+                    
+                }
+            }
+
+            moteur.update();
+
+            layer1->initSurface();
+            window.draw(*(layer1->getSurface()));
+
+            layer2->initSurface();
+            window.draw(*(layer2->getSurface()));
+
+            window.display();
+            window.clear();
+        }
     
     }
 

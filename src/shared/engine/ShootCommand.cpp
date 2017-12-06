@@ -21,11 +21,14 @@ namespace engine{
     
    
     CommandTypeId ShootCommand::getTypeId() const{
+        //cout << "ShootCommand";
         return CommandTypeId::SHOOT;
     }
     
+
     void ShootCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions){
         cout << "debut shoot" << endl;
+
         ElementTab& tabchars = state.getChars();
         
         size_t width = tabchars.getWidth();
@@ -49,6 +52,7 @@ namespace engine{
                             xennemy = persoAction->getI();
                             yennemy = persoAction->getJ();
                             cout << "xe = " << xennemy << ", ye = " << yennemy << endl;
+
                         }
                     }
                 }
@@ -57,6 +61,7 @@ namespace engine{
         
         int distance = sqrt((xperso-xennemy)*(xperso-xennemy)+(yperso-yennemy)*(yperso-yennemy));
         cout << "distance = " << distance << endl;
+
         if (distance < 10){
             cout << "L'ennemi a été touché." << endl;
             Personnage* ennemy = (Personnage*) tabchars.get(xennemy, yennemy);

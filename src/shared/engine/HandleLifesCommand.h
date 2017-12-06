@@ -27,6 +27,10 @@ namespace engine {
     int color;
     // Operations
   public:
+<<<<<<< HEAD
+=======
+    HandleLifesCommand (int color);
+>>>>>>> 7c5326b31f48f63aa03c5eb93744b3f8a147796f
     void addLife (int color, state::State& state);
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
