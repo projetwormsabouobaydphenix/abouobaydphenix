@@ -41,17 +41,18 @@ namespace engine{
             for (int j = 0; j < (int)width; j++) {
                 //cout << "test2" << endl;
                 if (tabchars.list[i * width + j].get() != NULL){
+                    //cout << "Test 1" << endl;
                     if (tabchars.list[i * width + j].get()->getTypeId() == TypeId::PERSONNAGE) {
-                        Personnage* persoAction = (Personnage*) tabchars.get(i,j);
+                        Personnage* persoAction = (Personnage*) tabchars.list[i * width + j].get();
                         if (persoAction->getColor() == color) {
                             xperso = persoAction->getI();
                             yperso = persoAction->getJ();
-                            cout << "xperso = " << xperso << ", yperso = " << yperso << endl;
+                            //cout << "xperso = " << xperso << ", yperso = " << yperso << endl;
                         }
                         else{
                             xennemy = persoAction->getI();
                             yennemy = persoAction->getJ();
-                            cout << "xe = " << xennemy << ", ye = " << yennemy << endl;
+                            //cout << "xe = " << xennemy << ", ye = " << yennemy << endl;
 
                         }
                     }
@@ -60,7 +61,7 @@ namespace engine{
         }
         
         int distance = sqrt((xperso-xennemy)*(xperso-xennemy)+(yperso-yennemy)*(yperso-yennemy));
-        cout << "distance = " << distance << endl;
+        //cout << "distance = " << distance << endl;
 
         if (distance < 10){
             cout << "L'ennemi a été touché." << endl;

@@ -45,7 +45,7 @@ namespace engine {
 
     void engine::MoveCharCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions) {
 
-        //cout<<"Le personnage s'est déplacé"<<endl;
+        //cout << "Début movecharcommand" << endl;
         ElementTab& grid = state.getGrid();
         ElementTab& chars = state.getChars();
 
@@ -57,12 +57,15 @@ namespace engine {
         
         for (int i = 0; i < (int)height; i++) {
             for (int j = 0; j < (int)width; j++) {
-                if (chars.get(i,j) != NULL){
-                    if (chars.get(i,j)->getTypeId() == TypeId::PERSONNAGE) {
-                        Personnage* persoAction = (Personnage*) chars.get(i,j);
+                if (chars.list[i * width + j].get() != NULL){
+                    //cout << "Test 1" << endl;
+                    if (chars.list[i * width + j].get()->getTypeId() == TypeId::PERSONNAGE) {
+                        //cout << "Test 2" << endl;
+                        Personnage* persoAction = (Personnage*) chars.list[i * width + j].get();
                         if (persoAction->getColor() == color) {
                             int xFrom = persoAction->getI();
                             int yFrom = persoAction->getJ();
+                            int lifeCountPersoAction = persoAction->getLifecount();
                             state::Direction precDir = persoAction->getDirection();
                             //cout << "x = " << xFrom << ", y = " << yFrom << endl;
                             //cout << "Le personnage a " << p->getLifecount() << " vies" << endl;
@@ -70,6 +73,7 @@ namespace engine {
                                 if (grid.get(xFrom+1, yFrom)->getTypeId() == TypeId::SPACE){
                                     if (grid.get(xFrom+1, yFrom+1)->getTypeId() == TypeId::FLOOR){
                                         Personnage* persoApAction = new Personnage(color, RIGHT);
+                                        persoApAction->setLifecount(lifeCountPersoAction);
                                         state::Direction nextDir = persoApAction->getDirection();
                                         engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom+1, yFrom, persoApAction, precDir, nextDir);
                                         actions.push(shared_ptr<Action>(move));
@@ -86,6 +90,7 @@ namespace engine {
                                         } 
                                         else{
                                         Personnage* persoApAction = new Personnage(color, RIGHT);
+                                        persoApAction->setLifecount(lifeCountPersoAction);
                                         state::Direction nextDir = persoApAction->getDirection();
                                         engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom+1, yFrom+1, persoApAction, precDir, nextDir);
                                         actions.push(shared_ptr<Action>(move));
@@ -98,6 +103,7 @@ namespace engine {
 
                                 else { 
                                     Personnage* persoApAction = new Personnage(color, RIGHT);
+                                    persoApAction->setLifecount(lifeCountPersoAction);
                                     state::Direction nextDir = persoApAction->getDirection();
                                     engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom+1, yFrom-1, persoApAction, precDir, nextDir);
                                     actions.push(shared_ptr<Action>(move));
@@ -111,6 +117,7 @@ namespace engine {
                                 if (grid.get(xFrom-1, yFrom)->getTypeId() == TypeId::SPACE){
                                     if (grid.get(xFrom-1, yFrom+1)->getTypeId() == TypeId::FLOOR){
                                         Personnage* persoApAction = new Personnage(color, LEFT);
+                                        persoApAction->setLifecount(lifeCountPersoAction);
                                         state::Direction nextDir = persoApAction->getDirection();
                                         engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom-1, yFrom, persoApAction, precDir, nextDir);
                                         actions.push(shared_ptr<Action>(move));
@@ -127,6 +134,7 @@ namespace engine {
                                         }
                                         else{
                                         Personnage* persoApAction = new Personnage(color, LEFT);
+                                        persoApAction->setLifecount(lifeCountPersoAction);
                                         state::Direction nextDir = persoApAction->getDirection();
                                         engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom-1, yFrom+1, persoApAction, precDir, nextDir);
                                         actions.push(shared_ptr<Action>(move));
@@ -137,6 +145,7 @@ namespace engine {
                                 }
                                 else if(grid.get(xFrom-1, yFrom)->getTypeId() == TypeId::FLOOR){
                                     Personnage* persoApAction = new Personnage(color, LEFT);
+                                    persoApAction->setLifecount(lifeCountPersoAction);
                                     state::Direction nextDir = persoApAction->getDirection();
                                     engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom-1, yFrom-1, persoApAction, precDir, nextDir);
                                     actions.push(shared_ptr<Action>(move));

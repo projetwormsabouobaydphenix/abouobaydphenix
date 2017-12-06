@@ -9,87 +9,34 @@ using namespace state;
 using namespace engine;
 using namespace std;
 
-namespace ai{
-        
-    void AI::listCommands (std::vector<engine::Command*>& list, state::State& state, int i, int j){
-         /*ElementTab& tabchars= state.getChars();
-        Element* top;
-        top= tabchars.get( i, j);
-        top->setI(i);
-        top->setJ(j);
-        ElementTab& grid = state.getGrid();
-        Element* nextr;
-        Element* nextl;
-        
-        if(i!=0){
-            nextl = grid.get(i-1,j);
-        }
-        else { nextl= grid.get(i,j);}
-        
-        int width = grid.getWidth();
-        
-        if(i != (width-1)){
-            nextr = grid.get(i+1,j);
-        }
-        else { nextr = grid.get(i,j);}
-        
-        MoveCharCommand* move = new MoveCharCommand(i,j);
-        //OrientationCommand* orientright = new OrientationCommand(i,j,RIGHT);
-        //OrientationCommand* orientleft = new OrientationCommand(i,j,LEFT);
-       
-   
-        cout<<"test random ai 2"<<endl;
-       
-        if(top->getTypeId()== PERSONNAGE){
-            //cout<<"test perso"<<endl;
-            //Personnage* perso = (Personnage*)top;
-            
-            cout<<"test nextl"<<endl;
-            if((nextl->getTypeId())==FLOOR){
-                cout<<"test passé"<<endl;
-                OrientationCommand* orientright = new OrientationCommand(i,j,RIGHT);
-                list.push_back(orientright);
-                list.push_back(move);
-                if((nextr->getTypeId())==SPACE){
-                    Space* nextri = (Space*)nextr;
-                    if (nextri->getNature()==LIFE){
-                        HandleLifesCommand* add = new HandleLifesCommand(i,j);
-                        list.push_back(add);
-                    }
-                }
-            }
-            
-            else if(nextr->getTypeId()==FLOOR){
-                cout<<"nextr fonctionne"<<endl;
-                OrientationCommand* orientleft = new OrientationCommand(i,j,LEFT);
-                list.push_back(orientleft);
-                list.push_back(move);
-                if(nextl->getTypeId()==SPACE){
-                    Space* nextle = (Space*)nextl;
-                    if (nextle->getNature()==LIFE){
-                        HandleLifesCommand* add = new HandleLifesCommand(i,j);
-                        list.push_back(add);
-                    }
-                }
-            }
+namespace ai {
 
-            else {
-                OrientationCommand* orientleft = new OrientationCommand(i,j,LEFT);
-                list.push_back(orientleft);
-                OrientationCommand* orientright = new OrientationCommand(i,j,RIGHT);
-                list.push_back(orientright);
-                list.push_back(move);
-                if(nextl->getTypeId()==SPACE){
-                    Space* nextle = (Space*)nextl;
-                    if (nextle->getNature()==LIFE){
-                        HandleLifesCommand* add = new HandleLifesCommand(i,j);
-                        list.push_back(add);
-                    }
-                }
-            }
-        } 
-       
-    }*/
+    void AI::listCommands(std::vector<engine::Command*>& list, state::State& state, int color) {
+
+        ElementTab& chars = state.getChars();
+
+        //size_t width = chars.getWidth();
+        //size_t height = chars.getHeight();
+
+        Command* move1 = new MoveCharCommand(1, Direction::RIGHT);
+        list.push_back(move1);
+
+        Command* shoot1 = new ShootCommand(1);
+        list.push_back(shoot1);
+
+        Command* move3 = new MoveCharCommand(1, Direction::LEFT);
+        list.push_back(move3);
+
+        Command* move4 = new MoveCharCommand(2, Direction::RIGHT);
+        list.push_back(move4);
+
+        Command* shoot2 = new ShootCommand(2);
+        list.push_back(shoot2);
+
+        Command* move5 = new MoveCharCommand(2, Direction::LEFT);
+        list.push_back(move5);
+
+    }
+
+
 }
-}
-    

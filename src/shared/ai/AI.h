@@ -21,9 +21,9 @@ namespace ai {
   class AI : public state::Observer {
     // Operations
   public:
-    virtual void run (engine::Engine& engine, int i, int j) = 0;
+    virtual void run (engine::Engine& engine, int color) = 0;
   protected:
-    void listCommands (std::vector<engine::Command*>& list, state::State& state, int i, int j);
+    void listCommands (std::vector<engine::Command*>& list, state::State& state, int color);
     // Setters and Getters
   };
 

@@ -42,8 +42,7 @@ namespace engine {
     }
     
     void Engine::addPassiveCommand(){
-        Command* cmd;
-        int priority;
+        
         //addCommand(priority,cmd);
     }
     

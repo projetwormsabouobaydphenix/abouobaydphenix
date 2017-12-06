@@ -30,11 +30,11 @@ namespace ai {
     PathMap ennemyMap;
     // Operations
   public:
-    HeuristicAI (const state::State& state, int i, int j);
+    HeuristicAI (const state::State& state, int color);
     const PathMap& getLifeMap () const;
     const PathMap& getEnnemyMap () const;
     void stateChanged (const state::Event& event);
-    void run (engine::Engine& engine, int i, int j);
+    void run (engine::Engine& engine, int color);
     bool dijkstra ();
     // Setters and Getters
   };

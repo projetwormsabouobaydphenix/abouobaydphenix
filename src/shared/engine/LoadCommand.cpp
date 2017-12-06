@@ -28,8 +28,8 @@ namespace engine{
     void LoadCommand::setFile_name(const std::string& file_name) {
         this->file_name = file_name;
     }
-    
-    void LoadCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions) {
+
+    void LoadCommand::execute(state::State& state, std::stack<std::shared_ptr<Action> >& actions) {
         ElementTab& grid = state.getGrid();
         ElementTab& chars = state.getChars();
         grid.resize(25, 12);
@@ -114,10 +114,11 @@ namespace engine{
               //  chars.set(i%25, i/25, NULL);
             //}
             }
-            
-            
-            }
         }
+    
+    
+ 
+}
 
         
     

@@ -16,12 +16,7 @@ using namespace state;
 
 namespace engine {
     
-    HandleLifesCommand::HandleLifesCommand(int color) : color(color) {
-
-    }
-   
-    
-
+  
 
     void HandleLifesCommand::addLife(int color, state::State& state){
         //ElementTab tabgrid= state.getGrid();
@@ -30,7 +25,7 @@ namespace engine {
         ElementTab& chars= state.getChars();
         int width = chars.getWidth();
         int height = chars.getHeight();
-        Element* top;
+        //Element* top;
         
         for (int i = 0; i < (int)height; i++) {
             for (int j = 0; j < (int)width; j++) {
@@ -59,7 +54,6 @@ namespace engine {
         ElementTab& chars= state.getChars();
         int width = chars.getWidth();
         int height = chars.getHeight();
-        Element* top;
         
         for (int i = 0; i < (int)height; i++) {
             for (int j = 0; j < (int)width; j++) {

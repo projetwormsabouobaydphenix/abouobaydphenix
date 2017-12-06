@@ -2,6 +2,8 @@
 #ifndef ENGINE__COMMAND__H
 #define ENGINE__COMMAND__H
 
+#include <stack>
+#include <memory>
 
 namespace engine {
   class Action;
@@ -28,7 +30,7 @@ namespace engine {
     Command ();
     virtual ~Command ();
     virtual CommandTypeId getTypeId () const = 0;
-    virtual void execute (state:: State& state) = 0;
+    virtual void execute (state:: State& state, std::stack<std::shared_ptr<Action>>& actions) = 0;
     // Setters and Getters
   };
 

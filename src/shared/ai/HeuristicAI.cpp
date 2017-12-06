@@ -18,119 +18,97 @@ using namespace state;
 using namespace engine;
 
 namespace ai {
-    
-    HeuristicAI::HeuristicAI(const state::State& state, int i, int j){
-       
+
+    HeuristicAI::HeuristicAI(const state::State& state, int color) {
+
     }
-    
-    const PathMap& HeuristicAI::getEnnemyMap() const{
+
+    const PathMap& HeuristicAI::getEnnemyMap() const {
         return HeuristicAI::ennemyMap;
     }
-    
-    const PathMap& HeuristicAI::getLifeMap() const{
+
+    const PathMap& HeuristicAI::getLifeMap() const {
         return HeuristicAI::lifeMap;
     }
-    
-    bool HeuristicAI::dijkstra(){
-        
+
+    bool HeuristicAI::dijkstra() {
+
     }
-    
-    void HeuristicAI::run(engine::Engine& engine, int i, int j){
-       /* //cout << "debut heuristic" << endl;
+
+    void HeuristicAI::run(engine::Engine& engine, int color) {
+        //cout << "debut heuristic" << endl;
         State& state = engine.getState();
         ElementTab& grid = state.getGrid();
         ElementTab& chars = state.getChars();
-        Element* top = chars.get(i,j);                    
-        Point* ennemy= new Point(); 
-        
-        lifeMap.init(grid);       
-        lifeMap.setWeights(4*grid.getWidth()+7,0);
-        lifeMap.setWeights(3*grid.getWidth()+20,0);
+
+        size_t width = grid.getWidth();
+        size_t height = grid.getHeight();
+
+        Point* ennemy = new Point();
+
+        lifeMap.init(grid);
+        lifeMap.setWeights(4 * grid.getWidth() + 7, 0);
+        lifeMap.setWeights(3 * grid.getWidth() + 20, 0);
         std::vector<int> weightslife = lifeMap.getWeights();
-        //cout << "test 10" << endl;
         ennemyMap.init(grid);
-        //cout << "test 11" << endl;
-        if (top->getTypeId()== TypeId::PERSONNAGE){
-            //cout << "test 1" << endl;
-            Personnage* player = (Personnage*)top;
-            for(size_t x = 0; x<grid.getWidth(); x++){
-                //cout << x << endl;
-                for(size_t y =0; y<grid.getHeight(); y++){
-                    //cout << y << endl;
-                    //if(lifeMap.getWeight(Point(x,y))==(std::numeric_limits<int>::max())){
-                    if(weightslife[y*grid.getWidth()+x]==(std::numeric_limits<int>::max())){
-                        //cout << "test 2" << endl;
-                        int dist1 = sqrt((20-x)*(20-x)+(3-y)*(3-y));
-                        int dist2 = sqrt((7-x)*(7-x)+(4-y)*(4-y));
-                        //cout << "calcul" << endl;
-                        lifeMap.setWeights(y*grid.getWidth()+x, min(dist1,dist2));
-                       
-                       
+
+        for (int i = 0; i < (int) height; i++) {
+            for (int j = 0; j < (int) width; j++) {
+
+                if (weightslife[i * grid.getWidth() + j] == (std::numeric_limits<int>::max())) {
+                    //cout << "test 2" << endl;
+                    int dist1 = sqrt((20 - j)*(20 - j)+(3 - i)*(3 - i));
+                    int dist2 = sqrt((7 - j)*(7 - j)+(4 - i)*(4 - i));
+                    //cout << "calcul" << endl;
+                    lifeMap.setWeights(i * grid.getWidth() + j, min(dist1, dist2));
+                }
+            
+            if (chars.list[i * width + j].get() != NULL) {
+                if (chars.list[i * width + j].get()->getTypeId() == TypeId::PERSONNAGE) {
+                    Personnage* player = (Personnage*) chars.list[i * width + j].get();
+                    if (player->getColor() == color) {
+                        int x = player->getI();
+                        int y = player->getJ();
+                        if (player->getLifecount() < 3) {
+                            //cout << "test 5" << endl;
+                            if (weightslife[x * grid.getWidth() + y + 1] < 0) {
+                                if (lifeMap.compare(weightslife[y * grid.getWidth() + x], weightslife[(y - 1) * grid.getWidth() + x + 1])) {
+                                    Command* move = new MoveCharCommand(color, state::Direction::RIGHT); 
+                                    engine.addCommand(0, move);
+                                    engine.update();
+                                } else {
+                                    Command* move = new MoveCharCommand(color, state::Direction::LEFT);
+                                    engine.addCommand(0, move);
+                                    engine.update();
+                                }
+                            } else if (lifeMap.compare(weightslife[y * grid.getWidth() + x + 1], weightslife[(y) * grid.getWidth() + x])) {
+                                Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
+                                engine.addCommand(0, move);
+                                engine.update();
+                            } else {
+                                //cout << "test 7" << endl;
+                                Command* move = new MoveCharCommand(color, state::Direction::LEFT);
+                                engine.addCommand(0, move);
+                                engine.update();
+                            }
+                            
+                        }
+                        else {
+                            cout << "Le personnage a trois vies" << endl;
+                        }
                     }
 
-                    /*if(chars.get(x,y)->getTypeId()==TypeId::PERSONNAGE){
-                        cout << "test 3" << endl;
-                        Personnage* perso = (Personnage*)chars.get(x,y);
-                        if(perso->getColor() != player->getColor()){                            
-                            ennemy->setX(x);
-                            ennemy->setY(y);
-                            ennemyMap.setWeights(y*grid.getWidth()+x, 0);
-                        }
-                    }       
+
                 }
+
+
+
             }
-            for(size_t x = 0; x<grid.getWidth(); x++){
-                for(size_t y =0; y<grid.getHeight(); y++){
-                    if(ennemyMap.getWeight(Point(x,y))==(std::numeric_limits<int>::max())){
-                        //cout << "test 4" << endl;
-                        int dx = ennemy->getX();
-                        int dy = ennemy->getY();
-                        int dist = sqrt((dx-x)*(dx-x)+(dy-y)*(dy-y));                      
-                        ennemyMap.setWeights(y*grid.getWidth()+x, dist);
-                        
-                    }
-                }   
-            }
-            //if(player->getStepcount() != 3){              
-                if(player->getLifecount()<3){
-                    //cout << "test 5" << endl;
-                    if(weightslife[j*grid.getWidth()+i+1]<0){
-                        if(lifeMap.compare(weightslife[j*grid.getWidth()+i], weightslife[(j-1)*grid.getWidth()+i+1])){
-                            Command* move = new MoveCharCommand(i,j, state::Direction::RIGHT); // ajout direction left
-                            engine.addCommand(0, move);
-                            engine.update();
-                        }
-                       
-                        else {
-                            Command* move = new MoveCharCommand(i,j, state::Direction::LEFT);
-                            engine.addCommand(0,move);
-                            engine.update();
-                        }
-                    }
-                   
-                    else if (lifeMap.compare(weightslife[j*grid.getWidth()+i+1], weightslife[(j)*grid.getWidth()+i])){
-                            Command* move = new MoveCharCommand(i,j, state::Direction::RIGHT);
-                            engine.addCommand(0,move);
-                            engine.update();
-                    }
-                   
-                    else {
-                        //cout << "test 7" << endl;
-                        Command* move = new MoveCharCommand(i,j, state::Direction::LEFT);
-                        engine.addCommand(0,move);
-                        engine.update();
-                    }
-        //}
-                //player->setStepcount(player->getStepcount()+1);
-        
-        
-        
-        
+        }
     }
-        
-}
-        else{
-            cout << "test 12" << endl;
-        }*/
     }
+
+
+
+
 }

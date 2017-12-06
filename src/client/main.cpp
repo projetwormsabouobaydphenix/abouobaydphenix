@@ -61,6 +61,15 @@ int main(int argc,char* argv[])
             cout << "Test Heuristic  AI" << endl;
             ai::TestHeuristicAi();
         }
+        
+        else if (mode == "rollback"){
+            cout << "Test RollBack" << endl;
+            //ai::TestHeuristicAi();
+        }
+        
+        else{
+            cout << "Mode invalide" << endl;
+        }
     }
     
     
