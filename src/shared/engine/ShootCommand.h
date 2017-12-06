@@ -2,15 +2,19 @@
 #ifndef ENGINE__SHOOTCOMMAND__H
 #define ENGINE__SHOOTCOMMAND__H
 
+#include <stack>
+#include <memory>
 
 namespace state {
   class State;
 };
 namespace engine {
+  class Action;
   class Command;
 }
 
 #include "CommandTypeId.h"
+#include "Action.h"
 #include "Command.h"
 
 namespace engine {
@@ -19,18 +23,15 @@ namespace engine {
   class ShootCommand : public engine::Command {
     // Attributes
   protected:
-    int i;
-    int j;
+    int color;
     // Operations
   public:
-    ShootCommand (int i, int j);
+    ShootCommand (int color);
     CommandTypeId getTypeId () const;
-    void execute (state::State& state);
+    void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
     // Setters and Getters
-    int getI() const;
-    void setI(int i);
-    int getJ() const;
-    void setJ(int j);
+    int getColor() const;
+    void setColor(int color);
   };
 
 };

@@ -9,6 +9,7 @@
 #include "LoadCommand.h"
 #include "HandleImpactCommand.h"
 #include "HandleLifesCommand.h"
+#include "ShootCommand.h"
 #include "MoveCharCommand.h"
 #include <algorithm>
 #include <iostream>
@@ -50,20 +51,25 @@ namespace engine {
         return this ->currentState;
     }
     
-    void Engine::update(){
+    std::stack<std::shared_ptr<Action>> Engine::update(){
         //cout<<"test update"<<endl;
+        std::stack<std::shared_ptr<Action>> actions;
         for (int i=0; i<((int)(currentCommands.size()));i++){
             if ((currentCommands[i])->getTypeId() == LOAD){
                 //cout << "load command" << endl;
-                ((LoadCommand*)(currentCommands[i]))->execute(currentState);
+                ((LoadCommand*)(currentCommands[i]))->execute(currentState, actions);
             }
             else if((currentCommands[i])->getTypeId() == MOVE_CHAR){
                 //cout << "MoveCharcommand" << endl;
-                ((MoveCharCommand*)(currentCommands[i]))->execute(currentState);
+                ((MoveCharCommand*)(currentCommands[i]))->execute(currentState, actions);
             }
             else if((currentCommands[i])->getTypeId() == HANDLE_LIFE){
                 //cout << "HandleLife" << endl;
-                ((HandleLifesCommand*)(currentCommands[i]))->execute(currentState);
+                ((HandleLifesCommand*)(currentCommands[i]))->execute(currentState, actions);
+            }
+            else if((currentCommands[i])->getTypeId() == SHOOT){
+                //cout << "HandleLife" << endl;
+                ((ShootCommand*)(currentCommands[i]))->execute(currentState, actions);
             }
             /*else if((currentCommands[i])->getTypeId() == HANDLE_IMPACT){
                 ((HandleImpactCommand*)(currentCommands[i]))->execute(currentState);
@@ -71,7 +77,14 @@ namespace engine {
             delete currentCommands[i];
             currentCommands.clear();
             }
-
-        
+        return actions;
+    }
+    
+    void Engine::undo(std::stack<std::shared_ptr<Action> >& actions){
+        for(size_t k=0; k<actions.size(); k++){
+            shared_ptr<Action> action = actions.top();
+            action->undo(currentState);
+            actions.pop();
+        }
     }
 }

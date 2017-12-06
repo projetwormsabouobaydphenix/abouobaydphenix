@@ -6,42 +6,80 @@
 
 #include "ShootCommand.h"
 #include "state.h"
+#include "KillCharAction.h"
+#include "ShootAction.h"
 #include <iostream>
+#include <cmath>
+#include <stack>
 
 using namespace std;
 using namespace state;
 
 namespace engine{
+
+    ShootCommand::ShootCommand(int color) : color(color) {}
     
-    ShootCommand::ShootCommand(int i, int j){
-        this->i = i;
-        this->j = j;
-    }
-    
+   
     CommandTypeId ShootCommand::getTypeId() const{
         return CommandTypeId::SHOOT;
     }
     
-    void ShootCommand::execute(state::State& state){
-        ElementTab tabchars = state.getChars();
-        Element* top;
-        top = tabchars.get( i, j);
-        if(top->getTypeId()== PERSONNAGE){
-            Personnage* perso = (Personnage*)top;
-            int lifecount = perso->getLifecount();
-            perso->setLifecount(lifecount-1);
+    void ShootCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions){
+        cout << "debut shoot" << endl;
+        ElementTab& tabchars = state.getChars();
         
-      
-            cout<< "Le personnage a perdu une vie"<<endl;
-
-            if (lifecount==0){
-                perso->setStatus(DEAD);
-                perso->~Personnage();
-                cout<<"Le personnage est mort"<<endl;
+        size_t width = tabchars.getWidth();
+        size_t height = tabchars.getHeight();
+        int xperso, yperso, xennemy, yennemy;
+        
+        
+        for (int i = 0; i < (int)height; i++) {
+            //cout << "test" << endl;
+            for (int j = 0; j < (int)width; j++) {
+                //cout << "test2" << endl;
+                if (tabchars.list[i * width + j].get() != NULL){
+                    if (tabchars.list[i * width + j].get()->getTypeId() == TypeId::PERSONNAGE) {
+                        Personnage* persoAction = (Personnage*) tabchars.get(i,j);
+                        if (persoAction->getColor() == color) {
+                            xperso = persoAction->getI();
+                            yperso = persoAction->getJ();
+                            cout << "xperso = " << xperso << ", yperso = " << yperso << endl;
+                        }
+                        else{
+                            xennemy = persoAction->getI();
+                            yennemy = persoAction->getJ();
+                            cout << "xe = " << xennemy << ", ye = " << yennemy << endl;
+                        }
+                    }
+                }
             }
         }
+        
+        int distance = sqrt((xperso-xennemy)*(xperso-xennemy)+(yperso-yennemy)*(yperso-yennemy));
+        cout << "distance = " << distance << endl;
+        if (distance < 10){
+            cout << "L'ennemi a été touché." << endl;
+            Personnage* ennemy = (Personnage*) tabchars.get(xennemy, yennemy);
+            int life = ennemy->getLifecount();
+            
+            if (life > 0){
+                engine::Action* shoot = new ShootAction(color,ennemy, life);
+                actions.push(shared_ptr<Action>(shoot));
+                shoot->apply(state);
+                return;
+            }
+            else{
+                engine::Action* shoot = new ShootAction(color,ennemy, life);
+                actions.push(shared_ptr<Action>(shoot));
+                shoot->apply(state);
+                engine::Action* die = new KillCharAction(color, xennemy, yennemy,ennemy);
+                actions.push(shared_ptr<Action>(die));
+                die->apply(state);
+                cout << "Il n'avait qu'une vie restante. Il est mort" << endl;
+                return;
+            }
+            
+        }
     }
-    
-    
-    
 }
+   

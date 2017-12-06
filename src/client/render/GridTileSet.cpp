@@ -19,9 +19,10 @@ namespace render{
         Tile life(128, 0, 32, 32);
         spaces.push_back(vide); //0
         spaces.push_back(life); //1
+        spaces.push_back(water); //2
         floors.push_back(terre); //0
         floors.push_back(grass); //1
-        floors.push_back(water); //2
+         //2
     }
 
     int GridTileSet::getCellHeight() const {
@@ -46,10 +47,6 @@ namespace render{
                 //cout << "ground" << endl;
                 return this->floors[0]; 
             } 
-            else if (floorId == state::FloorTypeId::WATER){ 
-                //cout << "water" << endl;
-                return this->floors[2]; 
-            } 
             else if (floorId == state::FloorTypeId::GRASS){ 
                 //cout << "grass" << endl;
                 return this->floors[1]; 
@@ -64,6 +61,10 @@ namespace render{
             else if (spaceId == state::SpaceTypeId::LIFE){
                 return this->spaces[1];
             }
+            else if (spaceId == state::SpaceTypeId::WATER){ 
+                //cout << "water" << endl;
+                return this->spaces[2]; 
+            } 
         }
  
     }

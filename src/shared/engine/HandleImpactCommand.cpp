@@ -49,7 +49,7 @@ namespace engine {
         }
     }*/
 
-    void engine::HandleImpactCommand::execute(state::State& state, int i, int j){
+    void engine::HandleImpactCommand::execute(state::State& state, int i, int j, std::stack<std::shared_ptr<Action>>& actions){
         /*ElementTab tabgrid= state.getGrid();
         Element* top;
         top= tabgrid.get(i,j);

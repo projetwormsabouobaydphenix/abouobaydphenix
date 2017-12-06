@@ -20,7 +20,7 @@ namespace ai {
     TestAI::TestAI() {
 
         //RandomAI* rai = new RandomAI();
-        Engine moteur;
+     /*   Engine moteur;
         State& state = moteur.getState();
 
         // initialisation de l'état
@@ -37,7 +37,7 @@ namespace ai {
         window.create(sf::VideoMode(800, 384), "Test Worms");
 
         cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
-
+        cout << "Appuyez sur la touche T pour tirer" << endl;
         while (window.isOpen()) {
 
             sf::Event event;
@@ -60,6 +60,11 @@ namespace ai {
                         Command* move = new MoveCharCommand(2, Direction::LEFT);
                         moteur.addCommand(0, move);
                     }
+                    else if(event.key.code == Keyboard::L){
+                        cout << "le noir va tirer" << endl;
+                        Command* shoot = new ShootCommand(2);
+                        moteur.addCommand(0, shoot);
+                    }
                 }
             }
 
@@ -80,7 +85,7 @@ namespace ai {
             
             
 
-            moteur.update();
+          /*  moteur.update();
 
             layer1->initSurface();
             window.draw(*(layer1->getSurface()));
@@ -89,8 +94,8 @@ namespace ai {
             window.draw(*(layer2->getSurface()));
 
             window.display();
-            window.clear();
-        }
+            window.clear();*/
+        //}
     }
 
     TestAI::~TestAI() {

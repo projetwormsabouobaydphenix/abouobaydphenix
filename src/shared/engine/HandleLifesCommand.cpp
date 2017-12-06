@@ -7,7 +7,9 @@
 #include "HandleLifesCommand.h"
 #include "state.h"
 #include "state/SpaceTypeId.h"
+#include "LifeAction.h"
 #include <iostream>
+#include <unistd.h>
 
 using namespace std;
 using namespace state;
@@ -17,38 +19,59 @@ namespace engine {
    
     
 
-    void HandleLifesCommand::addLife(int i, int j, state::State& state){
+    void HandleLifesCommand::addLife(int color, state::State& state){
         //ElementTab tabgrid= state.getGrid();
         //Element* pos;
         //pos= tabgrid.get(i,j);
-        ElementTab tabchars= state.getChars();
+        ElementTab& chars= state.getChars();
+        int width = chars.getWidth();
+        int height = chars.getHeight();
         Element* top;
-        top= tabchars.get( i, j);
         
-        /*if ((pos->getTypeId())==SPACE){
-            Space* lieu = (Space*)pos;*/
-        
-            if(top->getTypeId()== PERSONNAGE){
-                Personnage* perso = (Personnage*)top;
-                int lifecount = perso->getLifecount();
-                if (lifecount<3){
-                    perso->setLifecount(lifecount+1);
-                    cout<<"Le personnage a récupéré une vie."<<endl;
+        for (int i = 0; i < (int)height; i++) {
+            for (int j = 0; j < (int)width; j++) {
+                if (chars.get(i,j) != NULL){
+                    if (chars.get(i,j)->getTypeId() == TypeId::PERSONNAGE) {
+                        Personnage* persoAction = (Personnage*) chars.get(i,j);
+                        int lifecount = persoAction->getLifecount();
+                        if (lifecount<3){
+                            persoAction->setLifecount(lifecount+1);
+                            cout<<"Le personnage a récupéré une vie."<<endl;
+                        }
+                    }
                 }
-                //lieu->setNature(EMPTY);
             }
-        //}
+        }
     }
+           
     
-    void engine::HandleLifesCommand::execute(state::State& state){
-        /*ElementTab tabgrid= state.getGrid();
-        Element* heart;
-        heart = tabgrid.get(i,j);
+    void engine::HandleLifesCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions){
+
+            
+                    //ElementTab tabgrid= state.getGrid();
+        //Element* pos;
+        //pos= tabgrid.get(i,j);
+        ElementTab& chars= state.getChars();
+        int width = chars.getWidth();
+        int height = chars.getHeight();
+        Element* top;
         
-        if ((heart->getTypeId())== SPACE){
-            Space* vie = (Space*)heart;
-            if ((vie->getNature())==LIFE){*/
-            HandleLifesCommand::addLife(i,j , state);
+        for (int i = 0; i < (int)height; i++) {
+            for (int j = 0; j < (int)width; j++) {
+                if (chars.get(i,j) != NULL){
+                    if (chars.get(i,j)->getTypeId() == TypeId::PERSONNAGE) {
+                        Personnage* persoApAction = (Personnage*) chars.get(i,j);
+                        int lifecount = persoApAction->getLifecount();
+                        if (lifecount<3){
+                            engine::Action* life = new LifeAction(color,lifecount+1, persoApAction);
+                            actions.push(shared_ptr<Action>(life));
+                            life->apply(state);
+                            cout<<"Le personnage a récupéré une vie."<<endl;
+                        }
+                    }
+                }
+            }
+        }
         
         cout<<"le personnage a récupéré une vie"<<endl;
     }

@@ -3,15 +3,19 @@
 #define ENGINE__ENGINE__H
 
 #include <map>
+#include <stack>
+#include <memory>
 
 namespace state {
   class State;
 };
 namespace engine {
   class Command;
+  class Action;
 }
 
 #include "state/State.h"
+#include "Action.h"
 
 namespace engine {
 
@@ -28,8 +32,9 @@ namespace engine {
      state::State& getState ();
     void addPassiveCommand ();
     void addCommand (int priority, Command* cmd);
-    void update ();
+    std::stack<std::shared_ptr<Action>> update ();
     void moteur ();
+    void undo (std::stack<std::shared_ptr<Action>>& actions);
     // Setters and Getters
   };
 

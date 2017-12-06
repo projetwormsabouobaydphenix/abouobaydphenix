@@ -2,15 +2,19 @@
 #ifndef ENGINE__HANDLEIMPACTCOMMAND__H
 #define ENGINE__HANDLEIMPACTCOMMAND__H
 
+#include <stack>
+#include <memory>
 
 namespace state {
   class State;
 };
 namespace engine {
+  class Action;
   class Command;
 }
 
 #include "CommandTypeId.h"
+#include "Action.h"
 #include "Command.h"
 #include "state/Status.h"
 
@@ -23,7 +27,7 @@ namespace engine {
     void lostLife (state::State& state, int i, int j);
     void destruct (state::State& state, int i, int j);
     CommandTypeId getTypeId () const;
-    void execute (state::State& state, int i, int j);
+    void execute (state::State& state, int i, int j, std::stack<std::shared_ptr<Action>>& actions);
     // Setters and Getters
   };
 

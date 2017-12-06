@@ -3,6 +3,9 @@
 #define ENGINE__COMMAND__H
 
 
+namespace engine {
+  class Action;
+};
 namespace state {
   class State;
 };
@@ -11,6 +14,7 @@ namespace engine {
 }
 
 #include "CommandTypeId.h"
+#include "Action.h"
 #include "state/State.h"
 #include "Engine.h"
 

@@ -37,7 +37,7 @@ namespace engine {
         this->j = j;
     }
     
-    void JumpCommand::execute(state::State& state){
+    void JumpCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions){
         ElementTab tabchars= state.getChars();
         Element* top;
         top= tabchars.get(i, j);
