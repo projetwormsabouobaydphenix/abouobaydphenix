@@ -20,6 +20,7 @@ void testSFML() {
 #include "engine/TestEngine.h"
 #include "ai/TestAI.h"
 #include "ai/TestHeuristicAi.h"
+#include "ai/TestRollBack.h"
 
 
 using namespace std;
@@ -64,7 +65,7 @@ int main(int argc,char* argv[])
         
         else if (mode == "rollback"){
             cout << "Test RollBack" << endl;
-            //ai::TestHeuristicAi();
+            ai::TestRollBack();
         }
         
         else{

@@ -38,7 +38,7 @@ namespace ai {
         sf::RenderWindow window;
         window.create(sf::VideoMode(800, 384), "Jeu Worms");
 
-        cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
+        //cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
         //cout << "Appuyez sur la touche T pour tirer" << endl;
         while (window.isOpen()) {
 

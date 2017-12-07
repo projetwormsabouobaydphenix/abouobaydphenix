@@ -15,10 +15,12 @@ namespace ai {
     
     void PathMap::init(const state::ElementTab& grid){
         weights.resize(grid.getWidth()*grid.getHeight());
+        //cout << "taille weights" << weights.size()<< endl;
+
         Point* p = new Point();
         for (size_t i =0; i< grid.getWidth(); i++){
             for (size_t j =0; j < grid.getHeight(); j++){
-                if((grid.get(i,j)->getTypeId())== state::TypeId::FLOOR){
+                if((grid.list[j*width+i].get()->getTypeId())== state::TypeId::FLOOR){
                     //cout << "test 9" << endl;
                     weights[j*grid.getWidth()+i]= -1;
                     p->setX(i);
@@ -26,7 +28,7 @@ namespace ai {
                     int& w = weights[j*grid.getWidth()+i];
                     p->setWeight(w);
                     //cout<<"le poids est"<<p->getWeight()<<"."<<endl;
-                    queue.push(*p);                    
+                    queue.push(*p);    
                     }
                 
                 else {

@@ -30,7 +30,12 @@ namespace engine {
     
     void KillCharAction::undo(state::State& state){
         ElementTab& chars = state.getChars();
-        int width = chars.getWidth();
+        //int width = chars.getWidth();
         chars.set(xFrom, yFrom, persoAvAction);
     }
+    
+    ActionTypeId KillCharAction::getActionTypeId() const {
+        return ActionTypeId::KILL_ACTION;
+    }
+
 }

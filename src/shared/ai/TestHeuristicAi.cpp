@@ -27,7 +27,6 @@ namespace ai {
         Engine moteur;
         State& state = moteur.getState();
 
-        // initialisation de l'état
         Command* init = new LoadCommand("res/heuristic_ai.txt");
         moteur.addCommand(0, init);
         moteur.update();

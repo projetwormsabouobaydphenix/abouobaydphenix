@@ -11,6 +11,7 @@ namespace engine {
   class Action;
 }
 
+#include "ActionTypeId.h"
 #include "Action.h"
 #include "state/Personnage.h"
 
@@ -31,6 +32,7 @@ namespace engine {
     KillCharAction (int color, int xFrom, int yFrom, state::Personnage* persoAvAction);
     void apply (state::State& state);
     void undo (state::State& state);
+    ActionTypeId getActionTypeId () const;
     // Setters and Getters
     int getColor() const;
     void setColor(int color);

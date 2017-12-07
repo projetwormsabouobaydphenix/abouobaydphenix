@@ -13,7 +13,7 @@ namespace ai {
 
     void AI::listCommands(std::vector<engine::Command*>& list, state::State& state, int color) {
 
-        ElementTab& chars = state.getChars();
+        //ElementTab& chars = state.getChars();
 
         //size_t width = chars.getWidth();
         //size_t height = chars.getHeight();

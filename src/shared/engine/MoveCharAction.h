@@ -12,6 +12,7 @@ namespace engine {
 }
 
 #include "state/Direction.h"
+#include "ActionTypeId.h"
 #include "Action.h"
 #include "state/Personnage.h"
 
@@ -36,6 +37,7 @@ namespace engine {
     MoveCharAction (int color, int xFrom, int yFrom, int xTo, int yTo, state::Personnage* persoApAction, state::Direction precDir, state::Direction nextDir);
     void apply (state::State& state);
     void undo (state::State& state);
+    ActionTypeId getActionTypeId () const;
     // Setters and Getters
     int getColor() const;
     void setColor(int color);

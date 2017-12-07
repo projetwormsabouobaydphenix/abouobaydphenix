@@ -27,4 +27,9 @@ namespace engine {
     void ShootAction::undo(state::State& state){
         ennemy->setLifecount(life);
     }
+
+    ActionTypeId ShootAction::getActionTypeId() const {
+        return ActionTypeId::SHOOT_ACTION;
+    }
+    
 }

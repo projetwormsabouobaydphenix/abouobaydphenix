@@ -6,6 +6,7 @@
 
 #include "MoveCharAction.h"
 #include "state.h"
+#include <iostream>
 
 using namespace std;
 using namespace state;
@@ -26,16 +27,36 @@ namespace engine {
     
     void MoveCharAction::apply(state::State& state){
         ElementTab& chars = state.getChars();
-        persoApAction->setI(xTo);
-        persoApAction->setJ(yTo);
-        chars.changePosition(xFrom, yFrom, xTo, yTo, persoApAction);
+        Element* e = chars.get(xFrom, yFrom);
+        if (e != NULL){
+            Personnage* p = new Personnage(color, nextDir);
+            p->setI(xTo);
+            p->setJ(yTo);
+        //cout << "xfrom = " << xFrom << " yFrom = " << yFrom << endl;
+        //cout << "xto = " << xTo << " yTo = " << yTo << endl;
+        chars.changePosition(xFrom, yFrom, xTo, yTo, p);
+        }
     }
     
     void MoveCharAction::undo(state::State& state){
         ElementTab& chars = state.getChars();
-        persoApAction->setI(xFrom);
-        persoApAction->setJ(yFrom);
-        persoApAction->setDirection(precDir);
-        chars.changePosition(xTo,yTo,xFrom, yFrom, persoApAction);
+        Element* e = chars.get(xTo, yTo);
+        if (e != NULL){
+            Personnage* p = new Personnage(color, precDir);
+            p->setI(xFrom);
+            p->setJ(yFrom);
+            //cout << "xfrom2 = " << xFrom << " yFrom2 = " << yFrom << endl;
+            //cout << "xto2 = " << xTo << " yTo2 = " << yTo << endl;
+            //persoApAction->setDirection(precDir);
+            chars.changePosition(xTo,yTo,xFrom, yFrom, p);
+        }
+        else{
+            cout << "erreur, pas de perso" << endl;
+        }
     }
+
+    ActionTypeId MoveCharAction::getActionTypeId() const {
+        return ActionTypeId::MOVE_ACTION;
+    }
+
 }

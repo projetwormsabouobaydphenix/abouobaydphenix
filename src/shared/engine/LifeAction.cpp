@@ -25,4 +25,9 @@ namespace engine{
     void LifeAction::undo(state::State& state){
         persoApAction->setLifecount(lifeCount);
     }
+
+    ActionTypeId LifeAction::getActionTypeId() const {
+        return ActionTypeId::LIFE_ACTION;
+    }
+
 }

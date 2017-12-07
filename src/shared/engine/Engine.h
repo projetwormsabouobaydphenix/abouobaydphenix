@@ -2,7 +2,7 @@
 #ifndef ENGINE__ENGINE__H
 #define ENGINE__ENGINE__H
 
-#include <map>
+#include <vector>
 #include <stack>
 #include <memory>
 
@@ -24,7 +24,7 @@ namespace engine {
     // Attributes
   private:
     state::State currentState;
-    std::map<int,Command*> currentCommands;
+    std::vector<Command*> currentCommands;
     // Operations
   public:
     Engine ();
@@ -32,9 +32,9 @@ namespace engine {
      state::State& getState ();
     void addPassiveCommand ();
     void addCommand (int priority, Command* cmd);
-    std::stack<std::shared_ptr<Action>> update ();
+    std::stack<std::shared_ptr<Action>>& update ();
     void moteur ();
-    void undo (std::stack<std::shared_ptr<Action>>& actions);
+    void undoe (std::stack<std::shared_ptr<Action>>& actions);
     // Setters and Getters
   };
 

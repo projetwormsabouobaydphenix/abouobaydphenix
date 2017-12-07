@@ -7,6 +7,8 @@ namespace state {
   class State;
 }
 
+#include "ActionTypeId.h"
+
 namespace engine {
 
   /// class Action - 
@@ -15,6 +17,7 @@ namespace engine {
   public:
     virtual void apply (state::State& state) = 0;
     virtual void undo (state::State& state) = 0;
+    virtual ActionTypeId getActionTypeId () const = 0;
     // Setters and Getters
   };
 

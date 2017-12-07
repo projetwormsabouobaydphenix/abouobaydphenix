@@ -27,7 +27,7 @@ namespace engine{
     
 
     void ShootCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions){
-        cout << "debut shoot" << endl;
+        //cout << "debut shoot" << endl;
 
         ElementTab& tabchars = state.getChars();
         

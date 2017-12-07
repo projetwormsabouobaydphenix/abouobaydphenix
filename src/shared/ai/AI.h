@@ -14,6 +14,9 @@ namespace state {
 }
 
 #include "state/Observer.h"
+#include "engine/Engine.h"
+#include "engine/Command.h"
+#include "state/State.h"
 
 namespace ai {
 

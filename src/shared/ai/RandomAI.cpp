@@ -34,8 +34,8 @@ namespace ai{
         std::uniform_int_distribution<> dis(0, list.size()-1);
         randgen = rng;
         int pos = dis(randgen);
-        cout << "pos = " << pos << endl;
-        cout << "execution de la commande : " << list[pos]->getTypeId() << endl;
+       // cout << "pos = " << pos << endl;
+        //cout << "execution de la commande : " << list[pos]->getTypeId() << endl;
         engine.addCommand(0, list[pos]);
         
        

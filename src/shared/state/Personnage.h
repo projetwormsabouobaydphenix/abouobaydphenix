@@ -23,7 +23,7 @@ namespace state {
     int color;
     int stepcount     = 0;
     int shootcount     = 0;
-    int lifecount     = 3;
+    int lifecount     = 2;
     Status status;
     Direction direction;
     // Operations
