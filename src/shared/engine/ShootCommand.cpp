@@ -87,5 +87,15 @@ namespace engine{
             
         }
     }
+
+    ShootCommand* ShootCommand::deserialize(const Json::Value& in) {
+
+    }
+
+    void ShootCommand::serialize(Json::Value& out) const {
+
+    }
+
+
 }
    

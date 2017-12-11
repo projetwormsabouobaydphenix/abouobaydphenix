@@ -7,7 +7,6 @@
 #include "Engine.h"
 #include "Command.h"
 #include "LoadCommand.h"
-#include "HandleImpactCommand.h"
 #include "HandleLifesCommand.h"
 #include "ShootCommand.h"
 #include "MoveCharCommand.h"

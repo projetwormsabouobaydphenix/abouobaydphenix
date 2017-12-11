@@ -115,7 +115,15 @@ namespace engine{
             //}
             }
         }
-    
+
+    void LoadCommand::serialize(Json::Value& out) const {
+
+    }
+
+    LoadCommand* LoadCommand::deserialize(const Json::Value& in) {
+        
+
+    }
     
  
 }

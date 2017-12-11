@@ -4,12 +4,14 @@
 
 #include <stack>
 #include <memory>
+#include <json/json.h>
 
 namespace state {
   class State;
 };
 namespace engine {
   class Action;
+  class ShootCommand;
   class Command;
 }
 
@@ -29,6 +31,8 @@ namespace engine {
     ShootCommand (int color);
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
+    void serialize (Json::Value& out) const;
+    ShootCommand* deserialize (const Json::Value& in);
     // Setters and Getters
     int getColor() const;
     void setColor(int color);

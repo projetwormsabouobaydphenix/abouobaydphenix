@@ -9,12 +9,11 @@
 #include "engine/Command.h"
 #include "engine/MoveCharCommand.h"
 #include "engine/HandleLifesCommand.h"
-#include "engine/HandleImpactCommand.h"
 #include "engine/LoadCommand.h"
 #include "engine/ShootCommand.h"
-#include "engine/JumpCommand.h"
 #include "engine/MoveCharAction.h"
 #include "engine/LifeAction.h"
 #include "engine/KillCharAction.h"
 #include "engine/ShootAction.h"
+#include "engine/TestJson.h"
 #endif
