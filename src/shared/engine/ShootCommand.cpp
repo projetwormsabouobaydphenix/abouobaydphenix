@@ -89,11 +89,19 @@ namespace engine{
     }
 
     ShootCommand* ShootCommand::deserialize(const Json::Value& in) {
-
+        ShootCommand* shoot = new ShootCommand(2); //constructeur choisi au hasard
+        if (in.isMember("color")){
+            shoot->color = in["color"].asInt();
+        }
+         else {
+            cout << "Erreur Deserialize ShootCommand" << endl;
+        }
+        return shoot;
     }
 
     void ShootCommand::serialize(Json::Value& out) const {
-
+        out["commande"] = "ShootCommand";
+        out["color"] = color;
     }
 
 

@@ -117,11 +117,19 @@ namespace engine{
         }
 
     void LoadCommand::serialize(Json::Value& out) const {
-
+        out["commande"] = "LoadCommand";
+        out["fileName"] = file_name;
     }
 
     LoadCommand* LoadCommand::deserialize(const Json::Value& in) {
-        
+        LoadCommand* load = new LoadCommand("name"); //constructeur choisi au hasard
+        if (in.isMember("fileName")){
+            load->file_name = in["fineName"].asString();
+        }
+         else {
+            cout << "Erreur Deserialize ShootCommand" << endl;
+        }
+        return load;
 
     }
     

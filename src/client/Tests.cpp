@@ -509,18 +509,6 @@ cout << "debut test hai" << endl;
         }
 }
 
-void Tests::test_record() {
-TestJson test("Sanaa", 22);
-        
-        Json::Value out;
-        test.serialize(out);
-        cout << out["nom"].asString() << endl;
-        cout << out["age"].asInt() << endl;
-
-}
-
-
-
 Tests::~Tests() {
 }
 

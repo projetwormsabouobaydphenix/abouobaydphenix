@@ -15,5 +15,4 @@
 #include "engine/LifeAction.h"
 #include "engine/KillCharAction.h"
 #include "engine/ShootAction.h"
-#include "engine/TestJson.h"
 #endif

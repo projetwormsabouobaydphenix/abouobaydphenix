@@ -35,6 +35,7 @@ namespace engine {
     virtual void execute (state:: State& state, std::stack<std::shared_ptr<Action>>& actions) = 0;
     virtual void serialize (Json::Value& out) const = 0;
     virtual Command* deserialize (const Json::Value& in);
+    void addToReplay ();
     // Setters and Getters
   };
 

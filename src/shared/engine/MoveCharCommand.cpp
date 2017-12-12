@@ -12,6 +12,8 @@
 #include <iostream>
 #include <unistd.h>
 #include <stack>
+#include <fstream>
+#include <string>
 
 using namespace std;
 using namespace state;
@@ -43,7 +45,7 @@ namespace engine {
         return CommandTypeId::MOVE_CHAR;
     }
 
-    void engine::MoveCharCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>& actions) {
+    void engine::MoveCharCommand::execute(state::State& state, std::stack<std::shared_ptr<Action>>&actions) {
 
         //cout << "Début movecharcommand" << endl;
         ElementTab& grid = state.getGrid();
@@ -54,10 +56,10 @@ namespace engine {
         //cout << width << endl;
         //cout << height << endl;
 
-        
-        for (int i = 0; i < (int)height; i++) {
-            for (int j = 0; j < (int)width; j++) {
-                if (chars.list[i * width + j].get() != NULL){
+
+        for (int i = 0; i < (int) height; i++) {
+            for (int j = 0; j < (int) width; j++) {
+                if (chars.list[i * width + j].get() != NULL) {
                     //cout << "Test 1" << endl;
                     if (chars.list[i * width + j].get()->getTypeId() == TypeId::PERSONNAGE) {
                         //cout << "Test 2" << endl;
@@ -69,128 +71,123 @@ namespace engine {
                             state::Direction precDir = persoAction->getDirection();
                             //cout << "x = " << xFrom << ", y = " << yFrom << endl;
                             //cout << "Le personnage a " << p->getLifecount() << " vies" << endl;
-                            if (direction == Direction::RIGHT){
-                                if (grid.get(xFrom+1, yFrom)->getTypeId() == TypeId::SPACE){
-                                    if (grid.get(xFrom+1, yFrom+1)->getTypeId() == TypeId::FLOOR){
+                            if (direction == Direction::RIGHT) {
+                                if (grid.get(xFrom + 1, yFrom)->getTypeId() == TypeId::SPACE) {
+                                    if (grid.get(xFrom + 1, yFrom + 1)->getTypeId() == TypeId::FLOOR) {
                                         Personnage* persoApAction = new Personnage(color, RIGHT);
                                         persoApAction->setLifecount(lifeCountPersoAction);
                                         state::Direction nextDir = persoApAction->getDirection();
-                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom+1, yFrom, persoApAction, precDir, nextDir);
+                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom + 1, yFrom, persoApAction, precDir, nextDir);
                                         move->apply(state);
                                         actions.push(shared_ptr<Action>(move));
-                                            Space* s = (Space*)grid.get(xFrom+1, yFrom);
-                                            if (s->getNature() == SpaceTypeId::LIFE){
-                                                persoApAction->setLifecount(persoApAction->getLifecount()+1);
-                                                cout << "Super, le personnage a récupéré une vie" << endl;
-                                                cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
-                                            }
-                                        return;
-                                    }
-
-                                    else if(grid.get(xFrom+1, yFrom+1)->getTypeId() == TypeId::SPACE){
-                                        if (grid.get(xFrom+1, yFrom+2)->getTypeId() == TypeId::SPACE){
-                                            engine::Action* die = new KillCharAction(color, xFrom, yFrom, persoAction);
-                                            actions.push(shared_ptr<Action>(die));
-                                            die->apply(state);
-                                            return;
-                                        } 
-                                        else{
-                                        Personnage* persoApAction = new Personnage(color, RIGHT);
-                                        persoApAction->setLifecount(lifeCountPersoAction);
-                                        state::Direction nextDir = persoApAction->getDirection();
-                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom+1, yFrom+1, persoApAction, precDir, nextDir);
-                                        move->apply(state);
-                                        actions.push(shared_ptr<Action>(move));
-                                        cout << "test " << endl;
-                                        Space* s = (Space*)grid.get(xFrom+1, yFrom+1);
-                                        if (s->getNature() == SpaceTypeId::LIFE && persoApAction->getLifecount()< 3){
-                                                persoApAction->setLifecount(persoApAction->getLifecount()+1);
-                                                cout << "Super, le personnage a récupéré une vie" << endl;
-                                                cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
-                                            }
-                                        
-                                        return;
+                                        Space* s = (Space*) grid.get(xFrom + 1, yFrom);
+                                        if (s->getNature() == SpaceTypeId::LIFE) {
+                                            persoApAction->setLifecount(persoApAction->getLifecount() + 1);
+                                            cout << "Super, le personnage a récupéré une vie" << endl;
+                                            cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
                                         }
-
-                                    }
-                                
-
-                                else { 
-                                    Personnage* persoApAction = new Personnage(color, RIGHT);
-                                    persoApAction->setLifecount(lifeCountPersoAction);
-                                    state::Direction nextDir = persoApAction->getDirection();
-                                    engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom+1, yFrom-1, persoApAction, precDir, nextDir);
-                                    move->apply(state);
-                                    actions.push(shared_ptr<Action>(move));
-                                    Space* s = (Space*)grid.get(xFrom+1, yFrom-1);
-                                    if (s->getNature() == SpaceTypeId::LIFE && persoApAction->getLifecount()< 3){
-                                                persoApAction->setLifecount(persoApAction->getLifecount()+1);
-                                                cout << "Super, le personnage a récupéré une vie" << endl;
-                                                cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
-                                            }
-                                    return;
-                                }
-                                }
-
-                            }  //fin if direction = right
-
-                            else if (direction == Direction::LEFT){
-                                if (grid.get(xFrom-1, yFrom)->getTypeId() == TypeId::SPACE){
-                                    if (grid.get(xFrom-1, yFrom+1)->getTypeId() == TypeId::FLOOR){
-                                        Personnage* persoApAction = new Personnage(color, LEFT);
-                                        persoApAction->setLifecount(lifeCountPersoAction);
-                                        state::Direction nextDir = persoApAction->getDirection();
-                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom-1, yFrom, persoApAction, precDir, nextDir);
-                                        move->apply(state);
-                                        actions.push(shared_ptr<Action>(move));
-                                            Space* s = (Space*)grid.get(xFrom-1, yFrom);
-                                            if (s->getNature() == SpaceTypeId::LIFE && persoApAction->getLifecount()< 3){
-                                                persoApAction->setLifecount(persoApAction->getLifecount()+1);
-                                                cout << "Super, le personnage a récupéré une vie" << endl;
-                                                cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
-                                            }
-                                        
                                         return;
                                     }
-
-                                    else if(grid.get(xFrom-1, yFrom+1)->getTypeId() == TypeId::SPACE){
-                                        if (grid.get(xFrom-1, yFrom+2)->getTypeId() == TypeId::SPACE){
+                                    else if (grid.get(xFrom + 1, yFrom + 1)->getTypeId() == TypeId::SPACE) {
+                                        if (grid.get(xFrom + 1, yFrom + 2)->getTypeId() == TypeId::SPACE) {
                                             engine::Action* die = new KillCharAction(color, xFrom, yFrom, persoAction);
                                             actions.push(shared_ptr<Action>(die));
                                             die->apply(state);
                                             return;
                                         }
-                                        else{
-                                        Personnage* persoApAction = new Personnage(color, LEFT);
-                                        persoApAction->setLifecount(lifeCountPersoAction);
-                                        state::Direction nextDir = persoApAction->getDirection();
-                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom-1, yFrom+1, persoApAction, precDir, nextDir);
-                                        move->apply(state);
-                                        actions.push(shared_ptr<Action>(move));
-                                            Space* s = (Space*)grid.get(xFrom-1, yFrom+1);
-                                            if (s->getNature() == SpaceTypeId::LIFE && persoApAction->getLifecount()< 3){
-                                                persoApAction->setLifecount(persoApAction->getLifecount()+1);
+                                        else {
+                                            Personnage* persoApAction = new Personnage(color, RIGHT);
+                                            persoApAction->setLifecount(lifeCountPersoAction);
+                                            state::Direction nextDir = persoApAction->getDirection();
+                                            engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom + 1, yFrom + 1, persoApAction, precDir, nextDir);
+                                            move->apply(state);
+                                            actions.push(shared_ptr<Action>(move));
+                                            cout << "test " << endl;
+                                            Space* s = (Space*) grid.get(xFrom + 1, yFrom + 1);
+                                            if (s->getNature() == SpaceTypeId::LIFE && persoApAction->getLifecount() < 3) {
+                                                persoApAction->setLifecount(persoApAction->getLifecount() + 1);
                                                 cout << "Super, le personnage a récupéré une vie" << endl;
                                                 cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
                                             }
-                                        
-                                        return;
+
+                                            return;
                                         }
+
+                                    }
+
+                                    else {
+                                        Personnage* persoApAction = new Personnage(color, RIGHT);
+                                        persoApAction->setLifecount(lifeCountPersoAction);
+                                        state::Direction nextDir = persoApAction->getDirection();
+                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom + 1, yFrom - 1, persoApAction, precDir, nextDir);
+                                        move->apply(state);
+                                        actions.push(shared_ptr<Action>(move));
+                                        Space* s = (Space*) grid.get(xFrom + 1, yFrom - 1);
+                                        if (s->getNature() == SpaceTypeId::LIFE && persoApAction->getLifecount() < 3) {
+                                            persoApAction->setLifecount(persoApAction->getLifecount() + 1);
+                                            cout << "Super, le personnage a récupéré une vie" << endl;
+                                            cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                        }
+                                        return;
                                     }
                                 }
-                                else if(grid.get(xFrom-1, yFrom)->getTypeId() == TypeId::FLOOR){
+
+                            }//fin if direction = right
+
+                            else if (direction == Direction::LEFT) {
+                                if (grid.get(xFrom - 1, yFrom)->getTypeId() == TypeId::SPACE) {
+                                    if (grid.get(xFrom - 1, yFrom + 1)->getTypeId() == TypeId::FLOOR) {
+                                        Personnage* persoApAction = new Personnage(color, LEFT);
+                                        persoApAction->setLifecount(lifeCountPersoAction);
+                                        state::Direction nextDir = persoApAction->getDirection();
+                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom - 1, yFrom, persoApAction, precDir, nextDir);
+                                        move->apply(state);
+                                        actions.push(shared_ptr<Action>(move));
+                                        Space* s = (Space*) grid.get(xFrom - 1, yFrom);
+                                        if (s->getNature() == SpaceTypeId::LIFE && persoApAction->getLifecount() < 3) {
+                                            persoApAction->setLifecount(persoApAction->getLifecount() + 1);
+                                            cout << "Super, le personnage a récupéré une vie" << endl;
+                                            cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                        }
+
+                                        return;
+                                    }
+                                    else if (grid.get(xFrom - 1, yFrom + 1)->getTypeId() == TypeId::SPACE) {
+                                        if (grid.get(xFrom - 1, yFrom + 2)->getTypeId() == TypeId::SPACE) {
+                                            engine::Action* die = new KillCharAction(color, xFrom, yFrom, persoAction);
+                                            actions.push(shared_ptr<Action>(die));
+                                            die->apply(state);
+                                            return;
+                                        } else {
+                                            Personnage* persoApAction = new Personnage(color, LEFT);
+                                            persoApAction->setLifecount(lifeCountPersoAction);
+                                            state::Direction nextDir = persoApAction->getDirection();
+                                            engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom - 1, yFrom + 1, persoApAction, precDir, nextDir);
+                                            move->apply(state);
+                                            actions.push(shared_ptr<Action>(move));
+                                            Space* s = (Space*) grid.get(xFrom - 1, yFrom + 1);
+                                            if (s->getNature() == SpaceTypeId::LIFE && persoApAction->getLifecount() < 3) {
+                                                persoApAction->setLifecount(persoApAction->getLifecount() + 1);
+                                                cout << "Super, le personnage a récupéré une vie" << endl;
+                                                cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                            }
+
+                                            return;
+                                        }
+                                    }
+                                } else if (grid.get(xFrom - 1, yFrom)->getTypeId() == TypeId::FLOOR) {
                                     Personnage* persoApAction = new Personnage(color, LEFT);
                                     persoApAction->setLifecount(lifeCountPersoAction);
                                     state::Direction nextDir = persoApAction->getDirection();
-                                    engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom-1, yFrom-1, persoApAction, precDir, nextDir);
+                                    engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom - 1, yFrom - 1, persoApAction, precDir, nextDir);
                                     move->apply(state);
                                     actions.push(shared_ptr<Action>(move));
-                                            Space* s = (Space*)grid.get(xFrom-1, yFrom-1);
-                                            if (s->getNature() == SpaceTypeId::LIFE && persoApAction->getLifecount()< 3){
-                                                persoApAction->setLifecount(persoApAction->getLifecount()+1);
-                                                cout << "Super, le personnage a récupéré une vie" << endl;
-                                                cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
-                                            }
+                                    Space* s = (Space*) grid.get(xFrom - 1, yFrom - 1);
+                                    if (s->getNature() == SpaceTypeId::LIFE && persoApAction->getLifecount() < 3) {
+                                        persoApAction->setLifecount(persoApAction->getLifecount() + 1);
+                                        cout << "Super, le personnage a récupéré une vie" << endl;
+                                        cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                    }
                                     return;
                                 }
                             } //fin direction == LEFT
@@ -202,13 +199,34 @@ namespace engine {
     }
 
     MoveCharCommand* MoveCharCommand::deserialize(const Json::Value& in) {
+        MoveCharCommand* move = new MoveCharCommand(2, Direction::RIGHT); //constructeur choisi au hasard
+        if (in.isMember("color")) {
+            move->color = in["color"].asInt();
+        }
+        if (in.isMember("direction")) {
+            if (in["direction"].asString() == "Left") {
+                move->direction = Direction::LEFT;
+            } else if (in["direction"].asString() == "Right") {
+                move->direction = Direction::RIGHT;
+            }
+        } else {
+            cout << "Erreur Deserialize MoveCharCommand" << endl;
+        }
 
+        return move;
     }
 
     void MoveCharCommand::serialize(Json::Value& out) const {
-
+        out["commande"] = "MoveCharCommand";
+        out["color"] = color;
+        if (direction == Direction::LEFT) {
+            out["direction"] = "Left";
+        } else if (direction == Direction::RIGHT) {
+            out["direction"] = "Right";
+        }
+       
     }
-    
-    
-    
+
+
+
 }
