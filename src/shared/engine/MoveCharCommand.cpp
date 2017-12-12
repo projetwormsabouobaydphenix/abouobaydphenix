@@ -200,4 +200,15 @@ namespace engine {
             }
         }
     }
+
+/*    MoveCharCommand* MoveCharCommand::deserialize(const Json::Value& in) {
+
+    }
+
+    void MoveCharCommand::serialize(Json::Value& out) const {
+
+    }*/
+    
+    
+    
 }

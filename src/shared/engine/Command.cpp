@@ -9,8 +9,13 @@
 namespace engine {
    
      Command::Command(){}
+    Command::~Command() {
 
-    
+    }
+/*        Command* Command::deserialize(const Json::Value& in) {
+
+    }*/
+
     
     
 

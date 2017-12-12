@@ -15,13 +15,7 @@ void testSFML() {
 #include "engine.h"
 #include <stdio.h>
 #include <string.h>
-#include "state/TestState.h"
-#include "render/TestRender.h"
-#include "engine/TestEngine.h"
-#include "ai/TestAI.h"
-#include "ai/TestHeuristicAi.h"
-#include "ai/TestRollBack.h"
-
+#include "Tests.h"
 
 using namespace std;
 
@@ -32,46 +26,51 @@ int main(int argc,char* argv[])
     const char *str2 = "state";
     const char *str3 = "render";*/
     string mode(argv[1]); 
+    Tests test;
     if (argc==2){
         if (mode == "hello"){
             cout << "Hello World !" << endl;
         }
         
         else if (mode == "state"){
-            using namespace state;
-            TestState();
+            test.test_state();
+            
         }
         
         else if (mode == "render"){
             cout << "Test render" << endl;
-            render::TestRender();
+            test.test_render();
             
         }
         
         else if (mode == "engine"){
             cout << "Test engine" << endl;
-            engine::TestEngine();
+            test.test_engine();
         }
         
         else if (mode == "random_ai"){
             cout << "Test AI" << endl;
-            ai::TestAI();
+            test.test_random_ai();
         }
         
         else if (mode == "heuristic_ai"){
             cout << "Test Heuristic  AI" << endl;
-            ai::TestHeuristicAi();
+            test.test_heuristic_ai();
         }
         
         else if (mode == "rollback"){
             cout << "Test RollBack" << endl;
-            ai::TestRollBack();
+            test.test_rollback();
         }
-        
-        /*else if (mode == "thread"){
-            cout << "Test Thread" << end;
-            engine::Test_thread();
+        /*else if (mode == "record"){
+            cout << "Test Record" << endl;
+            test.test_record();
         }*/
+        
+        else if (mode == "thread"){
+            cout << "Test Thread" << endl;
+            test.test_thread();
+        }
         
         else{
             cout << "Mode invalide" << endl;

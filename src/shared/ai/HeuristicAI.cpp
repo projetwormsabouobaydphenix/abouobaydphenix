@@ -17,6 +17,7 @@ using namespace std;
 using namespace state;
 using namespace engine;
 
+
 namespace ai {
 
     HeuristicAI::HeuristicAI(const state::State& state, int color) {
@@ -37,6 +38,7 @@ namespace ai {
 
     void HeuristicAI::run(engine::Engine& engine, int color) {
         //cout << "debut heuristic" << endl;
+        
         State& state = engine.getState();
         ElementTab& grid = state.getGrid();
         ElementTab& chars = state.getChars();
@@ -48,10 +50,7 @@ namespace ai {
         int xennemy;
         int yennemy;
         int distennemy;
-       // int lifeCount;
-        //Personnage* player;
-
-        //Point* ennemy = new Point();
+        static std::stack<std::shared_ptr<Action>> actions;
 
         lifeMap.init(grid);
         lifeMap.setWeights(4 * grid.getWidth() + 7, 0);
@@ -75,13 +74,19 @@ namespace ai {
                     if (chars.list[i * width + j].get() != NULL) {
                         if (chars.list[i * width + j].get()->getTypeId() == TypeId::PERSONNAGE) {
                             Personnage* perso = (Personnage*) chars.list[i * width + j].get();
-                            if (!(perso->getColor() == color)) {
+                            if ((perso->getColor() == color)) {
+                               // cout<<"c'est le joueur"<<endl;
+                            }
+                            else {
                                 xennemy = perso->getI();
                                 yennemy = perso->getJ(); 
-                                distennemy = sqrt((xennemy - j)*(xennemy - j)+(yennemy - i)*(yennemy - i));
+                                //cout<<"distance dans if "<<distennemy<<endl;
                             }
+                            
                         }
                     }
+                    distennemy = sqrt((xennemy - j)*(xennemy - j)+(yennemy - i)*(yennemy - i));
+                    //cout<<"la distance avec l'ennemi est :"<<distennemy<<endl;
                     ennemyMap.setWeights(i * grid.getWidth() + j, distennemy);
                 }
 
@@ -210,6 +215,6 @@ namespace ai {
                 }
             }
         }        
-        engine.update();
+        
     }
 }
