@@ -42,12 +42,34 @@ namespace ai {
         cout << "Le personnage vert n'a qu'une seule vie. Normalement, il doit en récupérer s'il ne veut pas mourir" << endl;
         cout << "Appuyez sur Espace pour faire défiler" << endl;
         //cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
-        HeuristicAI heuristic(state, 2);
-        int i = 0;
+        HeuristicAI heuristicnoir(state, 2);
+        HeuristicAI heuristicvert(state,1);
+        //int i = 0;
+        //int k = 0;
+        int color =1;
         while (window.isOpen()) {
+            
+            if (color==1){
+                heuristicvert.run(moteur,1);
+                //moteur.update();
+                sleep(milliseconds(1000));
+                color =2;
+            }
+            else if (color==2){
+                heuristicnoir.run(moteur, 2);
+                //moteur.update();
+                sleep(milliseconds(1000));
+                color=1;
+            }
+            else {
+                cout<<"erreur la couleur n'est pas bonne"<<endl;
+            }
 
-            sf::Event event;
-            while (window.pollEvent(event)) {
+               
+
+            
+            //sf::Event event;
+            /*while (window.pollEvent(event)) {
                 // fermeture de la fenêtre lorsque l'utilisateur le souhaite
                 if (event.type == sf::Event::Closed) {
                     window.close();
@@ -75,10 +97,10 @@ namespace ai {
                         }
                     }
                 }
-            }
+            }*/
 
            
-            moteur.update();
+            //moteur.update();
 
             layer1->initSurface();
             window.draw(*(layer1->getSurface()));
@@ -92,6 +114,7 @@ namespace ai {
         }
         
     }
+        
 
     TestHeuristicAi::~TestHeuristicAi() {
     }

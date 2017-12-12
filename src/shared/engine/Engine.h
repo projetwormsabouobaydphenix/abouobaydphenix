@@ -3,6 +3,7 @@
 #define ENGINE__ENGINE__H
 
 #include <vector>
+#include <mutex>
 #include <stack>
 #include <memory>
 
@@ -25,6 +26,7 @@ namespace engine {
   private:
     state::State currentState;
     std::vector<Command*> currentCommands;
+    mutable std::mutex commands_mutex;
     // Operations
   public:
     Engine ();

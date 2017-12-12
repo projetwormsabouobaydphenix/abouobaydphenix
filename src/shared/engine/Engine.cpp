@@ -89,9 +89,24 @@ namespace engine {
 
     void Engine::undoe(std::stack<std::shared_ptr<Action> >& actions) {
         //cout << "debut undoe" << endl;
-        for(size_t k=0; k<actions.size(); k++){
+        //for(size_t k=0; k<actions.size(); k++){
             //cout << "k = " << k << endl;
-            if (actions.top().get()->getActionTypeId() == ActionTypeId::KILL_ACTION){
+        switch (actions.top().get()->getActionTypeId()){
+            case ActionTypeId::KILL_ACTION:
+                ((KillCharAction*)(actions.top().get()))->undo(currentState);
+                actions.pop();
+            case ActionTypeId::LIFE_ACTION:
+                ((LifeAction*)(actions.top().get()))->undo(currentState);
+                actions.pop();
+            case ActionTypeId::MOVE_ACTION:
+                ((MoveCharAction*)(actions.top().get()))->undo(currentState);
+                actions.pop();
+            case ActionTypeId::SHOOT_ACTION:
+                ((ShootAction*)(actions.top().get()))->undo(currentState);
+                actions.pop();
+                
+        }
+            /*if (actions.top().get()->getActionTypeId() == ActionTypeId::KILL_ACTION){
                 //cout << "KILL" << endl;
                 ((KillCharAction*)(actions.top().get()))->undo(currentState);
                 //sleep(milliseconds(1000));
@@ -122,7 +137,7 @@ namespace engine {
             /*shared_ptr<Action> action = actions.top();
             action->undo(currentState);
             actions.pop();*/
-        }
+        //}*/
         //cout << "test fin undo " << endl;
     }
 }

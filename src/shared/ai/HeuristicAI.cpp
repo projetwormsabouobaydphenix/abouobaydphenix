@@ -47,8 +47,9 @@ namespace ai {
         int yperso;
         int xennemy;
         int yennemy;
-        int lifeCount;
-        Personnage* player;
+        int distennemy;
+       // int lifeCount;
+        //Personnage* player;
 
         //Point* ennemy = new Point();
 
@@ -57,7 +58,9 @@ namespace ai {
         lifeMap.setWeights(3 * grid.getWidth() + 20, 0);
         std::vector<int> weightslifeAv = lifeMap.getWeights();
         ennemyMap.init(grid);
+        std::vector<int> weightsEnnemyAv = ennemyMap.getWeights();
 
+        // instanciation de lifeMap
         for (int i = 0; i < (int) height; i++) {
             for (int j = 0; j < (int) width; j++) {
                 if (weightslifeAv[i * grid.getWidth() + j] == (std::numeric_limits<int>::max())) {
@@ -68,11 +71,27 @@ namespace ai {
                     lifeMap.setWeights(i * grid.getWidth() + j, min(dist1, dist2));
                     //cout << "dist1 = " << dist1 << "dist2 = " << dist2 << "min = " << min(dist1, dist2) << endl;
                 }
+                if (weightslifeAv[i * grid.getWidth() + j] == (std::numeric_limits<int>::max())) {
+                    if (chars.list[i * width + j].get() != NULL) {
+                        if (chars.list[i * width + j].get()->getTypeId() == TypeId::PERSONNAGE) {
+                            Personnage* perso = (Personnage*) chars.list[i * width + j].get();
+                            if (!(perso->getColor() == color)) {
+                                xennemy = perso->getI();
+                                yennemy = perso->getJ(); 
+                                distennemy = sqrt((xennemy - j)*(xennemy - j)+(yennemy - i)*(yennemy - i));
+                            }
+                        }
+                    }
+                    ennemyMap.setWeights(i * grid.getWidth() + j, distennemy);
+                }
+
             }
         }
         
         std::vector<int> weightslife = lifeMap.getWeights();
+        std::vector<int> weightsennemy = ennemyMap.getWeights();
 
+        //heuristic life
         for (int i = 0; i < (int) height; i++) {
             for (int j = 0; j < (int) width; j++) {
                 if (chars.list[i * width + j].get() != NULL) {
@@ -81,8 +100,8 @@ namespace ai {
                         if (perso->getColor() == color) {
                             xperso = perso->getI();
                             yperso = perso->getJ();
-                            lifeCount = perso->getLifecount();
-                            if (perso->getLifecount() < 3) {
+//                            int lifeCount = perso->getLifecount();
+                            if (perso->getLifecount() < 2) {
                                 //cout << "test 5" << endl;
                                 if (weightslife[yperso * grid.getWidth() + xperso + 1] < 0) {
                                     if (lifeMap.compare(weightslife[yperso * width + xperso - 1], weightslife[(yperso - 1) * grid.getWidth() + xperso + 1])) {
@@ -94,6 +113,21 @@ namespace ai {
                                     } else {
                                         //cout << "poid gauche " <<  weightslife[yperso * width + xperso - 1] << "poid droite " << weightslife[(yperso - 1) * grid.getWidth() + xperso + 1] << endl;
                                         Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
+                                        engine.addCommand(0, move);
+                                        engine.update();
+                                        return;
+                                    }
+                                }
+                                else if (weightslife[yperso * grid.getWidth() + xperso - 1] < 0) {
+                                    if (lifeMap.compare(weightslife[yperso * width + xperso + 1], weightslife[(yperso - 1) * grid.getWidth() + xperso - 1])) {
+                                        //cout << "poid gauche " <<  weightslife[yperso * width + xperso - 1] << "poid droite " << weightslife[(yperso - 1) * grid.getWidth() + xperso + 1] << endl;
+                                        Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
+                                        engine.addCommand(0, move);
+                                        engine.update();
+                                        return;
+                                    } else {
+                                        //cout << "poid gauche " <<  weightslife[yperso * width + xperso - 1] << "poid droite " << weightslife[(yperso - 1) * grid.getWidth() + xperso + 1] << endl;
+                                        Command* move = new MoveCharCommand(color, state::Direction::LEFT);
                                         engine.addCommand(0, move);
                                         engine.update();
                                         return;
@@ -118,32 +152,64 @@ namespace ai {
                                 }
                             }
                             else {
-                                cout << "Le personnage a trois vies" << endl;
+                                //cout << "Le personnage a trois vies" << endl;
+                                if (weightsennemy[yperso * grid.getWidth() + xperso + 1] < 0) {
+                                    if (ennemyMap.compare(weightsennemy[yperso * width + xperso - 1], weightsennemy[(yperso - 1) * grid.getWidth() + xperso + 1])) {
+                                        //cout << "poid gauche " <<  weightslife[yperso * width + xperso - 1] << "poid droite " << weightslife[(yperso - 1) * grid.getWidth() + xperso + 1] << endl;
+                                        Command* move = new MoveCharCommand(color, state::Direction::LEFT);
+                                        engine.addCommand(0, move);
+                                        engine.update();
+                                        return;
+                                    } else {
+                                        //cout << "poid gauche " <<  weightslife[yperso * width + xperso - 1] << "poid droite " << weightslife[(yperso - 1) * grid.getWidth() + xperso + 1] << endl;
+                                        
+                                        Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
+                                        engine.addCommand(0, move);
+                                        engine.update();
+                                        return;
+                                    }
+                                }
+                                
+                                else if (weightsennemy[yperso * grid.getWidth() + xperso - 1] < 0) {
+                                    if (ennemyMap.compare(weightsennemy[yperso * width + xperso + 1], weightsennemy[(yperso - 1) * grid.getWidth() + xperso - 1])) {
+                                        //cout << "poid gauche " <<  weightslife[yperso * width + xperso - 1] << "poid droite " << weightslife[(yperso - 1) * grid.getWidth() + xperso + 1] << endl;
+                                        Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
+                                        engine.addCommand(0, move);
+                                        engine.update();
+                                        return;
+                                    } else {
+                                        //cout << "poid gauche " <<  weightslife[yperso * width + xperso - 1] << "poid droite " << weightslife[(yperso - 1) * grid.getWidth() + xperso + 1] << endl;
+                                        
+                                        Command* move = new MoveCharCommand(color, state::Direction::LEFT);
+                                        engine.addCommand(0, move);
+                                        engine.update();
+                                        return;
+                                    }
+                                }
+                                
+                                else {
+                                    if (ennemyMap.compare(weightsennemy[yperso * grid.getWidth() + xperso + 1], weightsennemy[(yperso) * grid.getWidth() + xperso - 1])) {
+                                        //cout << "poid droite " <<  weightslife[yperso * width + xperso + 1] << "poid gauche " << weightslife[(yperso) * grid.getWidth() + xperso - 1] << endl;
+                                        Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
+                                        engine.addCommand(0, move);
+                                        engine.update();
+                                        return;
+                                    }
+                                    else {
+                                        //cout << "poid droite " <<  weightslife[yperso * width + xperso + 1] << "poid gauche " << weightslife[(yperso) * grid.getWidth() + xperso - 1] << endl;
+                                        //cout << "test 7" << endl;
+                                        Command* move = new MoveCharCommand(color, state::Direction::LEFT);
+                                        engine.addCommand(0, move);
+                                        engine.update();
+                                        return;
+                                    }
+                                }
                             }
-                            //cout << "x = " << xperso << "y =" << yperso << endl;
-                        } else if (perso->getColor() != color) {
-                            xennemy = perso->getI();
-                            yennemy = perso->getJ();
                         }
                     }
                 }
             }
-
-            /*cout << "x 2 = " << xperso << "y =" << yperso << endl;
-            if (chars.list[yperso * width + xperso].get() != NULL) {
-                player = (Personnage*) chars.list[yperso * width + xperso].get();
-                player->setLifecount(lifeCount);
-            } else {
-                cout << "il y a une erreur" << endl;
-            }*/
-
-
-
-        }
-
-
+        }        
+        engine.update();
     }
-
-
-
 }

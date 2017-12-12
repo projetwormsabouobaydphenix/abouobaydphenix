@@ -68,6 +68,11 @@ int main(int argc,char* argv[])
             ai::TestRollBack();
         }
         
+        /*else if (mode == "thread"){
+            cout << "Test Thread" << end;
+            engine::Test_thread();
+        }*/
+        
         else{
             cout << "Mode invalide" << endl;
         }

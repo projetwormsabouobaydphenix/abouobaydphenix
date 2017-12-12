@@ -57,11 +57,11 @@ namespace ai {
                     window.close();
                 } else if (event.type == sf::Event::KeyReleased) {
 
-                    if (event.key.code == Keyboard::Return) {
+                    if (event.key.code == Keyboard::N) {
                         cout << "Appuyez sur Entrée pour faire défiler" << endl;
                         cout << "Appuyez sur BackSpace pour revenir en arrière" << endl; 
                         //cout << "" << endl;
-                        i = i + 1;
+                        /*i = i + 1;
                         if (i == 1) {
                             Command* move = new MoveCharCommand(1, Direction::RIGHT);
                             moteur.addCommand(0, move);
@@ -77,38 +77,63 @@ namespace ai {
                         } else if (i == 5) {
                             Command* move = new MoveCharCommand(1, Direction::RIGHT);
                             moteur.addCommand(2, move);
-                        } 
+                        } */
+                        heuristic.run(moteur,2);
+                    }
+                    
+                    else if (event.key.code == Keyboard::V){
+                        i = i + 1;
+                        if (i == 1){
+                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                            cout<<"move1"<<endl;
+                            moteur.addCommand(0, move);
+                        }
+                        else if (i == 2){
+                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                            cout<<"move2"<<endl;
+                            moteur.addCommand(0, move);
+                        }
+                        else if (i == 3){
+                            cout << "Le personnage vert va tirer" << endl;
+                            Command* shoot = new ShootCommand(1);
+                            moteur.addCommand(0, shoot);
+                        }
+                    }
                    
-                        actionsTmp = moteur.update();
+                       
                         
-                        int lActions = (int) actionsTmp.size();
-                        for (int i = 0; i < lActions; i++) {
-                            vectActions.push_back(actionsTmp.top());
-                            actionsTmp.pop();
-                        }
-                        for (int j = 0; j < (int) vectActions.size(); j++) {
-                            int n = (int) vectActions.size();
-                            actions.push(vectActions[n - j - 1]);
-                        }
-                        vectActions.clear();
+
                         //sleep(milliseconds(1000));
                         
-                    } else if (event.key.code == Keyboard::BackSpace) {
-                        moteur.undoe(actions);
-                        i = 0;
+                    else if (event.key.code == Keyboard::BackSpace) {
+                        cout<<"il y a "<<actionsTmp.size()<<"actions"<<endl;
+                        moteur.undoe(actionsTmp);
+                        //i = 0;
                         //actions.pop()
                        //sleep(milliseconds(1000));
-                        
-
-                    }
-                }
+                     }
+            
+                }    
             }
-
-
-
-
-
-            moteur.update();
+                actionsTmp = moteur.update();
+                int lActions = (int) actionsTmp.size();
+               // cout<<"nbre actions tempo"<<actionsTmp.size()<<endl;
+                /*for (int i = 0; i < lActions; i++) {
+                    vectActions.push_back(actionsTmp.top());
+                    actionsTmp.pop();
+                }
+               // cout<<"taille de vectActions : "<<vectActions.size()<<endl;
+                for (int j = 0; j < (int) vectActions.size(); j++) {
+                    int n = (int) vectActions.size();
+                    actions.push(vectActions[n - j - 1]);
+                }
+               // cout<<"taille de actions : "<<actions.size()<<endl;
+                vectActions.clear();*/
+                        
+                        
+                
+            //moteur.update();
+            
             // moteur.undo(actions);
 
             layer1->initSurface();
@@ -120,10 +145,10 @@ namespace ai {
             window.display();
             window.clear();
 
-        }
-
-
+        
     }
+ }
+    
 
     TestRollBack::~TestRollBack() {
     }
