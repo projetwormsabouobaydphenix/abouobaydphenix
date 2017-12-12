@@ -60,10 +60,10 @@ namespace engine{
             }
         }
         
-        int distance = sqrt((xperso-xennemy)*(xperso-xennemy)+(yperso-yennemy)*(yperso-yennemy));
+        //int distance = sqrt((xperso-xennemy)*(xperso-xennemy)+(yperso-yennemy)*(yperso-yennemy));
         //cout << "distance = " << distance << endl;
 
-        if (distance < 10){
+       // if (distance < 10){
             cout << "L'ennemi a été touché." << endl;
             Personnage* ennemy = (Personnage*) tabchars.get(xennemy, yennemy);
             int life = ennemy->getLifecount();
@@ -88,14 +88,21 @@ namespace engine{
         }
     }
 
-/*    ShootCommand* ShootCommand::deserialize(const Json::Value& in) {
 
+  /*  ShootCommand* ShootCommand::deserialize(const Json::Value& in) {
+        ShootCommand* shoot = new ShootCommand(2); //constructeur choisi au hasard
+        if (in.isMember("color")){
+            shoot->color = in["color"].asInt();
+        }
+         else {
+            cout << "Erreur Deserialize ShootCommand" << endl;
+        }
+        return shoot;
     }
 
     void ShootCommand::serialize(Json::Value& out) const {
-
-    }*/
-
-
-}
+        out["commande"] = "ShootCommand";
+        out["color"] = color;
+    }
+}*/
    

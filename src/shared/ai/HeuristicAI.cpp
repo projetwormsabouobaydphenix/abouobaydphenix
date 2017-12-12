@@ -58,6 +58,8 @@ namespace ai {
         std::vector<int> weightslifeAv = lifeMap.getWeights();
         ennemyMap.init(grid);
         std::vector<int> weightsEnnemyAv = ennemyMap.getWeights();
+        
+        Personnage* ennemy;
 
         // instanciation de lifeMap
         for (int i = 0; i < (int) height; i++) {
@@ -80,6 +82,7 @@ namespace ai {
                             else {
                                 xennemy = perso->getI();
                                 yennemy = perso->getJ(); 
+                                ennemy=perso;
                                 //cout<<"distance dans if "<<distennemy<<endl;
                             }
                             
@@ -114,12 +117,23 @@ namespace ai {
                                         Command* move = new MoveCharCommand(color, state::Direction::LEFT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightslife[yperso * width + xperso - 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);
+                                            engine.update();
+                                        }
+                                        
                                         return;
                                     } else {
                                         //cout << "poid gauche " <<  weightslife[yperso * width + xperso - 1] << "poid droite " << weightslife[(yperso - 1) * grid.getWidth() + xperso + 1] << endl;
                                         Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightslife[(yperso - 1) * grid.getWidth() + xperso + 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);
+                                            engine.update();
+                                        }
                                         return;
                                     }
                                 }
@@ -129,12 +143,22 @@ namespace ai {
                                         Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightslife[yperso * width + xperso + 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);
+                                            engine.update();
+                                        }
                                         return;
                                     } else {
                                         //cout << "poid gauche " <<  weightslife[yperso * width + xperso - 1] << "poid droite " << weightslife[(yperso - 1) * grid.getWidth() + xperso + 1] << endl;
                                         Command* move = new MoveCharCommand(color, state::Direction::LEFT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightslife[(yperso - 1) * grid.getWidth() + xperso - 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);
+                                            engine.update();
+                                        }
                                         return;
                                     }
                                 }
@@ -144,6 +168,11 @@ namespace ai {
                                         Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightslife[yperso * grid.getWidth() + xperso + 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);
+                                            engine.update();
+                                        }
                                         return;
                                     }
                                     else {
@@ -152,6 +181,11 @@ namespace ai {
                                         Command* move = new MoveCharCommand(color, state::Direction::LEFT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightslife[(yperso) * grid.getWidth() + xperso - 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);
+                                            engine.update();
+                                        }
                                         return;
                                     }
                                 }
@@ -164,6 +198,11 @@ namespace ai {
                                         Command* move = new MoveCharCommand(color, state::Direction::LEFT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightsennemy[yperso * width + xperso - 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);
+                                            engine.update();
+                                        }
                                         return;
                                     } else {
                                         //cout << "poid gauche " <<  weightslife[yperso * width + xperso - 1] << "poid droite " << weightslife[(yperso - 1) * grid.getWidth() + xperso + 1] << endl;
@@ -171,6 +210,11 @@ namespace ai {
                                         Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightsennemy[(yperso - 1) * grid.getWidth() + xperso + 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);
+                                            engine.update();
+                                        }
                                         return;
                                     }
                                 }
@@ -181,6 +225,11 @@ namespace ai {
                                         Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightsennemy[yperso * width + xperso + 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);
+                                            engine.update();
+                                        }
                                         return;
                                     } else {
                                         //cout << "poid gauche " <<  weightslife[yperso * width + xperso - 1] << "poid droite " << weightslife[(yperso - 1) * grid.getWidth() + xperso + 1] << endl;
@@ -188,6 +237,11 @@ namespace ai {
                                         Command* move = new MoveCharCommand(color, state::Direction::LEFT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightslife[yperso * width + xperso - 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);
+                                            engine.update();
+                                        }
                                         return;
                                     }
                                 }
@@ -198,6 +252,11 @@ namespace ai {
                                         Command* move = new MoveCharCommand(color, state::Direction::RIGHT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightslife[yperso * width + xperso + 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);
+                                            engine.update();
+                                        }  
                                         return;
                                     }
                                     else {
@@ -206,6 +265,11 @@ namespace ai {
                                         Command* move = new MoveCharCommand(color, state::Direction::LEFT);
                                         engine.addCommand(0, move);
                                         engine.update();
+                                        if(weightslife[(yperso) * grid.getWidth() + xperso - 1]<5){
+                                            Command* shoot = new ShootCommand(color);
+                                            engine.addCommand(0,shoot);  
+                                            engine.update();
+                                        }
                                         return;
                                     }
                                 }

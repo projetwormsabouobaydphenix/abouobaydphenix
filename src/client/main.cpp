@@ -72,6 +72,11 @@ int main(int argc,char* argv[])
             test.test_thread();
         }
         
+        else if (mode == "play"){
+            cout << "Test Play" << endl;
+            test.test_play();
+        }
+        
         else{
             cout << "Mode invalide" << endl;
         }

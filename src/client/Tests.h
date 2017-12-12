@@ -16,6 +16,7 @@
 
 namespace engine {
     class Engine;    
+    class MoveCharCommand;
 };
 
 class Tests {
@@ -30,6 +31,7 @@ public:
     void thread_secondaire(engine::Engine& moteur, int color);
     void test_thread();
     void test_record();
+    void test_play();
     
     virtual ~Tests();
 private:

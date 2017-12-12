@@ -6,6 +6,7 @@
 #include <memory>
 
 namespace state {
+  class Personnage;
   class State;
 };
 namespace engine {
@@ -23,6 +24,8 @@ namespace engine {
   class ShootCommand : public engine::Command {
     // Attributes
   protected:
+    int lifecount;
+    state::Personnage* ennemy;
     int color;
     // Operations
   public:
@@ -30,6 +33,10 @@ namespace engine {
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
     // Setters and Getters
+    int getLifecount() const;
+    void setLifecount(int lifecount);
+    const state::Personnage*& getEnnemy() const;
+    void setEnnemy(const state::Personnage*& ennemy);
     int getColor() const;
     void setColor(int color);
   };

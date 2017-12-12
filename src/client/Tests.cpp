@@ -1,6 +1,7 @@
 
 
 #include "Tests.h"
+#include "engine/MoveCharCommand.h"
 #include "state/ElementTab.h"
 #include <SFML/Graphics.hpp>
 #include "../shared/state.h"
@@ -628,6 +629,7 @@ void Tests::test_thread(){
     
 }
 
+
 /*void Tests::test_record() {
 TestJson test("Sanaa", 22);
         
@@ -637,6 +639,13 @@ TestJson test("Sanaa", 22);
         cout << out["age"].asInt() << endl;
 
 }*/
+
+void Tests::test_play(){
+    // ouvrir fichier text avec ifstream fichier("test_play.txt", ios:in);
+    //mettre la premiere ligne dans un JSON ? getline(fichier, json);
+    //une ligne du fichier c'est une commande => Command* move = new MoveCharCommand(...) ou bien MoveCharCommand(...) ?
+    //
+}
 
 
 Tests::~Tests() {
