@@ -1,6 +1,7 @@
 
 
 #include "Tests.h"
+#include "engine/MoveCharCommand.h"
 #include "state/ElementTab.h"
 #include <SFML/Graphics.hpp>
 #include "../shared/state.h"
@@ -10,10 +11,10 @@
 #include "render.h"
 #include <iostream>
 #include <fstream>
-#include <fstream>
 #include <string>
-
-
+#include <thread>
+#include <mutex>
+#include <chrono>
 #define LIMITE_FRAME 60
 
 using namespace sf;
@@ -23,7 +24,68 @@ using namespace render;
 using namespace ai;
 using namespace engine;
 
+std::mutex commands_mutex;
+
+
 Tests::Tests() {
+}
+
+void Tests::test_state() {
+    cout << "Tests des états" << endl;
+    cout << "Création d'une grille" << endl;
+    ElementTab grille(0, 1);
+    //Personnage* perso;
+    //perso = new Personnage; 
+    cout << "Vérifie que la largeur est nulle" << endl;
+    // vérification de la largeur
+    size_t largeur = grille.getWidth();
+    if (largeur == 0) {
+        cout << "La largeur est nulle" << endl;
+    } else {
+        cout << "La largeur n'est pas nulle" << endl;
+    }
+
+    cout << "Vérifie que la largeur est 1" << endl;
+    size_t l2 = grille.getWidth();
+    if (l2 == 1) {
+        cout << "Largeur = 1" << endl;
+    } else {
+        cout << "Largeur différente de 1" << endl;
+    }
+
+
+    //Personnage* ptt; 
+    //Floor floor;
+    //Space s;
+    cout << "Ajout d'un élement dans la grille" << endl;
+
+    // size_t add = grille.add(fl);
+
+    cout << "On vérifie que la largeur a changé :";
+    /*if (add == 1){
+        cout << "OK" << endl;
+    }
+    else{
+        cout << "not ok" << endl;
+    }*/
+    cout << "Tests sur la grille" << endl;
+    cout << "Redimmensionne en 5 par 7" << endl;
+    grille.resize(5, 7);
+    cout << "Vérifie que la largeur est correcte : ";
+    if (grille.getWidth() == 5) {
+        cout << "OK" << endl;
+    } else {
+        cout << "Not OK" << endl;
+    }
+
+    cout << "Vérifie que la hauteur est correcte : ";
+    if (grille.getHeight() == 7) {
+        cout << "OK" << endl;
+    } else {
+        cout << "Not OK" << endl;
+    }
+
+    //cout << "Vérifie que toutes les cases sont nulles ";
 }
 
 void Tests::test_render() {
@@ -351,68 +413,9 @@ void Tests::test_random_ai() {
     }
 }
 
-void Tests::test_state() {
-    cout << "Tests des états" << endl;
-    cout << "Création d'une grille" << endl;
-    ElementTab grille(0, 1);
-    //Personnage* perso;
-    //perso = new Personnage; 
-    cout << "Vérifie que la largeur est nulle" << endl;
-    // vérification de la largeur
-    size_t largeur = grille.getWidth();
-    if (largeur == 0) {
-        cout << "La largeur est nulle" << endl;
-    } else {
-        cout << "La largeur n'est pas nulle" << endl;
-    }
-
-    cout << "Vérifie que la largeur est 1" << endl;
-    size_t l2 = grille.getWidth();
-    if (l2 == 1) {
-        cout << "Largeur = 1" << endl;
-    } else {
-        cout << "Largeur différente de 1" << endl;
-    }
-
-
-    //Personnage* ptt; 
-    //Floor floor;
-    //Space s;
-    cout << "Ajout d'un élement dans la grille" << endl;
-
-    // size_t add = grille.add(fl);
-
-    cout << "On vérifie que la largeur a changé :";
-    /*if (add == 1){
-        cout << "OK" << endl;
-    }
-    else{
-        cout << "not ok" << endl;
-    }*/
-    cout << "Tests sur la grille" << endl;
-    cout << "Redimmensionne en 5 par 7" << endl;
-    grille.resize(5, 7);
-    cout << "Vérifie que la largeur est correcte : ";
-    if (grille.getWidth() == 5) {
-        cout << "OK" << endl;
-    } else {
-        cout << "Not OK" << endl;
-    }
-
-    cout << "Vérifie que la hauteur est correcte : ";
-    if (grille.getHeight() == 7) {
-        cout << "OK" << endl;
-    } else {
-        cout << "Not OK" << endl;
-    }
-
-    //cout << "Vérifie que toutes les cases sont nulles ";
-
-
-}
-
 void Tests::test_rollback() {
-cout << "debut test hai" << endl;
+
+        cout << "debut test hai" << endl;
         Engine moteur;
         State& state = moteur.getState();
 
@@ -448,11 +451,11 @@ cout << "debut test hai" << endl;
                     window.close();
                 } else if (event.type == sf::Event::KeyReleased) {
 
-                    if (event.key.code == Keyboard::Return) {
+                    if (event.key.code == Keyboard::N) {
                         cout << "Appuyez sur Entrée pour faire défiler" << endl;
                         cout << "Appuyez sur BackSpace pour revenir en arrière" << endl; 
                         //cout << "" << endl;
-                        i = i + 1;
+                        /*i = i + 1;
                         if (i == 1) {
                             Command* move = new MoveCharCommand(1, Direction::RIGHT);
                             moteur.addCommand(0, move);
@@ -468,38 +471,63 @@ cout << "debut test hai" << endl;
                         } else if (i == 5) {
                             Command* move = new MoveCharCommand(1, Direction::RIGHT);
                             moteur.addCommand(2, move);
-                        } 
+                        } */
+                        heuristic.run(moteur,2);
+                    }
+                    
+                    else if (event.key.code == Keyboard::V){
+                        i = i + 1;
+                        if (i == 1){
+                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                            cout<<"move1"<<endl;
+                            moteur.addCommand(0, move);
+                        }
+                        else if (i == 2){
+                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                            cout<<"move2"<<endl;
+                            moteur.addCommand(0, move);
+                        }
+                        else if (i == 3){
+                            cout << "Le personnage vert va tirer" << endl;
+                            Command* shoot = new ShootCommand(1);
+                            moteur.addCommand(0, shoot);
+                        }
+                    }
                    
-                        actionsTmp = moteur.update();
+                       
                         
-                        int lActions = (int) actionsTmp.size();
-                        for (int i = 0; i < lActions; i++) {
-                            vectActions.push_back(actionsTmp.top());
-                            actionsTmp.pop();
-                        }
-                        for (int j = 0; j < (int) vectActions.size(); j++) {
-                            int n = (int) vectActions.size();
-                            actions.push(vectActions[n - j - 1]);
-                        }
-                        vectActions.clear();
+
                         //sleep(milliseconds(1000));
                         
-                    } else if (event.key.code == Keyboard::BackSpace) {
-                        moteur.undoe(actions);
-                        i = 0;
+                    else if (event.key.code == Keyboard::BackSpace) {
+                        cout<<"il y a "<<actionsTmp.size()<<"actions"<<endl;
+                        moteur.undoe(actionsTmp);
+                        //i = 0;
                         //actions.pop()
                        //sleep(milliseconds(1000));
-                        
-
-                    }
-                }
+                     }
+            
+                }    
             }
-
-
-
-
-
-            moteur.update();
+                actionsTmp = moteur.update();
+//                int lActions = (int) actionsTmp.size();
+               // cout<<"nbre actions tempo"<<actionsTmp.size()<<endl;
+                /*for (int i = 0; i < lActions; i++) {
+                    vectActions.push_back(actionsTmp.top());
+                    actionsTmp.pop();
+                }
+               // cout<<"taille de vectActions : "<<vectActions.size()<<endl;
+                for (int j = 0; j < (int) vectActions.size(); j++) {
+                    int n = (int) vectActions.size();
+                    actions.push(vectActions[n - j - 1]);
+                }
+               // cout<<"taille de actions : "<<actions.size()<<endl;
+                vectActions.clear();*/
+                        
+                        
+                
+            //moteur.update();
+            
             // moteur.undo(actions);
 
             layer1->initSurface();
@@ -511,7 +539,96 @@ cout << "debut test hai" << endl;
             window.display();
             window.clear();
 
+        
+    }
+}
+
+void Tests::thread_secondaire(engine::Engine& moteur, int color){
+    State& state = moteur.getState();
+    HeuristicAI heuristicnoir(state, 2);
+    HeuristicAI heuristicvert(state,1);
+    //int nbreaction =0;
+    
+    while (1){
+        int nbreaction =0;
+        if (color==1){
+            while(nbreaction <4){
+                {std::lock_guard<std::mutex> lock(commands_mutex);
+                cout<<"heuristic vert"<<endl;
+                heuristicvert.run(moteur,1);
+                nbreaction +=1;
+                }
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+
+            }
+            color =2;
+          }
+        else if (color==2){
+            while(nbreaction <3){
+                {std::lock_guard<std::mutex> lock(commands_mutex);
+                cout<<"heuristic noir"<<endl;
+                heuristicnoir.run(moteur, 2);
+                nbreaction+=1;
+                }
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+            }
+            color=1;
         }
+        else {
+            cout<<"erreur la couleur n'est pas bonne"<<endl;
+        }
+        
+        //cout<<"le personnage qui va jouer est "<<color<<endl;
+        //1sleep(milliseconds(1000));
+    }
+}
+
+void Tests::test_thread(){
+    cout << "debut test thread" << endl;
+    Engine moteur;
+    State& state = moteur.getState();
+
+    Command* init = new LoadCommand("res/heuristic_ai.txt");
+    moteur.addCommand(0, init);
+    moteur.update();
+
+    Layer* layer1 = new ElementTabLayer(state.getGrid());
+    Layer* layer2 = new ElementTabLayer(state.getChars());
+
+    sf::RenderWindow window;
+    window.setFramerateLimit(LIMITE_FRAME);
+    window.create(sf::VideoMode(800, 384), "Test Worms");
+    cout << "Bienvenue sur le jeu worms" << endl;
+    /*cout << "Le personnage vert n'a qu'une seule vie. Normalement, il doit en récupérer s'il ne veut pas mourir" << endl;
+    cout << "Appuyez sur Espace pour faire défiler" << endl;*/
+
+    int color =1;
+    thread th_second(&Tests::thread_secondaire,this,std::ref(moteur), std::ref(color));
+    
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            // fermeture de la fenêtre lorsque l'utilisateur le souhaite
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
+        
+        std::lock_guard<std::mutex> lock(commands_mutex);
+
+        layer1->initSurface();
+        window.draw(*(layer1->getSurface()));
+
+        layer2->initSurface();
+        
+        window.draw(*(layer2->getSurface()));
+        
+        window.display();
+        window.clear();
+
+    }
+    th_second.join();
+    
 }
 
 void Tests::test_play() {
@@ -600,14 +717,7 @@ void Tests::test_play() {
             window.display();
             window.clear();
         }
-   
-    
-        
-        
-        
-        
-        
-    
+
 
 }
 

@@ -4,14 +4,13 @@
 
 #include <stack>
 #include <memory>
-#include <json/json.h>
 
 namespace state {
+  class Personnage;
   class State;
 };
 namespace engine {
   class Action;
-  class ShootCommand;
   class Command;
 }
 
@@ -25,15 +24,19 @@ namespace engine {
   class ShootCommand : public engine::Command {
     // Attributes
   protected:
+    int lifecount;
+    state::Personnage* ennemy;
     int color;
     // Operations
   public:
     ShootCommand (int color);
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
-    void serialize (Json::Value& out) const;
-    ShootCommand* deserialize (const Json::Value& in);
     // Setters and Getters
+    int getLifecount() const;
+    void setLifecount(int lifecount);
+    const state::Personnage*& getEnnemy() const;
+    void setEnnemy(const state::Personnage*& ennemy);
     int getColor() const;
     void setColor(int color);
   };

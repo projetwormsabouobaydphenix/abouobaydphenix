@@ -217,14 +217,17 @@ namespace engine {
                 return move;
             }
         }
-        else {
-            cout << "Erreur Deserialize MoveCharCommand" << endl;
-        }
 
-        
+
     }
 
     void MoveCharCommand::serialize(Json::Value& out) const {
+
+
+ 
+    
+    
+
         out["commande"] = "MoveCharCommand";
         out["color"] = color;
         if (direction == Direction::LEFT) {
@@ -244,7 +247,4 @@ namespace engine {
         }*/
        
     }
-
-
-
 }

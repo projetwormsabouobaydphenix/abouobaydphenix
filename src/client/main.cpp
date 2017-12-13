@@ -62,8 +62,14 @@ int main(int argc,char* argv[])
             cout << "Test RollBack" << endl;
             test.test_rollback();
         }
+        
+        else if (mode == "thread"){
+            cout << "Test Thread" << endl;
+            test.test_thread();
+        }
+        
         else if (mode == "play"){
-            cout << "Test Replay" << endl;
+            cout << "Test Play" << endl;
             test.test_play();
         }
         

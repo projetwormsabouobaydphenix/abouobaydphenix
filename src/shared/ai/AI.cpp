@@ -2,6 +2,7 @@
 #include "AI.h"
 #include "../state.h"
 #include "../engine.h"
+#include "engine/MoveCharCommand.h"
 #include <iostream>
 #include <vector>
 

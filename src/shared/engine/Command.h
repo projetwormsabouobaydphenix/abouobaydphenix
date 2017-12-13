@@ -4,11 +4,9 @@
 
 #include <stack>
 #include <memory>
-#include <json/json.h>
 
 namespace engine {
   class Action;
-  class Command;
 };
 namespace state {
   class State;
@@ -33,9 +31,6 @@ namespace engine {
     virtual ~Command ();
     virtual CommandTypeId getTypeId () const = 0;
     virtual void execute (state:: State& state, std::stack<std::shared_ptr<Action>>& actions) = 0;
-    virtual void serialize (Json::Value& out) const = 0;
-    virtual Command* deserialize (const Json::Value& in);
-    void addToReplay ();
     // Setters and Getters
   };
 

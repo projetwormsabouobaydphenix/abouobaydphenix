@@ -14,6 +14,11 @@
 #ifndef TESTS_H
 #define TESTS_H
 
+namespace engine {
+    class Engine;    
+    class MoveCharCommand;
+};
+
 class Tests {
 public:
     Tests();
@@ -23,6 +28,8 @@ public:
     void test_random_ai();
     void test_state();
     void test_rollback();
+    void thread_secondaire(engine::Engine& moteur, int color);
+    void test_thread();
     void test_play();
     virtual ~Tests();
 private:

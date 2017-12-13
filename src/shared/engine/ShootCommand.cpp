@@ -62,10 +62,10 @@ namespace engine{
             }
         }
         
-        int distance = sqrt((xperso-xennemy)*(xperso-xennemy)+(yperso-yennemy)*(yperso-yennemy));
+        //int distance = sqrt((xperso-xennemy)*(xperso-xennemy)+(yperso-yennemy)*(yperso-yennemy));
         //cout << "distance = " << distance << endl;
 
-        if (distance < 10){
+       // if (distance < 10){
             cout << "L'ennemi a été touché." << endl;
             Personnage* ennemy = (Personnage*) tabchars.get(xennemy, yennemy);
             int life = ennemy->getLifecount();
@@ -88,7 +88,7 @@ namespace engine{
             }
             
         }
-    }
+    
 
     ShootCommand* ShootCommand::deserialize(const Json::Value& in) {
         if (in.isMember("commande")){
@@ -100,28 +100,8 @@ namespace engine{
             return shoot;
             }
             
-        }
-         else {
-            cout << "Erreur Deserialize ShootCommand" << endl;
-        }
-        
     }
-
-    void ShootCommand::serialize(Json::Value& out) const {
-        out["commande"] = "ShootCommand";
-        out["color"] = color;
-        
-        /*string const nomFichier("res/replay.txt");
-        ofstream monFlux(nomFichier.c_str());
-
-        if (monFlux){
-            monFlux << out.toStyledString() << endl;
-        }
-        else{
-            cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
-        }*/
-    }
-
-
 }
+}
+    
    
