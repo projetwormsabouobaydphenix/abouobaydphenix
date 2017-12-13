@@ -1,5 +1,12 @@
-{
-   "color" : 1,
-   "direction" : "Left"
-}
+[
+   {
+      "color" : 2,
+      "commande" : "MoveCharCommand",
+      "direction" : "Left"
+   },
+   {
+      "color" : 1,
+      "commande" : "ShootCommand"
+   }
+]
 

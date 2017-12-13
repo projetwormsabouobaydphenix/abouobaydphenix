@@ -23,7 +23,7 @@ public:
     void test_random_ai();
     void test_state();
     void test_rollback();
-    void test_record();
+    void test_play();
     virtual ~Tests();
 private:
 

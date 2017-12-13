@@ -6,11 +6,13 @@
 #include <stack>
 #include <memory>
 
+namespace engine {
+  class Command;
+};
 namespace state {
   class State;
 };
 namespace engine {
-  class Command;
   class Action;
 }
 
@@ -22,9 +24,10 @@ namespace engine {
   /// class Engine - 
   class Engine {
     // Attributes
+  public:
+    std::vector<Command*> currentCommands;
   private:
     state::State currentState;
-    std::vector<Command*> currentCommands;
     // Operations
   public:
     Engine ();

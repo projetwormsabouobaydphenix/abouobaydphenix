@@ -62,9 +62,9 @@ int main(int argc,char* argv[])
             cout << "Test RollBack" << endl;
             test.test_rollback();
         }
-        else if (mode == "record"){
-            cout << "Test Record" << endl;
-            test.test_record();
+        else if (mode == "play"){
+            cout << "Test Replay" << endl;
+            test.test_play();
         }
         
         else{

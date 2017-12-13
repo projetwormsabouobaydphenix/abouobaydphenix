@@ -25,7 +25,7 @@ namespace engine {
         ElementTab& chars = state.getChars();
         int width = chars.getWidth();
         chars.list[xFrom+yFrom*width].reset();
-        cout << "Le personnage est tombé dans l'eau. Il est mort." << endl;
+        //cout << "Le personnage est tombé dans l'eau. Il est mort." << endl;
     }
     
     void KillCharAction::undo(state::State& state){

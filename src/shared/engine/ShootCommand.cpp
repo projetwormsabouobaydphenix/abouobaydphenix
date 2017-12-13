@@ -11,6 +11,8 @@
 #include <iostream>
 #include <cmath>
 #include <stack>
+#include <fstream>
+#include <string>
 
 using namespace std;
 using namespace state;
@@ -89,19 +91,35 @@ namespace engine{
     }
 
     ShootCommand* ShootCommand::deserialize(const Json::Value& in) {
-        ShootCommand* shoot = new ShootCommand(2); //constructeur choisi au hasard
-        if (in.isMember("color")){
-            shoot->color = in["color"].asInt();
+        if (in.isMember("commande")){
+            if (in["commande"].asString() == "ShootCommand"){ 
+                ShootCommand* shoot = new ShootCommand(2); //constructeur choisi au hasard
+                if (in.isMember("color")){
+                    shoot->color = in["color"].asInt();
+                }
+            return shoot;
+            }
+            
         }
          else {
             cout << "Erreur Deserialize ShootCommand" << endl;
         }
-        return shoot;
+        
     }
 
     void ShootCommand::serialize(Json::Value& out) const {
         out["commande"] = "ShootCommand";
         out["color"] = color;
+        
+        /*string const nomFichier("res/replay.txt");
+        ofstream monFlux(nomFichier.c_str());
+
+        if (monFlux){
+            monFlux << out.toStyledString() << endl;
+        }
+        else{
+            cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+        }*/
     }
 
 
