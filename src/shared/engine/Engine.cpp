@@ -60,14 +60,17 @@ namespace engine {
     std::stack<std::shared_ptr<Action>>& Engine::update(){
         //cout<<"test update"<<endl;
         static std::stack<std::shared_ptr<Action>> actions;
+        static Json::Value out;
         for (int i=0; i<((int)(currentCommands.size()));i++){
             if ((currentCommands[i])->getTypeId() == LOAD){
                 //cout << "load command" << endl;
                 ((LoadCommand*)(currentCommands[i]))->execute(currentState, actions);
+                //((LoadCommand*)(currentCommands[i]))->serialize(out);
             }
             else if((currentCommands[i])->getTypeId() == MOVE_CHAR){
                 //cout << "MoveCharcommand" << endl;
                 ((MoveCharCommand*)(currentCommands[i]))->execute(currentState, actions);
+                //((MoveCharCommand*)(currentCommands[i]))->serialize(out);
             }
             else if((currentCommands[i])->getTypeId() == HANDLE_LIFE){
                 //cout << "HandleLife" << endl;
@@ -76,6 +79,7 @@ namespace engine {
             else if((currentCommands[i])->getTypeId() == SHOOT){
                 //cout << "HandleLife" << endl;
                 ((ShootCommand*)(currentCommands[i]))->execute(currentState, actions);
+                //((ShootCommand*)(currentCommands[i]))->serialize(out);
             }
             /*else if((currentCommands[i])->getTypeId() == HANDLE_IMPACT){
                 ((HandleImpactCommand*)(currentCommands[i]))->execute(currentState);

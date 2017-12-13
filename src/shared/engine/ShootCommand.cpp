@@ -11,6 +11,8 @@
 #include <iostream>
 #include <cmath>
 #include <stack>
+#include <fstream>
+#include <string>
 
 using namespace std;
 using namespace state;
@@ -89,7 +91,8 @@ namespace engine{
     
 
 
-    ShootCommand* ShootCommand::deserialize(const Json::Value& in) {
+
+   /* ShootCommand* ShootCommand::deserialize(const Json::Value& in) {
         ShootCommand* shoot = new ShootCommand(2); //constructeur choisi au hasard
         if (in.isMember("color")){
             shoot->color = in["color"].asInt();
@@ -98,11 +101,28 @@ namespace engine{
             cout << "Erreur Deserialize ShootCommand" << endl;
         }
         return shoot;
+    }*/
+
+
+    void ShootCommand::deserialize(const Json::Value& in) {
+        if (in.isMember("commande")){
+            if (in["commande"].asString() == "ShootCommand"){ 
+                //ShootCommand* shoot = new ShootCommand(2); //constructeur choisi au hasard
+                if (in.isMember("color")){
+                    this->color = in["color"].asInt();
+                }
+            
+            }
+            
+    }
+        
+}
+ 
+   void ShootCommand::serialize(Json::Value& out) const {
+
     }
 
-    void ShootCommand::serialize(Json::Value& out) const {
-        out["commande"] = "ShootCommand";
-        out["color"] = color;
-    }
 }
+    
+
    

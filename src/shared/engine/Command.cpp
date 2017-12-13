@@ -5,18 +5,30 @@
  */
 
 #include "Command.h"
+#include <iostream>
+
+#include <fstream>
+
+#include <string>
+
+using namespace std;
 
 namespace engine {
-   
-     Command::Command(){}
+
+    Command::Command() {
+    }
+
     Command::~Command() {
 
     }
-       Command* Command::deserialize(const Json::Value& in) {
+
+       void Command::deserialize(const Json::Value& in) {
 
     }
 
-    
-    
+ 
+
+
+
 
 }

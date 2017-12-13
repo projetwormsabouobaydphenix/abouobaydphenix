@@ -198,23 +198,29 @@ namespace engine {
         }
     }
 
-    MoveCharCommand* MoveCharCommand::deserialize(const Json::Value& in) {
-        MoveCharCommand* move = new MoveCharCommand(2, Direction::RIGHT); //constructeur choisi au hasard
-        if (in.isMember("color")) {
-            move->color = in["color"].asInt();
-        }
-        if (in.isMember("direction")) {
-            if (in["direction"].asString() == "Left") {
-                move->direction = Direction::LEFT;
-            } else if (in["direction"].asString() == "Right") {
-                move->direction = Direction::RIGHT;
+    void MoveCharCommand::deserialize(const Json::Value& in) {
+
+        cout << "debut deserialize move" << endl;
+        if (in.isMember("commande")){
+            if (in["commande"].asString() == "MoveCharCommand"){
+                cout << "commande move" << endl;
+                //MoveCharCommand* move = new MoveCharCommand(2, Direction::RIGHT); //constructeur choisi au hasard
+                if (in.isMember("color")) {
+                    this->color = in["color"].asInt();
+                }
+                if (in.isMember("direction")) {
+                    if (in["direction"].asString() == "Left") {
+                        this->direction = Direction::LEFT;
+                    } else if (in["direction"].asString() == "Right") {
+                        this->direction = Direction::RIGHT;
+                    }
+                }
+                
+
             }
-        } else {
-            cout << "Erreur Deserialize MoveCharCommand" << endl;
         }
 
 
-        return move;
     }
 
     void MoveCharCommand::serialize(Json::Value& out) const {
@@ -226,6 +232,16 @@ namespace engine {
         } else if (direction == Direction::RIGHT) {
             out["direction"] = "Right";
         }
+        
+        /*string const nomFichier("res/replay.txt");
+        ofstream monFlux(nomFichier.c_str());
+
+        if (monFlux){
+            monFlux << out.toStyledString() << endl;
+        }
+        else{
+            cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+        }*/
        
     }
 }

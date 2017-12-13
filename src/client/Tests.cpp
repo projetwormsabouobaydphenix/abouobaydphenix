@@ -10,6 +10,8 @@
 #include "../shared/engine.h"
 #include "render.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <thread>
 #include <mutex>
 #include <chrono>
@@ -630,24 +632,102 @@ void Tests::test_thread(){
     
 }
 
+void Tests::test_play() {
+    
+    Engine moteur;
+        State& state = moteur.getState();
 
-/*void Tests::test_record() {
-TestJson test("Sanaa", 22);
-        
-        Json::Value out;
-        test.serialize(out);
-        cout << out["nom"].asString() << endl;
-        cout << out["age"].asInt() << endl;
+        // initialisation de l'état
+        Command* init = new LoadCommand("res/heuristic_ai.txt");
+        moteur.addCommand(0, init);
+        moteur.update();
+        //init->execute(state);
 
-}*/
+        Layer* layer1 = new ElementTabLayer(state.getGrid());
+        Layer* layer2 = new ElementTabLayer(state.getChars());
+        std::stack<std::shared_ptr < Action>> actions;
+        std::stack<std::shared_ptr < Action>> actionsTmp;
+        std::vector<std::shared_ptr < Action>> vectActions;
 
-void Tests::test_play(){
-    Command* comm;
-    string const monFichier("res/replay.txt");
-    ofstream monFlux(monFichier.c_str());
+        sf::RenderWindow window;
+        window.setFramerateLimit(LIMITE_FRAME);
+        window.create(sf::VideoMode(800, 384), "Test Worms");
+        cout << "Bienvenue sur le jeu worms" << endl;
+        //cout << "Le personnage vert n'a qu'une seule vie. Normalement, il doit en récupérer s'il ne veut pas mourir" << endl;
+        cout << "Appuyez sur Entrée pour faire défiler" << endl;
+        cout << "Appuyez sur BackSpace pour revenir en arrière" << endl;
+        //cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
+        HeuristicAI heuristic(state, 2);
+         ifstream ifs("res/replay.txt");
+         int i = 0;
+         Json::Reader reader;
+        Json::Value obj;
+        reader.parse(ifs, obj); // reader can also read strings
+        int length = ifs.tellg();
+        cout << "length = " << length <<  endl;
+        while (window.isOpen()) {
+
+            sf::Event event;
+            while (window.pollEvent(event)) {
+                // fermeture de la fenêtre lorsque l'utilisateur le souhaite
+                if (event.type == sf::Event::Closed) {
+                    window.close();
+                } else if (event.type == sf::Event::KeyReleased) {
+
+                    if (event.key.code == Keyboard::Return) {
+   
+           
+                        
+                        if (i != 2){
+                            cout << "i = " << i << endl;
+                        Command* comm;
+                            Json::Value in = obj[i];
+                            cout << in.toStyledString() << endl;
+                            //bool test = in["commande"].asString()== "MoveCharCommand"; 
+                            //cout<<"commande:: "<< test<<endl;
+                            if (in["commande"].asString() == "MoveCharCommand"){
+                               MoveCharCommand* move = new MoveCharCommand(1, Direction::LEFT);
+                            
+
+                                //moteur.addCommand(0, move->deserialize(in));
+                                //moteur.update();
+                               move->deserialize(in);
+                                cout << "test move " << endl;
+
+                                move->execute(state, actions);
+                            }
+                            else if (in["commande"].asString() == "ShootCommand"){
+                                ShootCommand* shoot = new ShootCommand(1);
+                                shoot->deserialize(in);
+                                moteur.addCommand(0,shoot);
+                                moteur.update();
+                            }
+                            
+                            i++;
+                        }
+                        else {
+                            cout << "i grand" << endl;
+                        }
+                        //cout << "Commande: " << obj[1]["commande"].asString() << endl;
+                        //cout << "Color: " << obj[1]["color"].asInt() << endl;
+                    }
+                }
+            }
+                moteur.update();
+             layer1->initSurface();
+            window.draw(*(layer1->getSurface()));
+
+            layer2->initSurface();
+            window.draw(*(layer2->getSurface()));
+
+            window.display();
+            window.clear();
+        }
 }
 
+        Tests::~Tests(){
+            
+        }
 
-Tests::~Tests() {
-}
+
 

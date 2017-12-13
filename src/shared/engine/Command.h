@@ -8,7 +8,6 @@
 
 namespace engine {
   class Action;
-  class Command;
 };
 namespace state {
   class State;
@@ -34,7 +33,7 @@ namespace engine {
     virtual CommandTypeId getTypeId () const = 0;
     virtual void execute (state:: State& state, std::stack<std::shared_ptr<Action>>& actions) = 0;
     virtual void serialize (Json::Value& out) const = 0;
-    virtual Command* deserialize (const Json::Value& in);
+    virtual void deserialize (const Json::Value& in);
     void addToReplay ();
     // Setters and Getters
   };

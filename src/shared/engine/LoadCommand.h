@@ -12,7 +12,6 @@ namespace state {
 };
 namespace engine {
   class Action;
-  class LoadCommand;
   class Command;
 }
 
@@ -33,7 +32,7 @@ namespace engine {
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
     void serialize (Json::Value& out) const;
-    LoadCommand* deserialize (const Json::Value& in);
+    void deserialize (const Json::Value& in);
     // Setters and Getters
     const std::string& getFile_name() const;
     void setFile_name(const std::string& file_name);

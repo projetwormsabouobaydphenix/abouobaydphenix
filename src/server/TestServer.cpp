@@ -19,6 +19,8 @@
 #include "../shared/engine.h"
 #include "render.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 
 
 using namespace std;
@@ -31,13 +33,40 @@ TestServer::TestServer() {
 }
 
 void TestServer::test_record() {
-        MoveCharCommand test(1, Direction::LEFT);
-        Json::Value out;
-        MoveCharCommand* t;
-        test.serialize(out);
-        t = test.deserialize(out);
-        cout << out.toStyledString() << endl;
-        cout << "direction : " << t->getDirection() << " color : " << t->getColor() << endl;
+    Engine moteur;
+    Json::Value out;
+    
+    Command* move = new MoveCharCommand(2, Direction::LEFT);
+    moteur.addCommand(0, move);
+    
+    
+    Command* shoot = new ShootCommand(1);
+    moteur.addCommand(1, shoot);
+    
+    std::vector<Command*> listCommand = moteur.currentCommands;
+    Json::Value listJson;
+    
+    
+    cout << listCommand.size() << endl;
+    for (int i = 0; i<(int)listCommand.size(); i++){
+        cout << "i = " << i << endl;
+        listCommand[i]->serialize(out);
+        listJson.append(out);
+        out.clear();
+    }
+    
+    cout << listJson.toStyledString() << endl;
+    
+    string const nomFichier("res/replay.txt");
+    ofstream monFlux(nomFichier.c_str());
+    monFlux.clear();
+    if (monFlux){
+        monFlux << listJson.toStyledString() << endl;
+    }
+    else{
+        cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+    }
+   
 }
 
 TestServer::~TestServer() {
