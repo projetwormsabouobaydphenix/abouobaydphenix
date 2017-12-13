@@ -4,12 +4,14 @@
 
 #include <stack>
 #include <memory>
+#include <json/json.h>
 
 namespace state {
   class State;
 };
 namespace engine {
   class Action;
+  class MoveCharCommand;
   class Command;
 }
 
@@ -32,6 +34,8 @@ namespace engine {
     MoveCharCommand (int color, state::Direction direction);
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
+    void serialize (Json::Value& out) const;
+    MoveCharCommand* deserialize (const Json::Value& in);
     // Setters and Getters
     int getColor() const;
     void setColor(int color);

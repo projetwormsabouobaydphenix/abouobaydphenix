@@ -13,6 +13,7 @@
 #include <thread>
 #include <mutex>
 #include <chrono>
+#include <fstream>
 #define LIMITE_FRAME 60
 
 using namespace sf;
@@ -641,10 +642,9 @@ TestJson test("Sanaa", 22);
 }*/
 
 void Tests::test_play(){
-    // ouvrir fichier text avec ifstream fichier("test_play.txt", ios:in);
-    //mettre la premiere ligne dans un JSON ? getline(fichier, json);
-    //une ligne du fichier c'est une commande => Command* move = new MoveCharCommand(...) ou bien MoveCharCommand(...) ?
-    //
+    Command* comm;
+    string const monFichier("res/replay.txt");
+    ofstream monFlux(monFichier.c_str());
 }
 
 

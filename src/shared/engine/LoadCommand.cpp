@@ -116,10 +116,6 @@ namespace engine{
             }
         }
 
-
-/*    void LoadCommand::serialize(Json::Value& out) const {
-
-
     void LoadCommand::serialize(Json::Value& out) const {
         out["commande"] = "LoadCommand";
         out["fileName"] = file_name;
@@ -136,7 +132,7 @@ namespace engine{
         }
         return load;
 
-    }*/
+    }
     
  
 }

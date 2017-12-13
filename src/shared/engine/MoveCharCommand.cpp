@@ -198,7 +198,7 @@ namespace engine {
         }
     }
 
-/*  MoveCharCommand* MoveCharCommand::deserialize(const Json::Value& in) {
+    MoveCharCommand* MoveCharCommand::deserialize(const Json::Value& in) {
         MoveCharCommand* move = new MoveCharCommand(2, Direction::RIGHT); //constructeur choisi au hasard
         if (in.isMember("color")) {
             move->color = in["color"].asInt();
@@ -218,12 +218,7 @@ namespace engine {
     }
 
     void MoveCharCommand::serialize(Json::Value& out) const {
-
-
- 
-    
-    
-
+  
         out["commande"] = "MoveCharCommand";
         out["color"] = color;
         if (direction == Direction::LEFT) {
@@ -232,5 +227,5 @@ namespace engine {
             out["direction"] = "Right";
         }
        
-    }*/
+    }
 }

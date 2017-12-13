@@ -86,10 +86,10 @@ namespace engine{
             }
             
         }
-    }
+    
 
 
-  /*  ShootCommand* ShootCommand::deserialize(const Json::Value& in) {
+    ShootCommand* ShootCommand::deserialize(const Json::Value& in) {
         ShootCommand* shoot = new ShootCommand(2); //constructeur choisi au hasard
         if (in.isMember("color")){
             shoot->color = in["color"].asInt();
@@ -104,5 +104,5 @@ namespace engine{
         out["commande"] = "ShootCommand";
         out["color"] = color;
     }
-}*/
+}
    
