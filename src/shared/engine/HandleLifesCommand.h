@@ -11,7 +11,6 @@ namespace state {
 };
 namespace engine {
   class Action;
-  class HandleLifesCommand;
   class Command;
 }
 
@@ -33,7 +32,7 @@ namespace engine {
     CommandTypeId getTypeId () const;
     void execute (state::State& state, std::stack<std::shared_ptr<Action>>& actions);
     void serialize (Json::Value& out) const;
-    HandleLifesCommand* deserialize (const Json::Value& in);
+    void deserialize (const Json::Value& in);
     // Setters and Getters
     int getColor() const;
     void setColor(int color);

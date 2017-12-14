@@ -21,6 +21,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <random>
 
 
 using namespace std;
@@ -36,26 +37,65 @@ void TestServer::test_record() {
     Engine moteur;
     Json::Value out;
     
-    Command* move = new MoveCharCommand(2, Direction::LEFT);
-    moteur.addCommand(0, move);
+    vector<Command*> list;
+
+    
+    Command* move1 = new MoveCharCommand(1, Direction::RIGHT);
+    list.push_back(move1);
+    
+    move1 = new MoveCharCommand(1, Direction::RIGHT);
+    list.push_back(move1);
+    
+    move1 = new MoveCharCommand(1, Direction::RIGHT);
+    list.push_back(move1);
+    
+    ShootCommand* shoot1 = new ShootCommand(1);
+    list.push_back(shoot1);
+
+    Command* move3 = new MoveCharCommand(2, Direction::RIGHT);
+    list.push_back(move3);
+
+    Command* move4 = new MoveCharCommand(2, Direction::RIGHT);
+    list.push_back(move4);
+    
+    move4 = new MoveCharCommand(2, Direction::LEFT);
+    list.push_back(move4);
+
+    Command* shoot2 = new ShootCommand(2);
+    list.push_back(shoot2);
+
+    Command* move5 = new MoveCharCommand(1, Direction::LEFT);
+    list.push_back(move5);
+    
+    move5 = new MoveCharCommand(1, Direction::RIGHT);
+    list.push_back(move5);
+        
     
     
-    Command* shoot = new ShootCommand(1);
-    moteur.addCommand(1, shoot);
-    
-    std::vector<Command*> listCommand = moteur.currentCommands;
+    //std::vector<Command*> listCommand = moteur.currentCommands;
     Json::Value listJson;
+    std::mt19937 randgen;
+    std::random_device rd;  //Will be used to obtain a seed for the random number engine
+    std::mt19937 rng(rd()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<> dis(0, list.size()-1);
+    randgen = rng;
+    int pos = dis(randgen);
     
     
-    cout << listCommand.size() << endl;
-    for (int i = 0; i<(int)listCommand.size(); i++){
-        cout << "i = " << i << endl;
-        listCommand[i]->serialize(out);
+    moteur.addCommand(0, list[pos]);
+    moteur.update();
+    
+    
+    //cout << listCommand.size() << endl;
+    for (int i = 0; i<(int)list.size(); i++){
+        //int p = rand()%6;
+        //cout << "i = " << i << " p = " << p << endl;
+        list[i]->serialize(out);
         listJson.append(out);
         out.clear();
     }
     
-    cout << listJson.toStyledString() << endl;
+    
     
     string const nomFichier("res/replay.txt");
     ofstream monFlux(nomFichier.c_str());
@@ -66,6 +106,7 @@ void TestServer::test_record() {
     else{
         cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
     }
+    cout << "Les commandes ont été ajoutées au fichier replay.txt" << endl;
    
 }
 

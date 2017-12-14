@@ -22,14 +22,12 @@ namespace engine {
 
     }
 
-    Command* Command::deserialize(const Json::Value& in) {
+       void Command::deserialize(const Json::Value& in) {
 
     }
 
-    void Command::addToReplay() {
-        
+ 
 
-    }
 
 
 

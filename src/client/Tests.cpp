@@ -15,6 +15,7 @@
 #include <thread>
 #include <mutex>
 #include <chrono>
+#include <fstream>
 #define LIMITE_FRAME 60
 
 using namespace sf;
@@ -654,16 +655,16 @@ void Tests::test_play() {
         cout << "Bienvenue sur le jeu worms" << endl;
         //cout << "Le personnage vert n'a qu'une seule vie. Normalement, il doit en récupérer s'il ne veut pas mourir" << endl;
         cout << "Appuyez sur Entrée pour faire défiler" << endl;
-        cout << "Appuyez sur BackSpace pour revenir en arrière" << endl;
+        //cout << "Appuyez sur BackSpace pour revenir en arrière" << endl;
         //cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
-        HeuristicAI heuristic(state, 2);
+        //HeuristicAI heuristic(state, 2);
          ifstream ifs("res/replay.txt");
          int i = 0;
          Json::Reader reader;
         Json::Value obj;
         reader.parse(ifs, obj); // reader can also read strings
-        int length = ifs.tellg();
-        cout << "length = " << length <<  endl;
+        //int length = ifs.tellg();
+        //cout << "length = " << length <<  endl;
         while (window.isOpen()) {
 
             sf::Event event;
@@ -677,39 +678,47 @@ void Tests::test_play() {
    
            
                         
-                        if (i != 2){
-                            cout << "i = " << i << endl;
-                        Command* comm;
+                        if (i != 10){
+                        //cout << "i = " << i << endl;
+                            //Command* comm;
                             Json::Value in = obj[i];
-                            cout << in.toStyledString() << endl;
-                            cout<<"voila<"<<in["commande"].asString()<<endl;
+                            //cout << in.toStyledString() << endl;
+                            //cout<<"voila<"<<in["commande"].asString()<<endl;
+                            cout << "Commande = " << in["commande"].asString() << endl;
+                            
                             if (in["commande"].asString() == "MoveCharCommand"){
-                                //cout << "test move " << endl;
-                               MoveCharCommand* move = (MoveCharCommand*) comm;
+                            MoveCharCommand* move = new MoveCharCommand(1, Direction::LEFT);
+                            
+
                                 //moteur.addCommand(0, move->deserialize(in));
                                 //moteur.update();
-                               MoveCharCommand* move1 = move->deserialize(in);
-                                move1->execute(state, actions);
+                                move->deserialize(in);
+                                //cout << "test move " << endl;
+
+                                move->execute(state, actions);
                             }
                             else if (in["commande"].asString() == "ShootCommand"){
-                                ShootCommand* shoot = (ShootCommand*) comm;
-                                ShootCommand* shoot1 = shoot->deserialize(in);
-                                moteur.addCommand(0,shoot1);
+                                ShootCommand* shoot = new ShootCommand(1);
+                                shoot->deserialize(in);
+                                moteur.addCommand(0,shoot);
                                 moteur.update();
                             }
-                            
+                            cout << " " << endl;
                             i++;
                         }
                         else {
-                            cout << "i grand" << endl;
+                            cout << "Plus de commande" << endl;
+                            return;
                         }
                         //cout << "Commande: " << obj[1]["commande"].asString() << endl;
                         //cout << "Color: " << obj[1]["color"].asInt() << endl;
                     }
                 }
             }
-                moteur.update();
-             layer1->initSurface();
+                
+            
+            moteur.update();
+            layer1->initSurface();
             window.draw(*(layer1->getSurface()));
 
             layer2->initSurface();
@@ -718,11 +727,11 @@ void Tests::test_play() {
             window.display();
             window.clear();
         }
-
-
 }
 
+        Tests::~Tests(){
+            
+        }
 
-Tests::~Tests() {
-}
+
 

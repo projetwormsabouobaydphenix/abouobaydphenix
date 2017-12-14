@@ -80,13 +80,13 @@ namespace engine {
         return CommandTypeId::HANDLE_LIFE;
     }
 
- /*   HandleLifesCommand* HandleLifesCommand::deserialize(const Json::Value& in) {
+    void HandleLifesCommand::deserialize(const Json::Value& in) {
 
     }
 
     void HandleLifesCommand::serialize(Json::Value& out) const {
 
-    }*/
+    }
     
  
 }

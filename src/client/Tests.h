@@ -31,7 +31,7 @@ public:
     void thread_secondaire(engine::Engine& moteur, int color);
     void test_thread();
     void test_play();
-    virtual ~Tests();
+    ~Tests();
 private:
 
 };
