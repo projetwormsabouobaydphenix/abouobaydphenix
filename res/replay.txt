@@ -7,19 +7,19 @@
    ],
    [
       {
+         "color" : 2,
+         "commande" : "MoveCharCommand",
+         "direction" : "Right"
+      },
+      {
          "color" : 1,
          "commande" : "MoveCharCommand",
-         "direction" : "Left"
+         "direction" : "Right"
       },
       {
          "color" : 2,
          "commande" : "MoveCharCommand",
-         "direction" : "Left"
-      },
-      {
-         "color" : 1,
-         "commande" : "MoveCharCommand",
-         "direction" : "Left"
+         "direction" : "Right"
       },
       {
          "color" : 1,
@@ -31,41 +31,7 @@
          "commande" : "ShootCommand"
       },
       {
-         "color" : 2,
-         "commande" : "MoveCharCommand",
-         "direction" : "Right"
-      },
-      {
          "color" : 1,
-         "commande" : "MoveCharCommand",
-         "direction" : "Right"
-      },
-      {
-         "color" : 1,
-         "commande" : "MoveCharCommand",
-         "direction" : "Right"
-      },
-      {
-         "color" : 1,
-         "commande" : "MoveCharCommand",
-         "direction" : "Right"
-      },
-      {
-         "color" : 1,
-         "commande" : "MoveCharCommand",
-         "direction" : "Left"
-      },
-      {
-         "color" : 1,
-         "commande" : "MoveCharCommand",
-         "direction" : "Left"
-      },
-      {
-         "color" : 2,
-         "commande" : "ShootCommand"
-      },
-      {
-         "color" : 2,
          "commande" : "MoveCharCommand",
          "direction" : "Right"
       },
@@ -73,6 +39,21 @@
          "color" : 2,
          "commande" : "MoveCharCommand",
          "direction" : "Left"
+      },
+      {
+         "color" : 2,
+         "commande" : "MoveCharCommand",
+         "direction" : "Right"
+      },
+      {
+         "color" : 1,
+         "commande" : "MoveCharCommand",
+         "direction" : "Right"
+      },
+      {
+         "color" : 1,
+         "commande" : "MoveCharCommand",
+         "direction" : "Right"
       },
       {
          "color" : 2,
@@ -84,6 +65,30 @@
          "commande" : "ShootCommand"
       },
       {
+         "color" : 1,
+         "commande" : "MoveCharCommand",
+         "direction" : "Right"
+      },
+      {
+         "color" : 2,
+         "commande" : "MoveCharCommand",
+         "direction" : "Right"
+      },
+      {
+         "color" : 2,
+         "commande" : "MoveCharCommand",
+         "direction" : "Right"
+      },
+      {
+         "color" : 2,
+         "commande" : "ShootCommand"
+      },
+      {
+         "color" : 1,
+         "commande" : "MoveCharCommand",
+         "direction" : "Right"
+      },
+      {
          "color" : 2,
          "commande" : "MoveCharCommand",
          "direction" : "Left"
@@ -91,12 +96,7 @@
       {
          "color" : 2,
          "commande" : "MoveCharCommand",
-         "direction" : "Right"
-      },
-      {
-         "color" : 1,
-         "commande" : "MoveCharCommand",
-         "direction" : "Right"
+         "direction" : "Left"
       }
    ]
 ]

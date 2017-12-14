@@ -89,6 +89,7 @@ void Tests::test_state() {
 }
 
 void Tests::test_render() {
+    cout << "Test render" << endl;
     sf::RenderWindow window(sf::VideoMode(800, 384), "Worms");
 
     state::State state;
@@ -639,15 +640,17 @@ void Tests::test_play() {
     reader.parse(ifs, obj); // reader can also read strings
     //cout << obj[0].toStyledString() << endl;
     inn = obj[1];
+     std::stack<std::shared_ptr < Action>> actions;
     // initialisation de l'état
     Command* init = new LoadCommand("res/heuristic_ai.txt");
-    moteur.addCommand(0, init);
+    init->deserialize(obj[0][0]);
+    //moteur.addCommand(0, init);
     moteur.update();
-    //init->execute(state);
+    init->execute(state, actions);
 
     Layer* layer1 = new ElementTabLayer(state.getGrid());
     Layer* layer2 = new ElementTabLayer(state.getChars());
-    std::stack<std::shared_ptr < Action>> actions;
+   
 
     sf::RenderWindow window;
     window.setFramerateLimit(LIMITE_FRAME);

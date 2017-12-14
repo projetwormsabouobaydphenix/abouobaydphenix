@@ -84,7 +84,7 @@ namespace engine {
                                         if (s->getNature() == SpaceTypeId::LIFE ) {
                                             persoApAction->setLifecount(lifeCountPersoAction + 1);
                                             cout << "Super, le personnage a récupéré une vie" << endl;
-                                            cout << "Il en a maintenant 3"  <<endl;
+                                            //cout << "Il en a maintenant 3"  <<endl;
                                         }
                                         return;
                                     }
@@ -107,7 +107,7 @@ namespace engine {
                                             if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                                 persoApAction->setLifecount(lifeCountPersoAction );
                                                 cout << "Super, le personnage a récupéré une vie" << endl;
-                                                cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                                //cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
                                             }
                                             else if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction==3) {
                                         cout << "Le personnage a déjà trois vies, il ne peut pas en récupérer" << endl;
@@ -129,7 +129,7 @@ namespace engine {
                                         if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                             persoApAction->setLifecount(persoApAction->getLifecount() + 1);
                                             cout << "Super, le personnage a récupéré une vie" << endl;
-                                            cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                            //cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
                                         }
                                         return;
                                     }
@@ -150,7 +150,7 @@ namespace engine {
                                         if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                             persoApAction->setLifecount(persoApAction->getLifecount() + 1);
                                             cout << "Super, le personnage a récupéré une vie" << endl;
-                                            cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                            //cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
                                         }
 
                                         return;
@@ -172,7 +172,7 @@ namespace engine {
                                             if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                                 persoApAction->setLifecount(persoApAction->getLifecount() + 1);
                                                 cout << "Super, le personnage a récupéré une vie" << endl;
-                                                cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                                //cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
                                             }
                                            
 
@@ -190,7 +190,7 @@ namespace engine {
                                     if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                         persoApAction->setLifecount(persoApAction->getLifecount() + 1);
                                         cout << "Super, le personnage a récupéré une vie" << endl;
-                                        cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                        //cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
                                     }
                                     else if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction==3) {
                                         cout << "Le personnage a déjà trois vies, il ne peut pas en récupérer" << endl;
