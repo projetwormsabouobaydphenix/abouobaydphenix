@@ -27,7 +27,6 @@ using namespace engine;
 
 std::mutex commands_mutex;
 
-
 Tests::Tests() {
 }
 
@@ -416,175 +415,169 @@ void Tests::test_random_ai() {
 
 void Tests::test_rollback() {
 
-        cout << "debut test hai" << endl;
-        Engine moteur;
-        State& state = moteur.getState();
+    cout << "debut test hai" << endl;
+    Engine moteur;
+    State& state = moteur.getState();
 
-        // initialisation de l'état
-        Command* init = new LoadCommand("res/heuristic_ai.txt");
-        moteur.addCommand(0, init);
-        moteur.update();
-        //init->execute(state);
+    // initialisation de l'état
+    Command* init = new LoadCommand("res/heuristic_ai.txt");
+    moteur.addCommand(0, init);
+    moteur.update();
+    //init->execute(state);
 
-        Layer* layer1 = new ElementTabLayer(state.getGrid());
-        Layer* layer2 = new ElementTabLayer(state.getChars());
-        std::stack<std::shared_ptr < Action>> actions;
-        std::stack<std::shared_ptr < Action>> actionsTmp;
-        std::vector<std::shared_ptr < Action>> vectActions;
+    Layer* layer1 = new ElementTabLayer(state.getGrid());
+    Layer* layer2 = new ElementTabLayer(state.getChars());
+    std::stack<std::shared_ptr < Action>> actions;
+    std::stack<std::shared_ptr < Action>> actionsTmp;
+    std::vector<std::shared_ptr < Action>> vectActions;
 
-        sf::RenderWindow window;
-        window.setFramerateLimit(LIMITE_FRAME);
-        window.create(sf::VideoMode(800, 384), "Test Worms");
-        cout << "Bienvenue sur le jeu worms" << endl;
-        //cout << "Le personnage vert n'a qu'une seule vie. Normalement, il doit en récupérer s'il ne veut pas mourir" << endl;
-        cout << "Appuyez sur Entrée pour faire défiler" << endl;
-        cout << "Appuyez sur BackSpace pour revenir en arrière" << endl;
-        //cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
-        HeuristicAI heuristic(state, 2);
-        int i = 0;
-        //int k = 0;
-        while (window.isOpen()) {
+    sf::RenderWindow window;
+    window.setFramerateLimit(LIMITE_FRAME);
+    window.create(sf::VideoMode(800, 384), "Test Worms");
+    cout << "Bienvenue sur le jeu worms" << endl;
+    //cout << "Le personnage vert n'a qu'une seule vie. Normalement, il doit en récupérer s'il ne veut pas mourir" << endl;
+    cout << "Appuyez sur Entrée pour faire défiler" << endl;
+    cout << "Appuyez sur BackSpace pour revenir en arrière" << endl;
+    //cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
+    HeuristicAI heuristic(state, 2);
+    int i = 0;
+    //int k = 0;
+    while (window.isOpen()) {
 
-            sf::Event event;
-            while (window.pollEvent(event)) {
-                // fermeture de la fenêtre lorsque l'utilisateur le souhaite
-                if (event.type == sf::Event::Closed) {
-                    window.close();
-                } else if (event.type == sf::Event::KeyReleased) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            // fermeture de la fenêtre lorsque l'utilisateur le souhaite
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            } else if (event.type == sf::Event::KeyReleased) {
 
-                    if (event.key.code == Keyboard::N) {
-                        cout << "Appuyez sur Entrée pour faire défiler" << endl;
-                        cout << "Appuyez sur BackSpace pour revenir en arrière" << endl; 
-                        //cout << "" << endl;
-                        /*i = i + 1;
-                        if (i == 1) {
-                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
-                            moteur.addCommand(0, move);
-                        } else if (i == 2) {
-                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
-                            moteur.addCommand(1, move);
-                        } else if (i == 3) {
-                            Command* move = new MoveCharCommand(2, Direction::LEFT);
-                            moteur.addCommand(2, move);
-                        } else if (i == 4) {
-                            Command* move = new MoveCharCommand(2, Direction::RIGHT);
-                            moteur.addCommand(2, move);
-                        } else if (i == 5) {
-                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
-                            moteur.addCommand(2, move);
-                        } */
-                        heuristic.run(moteur,2);
+                if (event.key.code == Keyboard::N) {
+                    cout << "Appuyez sur Entrée pour faire défiler" << endl;
+                    cout << "Appuyez sur BackSpace pour revenir en arrière" << endl;
+                    //cout << "" << endl;
+                    /*i = i + 1;
+                    if (i == 1) {
+                        Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                        moteur.addCommand(0, move);
+                    } else if (i == 2) {
+                        Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                        moteur.addCommand(1, move);
+                    } else if (i == 3) {
+                        Command* move = new MoveCharCommand(2, Direction::LEFT);
+                        moteur.addCommand(2, move);
+                    } else if (i == 4) {
+                        Command* move = new MoveCharCommand(2, Direction::RIGHT);
+                        moteur.addCommand(2, move);
+                    } else if (i == 5) {
+                        Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                        moteur.addCommand(2, move);
+                    } */
+                    heuristic.run(moteur, 2);
+                } else if (event.key.code == Keyboard::V) {
+                    i = i + 1;
+                    if (i == 1) {
+                        Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                        cout << "move1" << endl;
+                        moteur.addCommand(0, move);
+                    } else if (i == 2) {
+                        Command* move = new MoveCharCommand(1, Direction::RIGHT);
+                        cout << "move2" << endl;
+                        moteur.addCommand(0, move);
+                    } else if (i == 3) {
+                        cout << "Le personnage vert va tirer" << endl;
+                        Command* shoot = new ShootCommand(1);
+                        moteur.addCommand(0, shoot);
                     }
-                    
-                    else if (event.key.code == Keyboard::V){
-                        i = i + 1;
-                        if (i == 1){
-                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
-                            cout<<"move1"<<endl;
-                            moteur.addCommand(0, move);
-                        }
-                        else if (i == 2){
-                            Command* move = new MoveCharCommand(1, Direction::RIGHT);
-                            cout<<"move2"<<endl;
-                            moteur.addCommand(0, move);
-                        }
-                        else if (i == 3){
-                            cout << "Le personnage vert va tirer" << endl;
-                            Command* shoot = new ShootCommand(1);
-                            moteur.addCommand(0, shoot);
-                        }
-                    }
-                   
-                       
-                        
+                }
 
-                        //sleep(milliseconds(1000));
-                        
-                    else if (event.key.code == Keyboard::BackSpace) {
-                        cout<<"il y a "<<actionsTmp.size()<<"actions"<<endl;
-                        moteur.undoe(actionsTmp);
-                        //i = 0;
-                        //actions.pop()
-                       //sleep(milliseconds(1000));
-                     }
-            
-                }    
+
+                    //sleep(milliseconds(1000));
+
+                else if (event.key.code == Keyboard::BackSpace) {
+                    cout << "il y a " << actionsTmp.size() << "actions" << endl;
+                    moteur.undoe(actionsTmp);
+                    //i = 0;
+                    //actions.pop()
+                    //sleep(milliseconds(1000));
+                }
+
             }
-                actionsTmp = moteur.update();
-//                int lActions = (int) actionsTmp.size();
-               // cout<<"nbre actions tempo"<<actionsTmp.size()<<endl;
-                /*for (int i = 0; i < lActions; i++) {
-                    vectActions.push_back(actionsTmp.top());
-                    actionsTmp.pop();
-                }
-               // cout<<"taille de vectActions : "<<vectActions.size()<<endl;
-                for (int j = 0; j < (int) vectActions.size(); j++) {
-                    int n = (int) vectActions.size();
-                    actions.push(vectActions[n - j - 1]);
-                }
-               // cout<<"taille de actions : "<<actions.size()<<endl;
-                vectActions.clear();*/
-                        
-                        
-                
-            //moteur.update();
-            
-            // moteur.undo(actions);
+        }
+        actionsTmp = moteur.update();
+        //                int lActions = (int) actionsTmp.size();
+        // cout<<"nbre actions tempo"<<actionsTmp.size()<<endl;
+        /*for (int i = 0; i < lActions; i++) {
+            vectActions.push_back(actionsTmp.top());
+            actionsTmp.pop();
+        }
+       // cout<<"taille de vectActions : "<<vectActions.size()<<endl;
+        for (int j = 0; j < (int) vectActions.size(); j++) {
+            int n = (int) vectActions.size();
+            actions.push(vectActions[n - j - 1]);
+        }
+       // cout<<"taille de actions : "<<actions.size()<<endl;
+        vectActions.clear();*/
 
-            layer1->initSurface();
-            window.draw(*(layer1->getSurface()));
 
-            layer2->initSurface();
-            window.draw(*(layer2->getSurface()));
 
-            window.display();
-            window.clear();
+        //moteur.update();
 
-        
+        // moteur.undo(actions);
+
+        layer1->initSurface();
+        window.draw(*(layer1->getSurface()));
+
+        layer2->initSurface();
+        window.draw(*(layer2->getSurface()));
+
+        window.display();
+        window.clear();
+
+
     }
 }
 
-void Tests::thread_secondaire(engine::Engine& moteur, int color){
+void Tests::thread_secondaire(engine::Engine& moteur, int color) {
     State& state = moteur.getState();
     HeuristicAI heuristicnoir(state, 2);
-    HeuristicAI heuristicvert(state,1);
+    HeuristicAI heuristicvert(state, 1);
     //int nbreaction =0;
-    
-    while (1){
-        int nbreaction =0;
-        if (color==1){
-            while(nbreaction <4){
-                {std::lock_guard<std::mutex> lock(commands_mutex);
-                cout<<"heuristic vert"<<endl;
-                heuristicvert.run(moteur,1);
-                nbreaction +=1;
+
+    while (1) {
+        int nbreaction = 0;
+        if (color == 1) {
+            while (nbreaction < 4) {
+                {
+                    std::lock_guard<std::mutex> lock(commands_mutex);
+                    cout << "heuristic vert" << endl;
+                    heuristicvert.run(moteur, 1);
+                    nbreaction += 1;
                 }
                 std::this_thread::sleep_for(std::chrono::seconds(1));
 
             }
-            color =2;
-          }
-        else if (color==2){
-            while(nbreaction <3){
-                {std::lock_guard<std::mutex> lock(commands_mutex);
-                cout<<"heuristic noir"<<endl;
-                heuristicnoir.run(moteur, 2);
-                nbreaction+=1;
+            color = 2;
+        } else if (color == 2) {
+            while (nbreaction < 3) {
+                {
+                    std::lock_guard<std::mutex> lock(commands_mutex);
+                    cout << "heuristic noir" << endl;
+                    heuristicnoir.run(moteur, 2);
+                    nbreaction += 1;
                 }
                 std::this_thread::sleep_for(std::chrono::seconds(1));
             }
-            color=1;
+            color = 1;
+        } else {
+            cout << "erreur la couleur n'est pas bonne" << endl;
         }
-        else {
-            cout<<"erreur la couleur n'est pas bonne"<<endl;
-        }
-        
+
         //cout<<"le personnage qui va jouer est "<<color<<endl;
         //1sleep(milliseconds(1000));
     }
 }
 
-void Tests::test_thread(){
+void Tests::test_thread() {
     cout << "debut test thread" << endl;
     Engine moteur;
     State& state = moteur.getState();
@@ -603,9 +596,9 @@ void Tests::test_thread(){
     /*cout << "Le personnage vert n'a qu'une seule vie. Normalement, il doit en récupérer s'il ne veut pas mourir" << endl;
     cout << "Appuyez sur Espace pour faire défiler" << endl;*/
 
-    int color =1;
-    thread th_second(&Tests::thread_secondaire,this,std::ref(moteur), std::ref(color));
-    
+    int color = 1;
+    thread th_second(&Tests::thread_secondaire, this, std::ref(moteur), std::ref(color));
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -614,124 +607,118 @@ void Tests::test_thread(){
                 window.close();
             }
         }
-        
+
         std::lock_guard<std::mutex> lock(commands_mutex);
 
         layer1->initSurface();
         window.draw(*(layer1->getSurface()));
 
         layer2->initSurface();
-        
+
         window.draw(*(layer2->getSurface()));
-        
+
         window.display();
         window.clear();
 
     }
     th_second.join();
-    
+
 }
 
 void Tests::test_play() {
-    
+
     Engine moteur;
-        State& state = moteur.getState();
+    State& state = moteur.getState();
 
-        // initialisation de l'état
-        Command* init = new LoadCommand("res/heuristic_ai.txt");
-        moteur.addCommand(0, init);
-        moteur.update();
-        //init->execute(state);
+    ifstream ifs("res/replay.txt");
+    int i = 0;
+    Json::Reader reader;
+    Json::Value obj;
+    Json::Value in;
+    Json::Value inn;
+    reader.parse(ifs, obj); // reader can also read strings
+    //cout << obj[0].toStyledString() << endl;
+    inn = obj[1];
+    // initialisation de l'état
+    Command* init = new LoadCommand("res/heuristic_ai.txt");
+    moteur.addCommand(0, init);
+    moteur.update();
+    //init->execute(state);
 
-        Layer* layer1 = new ElementTabLayer(state.getGrid());
-        Layer* layer2 = new ElementTabLayer(state.getChars());
-        std::stack<std::shared_ptr < Action>> actions;
-        std::stack<std::shared_ptr < Action>> actionsTmp;
-        std::vector<std::shared_ptr < Action>> vectActions;
+    Layer* layer1 = new ElementTabLayer(state.getGrid());
+    Layer* layer2 = new ElementTabLayer(state.getChars());
+    std::stack<std::shared_ptr < Action>> actions;
 
-        sf::RenderWindow window;
-        window.setFramerateLimit(LIMITE_FRAME);
-        window.create(sf::VideoMode(800, 384), "Test Worms");
-        cout << "Bienvenue sur le jeu worms" << endl;
-        //cout << "Le personnage vert n'a qu'une seule vie. Normalement, il doit en récupérer s'il ne veut pas mourir" << endl;
-        cout << "Appuyez sur Entrée pour faire défiler" << endl;
-        //cout << "Appuyez sur BackSpace pour revenir en arrière" << endl;
-        //cout << "Pour choisir l'équipe verte, appuyez sur la touche V; sinon appuyez sur la touche N" << endl;
-        //HeuristicAI heuristic(state, 2);
-         ifstream ifs("res/replay.txt");
-         int i = 0;
-         Json::Reader reader;
-        Json::Value obj;
-        reader.parse(ifs, obj); // reader can also read strings
-        //int length = ifs.tellg();
-        //cout << "length = " << length <<  endl;
-        while (window.isOpen()) {
+    sf::RenderWindow window;
+    window.setFramerateLimit(LIMITE_FRAME);
+    window.create(sf::VideoMode(800, 384), "Test Worms");
+    cout << "Bienvenue sur le jeu worms" << endl;
+    cout << "Appuyez sur Entrée pour faire défiler" << endl;
 
-            sf::Event event;
-            while (window.pollEvent(event)) {
-                // fermeture de la fenêtre lorsque l'utilisateur le souhaite
-                if (event.type == sf::Event::Closed) {
-                    window.close();
-                } else if (event.type == sf::Event::KeyReleased) {
+    while (window.isOpen()) {
 
-                    if (event.key.code == Keyboard::Return) {
-   
-           
-                        
-                        if (i != 10){
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            // fermeture de la fenêtre lorsque l'utilisateur le souhaite
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            } else if (event.type == sf::Event::KeyReleased) {
+
+                if (event.key.code == Keyboard::Return) {
+                    if (i != (int)inn.size()) {
                         //cout << "i = " << i << endl;
-                            //Command* comm;
-                            Json::Value in = obj[i];
-                            //cout << in.toStyledString() << endl;
-                            //cout<<"voila<"<<in["commande"].asString()<<endl;
-                            cout << "Commande = " << in["commande"].asString() << endl;
-                            
-                            if (in["commande"].asString() == "MoveCharCommand"){
+                        //Command* comm;
+                        Json::Value in = inn[i];
+                        //cout << in.toStyledString() << endl;
+                        //cout<<"voila<"<<in["commande"].asString()<<endl;
+                        cout << "Commande = " << in["commande"].asString() << endl;
+
+                        if (in["commande"].asString() == "MoveCharCommand") {
                             MoveCharCommand* move = new MoveCharCommand(1, Direction::LEFT);
-                            
 
-                                //moteur.addCommand(0, move->deserialize(in));
-                                //moteur.update();
-                                move->deserialize(in);
-                                //cout << "test move " << endl;
 
-                                move->execute(state, actions);
-                            }
-                            else if (in["commande"].asString() == "ShootCommand"){
-                                ShootCommand* shoot = new ShootCommand(1);
-                                shoot->deserialize(in);
-                                moteur.addCommand(0,shoot);
-                                moteur.update();
-                            }
-                            cout << " " << endl;
-                            i++;
+                            //moteur.addCommand(0, move->deserialize(in));
+                            //moteur.update();
+                            move->deserialize(in);
+                            //cout << "test move " << endl;
+
+                            move->execute(state, actions);
+                        } else if (in["commande"].asString() == "ShootCommand") {
+                            ShootCommand* shoot = new ShootCommand(1);
+                            shoot->deserialize(in);
+                            moteur.addCommand(0, shoot);
+                            moteur.update();
                         }
-                        else {
-                            cout << "Plus de commande" << endl;
-                            return;
-                        }
-                        //cout << "Commande: " << obj[1]["commande"].asString() << endl;
-                        //cout << "Color: " << obj[1]["color"].asInt() << endl;
+                        cout << " " << endl;
+                        i++;
+                    } else {
+                        cout << "Plus de commande" << endl;
+                        return;
                     }
+
+
+
                 }
+
             }
-                
-            
-            moteur.update();
-            layer1->initSurface();
-            window.draw(*(layer1->getSurface()));
-
-            layer2->initSurface();
-            window.draw(*(layer2->getSurface()));
-
-            window.display();
-            window.clear();
         }
+
+
+        //moteur.update();
+        layer1->initSurface();
+        window.draw(*(layer1->getSurface()));
+
+        layer2->initSurface();
+        window.draw(*(layer2->getSurface()));
+
+        window.display();
+        window.clear();
+    }
 }
 
-        Tests::~Tests(){
-            
-        }
+Tests::~Tests() {
+
+}
 
 
 

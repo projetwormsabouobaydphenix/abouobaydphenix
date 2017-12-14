@@ -124,8 +124,12 @@ namespace engine{
 
     void LoadCommand::deserialize(const Json::Value& in) {
         //LoadCommand* load = new LoadCommand("name"); //constructeur choisi au hasard
-        if (in.isMember("fileName")){
-            this->file_name = in["fineName"].asString();
+        if (in.isMember("commande")){
+            if (in["commande"].asString() == "LoadCommand"){
+                if (in.isMember("color")) {
+                    this->file_name = in["fineName"].asString();
+                }
+            }
         }
          else {
             cout << "Erreur Deserialize ShootCommand" << endl;
