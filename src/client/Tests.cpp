@@ -682,6 +682,7 @@ void Tests::test_play() {
                         Command* comm;
                             Json::Value in = obj[i];
                             cout << in.toStyledString() << endl;
+                            cout<<"voila<"<<in["commande"].asString()<<endl;
                             if (in["commande"].asString() == "MoveCharCommand"){
                                 //cout << "test move " << endl;
                                MoveCharCommand* move = (MoveCharCommand*) comm;
