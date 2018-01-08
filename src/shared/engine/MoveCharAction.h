@@ -22,8 +22,6 @@ namespace engine {
   class MoveCharAction : public engine::Action {
     // Associations
     // Attributes
-  public:
-    state::Direction nextDir;
   protected:
     int color;
     int xFrom;
@@ -32,9 +30,11 @@ namespace engine {
     int yTo;
     state::Personnage* persoApAction;
     state::Direction precDir;
+    state::Direction nextDir;
+    int lifeCountPersoAv;
     // Operations
   public:
-    MoveCharAction (int color, int xFrom, int yFrom, int xTo, int yTo, state::Personnage* persoApAction, state::Direction precDir, state::Direction nextDir);
+    MoveCharAction (int color, int xFrom, int yFrom, int xTo, int yTo, state::Personnage* persoApAction, state::Direction precDir, state::Direction nextDir, int lifeCountPersoAv);
     void apply (state::State& state);
     void undo (state::State& state);
     ActionTypeId getActionTypeId () const;
@@ -53,6 +53,10 @@ namespace engine {
     void setPersoApAction(const state::Personnage*& persoApAction);
     state::Direction getPrecDir() const;
     void setPrecDir(state::Direction precDir);
+    state::Direction getNextDir() const;
+    void setNextDir(state::Direction nextDir);
+    int getLifeCountPersoAv() const;
+    void setLifeCountPersoAv(int lifeCountPersoAv);
   };
 
 };

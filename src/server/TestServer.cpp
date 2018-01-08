@@ -181,6 +181,15 @@ void TestServer::test_record() {
    
 }
 
+void TestServer::test_server() {
+    
+    
+    
+    
+}
+
+
+
 TestServer::~TestServer() {
 }
 

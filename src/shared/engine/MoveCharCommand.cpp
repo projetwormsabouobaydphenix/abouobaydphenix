@@ -53,9 +53,10 @@ namespace engine {
 
         size_t width = chars.getWidth();
         size_t height = chars.getHeight();
-        //cout << width << endl;
-        //cout << height << endl;
-
+        
+        int lifeCountPersoAction;
+        int xFrom, yFrom;
+        state::Direction precDir;
 
         for (int i = 0; i < (int) height; i++) {
             for (int j = 0; j < (int) width; j++) {
@@ -65,10 +66,10 @@ namespace engine {
                         //cout << "Test 2" << endl;
                         Personnage* persoAction = (Personnage*) chars.list[i * width + j].get();
                         if (persoAction->getColor() == color) {
-                            int xFrom = persoAction->getI();
-                            int yFrom = persoAction->getJ();
-                            int lifeCountPersoAction = persoAction->getLifecount();
-                            state::Direction precDir = persoAction->getDirection();
+                            xFrom = persoAction->getI();
+                            yFrom = persoAction->getJ();
+                            lifeCountPersoAction = persoAction->getLifecount();
+                            precDir = persoAction->getDirection();
                             //cout << "x = " << xFrom << ", y = " << yFrom << endl;
                             //cout << "Le personnage a " << p->getLifecount() << " vies" << endl;
                             if (direction == Direction::RIGHT) {
@@ -77,14 +78,20 @@ namespace engine {
                                         Personnage* persoApAction = new Personnage(color, RIGHT);
                                         persoApAction->setLifecount(lifeCountPersoAction);
                                         state::Direction nextDir = persoApAction->getDirection();
-                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom + 1, yFrom, persoApAction, precDir, nextDir);
+                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom + 1, yFrom, persoApAction, precDir, nextDir, lifeCountPersoAction);
                                         move->apply(state);
                                         actions.push(shared_ptr<Action>(move));
                                         Space* s = (Space*) grid.get(xFrom + 1, yFrom);
                                         if (s->getNature() == SpaceTypeId::LIFE ) {
-                                            persoApAction->setLifecount(lifeCountPersoAction + 1);
-                                            cout << "Super, le personnage a récupéré une vie" << endl;
-                                            //cout << "Il en a maintenant 3"  <<endl;
+                                            if (persoApAction->getLifecount()<3){
+                                                persoApAction->setLifecount(lifeCountPersoAction + 1);
+                                                cout << "Super, le personnage a récupéré une vie" << endl;
+                                                cout << "Il en a maintenant " << persoApAction->getLifecount() <<endl;
+                                            }
+                                            else {
+                                                cout << "Le personnage a déjà 3 vies." << endl;
+                                            }
+                                                        
                                         }
                                         return;
                                     }
@@ -99,7 +106,7 @@ namespace engine {
                                             Personnage* persoApAction = new Personnage(color, RIGHT);
                                             persoApAction->setLifecount(lifeCountPersoAction);
                                             state::Direction nextDir = persoApAction->getDirection();
-                                            engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom + 1, yFrom + 1, persoApAction, precDir, nextDir);
+                                            engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom + 1, yFrom + 1, persoApAction, precDir, nextDir, lifeCountPersoAction);
                                             move->apply(state);
                                             actions.push(shared_ptr<Action>(move));
                                             //cout << "test " << endl;
@@ -107,7 +114,7 @@ namespace engine {
                                             if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                                 persoApAction->setLifecount(lifeCountPersoAction );
                                                 cout << "Super, le personnage a récupéré une vie" << endl;
-                                                //cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                                cout << "Il en a maintenant " << lifeCountPersoAction + 1 << endl;
                                             }
                                             else if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction==3) {
                                         cout << "Le personnage a déjà trois vies, il ne peut pas en récupérer" << endl;
@@ -122,14 +129,14 @@ namespace engine {
                                         Personnage* persoApAction = new Personnage(color, RIGHT);
                                         persoApAction->setLifecount(lifeCountPersoAction);
                                         state::Direction nextDir = persoApAction->getDirection();
-                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom + 1, yFrom - 1, persoApAction, precDir, nextDir);
+                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom + 1, yFrom - 1, persoApAction, precDir, nextDir, lifeCountPersoAction);
                                         move->apply(state);
                                         actions.push(shared_ptr<Action>(move));
                                         Space* s = (Space*) grid.get(xFrom + 1, yFrom - 1);
                                         if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                             persoApAction->setLifecount(persoApAction->getLifecount() + 1);
                                             cout << "Super, le personnage a récupéré une vie" << endl;
-                                            //cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                            cout << "Il en a maintenant " << lifeCountPersoAction + 1 << endl;
                                         }
                                         return;
                                     }
@@ -143,14 +150,14 @@ namespace engine {
                                         Personnage* persoApAction = new Personnage(color, LEFT);
                                         persoApAction->setLifecount(lifeCountPersoAction);
                                         state::Direction nextDir = persoApAction->getDirection();
-                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom - 1, yFrom, persoApAction, precDir, nextDir);
+                                        engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom - 1, yFrom, persoApAction, precDir, nextDir, lifeCountPersoAction);
                                         move->apply(state);
                                         actions.push(shared_ptr<Action>(move));
                                         Space* s = (Space*) grid.get(xFrom - 1, yFrom);
                                         if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
-                                            persoApAction->setLifecount(persoApAction->getLifecount() + 1);
+                                            persoApAction->setLifecount(lifeCountPersoAction + 1);
                                             cout << "Super, le personnage a récupéré une vie" << endl;
-                                            //cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                            cout << "Il en a maintenant " << lifeCountPersoAction + 1 << endl;
                                         }
 
                                         return;
@@ -165,14 +172,14 @@ namespace engine {
                                             Personnage* persoApAction = new Personnage(color, LEFT);
                                             persoApAction->setLifecount(lifeCountPersoAction);
                                             state::Direction nextDir = persoApAction->getDirection();
-                                            engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom - 1, yFrom + 1, persoApAction, precDir, nextDir);
+                                            engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom - 1, yFrom + 1, persoApAction, precDir, nextDir, lifeCountPersoAction);
                                             move->apply(state);
                                             actions.push(shared_ptr<Action>(move));
                                             Space* s = (Space*) grid.get(xFrom - 1, yFrom + 1);
                                             if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                                 persoApAction->setLifecount(persoApAction->getLifecount() + 1);
                                                 cout << "Super, le personnage a récupéré une vie" << endl;
-                                                //cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                                cout << "Il en a maintenant " << lifeCountPersoAction + 1 << endl;
                                             }
                                            
 
@@ -183,14 +190,14 @@ namespace engine {
                                     Personnage* persoApAction = new Personnage(color, LEFT);
                                     persoApAction->setLifecount(lifeCountPersoAction);
                                     state::Direction nextDir = persoApAction->getDirection();
-                                    engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom - 1, yFrom - 1, persoApAction, precDir, nextDir);
+                                    engine::Action* move = new MoveCharAction(color, xFrom, yFrom, xFrom - 1, yFrom - 1, persoApAction, precDir, nextDir, lifeCountPersoAction);
                                     move->apply(state);
                                     actions.push(shared_ptr<Action>(move));
                                     Space* s = (Space*) grid.get(xFrom - 1, yFrom - 1);
                                     if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                         persoApAction->setLifecount(persoApAction->getLifecount() + 1);
                                         cout << "Super, le personnage a récupéré une vie" << endl;
-                                        //cout << "Il en a maintenant " << persoApAction->getLifecount() << endl;
+                                        cout << "Il en a maintenant " << lifeCountPersoAction + 1 << endl;
                                     }
                                     else if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction==3) {
                                         cout << "Le personnage a déjà trois vies, il ne peut pas en récupérer" << endl;

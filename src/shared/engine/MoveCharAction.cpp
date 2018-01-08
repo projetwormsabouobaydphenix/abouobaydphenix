@@ -12,16 +12,17 @@ using namespace std;
 using namespace state;
 
 namespace engine {
-    
-    MoveCharAction::MoveCharAction(int color, int xFrom, int yFrom, int xTo, int yTo, Personnage* persoApAction, state::Direction precDir, state::Direction nextDir){
-        this->color=color;
-        this->xFrom=xFrom;
-        this->yFrom=yFrom;
-        this->xTo=xTo;
-        this->yTo=yTo;
-        this->persoApAction=persoApAction;
-        this->precDir=precDir;
-        this->nextDir=nextDir;
+
+    MoveCharAction::MoveCharAction(int color, int xFrom, int yFrom, int xTo, int yTo, state::Personnage* persoApAction, state::Direction precDir, state::Direction nextDir, int lifeCountPersoAv) {
+        this->color = color;
+        this->xFrom = xFrom;
+        this->yFrom = yFrom;
+        this->xTo = xTo;
+        this->yTo = yTo;
+        this->persoApAction = persoApAction;
+        this->precDir = precDir;
+        this->nextDir = nextDir;
+        this->lifeCountPersoAv = lifeCountPersoAv;
         
     }
     
@@ -32,9 +33,10 @@ namespace engine {
             Personnage* p = new Personnage(color, nextDir);
             p->setI(xTo);
             p->setJ(yTo);
-        //cout << "xfrom = " << xFrom << " yFrom = " << yFrom << endl;
-        //cout << "xto = " << xTo << " yTo = " << yTo << endl;
-        chars.changePosition(xFrom, yFrom, xTo, yTo, p);
+            p->setLifecount(lifeCountPersoAv);
+            //cout << "xfrom = " << xFrom << " yFrom = " << yFrom << endl;
+            //cout << "xto = " << xTo << " yTo = " << yTo << endl;
+            chars.changePosition(xFrom, yFrom, xTo, yTo, p);
         }
     }
     
