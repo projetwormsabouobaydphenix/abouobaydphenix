@@ -37,41 +37,6 @@ void TestServer::test_record() {
     
     Engine moteur;
     vector<Command*> list;
-
-    
-    /*Command* move1 = new MoveCharCommand(1, Direction::RIGHT);
-    list.push_back(move1);
-    
-    move1 = new MoveCharCommand(1, Direction::RIGHT);
-    list.push_back(move1);
-    
-    move1 = new MoveCharCommand(1, Direction::RIGHT);
-    list.push_back(move1);
-    
-    ShootCommand* shoot1 = new ShootCommand(1);
-    list.push_back(shoot1);
-
-    Command* move3 = new MoveCharCommand(2, Direction::RIGHT);
-    list.push_back(move3);
-
-    Command* move4 = new MoveCharCommand(2, Direction::RIGHT);
-    list.push_back(move4);
-    
-    move4 = new MoveCharCommand(2, Direction::LEFT);
-    list.push_back(move4);
-
-    Command* shoot2 = new ShootCommand(2);
-    list.push_back(shoot2);
-
-    Command* move5 = new MoveCharCommand(1, Direction::LEFT);
-    list.push_back(move5);
-    
-    move5 = new MoveCharCommand(1, Direction::RIGHT);
-    list.push_back(move5);*/
-       
-    
-    //moteur.addCommand(0, list[pos]);
-    //moteur.update();
     
     Command* move1 = new MoveCharCommand(1, Direction::RIGHT);
     list.push_back(move1);
