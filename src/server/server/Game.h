@@ -17,7 +17,7 @@ namespace server {
   class Game {
     // Associations
     // Attributes
-  public:
+  protected:
     int idseq;
     std::map<int,std::unique_ptr<Player>> players;
     // Operations
@@ -28,6 +28,10 @@ namespace server {
     void setPlayer (int id, std::unique_ptr<Player> player);
     void removePlayer (int id);
     // Setters and Getters
+    int getIdseq() const;
+    void setIdseq(int idseq);
+    const std::map<int,std::unique_ptr<Player>>& getPlayers() const;
+    void setPlayers(const std::map<int,std::unique_ptr<Player>>& players);
   };
 
 };

@@ -1,25 +1,26 @@
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 #include "PlayerService.h"
-#include "ServiceException.h"
+#include "Player.h"
+#include "server.h"
 
 using namespace std;
 
-template<class T,typename ... Args>
-std::unique_ptr<T> make_unique(Args ... args) {
-    return std::unique_ptr<T>(new T(args ...));
-}
-
-
 namespace server {
-
-    PlayerService::PlayerService(Game& game) : AbstractService("/player"), game(game) {
+    PlayerService::PlayerService (Game& game) : AbstractService("/player"),
+        game(game) {
 
     }
 
-    HttpStatus PlayerService::get(Json::Value& out, int id) const {
+    HttpStatus PlayerService::get (Json::Value& out, int id) const {
         const Player* player = game.getPlayer(id);
         if (!player)
-            throw ServiceException(HttpStatus::NOT_FOUND, "Invalid player id");
+            throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
         out["name"] = player->name;
         out["free"] = player->free;
         return HttpStatus::OK;
@@ -47,7 +48,8 @@ namespace server {
     HttpStatus PlayerService::put(Json::Value& out, const Json::Value& in) {
         string name = in["name"].asString();
         bool free = in["free"].asBool();
-        out["id"] = game.addPlayer(make_unique<Player>(name,free));
+        Player* player = new Player(name, free);
+        out["id"] = game.addPlayer((unique_ptr<Player>)player);
         return HttpStatus::CREATED;
     }
 
@@ -55,12 +57,6 @@ namespace server {
         const Player* player = game.getPlayer(id);
         if (!player)
         throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
-        game.removePlayer(id);
-        return HttpStatus::NO_CONTENT;
-    }
-
-    void PlayerService::setGame(const Game&& game) {
-        this->game = game;
     }
 
 

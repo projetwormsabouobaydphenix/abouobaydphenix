@@ -1,11 +1,17 @@
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
 #include "ServicesManager.h"
 #include "ServiceException.h"
-
 #include <iostream>
 
-
 using namespace std;
+
 namespace server {
 
     void ServicesManager::registerService(unique_ptr<AbstractService> service) {
@@ -14,14 +20,14 @@ namespace server {
 
     AbstractService* ServicesManager::findService(const string& url) const {
         for (auto& service : services) {
-            const string & pattern(service->getPattern());
-            if (url.find(pattern) != 0)
-                continue;
-            if (url.size() > pattern.size() && url[pattern.size()] != '/')
-                continue;
-            return service.get();
-        }
-        return nullptr;
+        const string& pattern(service->getPattern());
+        if (url.find(pattern) != 0)
+            continue;
+        if (url.size() > pattern.size() && url[pattern.size()] != '/')
+            continue;
+        return service.get();
+    }
+    return nullptr;
     }
 
     HttpStatus ServicesManager::queryService(string& out, const string& in, const string& url, const string& method) {
@@ -77,4 +83,7 @@ namespace server {
         }
         throw ServiceException(HttpStatus::BAD_REQUEST, "Méthode " + method + " invalide");
     }
+
 }
+
+

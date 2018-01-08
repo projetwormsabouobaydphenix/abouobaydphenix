@@ -1,6 +1,8 @@
 
+
 #include "AbstractService.h"
 #include "ServiceException.h"
+
 
 
 namespace server {
@@ -28,8 +30,13 @@ namespace server {
     HttpStatus AbstractService::remove(int id) {
         throw ServiceException(HttpStatus::NOT_IMPLEMENTED, "Non implanté");
     }
+    
+    const std::string& AbstractService::getPattern() const {
+        return this->pattern;
+    }
 
-
-
-
+    void AbstractService::setPattern(const std::string& pattern) {
+        this->pattern = pattern;
+    }
+    
 }

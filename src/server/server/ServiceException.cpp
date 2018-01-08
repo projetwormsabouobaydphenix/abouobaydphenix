@@ -1,39 +1,29 @@
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 #include "ServiceException.h"
+#include "HttpStatus.h"
 
-namespace server{
+using namespace std;
 
-    ServiceException::ServiceException(HttpStatus status, std::string msg): httpStatus(status), msg(msg) {
-
+namespace server {
+    ServiceException::ServiceException(HttpStatus status, std::string msg): httpStatus(status),msg(msg) { 
+       
+    }   
+ 
+    const string& ServiceException::getMsg() const {
+        return msg;
     }
-
-    HttpStatus ServiceException::getHttpStatus() const {
-        return this->httpStatus;
-    }
-
-    const std::string& ServiceException::getMsg() const {
-        return this->msg;
-    }
-
-    void ServiceException::setHttpStatus(HttpStatus httpStatus) {
-        this->httpStatus = httpStatus;
-    }
-
-    void ServiceException::setMsg(const std::string& msg) {
-        this->msg = msg;
-    }
-
-    HttpStatus ServiceException::status() const {
+    
+    HttpStatus ServiceException::status () const {
         return httpStatus;
     }
 
-    const char* ServiceException::what() const {
+    const char* ServiceException::what () const {
         return msg.c_str();
     }
-    
-
-    
-    
-    
-    
 }

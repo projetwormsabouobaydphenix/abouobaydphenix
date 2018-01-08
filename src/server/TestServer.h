@@ -18,7 +18,6 @@ class TestServer {
 public:
     TestServer();
     void test_record();
-    void test_server();
     virtual ~TestServer();
 private:
 
