@@ -62,10 +62,17 @@ namespace engine{
             }
         }
         
-        //int distance = sqrt((xperso-xennemy)*(xperso-xennemy)+(yperso-yennemy)*(yperso-yennemy));
+        int distance = sqrt((xperso-xennemy)*(xperso-xennemy)+(yperso-yennemy)*(yperso-yennemy));
         //cout << "distance = " << distance << endl;
 
-       // if (distance < 10){
+        
+        if (this->color == 1){
+            cout << "Le personnage vert va tirer" << endl;
+        }
+        else if (this->color == 2){
+            cout << "Le personnage noir va tirer" << endl;
+        }
+        if (distance < 20){
             cout << "L'ennemi a été touché." << endl;
             Personnage* ennemy = (Personnage*) tabchars.get(xennemy, yennemy);
             int life = ennemy->getLifecount();
@@ -88,6 +95,10 @@ namespace engine{
             }
             
         }
+        else{
+            cout << "L'ennemi est trop loin, il n'a pas été touché" << endl;
+        }
+    }
     
 
 
@@ -119,8 +130,9 @@ namespace engine{
 }
  
    void ShootCommand::serialize(Json::Value& out) const {
-
-    }
+        out["commande"] = "ShootCommand";
+        out["color"] = color;
+   }
 
 }
     
