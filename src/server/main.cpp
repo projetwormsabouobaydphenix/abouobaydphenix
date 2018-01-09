@@ -148,7 +148,7 @@ int main(int argc, char* argv[]) {
                     servicesManager.registerService((unique_ptr<VersionService>)VS);
 
                     Game game;
-                    Player* player = new Player("Paul", 23);
+                    Player* player = new Player("Paul", false);
                     game.addPlayer((unique_ptr<Player>)player);
                     PlayerService* PlServ = new PlayerService(game);
                     servicesManager.registerService((unique_ptr<PlayerService>)PlServ);
@@ -162,7 +162,7 @@ int main(int argc, char* argv[]) {
                             MHD_USE_SELECT_INTERNALLY | MHD_USE_DEBUG,
                             // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG | MHD_USE_POLL,
                             // MHD_USE_THREAD_PER_CONNECTION | MHD_USE_DEBUG,
-                            atoi(argv[1]),
+                            atoi(argc>=3 ?argv[2]:"8080"),
                             NULL, NULL, 
                             &main_handler, (void*) &servicesManager,
                             MHD_OPTION_NOTIFY_COMPLETED, request_completed, NULL,

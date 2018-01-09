@@ -16,6 +16,8 @@
 #include <mutex>
 #include <chrono>
 #include <fstream>
+#include <SFML/Network.hpp>
+#include <sstream>
 #define LIMITE_FRAME 60
 
 using namespace sf;
@@ -25,7 +27,7 @@ using namespace render;
 using namespace ai;
 using namespace engine;
 
-std::mutex commands_mutex;
+mutex commands_mutex;
 
 Tests::Tests() {
 }
@@ -98,8 +100,8 @@ void Tests::test_render() {
     ElementTab& chars = state.getChars();
     grid.resize(25, 12);
     chars.resize(25, 12);
-    std::vector<int> vcarte = state.getGrid().load("res/heuristic_ai.txt");
-    std::vector<int> pcarte = state.getChars().load("res/personnage_render.txt");
+    vector<int> vcarte = state.getGrid().load("res/heuristic_ai.txt");
+    vector<int> pcarte = state.getChars().load("res/personnage_render.txt");
     //cout << vcarte.size() << endl;
     // cout << pcarte.size() << endl;
 
@@ -372,7 +374,7 @@ void Tests::test_random_ai() {
     Engine moteur;
     State& state = moteur.getState();
 
-    //std::stack<std::shared_ptr<Action> >& actions   ;
+    //stack<shared_ptr<Action> >& actions   ;
 
     // initialisation de l'état
     Command* init = new LoadCommand("res/heuristic_ai.txt");
@@ -428,9 +430,9 @@ void Tests::test_rollback() {
 
     Layer* layer1 = new ElementTabLayer(state.getGrid());
     Layer* layer2 = new ElementTabLayer(state.getChars());
-    std::stack<std::shared_ptr < Action>> actions;
-    std::stack<std::shared_ptr < Action>> actionsTmp;
-    std::vector<std::shared_ptr < Action>> vectActions;
+    stack<shared_ptr < Action>> actions;
+    stack<shared_ptr < Action>> actionsTmp;
+    vector<shared_ptr < Action>> vectActions;
 
     sf::RenderWindow window;
     window.setFramerateLimit(LIMITE_FRAME);
@@ -491,7 +493,6 @@ void Tests::test_rollback() {
                     }
                 }
 
-
                     //sleep(milliseconds(1000));
 
                 else if (event.key.code == Keyboard::BackSpace) {
@@ -549,24 +550,24 @@ void Tests::thread_secondaire(engine::Engine& moteur, int color) {
         if (color == 1) {
             while (nbreaction < 4) {
                 {
-                    std::lock_guard<std::mutex> lock(commands_mutex);
+                    lock_guard<mutex> lock(commands_mutex);
                     cout << "heuristic vert" << endl;
                     heuristicvert.run(moteur, 1);
                     nbreaction += 1;
                 }
-                std::this_thread::sleep_for(std::chrono::seconds(1));
+                this_thread::sleep_for(chrono::seconds(1));
 
             }
             color = 2;
         } else if (color == 2) {
             while (nbreaction < 3) {
                 {
-                    std::lock_guard<std::mutex> lock(commands_mutex);
+                    lock_guard<mutex> lock(commands_mutex);
                     cout << "heuristic noir" << endl;
                     heuristicnoir.run(moteur, 2);
                     nbreaction += 1;
                 }
-                std::this_thread::sleep_for(std::chrono::seconds(1));
+                this_thread::sleep_for(chrono::seconds(1));
             }
             color = 1;
         } else {
@@ -598,7 +599,7 @@ void Tests::test_thread() {
     cout << "Appuyez sur Espace pour faire défiler" << endl;*/
 
     int color = 1;
-    thread th_second(&Tests::thread_secondaire, this, std::ref(moteur), std::ref(color));
+    thread th_second(&Tests::thread_secondaire, this, ref(moteur), ref(color));
 
     while (window.isOpen()) {
         sf::Event event;
@@ -609,7 +610,7 @@ void Tests::test_thread() {
             }
         }
 
-        std::lock_guard<std::mutex> lock(commands_mutex);
+        lock_guard<mutex> lock(commands_mutex);
 
         layer1->initSurface();
         window.draw(*(layer1->getSurface()));
@@ -640,7 +641,7 @@ void Tests::test_play() {
     reader.parse(ifs, obj); // reader can also read strings
     //cout << obj[0].toStyledString() << endl;
     inn = obj[1];
-     std::stack<std::shared_ptr < Action>> actions;
+    stack<shared_ptr < Action>> actions;
     // initialisation de l'état
     Command* init = new LoadCommand("res/heuristic_ai.txt");
     init->deserialize(obj[0][0]);
@@ -650,7 +651,7 @@ void Tests::test_play() {
 
     Layer* layer1 = new ElementTabLayer(state.getGrid());
     Layer* layer2 = new ElementTabLayer(state.getChars());
-   
+
 
     sf::RenderWindow window;
     window.setFramerateLimit(LIMITE_FRAME);
@@ -668,7 +669,7 @@ void Tests::test_play() {
             } else if (event.type == sf::Event::KeyReleased) {
 
                 if (event.key.code == Keyboard::Return) {
-                    if (i != (int)inn.size()) {
+                    if (i != (int) inn.size()) {
                         //cout << "i = " << i << endl;
                         //Command* comm;
                         Json::Value in = inn[i];
@@ -717,6 +718,48 @@ void Tests::test_play() {
         window.display();
         window.clear();
     }
+}
+
+void Tests::test_network() {
+    sf::Http connection("http://localhost", 8080);
+    sf::Http::Request* request = new sf::Http::Request;
+    sf::Http::Response response;
+    Json::Value jsonResponse;
+    Json::Reader jsonReader;
+
+    request->setUri("/player");
+    request->setMethod(sf::Http::Request::Post);
+    request->setBody("player = ");
+
+    response = connection.sendRequest(*request);
+
+    if (response.getStatus() == sf::Http::Response::ServiceNotAvailable) {
+        cout << "Service not available !" << endl;
+
+        delete request;
+        return;
+
+    } 
+    else if (response.getStatus() == sf::Http::Response::BadRequest) {
+        cout << "Requete invalide " << endl;
+        delete request;
+        return;
+
+    } 
+    else if (response.getStatus() == sf::Http::Response::NoContent) {
+        cout << "Joueur ajouté à la partie !" << endl;
+    }
+
+
+    if (!(jsonReader.parse(response.getBody(), jsonResponse, false))) {
+        cout << jsonReader.getFormattedErrorMessages() << endl;
+    }
+
+   
+    delete request;
+
+
+
 }
 
 Tests::~Tests() {
