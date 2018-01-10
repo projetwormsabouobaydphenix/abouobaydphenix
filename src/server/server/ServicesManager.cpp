@@ -55,7 +55,7 @@ namespace server {
         }
         // Traite les différentes méthodes
         if (method == "GET") {
-            cerr << "Requête GET " << pattern << " avec id=" << id << endl;
+            cerr << "Requête GET " << pattern << " avec id = " << id << endl;
             Json::Value jsonOut;
             HttpStatus status = service->get(jsonOut, id);
             out = jsonOut.toStyledString();

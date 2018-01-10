@@ -145,13 +145,13 @@ int main(int argc, char* argv[]) {
              try {
                     ServicesManager servicesManager;
                     VersionService* VS = new VersionService;
-                    servicesManager.registerService((unique_ptr<VersionService>)VS);
+                    servicesManager.registerService(unique_ptr<VersionService>(VS));
 
                     Game game;
-                    Player* player = new Player("Paul", false);
-                    game.addPlayer((unique_ptr<Player>)player);
+                    /*Player* player = new Player("Paul", false);
+                    game.addPlayer((unique_ptr<Player>)player);*/
                     PlayerService* PlServ = new PlayerService(game);
-                    servicesManager.registerService((unique_ptr<PlayerService>)PlServ);
+                    servicesManager.registerService(unique_ptr<PlayerService>(PlServ));
 
                     struct MHD_Daemon *d;
                     if (argc != 2) {

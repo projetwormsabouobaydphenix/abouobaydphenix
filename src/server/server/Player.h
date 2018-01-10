@@ -10,11 +10,10 @@ namespace server {
   class Player {
     // Attributes
   public:
-    std::string name;
-    bool free     = true;
+    std::string color;
     // Operations
   public:
-    Player (std::string name, bool free);
+    Player (std::string color);
     // Setters and Getters
   };
 

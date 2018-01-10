@@ -28,7 +28,8 @@ using namespace ai;
 using namespace engine;
 
 mutex commands_mutex;
-
+extern int nbJoueurs;
+int i = 0;
 Tests::Tests() {
 }
 
@@ -721,44 +722,95 @@ void Tests::test_play() {
 }
 
 void Tests::test_network() {
+    
+    std::vector<sf::Http::Response> tabResponse;
+    
+    while(i != 2){
+    string color;
+    cout << "Entrez la couleur du joueur que vous voulez ajouter " << endl;
+    cin >> color;
+    Json::Value data;
+    data["color"] = color;
+    
     sf::Http connection("http://localhost", 8080);
+    
     sf::Http::Request* request = new sf::Http::Request;
+    sf::Http::Request* request_get = new sf::Http::Request;
+    request->setHttpVersion(1, 1);
+    request->setField("Content-Type", "application/x-www-form-urlencoded");
+    request_get->setHttpVersion(1, 1);
+    request_get->setField("Content-Type", "application/x-www-form-urlencoded");
+    
     sf::Http::Response response;
+    sf::Http::Response response_get;
     Json::Value jsonResponse;
     Json::Reader jsonReader;
-
+    
     request->setUri("/player");
-    request->setMethod(sf::Http::Request::Post);
-    request->setBody("player = ");
-
+    request->setMethod(sf::Http::Request::Put);
+    request->setBody(data.toStyledString());
+        
     response = connection.sendRequest(*request);
-
+    //cout << response.getBody() << endl;
     if (response.getStatus() == sf::Http::Response::ServiceNotAvailable) {
         cout << "Service not available !" << endl;
 
-        delete request;
-        return;
+        delete (sf::Http::Request*)request;
+        //return;
 
     } 
     else if (response.getStatus() == sf::Http::Response::BadRequest) {
         cout << "Requete invalide " << endl;
         delete request;
-        return;
+        //return;
 
     } 
     else if (response.getStatus() == sf::Http::Response::NoContent) {
         cout << "Joueur ajouté à la partie !" << endl;
+    }
+    else {
+        
+        cout << "Status : " << response.getStatus() << endl;
     }
 
 
     if (!(jsonReader.parse(response.getBody(), jsonResponse, false))) {
         cout << jsonReader.getFormattedErrorMessages() << endl;
     }
-
-   
-    delete request;
-
-
+    
+    
+    
+    //std::string s = std::to_string();
+    string d = response.getBody();
+    stringstream ss;
+    string s;
+    char e = d.at(12);
+    ss << e;
+    ss >> s;
+    cout << "e = " << e << endl;
+    string uri = "/player/" +s;
+    cout << "uri = " << uri << endl;
+    request_get->setUri(uri);
+    request_get->setMethod(sf::Http::Request::Get);
+    
+    response_get = connection.sendRequest(*request_get);
+    //cout << "Status : " << response_get.getStatus() << endl;
+    //cout << response_get.getBody() << endl;
+    if (!(jsonReader.parse(response_get.getBody(), jsonResponse, false))) {
+        cout << jsonReader.getFormattedErrorMessages() << endl;
+    };
+    i++;
+    //delete request;
+    tabResponse.push_back(response_get);
+        }
+    cout << "Les joueurs présents dans la partie sont : " << endl;
+    for (int j = 0; j<(int)tabResponse.size(); j++){
+        //cout << "j = " << j << endl;
+        cout  << tabResponse[j].getBody() << endl;
+    }
+    
+    //cout << "test " << endl;
+    
 
 }
 

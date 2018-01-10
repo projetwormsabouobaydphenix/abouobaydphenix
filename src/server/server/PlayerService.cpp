@@ -8,8 +8,10 @@
 #include "PlayerService.h"
 #include "Player.h"
 #include "server.h"
+#include <iostream>
 
 using namespace std;
+int nbJoueurs = 0;
 
 namespace server {
     PlayerService::PlayerService (Game& game) : AbstractService("/player"),
@@ -21,8 +23,7 @@ namespace server {
         const Player* player = game.getPlayer(id);
         if (!player)
             throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
-        out["name"] = player->name;
-        out["free"] = player->free;
+        out["color"] = player->color;
         return HttpStatus::OK;
     }
 
@@ -35,21 +36,20 @@ namespace server {
         if (!player)
             throw ServiceException(HttpStatus::NOT_FOUND, "Invalid player id");
         unique_ptr<Player> usermod(new Player(*player));
-        if (in.isMember("name")) {
-            usermod->name = in["name"].asString();
-        }
-        if (in.isMember("free")) {
-            usermod->free = in["free"].asBool();
+        if (in.isMember("color")) {
+            usermod->color = in["color"].asString();
         }
         game.setPlayer(id,std::move(usermod));
         return HttpStatus::NO_CONTENT;
     }
 
     HttpStatus PlayerService::put(Json::Value& out, const Json::Value& in) {
-        string name = in["name"].asString();
-        bool free = in["free"].asBool();
-        Player* player = new Player(name, free);
+        string color = in["color"].asString();
+        //bool free = in["id"].asInt();
+        Player* player = new Player(color);
         out["id"] = game.addPlayer((unique_ptr<Player>)player);
+        nbJoueurs++;
+        cout << "nbJoueurs " << nbJoueurs << endl;
         return HttpStatus::CREATED;
     }
 
