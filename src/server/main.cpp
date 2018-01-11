@@ -3,6 +3,7 @@
 #include "server/ServicesManager.h"
 #include "server/VersionService.h"
 #include "server/PlayerService.h"
+#include "server/GameService.h"
 #include "server.h"
 
 #include <iostream>
@@ -152,6 +153,10 @@ int main(int argc, char* argv[]) {
                     game.addPlayer((unique_ptr<Player>)player);*/
                     PlayerService* PlServ = new PlayerService(game);
                     servicesManager.registerService(unique_ptr<PlayerService>(PlServ));
+                    
+                    //GameService* GServ = new GameService(game);
+                    //servicesManager.registerService(unique_ptr<GameService>(GServ));
+                    
 
                     struct MHD_Daemon *d;
                     if (argc != 2) {

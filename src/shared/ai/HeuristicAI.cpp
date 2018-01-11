@@ -59,7 +59,7 @@ namespace ai {
         ennemyMap.init(grid);
         std::vector<int> weightsEnnemyAv = ennemyMap.getWeights();
         
-        Personnage* ennemy;
+        //Personnage* ennemy;
 
         // instanciation de lifeMap
         for (int i = 0; i < (int) height; i++) {
@@ -82,7 +82,7 @@ namespace ai {
                             else {
                                 xennemy = perso->getI();
                                 yennemy = perso->getJ(); 
-                                ennemy=perso;
+                                //ennemy=perso;
                                 //cout<<"distance dans if "<<distennemy<<endl;
                             }
                             

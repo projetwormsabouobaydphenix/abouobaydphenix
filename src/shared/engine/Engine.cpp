@@ -137,7 +137,7 @@ namespace engine {
                 //sleep(milliseconds(1000));
             }
             
-            /*shared_ptr<Action> action = actions.top();
+            shared_ptr<Action> action = actions.top();
             action->undo(currentState);
             actions.pop();*/
         //}*/

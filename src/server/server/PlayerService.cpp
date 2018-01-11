@@ -20,11 +20,30 @@ namespace server {
     }
 
     HttpStatus PlayerService::get (Json::Value& out, int id) const {
-        const Player* player = game.getPlayer(id);
-        if (!player)
-            throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
-        out["color"] = player->color;
-        return HttpStatus::OK;
+        //cout << "test get" << endl;
+        size_t sizePlayers = game.getPlayers().size();
+        //cout << "nombre de joueurs : " << sizePlayers << endl;
+        if (id == -1){
+            for (int i = 1; i<=(int)sizePlayers; i++){
+                Json::Value outInter;
+                const Player* player = game.getPlayer(i);
+                if (!player)
+                    throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
+                outInter["color"] = player->color;
+                out.append(outInter);
+            }
+            return HttpStatus::OK;
+        }
+        else {
+            const Player* player = game.getPlayer(id);
+            Json::Value outInter;
+            if (!player)
+                throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
+            out["color"] = player->color;
+            return HttpStatus::OK;
+        }
+        
+        
     }
 
     Game& PlayerService::getGame() const {
@@ -44,14 +63,24 @@ namespace server {
     }
 
     HttpStatus PlayerService::put(Json::Value& out, const Json::Value& in) {
-        string color = in["color"].asString();
-        //bool free = in["id"].asInt();
-        Player* player = new Player(color);
-        out["id"] = game.addPlayer((unique_ptr<Player>)player);
-        nbJoueurs++;
-        cout << "nbJoueurs " << nbJoueurs << endl;
-        return HttpStatus::CREATED;
+     
+        if (nbJoueurs <2){
+            string color = in["color"].asString();
+            //bool free = in["id"].asInt();
+            Player* player = new Player(color);
+            out["id"] = game.addPlayer((unique_ptr<Player>)player);
+            nbJoueurs++;
+            //cout << "nbJoueurs = " << nbJoueurs << endl;
+            return HttpStatus::CREATED;
+        }
+        
+        //cout << "Le nombre de joueurs max est atteint" << endl;
+        else{
+            cout << "Le nombre de joueurs max est atteint, aucun joueur n'a été rajouté !" << endl;
+            return HttpStatus::NOT_IMPLEMENTED;
+        }
     }
+    
 
     HttpStatus PlayerService::remove(int id) {
         const Player* player = game.getPlayer(id);

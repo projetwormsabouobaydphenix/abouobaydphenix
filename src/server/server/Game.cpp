@@ -35,4 +35,8 @@ namespace server {
            return;
        players.erase(ite);
    }
+       const std::map<int, std::unique_ptr<Player> >& Game::getPlayers() const {
+           return this->players;
+    }
+
 }
