@@ -86,6 +86,10 @@ namespace server {
         const Player* player = game.getPlayer(id);
         if (!player)
         throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
+        game.removePlayer(id);
+        nbJoueurs--;
+        cout << "nb joueurs" << nbJoueurs << endl;
+        return HttpStatus::NO_CONTENT;
     }
 
 

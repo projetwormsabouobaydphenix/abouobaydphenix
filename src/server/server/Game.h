@@ -5,11 +5,16 @@
 #include <map>
 #include <memory>
 
+namespace engine {
+  class Engine;
+};
 namespace server {
   class Player;
 }
 
+#include "engine/Engine.h"
 #include "Player.h"
+#include "GameStatus.h"
 
 namespace server {
 
@@ -17,6 +22,8 @@ namespace server {
   class Game {
     // Associations
     // Attributes
+  public:
+    engine::Engine engine;
   protected:
     int idseq;
     std::map<int,std::unique_ptr<Player>> players;
@@ -27,6 +34,8 @@ namespace server {
     int addPlayer (std::unique_ptr<Player> player);
     void setPlayer (int id, std::unique_ptr<Player> player);
     void removePlayer (int id);
+    engine::Engine& getEngine ();
+    void run ();
     // Setters and Getters
     int getIdseq() const;
     void setIdseq(int idseq);

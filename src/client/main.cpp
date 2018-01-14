@@ -73,7 +73,7 @@ int main(int argc,char* argv[])
         }
         
         else if (mode == "network"){
-            cout << "Test network" << endl;
+            //cout << "Test network" << endl;
             test.test_network();
         }
         

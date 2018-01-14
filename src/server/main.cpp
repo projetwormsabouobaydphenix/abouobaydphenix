@@ -154,8 +154,8 @@ int main(int argc, char* argv[]) {
                     PlayerService* PlServ = new PlayerService(game);
                     servicesManager.registerService(unique_ptr<PlayerService>(PlServ));
                     
-                    //GameService* GServ = new GameService(game);
-                    //servicesManager.registerService(unique_ptr<GameService>(GServ));
+                    GameService* GServ = new GameService(game);
+                    servicesManager.registerService(unique_ptr<GameService>(GServ));
                     
 
                     struct MHD_Daemon *d;
