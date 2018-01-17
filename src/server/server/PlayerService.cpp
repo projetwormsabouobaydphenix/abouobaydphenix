@@ -30,13 +30,14 @@ namespace server {
                 if (!player)
                     throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
                 outInter["color"] = player->color;
+                outInter["name"] = player->name;
                 out.append(outInter);
             }
             return HttpStatus::OK;
         }
         else {
             const Player* player = game.getPlayer(id);
-            Json::Value outInter;
+            //Json::Value outInter;
             if (!player)
                 throw ServiceException(HttpStatus::NOT_FOUND,"Invalid player id");
             out["color"] = player->color;
@@ -58,19 +59,31 @@ namespace server {
         if (in.isMember("color")) {
             usermod->color = in["color"].asString();
         }
+        else if (in.isMember("name")){
+            usermod->name = in["name"].asString();
+        }
         game.setPlayer(id,std::move(usermod));
         return HttpStatus::NO_CONTENT;
     }
 
     HttpStatus PlayerService::put(Json::Value& out, const Json::Value& in) {
      
-        if (nbJoueurs <2){
-            string color = in["color"].asString();
+        if (nbJoueurs == 0){
+            string name = in["name"].asString();
             //bool free = in["id"].asInt();
-            Player* player = new Player(color);
+            Player* player = new Player("noir", name);
             out["id"] = game.addPlayer((unique_ptr<Player>)player);
             nbJoueurs++;
-            //cout << "nbJoueurs = " << nbJoueurs << endl;
+            cout << "nbJoueurs = " << nbJoueurs << endl;
+            return HttpStatus::CREATED;
+        }
+        else if (nbJoueurs == 1){
+            string name = in["name"].asString();
+            //bool free = in["id"].asInt();
+            Player* player = new Player("vert", name);
+            out["id"] = game.addPlayer((unique_ptr<Player>)player);
+            nbJoueurs++;
+            cout << "nbJoueurs = " << nbJoueurs << endl;
             return HttpStatus::CREATED;
         }
         

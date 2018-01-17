@@ -36,16 +36,19 @@ namespace server{
                     throw ServiceException(HttpStatus::NOT_FOUND, "Invalid command id");
                 engine::CommandTypeId commandTypeId = currentCommand[i]->getTypeId();
                 if (commandTypeId == CommandTypeId::MOVE_CHAR){
-                    outInter["commande"] = "MoveCharCommand";
+                    MoveCharCommand* move = (MoveCharCommand*)currentCommand[i];
+                    move->serialize(outInter);
+                    //outInter["commande"] = "MoveCharCommand";
                 }
                 else if (commandTypeId == CommandTypeId::SHOOT){
-                    outInter["commande"] = "ShootCommand";
+                    ShootCommand* shoot = (ShootCommand*)currentCommand[i];
+                    shoot->serialize(outInter);
+                    //outInter["commande"] = "ShootCommand";
                 }
                 else if (commandTypeId == CommandTypeId::LOAD){
-                    outInter["commande"] = "LoadCommand";
-                }
-                else if (commandTypeId == CommandTypeId::JUMP){
-                    outInter["commande"] = "JumpCommand";
+                    LoadCommand* load = (LoadCommand*)currentCommand[i];
+                    load->serialize(outInter);
+                    //outInter["commande"] = "LoadCommand";
                 }
                 out.append(outInter);
             }
@@ -56,14 +59,17 @@ namespace server{
                 throw ServiceException(HttpStatus::NOT_FOUND, "Invalid command id");
             engine::CommandTypeId commandTypeId = command->getTypeId();
             if (commandTypeId == CommandTypeId::MOVE_CHAR) {
-                out["commande"] = "MoveCharCommand";
+                MoveCharCommand* move = (MoveCharCommand*)command;
+                move->serialize(out);
             } else if (commandTypeId == CommandTypeId::SHOOT) {
-                out["commande"] = "ShootCommand";
+                ShootCommand* shoot = (ShootCommand*)command;
+                shoot->serialize(out);
+                //out["commande"] = "ShootCommand";
             } else if (commandTypeId == CommandTypeId::LOAD) {
-                out["commande"] = "LoadCommand";
-            } else if (commandTypeId == CommandTypeId::JUMP) {
-                out["commande"] = "JumpCommand";
-            }
+                LoadCommand* load = (LoadCommand*)command;
+                load->serialize(out);
+                //out["commande"] = "LoadCommand";
+            } 
             return HttpStatus::OK;
         }
 

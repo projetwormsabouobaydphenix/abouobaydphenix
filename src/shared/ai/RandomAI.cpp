@@ -24,7 +24,9 @@ namespace ai{
     }
     
     void RandomAI::run(engine::Engine& engine, int color){
-        //cout << "debut run" << endl;
+        //cout << "debut run" << endl
+        int i = 0;
+        //while (i<10){
         vector<Command*> list;
         
         listCommands(list, engine.getState(), color);
@@ -41,7 +43,8 @@ namespace ai{
        
         engine.update();
         //sleep(1);
-        
+        i++;
+        //}
     }
   
     

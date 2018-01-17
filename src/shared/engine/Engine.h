@@ -22,7 +22,7 @@ namespace engine {
   /// class Engine - 
   class Engine {
     // Attributes
-  private:
+  public:
     state::State currentState;
     std::vector<Command*> currentCommands;
     // Operations
@@ -31,7 +31,7 @@ namespace engine {
     ~Engine ();
      state::State& getState ();
     void addPassiveCommand ();
-    void addCommand (int priority, Command* cmd);
+    virtual void addCommand (int priority, Command* cmd);
     std::stack<std::shared_ptr<Action>>& update ();
     void moteur ();
     void undoe (std::stack<std::shared_ptr<Action>>& actions);

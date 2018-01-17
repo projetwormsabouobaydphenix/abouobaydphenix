@@ -11,9 +11,10 @@ namespace server {
     // Attributes
   public:
     std::string color;
+    std::string name;
     // Operations
   public:
-    Player (std::string color);
+    Player (std::string color, std::string name);
     // Setters and Getters
   };
 

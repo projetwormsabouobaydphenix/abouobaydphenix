@@ -9,6 +9,7 @@
 #include "../shared/ai.h"
 #include "../shared/engine.h"
 #include "render.h"
+#include "client/EngineServer.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -18,6 +19,8 @@
 #include <fstream>
 #include <SFML/Network.hpp>
 #include <sstream>
+#include <random>
+#include "../client/client/EngineServer.h"
 #define LIMITE_FRAME 60
 
 using namespace sf;
@@ -26,6 +29,7 @@ using namespace state;
 using namespace render;
 using namespace ai;
 using namespace engine;
+using namespace client;
 
 mutex commands_mutex;
 int i = 0;
@@ -492,8 +496,7 @@ void Tests::test_rollback() {
                         Command* shoot = new ShootCommand(1);
                         moteur.addCommand(0, shoot);
                     }
-                }
-                    //sleep(milliseconds(1000));
+                }//sleep(milliseconds(1000));
 
                 else if (event.key.code == Keyboard::BackSpace) {
                     cout << "il y a " << actionsTmp.size() << "actions" << endl;
@@ -721,17 +724,20 @@ void Tests::test_play() {
 }
 
 void Tests::test_network() {
-    
+    i++;
     Json::Value data;
+    stack<shared_ptr < Action>> actions;
+    //string = "http://localhost";
+    int port = 8080;
 
-    sf::Http connection("http://localhost", 8080);
+    sf::Http connection("http://localhost", port);
 
     sf::Http::Request* request_put = new sf::Http::Request;
     sf::Http::Request* request_get = new sf::Http::Request;
     sf::Http::Request* request_get_game = new sf::Http::Request;
     sf::Http::Request* request_get_command = new sf::Http::Request;
-    sf::Http::Request* request_put_command = new sf::Http::Request;
-    
+
+
     request_put->setHttpVersion(1, 1);
     request_put->setField("Content-Type", "application/x-www-form-urlencoded");
     request_get->setHttpVersion(1, 1);
@@ -740,6 +746,8 @@ void Tests::test_network() {
     request_get_game->setField("Content-Type", "application/x-www-form-urlencoded");
     request_get_command->setHttpVersion(1, 1);
     request_get_command->setField("Content-Type", "application/x-www-form-urlencoded");
+
+    sf::Http::Request* request_put_command = new sf::Http::Request;
     request_put_command->setHttpVersion(1, 1);
     request_put_command->setField("Content-Type", "application/x-www-form-urlencoded");
 
@@ -748,19 +756,24 @@ void Tests::test_network() {
     sf::Http::Response response_get_game;
     sf::Http::Response response_get_command;
     sf::Http::Response response_put_command;
-    
+
     Json::Value jsonResponse;
     Json::Reader jsonReader;
 
-    
+
     request_get_game->setUri("/game");
     request_get_game->setMethod(sf::Http::Request::Get);
-    
+
     response_get_game = connection.sendRequest(*request_get_game);
-    
+
+    //cout << "response_get_game 1 : " << response_get_game.getStatus() << endl;
     if (response_get_game.getStatus() == sf::Http::Response::Created) {
-        if (i == 0) data["color"] = "noir";
-        else if (i == 1) data["color"] = "vert";
+
+        string name;
+        cout << "Entrez le nom du joueur : ";
+        cin >> name;
+        data["name"] = name;
+
         request_put->setUri("/player");
         request_put->setMethod(sf::Http::Request::Put);
         request_put->setBody(data.toStyledString());
@@ -782,8 +795,7 @@ void Tests::test_network() {
         } else if (response_put.getStatus() == sf::Http::Response::NotImplemented) {
             cout << "La partie est déjà pleine, voici les joueurs déjà présents :" << endl;
 
-        }
-        else {
+        } else {
             //cout << "Status : " << response.getStatus() << endl;
         }
 
@@ -801,37 +813,35 @@ void Tests::test_network() {
 
         cout << "Liste des joueurs : " << endl;
         cout << response_get.getBody() << endl;
+
         i++;
 
-        while (1) {
+        /**/
 
-        }
-    } 
-    
-    else if (response_get_game.getStatus() == sf::Http::Response::Ok){
+        //break;
+    }
+    request_get_game->setMethod(sf::Http::Request::Get);
+
+    response_get_game = connection.sendRequest(*request_get_game);
+
+    //cout << "response_get_game 2 : " << response_get_game.getStatus() << endl;
+    if (response_get_game.getStatus() == sf::Http::Response::Ok) {
         cout << "Tous les joueurs sont présents, la partie peut commencer" << endl;
+
         Json::Value comm;
         Json::Value comms;
         comm["commande"] = "LoadCommand";
         comm["fileName"] = "res/heuristic_ai.txt";
         //comm["direction"] = "Left";
         comms.append(comm);
-        /* Méthodes PUT et GET CommandService */
+
+
         request_put_command->setUri("/command");
         request_put_command->setMethod(sf::Http::Request::Put);
         request_put_command->setBody(comms.toStyledString());
 
-        response_put_command = connection.sendRequest(*request_put_command);  
-        
-        if (response_put_command.getStatus() == sf::Http::Response::Created) {
-            cout << "Created" << endl;
-        }
-        else {
-            cout << "erreur" << endl;
-        }
-        if (!(jsonReader.parse(response_put_command.getBody(), jsonResponse, false))) {
-            cout << jsonReader.getFormattedErrorMessages() << endl;
-        }
+
+        response_put_command = connection.sendRequest(*request_put_command);
 
         request_get_command->setUri("/command/-1");
         request_get_command->setMethod(sf::Http::Request::Get);
@@ -843,27 +853,32 @@ void Tests::test_network() {
 
         cout << "Liste des commandes : " << endl;
         cout << response_get_command.getBody() << endl;
-        
-        Engine moteur;
-        State& state = moteur.getState();
-        
+
+        Engine* moteur = new EngineServer(8080, "http://localhost");
+        State& state = moteur->getState();
+
+        int i = 0;
+        Json::Value obj;
+        Json::Value in;
+        Json::Value inn;
+        //cout << obj[0].toStyledString() << endl;
         stack<shared_ptr < Action>> actions;
         // initialisation de l'état
-        //Command* init = new LoadCommand("res/heuristic_ai.txt");
-        //init->deserialize(obj[0][0]);
+        Command* init = new LoadCommand("res/heuristic_ai.txt");
+        init->deserialize(jsonResponse[0]);
         //moteur.addCommand(0, init);
-        moteur.update();
+        moteur->update();
         init->execute(state, actions);
 
         Layer* layer1 = new ElementTabLayer(state.getGrid());
         Layer* layer2 = new ElementTabLayer(state.getChars());
-
+        RandomAI ai;
 
         sf::RenderWindow window;
         window.setFramerateLimit(LIMITE_FRAME);
         window.create(sf::VideoMode(800, 384), "Test Worms");
         cout << "Bienvenue sur le jeu worms" << endl;
-        cout << "Appuyez sur Entrée pour faire défiler" << endl;
+        //cout << "Appuyez sur Entrée pour faire défiler" << endl;
 
         while (window.isOpen()) {
 
@@ -875,11 +890,104 @@ void Tests::test_network() {
                 } else if (event.type == sf::Event::KeyReleased) {
 
                     if (event.key.code == Keyboard::Return) {
-        
+                        int i = 0;
+                        while (i < 1) {
+                            Command* move = new MoveCharCommand(1, Direction::LEFT);
+                            moteur->addCommand(1, move);
+
+                            move =
+                                    //ai.run(*moteur, 1);
+
+
+                                    request_get_command->setUri("/command/-1");
+                            request_get_command->setMethod(sf::Http::Request::Get);
+
+                            response_get_command = connection.sendRequest(*request_get_command);
+                            if (!(jsonReader.parse(response_get_command.getBody(), jsonResponse, false))) {
+                                cout << jsonReader.getFormattedErrorMessages() << endl;
+                            };
+
+                            //cout << "Liste des commandes : " << endl;
+                            //cout << response_get_command.getBody() << endl;
+
+                            if (i != (int) jsonResponse.size()) {
+                                //cout << "i = " << i << endl;
+                                //Command* comm;
+                                Json::Value in = jsonResponse[i];
+                                //cout << in.toStyledString() << endl;
+                                //cout<<"voila<"<<in["commande"].asString()<<endl;
+                                cout << "Commande = " << in["commande"].asString() << endl;
+
+                                if (in["commande"].asString() == "MoveCharCommand") {
+                                    Command* move = new MoveCharCommand(2, Direction::LEFT);
+                                    moteur->addCommand(1, move);
+
+                                    move = new MoveCharCommand(2, Direction::LEFT);
+                                    moteur->addCommand(2, move);
+
+                                    Command* shoot = new ShootCommand(2);
+                                    moteur->addCommand(3, shoot);
+
+                                    move = new MoveCharCommand(1, Direction::RIGHT);
+                                    moteur->addCommand(4, move);
+
+                                    move = new MoveCharCommand(1, Direction::RIGHT);
+                                    moteur->addCommand(5, move);
+
+                                    move = new MoveCharCommand(1, Direction::RIGHT);
+                                    moteur->addCommand(6, move);
+
+                                    shoot = new ShootCommand(1);
+                                    moteur->addCommand(7, shoot);
+
+
+                                    //moteur.addCommand(0, move->deserialize(in));
+                                    //moteur.update();
+                                    move->deserialize(in);
+                                    //cout << "test move " << endl;
+
+                                    move->execute(state, actions);
+                                } else if (in["commande"].asString() == "ShootCommand") {
+                                    ShootCommand* shoot = new ShootCommand(1);
+                                    shoot->deserialize(in);
+                                    moteur->addCommand(0, shoot);
+                                    moteur->update();
+                                }
+                                cout << " " << endl;
+                                i++;
+                            }
+                            else {
+                                cout << "Plus de commande" << endl;
+                                return;
+                            }
+                            i++;
+                        }
+
+
+
+                    }
+
+                }
+            }
+
+
+            //moteur.update();
+            layer1->initSurface();
+            window.draw(*(layer1->getSurface()));
+
+            layer2->initSurface();
+            window.draw(*(layer2->getSurface()));
+
+            window.display();
+            window.clear();
+        }
+
+
+
     }
-    
-    
-    
+    while (1) {
+
+    }
 }
 
 Tests::~Tests() {

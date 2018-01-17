@@ -9,7 +9,10 @@ using namespace std;
 
 
 namespace server {
-    Player::Player (std::string color) : color(color) {
-    
+
+    Player::Player(std::string color, std::string name):color(color), name(name) {
+
     }
+    
+    
 }

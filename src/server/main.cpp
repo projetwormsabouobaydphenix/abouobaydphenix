@@ -5,6 +5,7 @@
 #include "server/PlayerService.h"
 #include "server/GameService.h"
 #include "server.h"
+#include "../shared/engine/Engine.h"
 
 #include <iostream>
 #include <sstream>
@@ -18,6 +19,7 @@
 
 using namespace std;
 using namespace server;
+using namespace engine;
 
 template<class T,typename ... Args>
 std::unique_ptr<T> make_unique(Args ... args) {
@@ -149,6 +151,7 @@ int main(int argc, char* argv[]) {
                     servicesManager.registerService(unique_ptr<VersionService>(VS));
 
                     Game game;
+                    Engine engine;
                     /*Player* player = new Player("Paul", false);
                     game.addPlayer((unique_ptr<Player>)player);*/
                     PlayerService* PlServ = new PlayerService(game);
@@ -156,6 +159,10 @@ int main(int argc, char* argv[]) {
                     
                     GameService* GServ = new GameService(game);
                     servicesManager.registerService(unique_ptr<GameService>(GServ));
+                    
+                    CommandService* CServ = new CommandService(engine);
+                    servicesManager.registerService(unique_ptr<CommandService>(CServ));
+                    
                     
 
                     struct MHD_Daemon *d;
