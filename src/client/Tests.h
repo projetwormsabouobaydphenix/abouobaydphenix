@@ -10,7 +10,7 @@
  *
  * Created on 11 décembre 2017, 17:09
  */
-
+#include <json/json.h>
 #ifndef TESTS_H
 #define TESTS_H
 
@@ -31,6 +31,7 @@ public:
     void thread_secondaire(engine::Engine& moteur, int color);
     void test_thread();
     void test_play();
+    void thread_command(engine::Engine& moteur, int currentEpoch);
     void test_network();
     ~Tests();
 private:

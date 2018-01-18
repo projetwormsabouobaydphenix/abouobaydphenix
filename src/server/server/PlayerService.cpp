@@ -71,7 +71,7 @@ namespace server {
         if (nbJoueurs == 0){
             string name = in["name"].asString();
             //bool free = in["id"].asInt();
-            Player* player = new Player("noir", name);
+            Player* player = new Player("vert", name);
             out["id"] = game.addPlayer((unique_ptr<Player>)player);
             nbJoueurs++;
             cout << "nbJoueurs = " << nbJoueurs << endl;
@@ -80,7 +80,7 @@ namespace server {
         else if (nbJoueurs == 1){
             string name = in["name"].asString();
             //bool free = in["id"].asInt();
-            Player* player = new Player("vert", name);
+            Player* player = new Player("noir", name);
             out["id"] = game.addPlayer((unique_ptr<Player>)player);
             nbJoueurs++;
             cout << "nbJoueurs = " << nbJoueurs << endl;

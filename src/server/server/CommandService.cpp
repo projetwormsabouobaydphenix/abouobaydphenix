@@ -54,6 +54,8 @@ namespace server{
             }
             return HttpStatus::OK;
         } else {
+            if (currentCommand.size()<=id)
+                throw ServiceException(HttpStatus::NOT_FOUND, "Invalid command id");
             const Command* command = currentCommand[id];
             if (!command)
                 throw ServiceException(HttpStatus::NOT_FOUND, "Invalid command id");
@@ -83,6 +85,7 @@ namespace server{
         
             for (int i = 0; i<(int)in.size(); i++){
                 Json::Value uneCommande = in[i];
+                //cout << "in[i] = " << uneCommande.toStyledString() << endl;
                 if (uneCommande.isMember("commande")){
                     if (uneCommande["commande"].asString() == "MoveCharCommand"){
                         Command* move = new MoveCharCommand(1, state::Direction::LEFT);
@@ -108,7 +111,8 @@ namespace server{
                 }
                 out["id"] = i;
             }
-                
+            
+            
             //out["id"] = 1;
                 
             return HttpStatus::CREATED;

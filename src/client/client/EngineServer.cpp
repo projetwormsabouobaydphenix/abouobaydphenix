@@ -19,6 +19,7 @@ namespace client{
     }
     
     void EngineServer::addCommand(int priority, engine::Command* cmd) {
+        //cout << "début add" << endl;
         currentCommands.push_back(cmd);
         
         Json::Value out;
@@ -41,7 +42,13 @@ namespace client{
             load->serialize(out);
             //outInter["commande"] = "LoadCommand";
         }
+        //cout << "out : " << out.toStyledString() << endl;
         out2.append(out);
+        //cout << "out dans EngineServer" << out.toStyledString() << endl;
+        /*if (out.isMember("color")){
+            currentState.setJoueur(out["color"].asInt());
+        }*/
+        out.clear();
         sf::Http connection("http://localhost", 8080);
         sf::Http::Request* request_put_command = new sf::Http::Request;
         sf::Http::Request* request_get_command = new sf::Http::Request;
@@ -62,24 +69,26 @@ namespace client{
         
         response_put_command = connection.sendRequest(*request_put_command);  
         if (response_put_command.getStatus() == sf::Http::Response::Created) {
-            cout << "Created" << endl;
+            //cout << "Created" << endl;
         }
         else {
-            cout << "erreur" << endl;
+            //cout << "Erreur" << endl;
         }
         
         if (!(jsonReader.parse(response_put_command.getBody(), jsonResponse, false))) {
             cout << jsonReader.getFormattedErrorMessages() << endl;
         }
         
-        
+        /*request_get_command->setUri("/command/-1");
+        request_get_command->setMethod(sf::Http::Request::Get);
         response_get_command = connection.sendRequest(*request_get_command);
         if (!(jsonReader.parse(response_put_command.getBody(), jsonResponse, false))) {
             cout << jsonReader.getFormattedErrorMessages() << endl;
         }
         
         cout << "Liste des commandes : " << endl;
-        cout << response_get_command.getBody() << endl;
+        cout << response_get_command.getBody() << endl;*/
+        
         
     }
     

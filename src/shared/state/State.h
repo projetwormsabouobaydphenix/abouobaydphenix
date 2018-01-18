@@ -21,7 +21,7 @@ namespace state {
     ElementTab grid;
     ElementTab chars;
   protected:
-    int joueur;
+    int joueur     = 2;
     int epoch     = 0;
     int epochrate     = 12;
     // Operations
