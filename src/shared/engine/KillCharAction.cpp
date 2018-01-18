@@ -26,7 +26,7 @@ namespace engine {
         int width = chars.getWidth();
         chars.list[xFrom+yFrom*width].reset();
         //cout << "Le personnage est tombé dans l'eau. Il est mort." << endl;
-        cout << "Le jeu est fini." << endl;
+        //cout << "Le jeu est fini." << endl;
     }
     
     void KillCharAction::undo(state::State& state){

@@ -709,8 +709,6 @@ void Tests::test_play() {
 
             }
         }
-
-
         //moteur.update();
         layer1->initSurface();
         window.draw(*(layer1->getSurface()));
@@ -731,7 +729,6 @@ void Tests::thread_command(engine::Engine& moteur, int currentEpoch) {
     Json::Reader jsonReader;
     request_get_command->setHttpVersion(1, 1);
     request_get_command->setField("Content-Type", "application/x-www-form-urlencoded");
-    int nbCommandes = 0;
     stack<shared_ptr < Action>> actions;
     State& state = moteur.getState();
     while (1) {
@@ -920,17 +917,8 @@ void Tests::test_network() {
     //sf::Time time = clock.getElapsedTime();
     int currentEpoch = 0;
     //time = clock.restart();
-    //cout << "time : " << clock.getElapsedTime().asMilliseconds() << endl;
-    /*request_get_command->setUri("/command/-1");
-    request_get_command->setMethod(sf::Http::Request::Get);
-
-    response_get_command = connection.sendRequest(*request_get_command);
-    if (!(jsonReader.parse(response_get_command.getBody(), jsonResponse, false))) {
-        cout << jsonReader.getFormattedErrorMessages() << endl;
-    };*/
     thread th(&Tests::thread_command, this, ref(*moteur), currentEpoch);
 
-    //cout << "epoch state = " << state.getEpoch() << endl;
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -938,19 +926,13 @@ void Tests::test_network() {
                 window.close();
             }
         }
-        //cout << "currentEpoch : " << currentEpoch << " , stateEpoch : " << state.getEpoch() << endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
         lock_guard<mutex> lock(commands_mutex);
         //if (clock.getElapsedTime().asMilliseconds() - time.asMilliseconds() > 100) {
-        //cout << "current Epoch dans test : " << currentEpoch << endl;
         if (currentEpoch != state.getEpoch()) {
-            cout << "idJoueur " << idJoueur["id"].asInt() << endl;
-            cout << "CE = " << currentEpoch << endl;
             if (currentEpoch == 0) {
-                cout << "dans ce = 0" << endl;
                 if ((state.getJoueur() == 2)) {
                     if ((idJoueur["id"].asInt() == 2)) {
-                        //cout << "joueur1" << endl;
                         Command* move = new MoveCharCommand(2, Direction::LEFT);
                         moteur->addCommand(2, move);
                     }
@@ -973,7 +955,6 @@ void Tests::test_network() {
 
                 state.setJoueur(1);
             } else if (currentEpoch == 3) {
-                cout << "dans ce = 1" << endl;
                 if ((state.getJoueur() == 1)) {
                     if (idJoueur["id"].asInt() == 1) {
 
@@ -982,7 +963,6 @@ void Tests::test_network() {
                     }
                 }
             } else if (currentEpoch == 4) {
-                cout << "dans ce = 1" << endl;
                 if ((state.getJoueur() == 1)) {
                     if (idJoueur["id"].asInt() == 1) {
 
@@ -991,7 +971,6 @@ void Tests::test_network() {
                     }
                 }
             } else if (currentEpoch == 5) {
-                cout << "dans ce = 1" << endl;
                 if ((state.getJoueur() == 1)) {
                     if (idJoueur["id"].asInt() == 1) {
 
@@ -1000,7 +979,6 @@ void Tests::test_network() {
                     }
                 }
             } else if (currentEpoch == 6) {
-                cout << "dans ce = 1" << endl;
                 if ((state.getJoueur() == 1)) {
                     if (idJoueur["id"].asInt() == 1) {
                         Command* shoot = new ShootCommand(1);
@@ -1011,11 +989,8 @@ void Tests::test_network() {
 
                 state.setJoueur(2);
             } else if (currentEpoch == 7) {
-                cout << "dans ce = 2, joueur : " << state.getJoueur() << endl;
                 if ((state.getJoueur() == 2)) {
-                    cout << "test" << endl;
                     if (idJoueur["id"].asInt() == 2) {
-                        cout << "test 2" << endl;
                         Command* shoot = new ShootCommand(2);
                         moteur->addCommand(9, shoot);
 
@@ -1024,7 +999,6 @@ void Tests::test_network() {
                 }
                 state.setJoueur(1);
             } else if (currentEpoch == 8) {
-                cout << "dans ce = 3" << endl;
 
                 if ((state.getJoueur() == 1)) {
                     if (idJoueur["id"].asInt() == 1) {
@@ -1054,7 +1028,6 @@ void Tests::test_network() {
                 }
                 state.setJoueur(2);
             } else if (currentEpoch == 11) {
-                cout << "dans ce = 4" << endl;
                 if (state.getJoueur() == 2) {
                     if (idJoueur["id"].asInt() == 2) {
                         Command* move = new MoveCharCommand(2, Direction::LEFT);
@@ -1062,7 +1035,6 @@ void Tests::test_network() {
                     }
                 }
             } else if (currentEpoch == 12) {
-                cout << "dans ce = 4" << endl;
                 if (state.getJoueur() == 2) {
                     if (idJoueur["id"].asInt() == 2) {
                         Command* move = new MoveCharCommand(2, Direction::LEFT);
@@ -1070,7 +1042,6 @@ void Tests::test_network() {
                     }
                 }
             } else if (currentEpoch == 13) {
-                cout << "dans ce = 4" << endl;
                 if (state.getJoueur() == 2) {
                     if (idJoueur["id"].asInt() == 2) {
                         Command* move = new MoveCharCommand(2, Direction::LEFT);
@@ -1085,7 +1056,6 @@ void Tests::test_network() {
                 state.setJoueur(1);
 
             } else if (currentEpoch == 14) {
-                cout << "dans ce = 4" << endl;
                 if (state.getJoueur() == 1) {
                     if (idJoueur["id"].asInt() == 1) {
                         Command* move = new MoveCharCommand(1, Direction::RIGHT);
@@ -1093,7 +1063,6 @@ void Tests::test_network() {
                     }
                 }
             } else if (currentEpoch == 15) {
-                cout << "dans ce = 4" << endl;
                 if (state.getJoueur() == 1) {
                     if (idJoueur["id"].asInt() == 1) {
                         Command* move = new MoveCharCommand(1, Direction::RIGHT);
@@ -1101,22 +1070,16 @@ void Tests::test_network() {
                     }
                 }
             } else if (currentEpoch == 16) {
-                cout << "dans ce = 4" << endl;
                 if (state.getJoueur() == 1) {
                     if (idJoueur["id"].asInt() == 1) {
                         Command* move = new MoveCharCommand(1, Direction::RIGHT);
                         moteur->addCommand(18, move);
-
-                        //Command* shoot = new ShootCommand(2);
-                        //moteur->addCommand(9, shoot);
-
 
                     }
                 }
                 state.setJoueur(2);
 
             } else if (currentEpoch == 17) {
-                cout << "dans ce = 4" << endl;
                 if (state.getJoueur() == 2) {
                     if (idJoueur["id"].asInt() == 2) {
                         Command* move = new MoveCharCommand(2, Direction::RIGHT);
@@ -1124,7 +1087,6 @@ void Tests::test_network() {
                     }
                 }
             } else if (currentEpoch == 18) {
-                cout << "dans ce = 4" << endl;
                 if (state.getJoueur() == 2) {
                     if (idJoueur["id"].asInt() == 2) {
                         Command* move = new MoveCharCommand(2, Direction::RIGHT);
@@ -1132,27 +1094,19 @@ void Tests::test_network() {
                     }
                 }
             } else if (currentEpoch == 19) {
-                cout << "dans ce = 4" << endl;
                 if (state.getJoueur() == 2) {
                     if (idJoueur["id"].asInt() == 2) {
                         Command* move = new MoveCharCommand(2, Direction::RIGHT);
                         moteur->addCommand(21, move);
 
-                        //Command* shoot = new ShootCommand(2);
-                        //moteur->addCommand(9, shoot);
-
-
                     }
                 }
                 state.setJoueur(1);
             } else if (currentEpoch == 20) {
-                cout << "dans ce = 7" << endl;
                 if ((state.getJoueur() == 1)) {
                     if (idJoueur["id"].asInt() == 1) {
                         Command* shoot = new ShootCommand(1);
                         moteur->addCommand(22, shoot);
-                        //state.setJoueur(2);
-                        //cout << "FIN, le joueur vert a gagné " << endl;
                     }
                 }
                     state.setJoueur(2);
@@ -1162,7 +1116,8 @@ void Tests::test_network() {
                     request_remove->setMethod(sf::Http::Request::Delete);
 
                     response_remove = connection.sendRequest(*request_remove);*/
-                    return;
+                    window.close();
+                    
                     
                 }
                 
