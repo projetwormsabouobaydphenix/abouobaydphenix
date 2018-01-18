@@ -85,7 +85,7 @@ namespace engine {
                                         if (s->getNature() == SpaceTypeId::LIFE ) {
                                             if (persoApAction->getLifecount()<3){
                                                 persoApAction->setLifecount(lifeCountPersoAction + 1);
-                                                cout << "Super, le personnage a récupéré une vie" << endl;
+                                                cout << "Super, le personnage " << color <<" a récupéré une vie" << endl;
                                                 cout << "Il en a maintenant " << persoApAction->getLifecount() <<endl;
                                             }
                                             else {
@@ -113,7 +113,7 @@ namespace engine {
                                             Space* s = (Space*) grid.get(xFrom + 1, yFrom + 1);
                                             if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                                 persoApAction->setLifecount(lifeCountPersoAction );
-                                                cout << "Super, le personnage a récupéré une vie" << endl;
+                                                cout << "Super, le personnage " << color <<" a récupéré une vie" << endl;
                                                 cout << "Il en a maintenant " << lifeCountPersoAction + 1 << endl;
                                             }
                                             else if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction==3) {
@@ -124,6 +124,7 @@ namespace engine {
                                         }
 
                                     }
+                                }
 
                                     else {
                                         Personnage* persoApAction = new Personnage(color, RIGHT);
@@ -135,12 +136,12 @@ namespace engine {
                                         Space* s = (Space*) grid.get(xFrom + 1, yFrom - 1);
                                         if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                             persoApAction->setLifecount(persoApAction->getLifecount() + 1);
-                                            cout << "Super, le personnage a récupéré une vie" << endl;
+                                            cout << "Super, le personnage " << color << " a récupéré une vie" << endl;
                                             cout << "Il en a maintenant " << lifeCountPersoAction + 1 << endl;
                                         }
                                         return;
                                     }
-                                }
+                                
 
                             }//fin if direction = right
 
@@ -156,7 +157,7 @@ namespace engine {
                                         Space* s = (Space*) grid.get(xFrom - 1, yFrom);
                                         if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                             persoApAction->setLifecount(lifeCountPersoAction + 1);
-                                            cout << "Super, le personnage a récupéré une vie" << endl;
+                                            cout << "Super, le personnage "<<color << " a récupéré une vie" << endl;
                                             cout << "Il en a maintenant " << lifeCountPersoAction + 1 << endl;
                                         }
 
@@ -178,7 +179,7 @@ namespace engine {
                                             Space* s = (Space*) grid.get(xFrom - 1, yFrom + 1);
                                             if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                                 persoApAction->setLifecount(persoApAction->getLifecount() + 1);
-                                                cout << "Super, le personnage a récupéré une vie" << endl;
+                                                cout << "Super, le personnage " << color <<" a récupéré une vie" << endl;
                                                 cout << "Il en a maintenant " << lifeCountPersoAction + 1 << endl;
                                             }
                                            
@@ -196,7 +197,7 @@ namespace engine {
                                     Space* s = (Space*) grid.get(xFrom - 1, yFrom - 1);
                                     if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction <3) {
                                         persoApAction->setLifecount(persoApAction->getLifecount() + 1);
-                                        cout << "Super, le personnage a récupéré une vie" << endl;
+                                        cout << "Super, le personnage " << color <<" a récupéré une vie" << endl;
                                         cout << "Il en a maintenant " << lifeCountPersoAction + 1 << endl;
                                     }
                                     else if (s->getNature() == SpaceTypeId::LIFE && lifeCountPersoAction==3) {

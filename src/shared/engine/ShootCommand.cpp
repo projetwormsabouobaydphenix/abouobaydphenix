@@ -77,13 +77,13 @@ namespace engine{
             Personnage* ennemy = (Personnage*) tabchars.get(xennemy, yennemy);
             int life = ennemy->getLifecount();
             
-            if (life > 0){
+            if (life > 1){
                 engine::Action* shoot = new ShootAction(color,ennemy, life);
                 actions.push(shared_ptr<Action>(shoot));
                 shoot->apply(state);
                 return;
             }
-            else{
+            else if (life == 1){
                 engine::Action* shoot = new ShootAction(color,ennemy, life);
                 actions.push(shared_ptr<Action>(shoot));
                 shoot->apply(state);
